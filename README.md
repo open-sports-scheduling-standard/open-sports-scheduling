@@ -95,3 +95,23 @@ See: [`CHARTER.md`](./CHARTER.md)
 
 This repository contains the OSSS specifications, schemas, and registries.
 
+
+---
+
+## Status
+
+- Version: **v0.1 (Draft)**
+- Public review phase
+- Founding Stewards being appointed
+
+---
+
+## Licensing
+
+- Specification: **CC-BY-4.0**
+- Schemas & reference code: **Apache-2.0**
+
+---
+
+**Sports scheduling should be transparent, portable, and fair.**
+

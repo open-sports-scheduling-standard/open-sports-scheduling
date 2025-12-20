@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opensportsscheduling.org/schemas/osss-core.schema.json",
+  "title": "OSSS Core Schema",
+  "type": "object",
+  "required": ["id", "name", "timezone", "season", "entities", "fixtures"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the OSSS instance"
+    },
+    "name": {
+      "type": "string"
+    },
+    "timezone": {
+      "type": "string",
+      "description": "IANA timezone (e.g. America/New_York)"
+    },
+    "season": {
+      "type": "object",
+      "required": ["start", "end"],
+      "properties": {
+        "start": { "type": "string", "format": "date-time" },
+        "end": { "type": "string", "format": "date-time" }
+      }
+    },
+    "entities": {
+      "type": "object",
+      "required": ["teams", "venues"],
+      "properties": {
+        "teams": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/team" }
+        },
+        "venues": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/venue" }
+        },
+        "officials": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/official" }
+        }
+      }
+    },
+    "fixtures": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/fixture" }
+    }
+  },
+
+  "$defs": {
+    "baseEntity": {
+      "type": "object",
+      "required": ["id", "name"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+
+    "team": {
+      "allOf": [
+        { "$ref": "#/$defs/baseEntity" },
+        {
+          "type": "object",
+          "properties": {
+            "homeVenueId": { "type": "string" },
+            "division": { "type": "string" }
+          }
+        }
+      ]
+    },
+
+    "venue": {
+      "allOf": [
+        { "$ref": "#/$defs/baseEntity" },
+        {
+          "type": "object",
+          "properties": {
+            "capacity": { "type": "integer" },
+            "location": {
+              "type": "object",
+              "properties": {
+                "lat": { "type": "number" },
+                "lon": { "type": "number" }
+              }
+            }
+          }
+        }
+      ]
+    },
+
+    "official": {
+      "allOf": [
+        { "$ref": "#/$defs/baseEntity" },
+        {
+          "type": "object",
+          "properties": {
+            "qualificationLevel": { "type": "string" }
+          }
+        }
+      ]
+    },
+
+    "fixture": {
+      "type": "object",
+      "required": ["id", "participants", "durationMinutes"],
+      "properties": {
+        "id": { "type": "string" },
+        "participants": {
+          "type": "array",
+          "minItems": 2,
+          "items": { "type": "string" }
+        },
+        "durationMinutes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "competitionPhase": { "type": "string" },
+        "locked": { "type": "boolean", "default": false }
+      }
+    }
+  }
+}

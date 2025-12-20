@@ -1,0 +1,29 @@
+{
+  "name": "osss-validator",
+  "version": "0.1.0",
+  "description": "Reference OSSS validator CLI (schema + basic rule checks + scoring consistency)",
+  "type": "module",
+  "bin": {
+    "osss-validate": "./bin/osss-validate.js"
+  },
+  "scripts": {
+    "start": "node ./bin/osss-validate.js",
+    "lint": "node -c ./bin/osss-validate.js && node -c ./src/index.js",
+    "test": "mocha 'test/**/*.test.js'",
+    "test:watch": "mocha 'test/**/*.test.js' --watch",
+    "test:coverage": "c8 mocha 'test/**/*.test.js'"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "commander": "^12.1.0"
+  },
+  "devDependencies": {
+    "mocha": "^10.8.2",
+    "chai": "^5.1.2",
+    "c8": "^10.1.3"
+  }
+}

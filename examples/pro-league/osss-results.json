@@ -1,0 +1,35 @@
+{
+  "feasible": true,
+  "assignments": [
+    {
+      "fixtureId": "week1-feature",
+      "startTime": "2025-02-08T19:30:00-05:00",
+      "endTime": "2025-02-08T21:30:00-05:00",
+      "venueId": "arena-east",
+      "officialIds": ["ref-1"]
+    }
+  ],
+  "scores": {
+    "totalPenalty": 45,
+    "byConstraint": [
+      {
+        "constraintId": "broadcast_prime_time",
+        "violations": 0,
+        "penalty": 0,
+        "explanation": "Fixture scheduled within approved broadcast window"
+      },
+      {
+        "constraintId": "min_rest_96h",
+        "violations": 0,
+        "penalty": 0,
+        "explanation": "All teams received at least 96 hours rest"
+      },
+      {
+        "constraintId": "minimize_travel",
+        "violations": 1,
+        "penalty": 45,
+        "explanation": "PRO-2 incurred higher-than-average travel distance"
+      }
+    ]
+  }
+}

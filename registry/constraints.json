@@ -1,0 +1,94 @@
+{
+  "version": "1.0.0",
+  "description": "Canonical OSSS constraint registry",
+  "constraints": [
+    {
+      "id": "no_overlap_team",
+      "category": "feasibility",
+      "applies_to": "team",
+      "type": "hard",
+      "description": "A team cannot be scheduled for overlapping fixtures"
+    },
+    {
+      "id": "no_overlap_venue_resource",
+      "category": "feasibility",
+      "applies_to": "venue",
+      "type": "hard",
+      "description": "A venue resource cannot host overlapping fixtures"
+    },
+    {
+      "id": "min_rest_time",
+      "category": "time",
+      "applies_to": "team",
+      "type": "hard_or_soft",
+      "params": {
+        "min_hours": "number"
+      },
+      "description": "Minimum rest time required between fixtures"
+    },
+    {
+      "id": "max_games_per_day",
+      "category": "time",
+      "applies_to": "team",
+      "type": "hard_or_soft",
+      "params": {
+        "max_games": "number"
+      },
+      "description": "Maximum games a team can play in a single day"
+    },
+    {
+      "id": "venue_availability",
+      "category": "venue",
+      "applies_to": "venue",
+      "type": "hard",
+      "description": "Fixtures must fall within venue availability windows"
+    },
+    {
+      "id": "max_travel_distance",
+      "category": "travel",
+      "applies_to": "team",
+      "type": "hard_or_soft",
+      "params": {
+        "max_km": "number"
+      },
+      "description": "Maximum allowable travel distance"
+    },
+    {
+      "id": "minimize_travel",
+      "category": "travel",
+      "applies_to": "team",
+      "type": "soft",
+      "description": "Minimize total travel distance across fixtures"
+    },
+    {
+      "id": "home_away_balance",
+      "category": "fairness",
+      "applies_to": "team",
+      "type": "soft",
+      "params": {
+        "max_delta": "number"
+      },
+      "description": "Balance home and away games"
+    },
+    {
+      "id": "opponent_spacing",
+      "category": "fairness",
+      "applies_to": "fixture",
+      "type": "soft",
+      "params": {
+        "min_days": "number"
+      },
+      "description": "Avoid repeat opponents within a short time window"
+    },
+    {
+      "id": "broadcast_window",
+      "category": "broadcast",
+      "applies_to": "fixture",
+      "type": "hard_or_soft",
+      "params": {
+        "allowed_windows": "array"
+      },
+      "description": "Fixtures must occur within broadcast-approved windows"
+    }
+  ]
+}

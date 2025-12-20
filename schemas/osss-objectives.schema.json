@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opensportsscheduling.org/schemas/osss-objectives.schema.json",
+  "title": "OSSS Objectives Schema",
+  "type": "object",
+  "required": ["objectives"],
+  "properties": {
+    "objectives": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/objective" }
+    }
+  },
+
+  "$defs": {
+    "objective": {
+      "type": "object",
+      "required": ["metric", "aggregation", "weight"],
+      "properties": {
+        "metric": {
+          "type": "string",
+          "description": "Metric identifier from registry"
+        },
+        "aggregation": {
+          "enum": ["sum", "average", "max", "minimax"]
+        },
+        "weight": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    }
+  }
+}

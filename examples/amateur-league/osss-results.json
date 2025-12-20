@@ -1,0 +1,40 @@
+{
+  "feasible": true,
+  "assignments": [
+    {
+      "fixtureId": "round1-match1",
+      "startTime": "2025-03-15T14:00:00+00:00",
+      "endTime": "2025-03-15T15:30:00+00:00",
+      "venueId": "stadium-north"
+    },
+    {
+      "fixtureId": "round1-match2",
+      "startTime": "2025-03-16T14:00:00+00:00",
+      "endTime": "2025-03-16T15:30:00+00:00",
+      "venueId": "stadium-south"
+    }
+  ],
+  "scores": {
+    "totalPenalty": 120,
+    "byConstraint": [
+      {
+        "constraintId": "min_rest_72h",
+        "violations": 0,
+        "penalty": 0,
+        "explanation": "All teams received at least 72 hours rest"
+      },
+      {
+        "constraintId": "max_travel_500km",
+        "violations": 1,
+        "penalty": 70,
+        "explanation": "AFC-3 exceeded travel target by 100km"
+      },
+      {
+        "constraintId": "home_away_balance",
+        "violations": 1,
+        "penalty": 50,
+        "explanation": "AFC-2 has 2 more away games than home"
+      }
+    ]
+  }
+}

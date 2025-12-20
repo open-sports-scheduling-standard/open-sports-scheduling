@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opensportsscheduling.org/schemas/osss-results.schema.json",
+  "title": "OSSS Results Schema",
+  "type": "object",
+  "required": ["feasible", "assignments", "scores"],
+  "properties": {
+    "feasible": {
+      "type": "boolean"
+    },
+    "assignments": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/assignment" }
+    },
+    "scores": {
+      "type": "object",
+      "required": ["totalPenalty", "byConstraint"],
+      "properties": {
+        "totalPenalty": { "type": "number" },
+        "byConstraint": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/constraintScore" }
+        }
+      }
+    }
+  },
+
+  "$defs": {
+    "assignment": {
+      "type": "object",
+      "required": ["fixtureId", "startTime", "endTime", "venueId"],
+      "properties": {
+        "fixtureId": { "type": "string" },
+        "startTime": { "type": "string", "format": "date-time" },
+        "endTime": { "type": "string", "format": "date-time" },
+        "venueId": { "type": "string" },
+        "officialIds": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+
+    "constraintScore": {
+      "type": "object",
+      "required": ["constraintId", "violations", "penalty"],
+      "properties": {
+        "constraintId": { "type": "string" },
+        "violations": { "type": "integer" },
+        "penalty": { "type": "number" },
+        "explanation": { "type": "string" }
+      }
+    }
+  }
+}

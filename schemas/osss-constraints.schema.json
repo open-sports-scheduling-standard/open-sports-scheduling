@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opensportsscheduling.org/schemas/osss-constraints.schema.json",
+  "title": "OSSS Constraints Schema",
+  "type": "object",
+  "required": ["constraints"],
+  "properties": {
+    "constraints": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/constraint" }
+    }
+  },
+
+  "$defs": {
+    "constraint": {
+      "type": "object",
+      "required": ["id", "type", "rule", "selector"],
+      "properties": {
+        "id": { "type": "string" },
+        "type": { "enum": ["hard", "soft"] },
+        "rule": { "type": "string" },
+        "selector": { "$ref": "#/$defs/selector" },
+        "params": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "penalty": {
+          "$ref": "#/$defs/penalty"
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "type": { "const": "soft" } } },
+          "then": { "required": ["penalty"] }
+        }
+      ]
+    },
+
+    "selector": {
+      "type": "object",
+      "properties": {
+        "entityType": {
+          "enum": ["team", "venue", "fixture", "official"]
+        },
+        "ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+
+    "penalty": {
+      "type": "object",
+      "required": ["model", "weight"],
+      "properties": {
+        "model": {
+          "enum": ["linear", "quadratic", "piecewise", "lexicographic"]
+        },
+        "weight": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    }
+  }
+}

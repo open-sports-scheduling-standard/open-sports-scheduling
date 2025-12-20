@@ -1,0 +1,34 @@
+{
+  "feasible": true,
+  "assignments": [
+    {
+      "fixtureId": "match-1",
+      "startTime": "2025-04-12T10:00:00-04:00",
+      "endTime": "2025-04-12T11:00:00-04:00",
+      "venueId": "park-1"
+    }
+  ],
+  "scores": {
+    "totalPenalty": 0,
+    "byConstraint": [
+      {
+        "constraintId": "no_overlap_team",
+        "violations": 0,
+        "penalty": 0,
+        "explanation": "No overlapping fixtures detected"
+      },
+      {
+        "constraintId": "weekend_only",
+        "violations": 0,
+        "penalty": 0,
+        "explanation": "Fixture scheduled on Saturday"
+      },
+      {
+        "constraintId": "minimize_travel",
+        "violations": 0,
+        "penalty": 0,
+        "explanation": "All teams travel within acceptable range"
+      }
+    ]
+  }
+}

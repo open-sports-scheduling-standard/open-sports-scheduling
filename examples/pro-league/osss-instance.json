@@ -1,0 +1,767 @@
+{
+  "id": "pro-league-2025",
+  "name": "Professional Basketball League - 2025 Season",
+  "version": "0.1.0",
+  "timezone": "America/New_York",
+  "season": {
+    "start": "2025-10-01T00:00:00-04:00",
+    "end": "2026-04-15T23:59:59-04:00",
+    "blackout_dates": [
+      {
+        "start": "2025-12-23T00:00:00-05:00",
+        "end": "2025-12-26T23:59:59-05:00",
+        "reason": "Christmas break"
+      },
+      {
+        "start": "2026-02-14T00:00:00-05:00",
+        "end": "2026-02-16T23:59:59-05:00",
+        "reason": "All-Star Weekend"
+      }
+    ]
+  },
+  "competition": {
+    "sport": "basketball",
+    "level": "professional",
+    "league": "PBL",
+    "division_count": 2
+  },
+  "entities": {
+    "teams": [
+      {
+        "id": "team-eagles",
+        "name": "Eastern Eagles",
+        "type": "team",
+        "tags": ["eastern-conference", "division-atlantic"],
+        "home_venue": "venue-eagles-arena",
+        "division": "atlantic",
+        "location": {
+          "latitude": 40.7506,
+          "longitude": -73.9935,
+          "city": "New York",
+          "state": "NY",
+          "country": "USA"
+        },
+        "metadata": {
+          "abbreviation": "EE",
+          "colors": ["blue", "white"],
+          "founded": 1995
+        }
+      },
+      {
+        "id": "team-lions",
+        "name": "Liberty Lions",
+        "type": "team",
+        "tags": ["eastern-conference", "division-atlantic"],
+        "home_venue": "venue-lions-center",
+        "division": "atlantic",
+        "location": {
+          "latitude": 39.9526,
+          "longitude": -75.1652,
+          "city": "Philadelphia",
+          "state": "PA",
+          "country": "USA"
+        },
+        "metadata": {
+          "abbreviation": "LL",
+          "colors": ["red", "gold"]
+        }
+      },
+      {
+        "id": "team-thunder",
+        "name": "Thunder Bay Thunder",
+        "type": "team",
+        "tags": ["eastern-conference", "division-atlantic"],
+        "home_venue": "venue-thunder-dome",
+        "division": "atlantic",
+        "location": {
+          "latitude": 42.3601,
+          "longitude": -71.0589,
+          "city": "Boston",
+          "state": "MA",
+          "country": "USA"
+        },
+        "metadata": {
+          "abbreviation": "TBT",
+          "colors": ["green", "white"]
+        }
+      },
+      {
+        "id": "team-knights",
+        "name": "Capital Knights",
+        "type": "team",
+        "tags": ["eastern-conference", "division-southeast"],
+        "home_venue": "venue-knights-palace",
+        "division": "southeast",
+        "location": {
+          "latitude": 38.8980,
+          "longitude": -77.0209,
+          "city": "Washington",
+          "state": "DC",
+          "country": "USA"
+        },
+        "metadata": {
+          "abbreviation": "CK",
+          "colors": ["navy", "silver"]
+        }
+      },
+      {
+        "id": "team-heat",
+        "name": "Miami Heat Wave",
+        "type": "team",
+        "tags": ["eastern-conference", "division-southeast"],
+        "home_venue": "venue-heat-center",
+        "division": "southeast",
+        "location": {
+          "latitude": 25.7817,
+          "longitude": -80.1918,
+          "city": "Miami",
+          "state": "FL",
+          "country": "USA"
+        },
+        "metadata": {
+          "abbreviation": "MHW",
+          "colors": ["red", "black", "yellow"]
+        }
+      },
+      {
+        "id": "team-stars",
+        "name": "Lone Stars",
+        "type": "team",
+        "tags": ["western-conference", "division-southwest"],
+        "home_venue": "venue-stars-stadium",
+        "division": "southwest",
+        "location": {
+          "latitude": 29.7604,
+          "longitude": -95.3698,
+          "city": "Houston",
+          "state": "TX",
+          "country": "USA"
+        },
+        "metadata": {
+          "abbreviation": "LS",
+          "colors": ["blue", "silver"]
+        }
+      },
+      {
+        "id": "team-pioneers",
+        "name": "Portland Pioneers",
+        "type": "team",
+        "tags": ["western-conference", "division-pacific"],
+        "home_venue": "venue-pioneers-arena",
+        "division": "pacific",
+        "location": {
+          "latitude": 45.5152,
+          "longitude": -122.6784,
+          "city": "Portland",
+          "state": "OR",
+          "country": "USA"
+        },
+        "metadata": {
+          "abbreviation": "PP",
+          "colors": ["green", "gold"]
+        }
+      },
+      {
+        "id": "team-waves",
+        "name": "Golden Waves",
+        "type": "team",
+        "tags": ["western-conference", "division-pacific"],
+        "home_venue": "venue-waves-center",
+        "division": "pacific",
+        "location": {
+          "latitude": 37.7749,
+          "longitude": -122.4194,
+          "city": "San Francisco",
+          "state": "CA",
+          "country": "USA"
+        },
+        "metadata": {
+          "abbreviation": "GW",
+          "colors": ["gold", "blue"]
+        }
+      }
+    ],
+    "venues": [
+      {
+        "id": "venue-eagles-arena",
+        "name": "Eagles Arena",
+        "type": "venue",
+        "tags": ["indoor", "large-capacity", "broadcast-equipped"],
+        "location": {
+          "latitude": 40.7506,
+          "longitude": -73.9935,
+          "city": "New York",
+          "state": "NY"
+        },
+        "capacity": 19812,
+        "resources": [
+          {
+            "id": "court-main",
+            "type": "court",
+            "sport": "basketball"
+          }
+        ],
+        "availability": [
+          {
+            "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "start_time": "18:00",
+            "end_time": "23:00"
+          }
+        ],
+        "setup_time_minutes": 30
+      },
+      {
+        "id": "venue-lions-center",
+        "name": "Lions Center",
+        "type": "venue",
+        "tags": ["indoor", "broadcast-equipped"],
+        "location": {
+          "latitude": 39.9526,
+          "longitude": -75.1652,
+          "city": "Philadelphia",
+          "state": "PA"
+        },
+        "capacity": 18500,
+        "resources": [
+          {
+            "id": "court-main",
+            "type": "court",
+            "sport": "basketball"
+          }
+        ],
+        "availability": [
+          {
+            "days": ["Monday", "Wednesday", "Friday", "Saturday", "Sunday"],
+            "start_time": "18:00",
+            "end_time": "23:00"
+          }
+        ],
+        "setup_time_minutes": 30
+      },
+      {
+        "id": "venue-thunder-dome",
+        "name": "Thunder Dome",
+        "type": "venue",
+        "tags": ["indoor", "historic", "broadcast-equipped"],
+        "location": {
+          "latitude": 42.3601,
+          "longitude": -71.0589,
+          "city": "Boston",
+          "state": "MA"
+        },
+        "capacity": 18624,
+        "resources": [
+          {
+            "id": "court-main",
+            "type": "court",
+            "sport": "basketball"
+          }
+        ],
+        "availability": [
+          {
+            "days": ["Tuesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "start_time": "18:00",
+            "end_time": "23:00"
+          }
+        ],
+        "blackout_dates": [
+          {
+            "start": "2026-03-15T00:00:00-04:00",
+            "end": "2026-03-17T23:59:59-04:00",
+            "reason": "Concert series"
+          }
+        ],
+        "setup_time_minutes": 45
+      },
+      {
+        "id": "venue-knights-palace",
+        "name": "Knights Palace",
+        "type": "venue",
+        "tags": ["indoor", "modern", "broadcast-equipped"],
+        "location": {
+          "latitude": 38.8980,
+          "longitude": -77.0209,
+          "city": "Washington",
+          "state": "DC"
+        },
+        "capacity": 20356,
+        "resources": [
+          {
+            "id": "court-main",
+            "type": "court",
+            "sport": "basketball"
+          }
+        ],
+        "availability": [
+          {
+            "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "start_time": "18:00",
+            "end_time": "23:00"
+          }
+        ],
+        "setup_time_minutes": 30
+      },
+      {
+        "id": "venue-heat-center",
+        "name": "Heat Center",
+        "type": "venue",
+        "tags": ["indoor", "modern", "broadcast-equipped"],
+        "location": {
+          "latitude": 25.7817,
+          "longitude": -80.1918,
+          "city": "Miami",
+          "state": "FL"
+        },
+        "capacity": 19600,
+        "resources": [
+          {
+            "id": "court-main",
+            "type": "court",
+            "sport": "basketball"
+          }
+        ],
+        "availability": [
+          {
+            "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "start_time": "19:00",
+            "end_time": "23:30"
+          }
+        ],
+        "setup_time_minutes": 30
+      },
+      {
+        "id": "venue-stars-stadium",
+        "name": "Lone Stars Stadium",
+        "type": "venue",
+        "tags": ["indoor", "large-capacity", "broadcast-equipped"],
+        "location": {
+          "latitude": 29.7604,
+          "longitude": -95.3698,
+          "city": "Houston",
+          "state": "TX"
+        },
+        "capacity": 18055,
+        "resources": [
+          {
+            "id": "court-main",
+            "type": "court",
+            "sport": "basketball"
+          }
+        ],
+        "availability": [
+          {
+            "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "start_time": "19:00",
+            "end_time": "23:00"
+          }
+        ],
+        "setup_time_minutes": 30
+      },
+      {
+        "id": "venue-pioneers-arena",
+        "name": "Pioneers Arena",
+        "type": "venue",
+        "tags": ["indoor", "broadcast-equipped"],
+        "location": {
+          "latitude": 45.5152,
+          "longitude": -122.6784,
+          "city": "Portland",
+          "state": "OR"
+        },
+        "capacity": 19441,
+        "resources": [
+          {
+            "id": "court-main",
+            "type": "court",
+            "sport": "basketball"
+          }
+        ],
+        "availability": [
+          {
+            "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "start_time": "19:00",
+            "end_time": "23:00"
+          }
+        ],
+        "setup_time_minutes": 30
+      },
+      {
+        "id": "venue-waves-center",
+        "name": "Golden Waves Center",
+        "type": "venue",
+        "tags": ["indoor", "modern", "broadcast-equipped"],
+        "location": {
+          "latitude": 37.7749,
+          "longitude": -122.4194,
+          "city": "San Francisco",
+          "state": "CA"
+        },
+        "capacity": 18064,
+        "resources": [
+          {
+            "id": "court-main",
+            "type": "court",
+            "sport": "basketball"
+          }
+        ],
+        "availability": [
+          {
+            "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "start_time": "19:00",
+            "end_time": "23:00"
+          }
+        ],
+        "setup_time_minutes": 30
+      }
+    ],
+    "officials": [
+      {
+        "id": "ref-001",
+        "name": "Sarah Johnson",
+        "type": "official",
+        "tags": ["senior-referee", "certified", "playoff-eligible"],
+        "certifications": ["level-3", "basketball"],
+        "max_games_per_week": 4
+      },
+      {
+        "id": "ref-002",
+        "name": "Michael Chen",
+        "type": "official",
+        "tags": ["senior-referee", "certified"],
+        "certifications": ["level-3", "basketball"],
+        "max_games_per_week": 4
+      },
+      {
+        "id": "ref-003",
+        "name": "David Williams",
+        "type": "official",
+        "tags": ["referee", "certified"],
+        "certifications": ["level-2", "basketball"],
+        "max_games_per_week": 5
+      }
+    ]
+  },
+  "fixtures": [
+    {
+      "id": "game-001",
+      "participants": [
+        { "id": "team-eagles", "role": "home" },
+        { "id": "team-lions", "role": "away" }
+      ],
+      "durationMinutes": 150,
+      "sport": "basketball",
+      "competition_phase": "regular_season",
+      "round": 1,
+      "tags": ["rivalry", "division-game"],
+      "required_resources": [
+        { "type": "court", "quantity": 1 },
+        { "type": "official", "quantity": 3 }
+      ]
+    },
+    {
+      "id": "game-002",
+      "participants": [
+        { "id": "team-thunder", "role": "home" },
+        { "id": "team-knights", "role": "away" }
+      ],
+      "durationMinutes": 150,
+      "sport": "basketball",
+      "competition_phase": "regular_season",
+      "round": 1,
+      "tags": ["conference-game"],
+      "required_resources": [
+        { "type": "court", "quantity": 1 },
+        { "type": "official", "quantity": 3 }
+      ]
+    },
+    {
+      "id": "game-003",
+      "participants": [
+        { "id": "team-heat", "role": "home" },
+        { "id": "team-stars", "role": "away" }
+      ],
+      "durationMinutes": 150,
+      "sport": "basketball",
+      "competition_phase": "regular_season",
+      "round": 1,
+      "tags": ["interconference-game", "nationally-televised"],
+      "required_resources": [
+        { "type": "court", "quantity": 1 },
+        { "type": "official", "quantity": 3 }
+      ],
+      "metadata": {
+        "tv_network": "National Sports Network",
+        "importance": "high"
+      }
+    },
+    {
+      "id": "game-004",
+      "participants": [
+        { "id": "team-pioneers", "role": "home" },
+        { "id": "team-waves", "role": "away" }
+      ],
+      "durationMinutes": 150,
+      "sport": "basketball",
+      "competition_phase": "regular_season",
+      "round": 1,
+      "tags": ["rivalry", "division-game", "nationally-televised"],
+      "required_resources": [
+        { "type": "court", "quantity": 1 },
+        { "type": "official", "quantity": 3 }
+      ],
+      "metadata": {
+        "tv_network": "National Sports Network",
+        "importance": "high"
+      }
+    },
+    {
+      "id": "game-005",
+      "participants": [
+        { "id": "team-lions", "role": "home" },
+        { "id": "team-thunder", "role": "away" }
+      ],
+      "durationMinutes": 150,
+      "sport": "basketball",
+      "competition_phase": "regular_season",
+      "round": 2,
+      "tags": ["division-game"],
+      "required_resources": [
+        { "type": "court", "quantity": 1 },
+        { "type": "official", "quantity": 3 }
+      ]
+    },
+    {
+      "id": "game-006",
+      "participants": [
+        { "id": "team-knights", "role": "home" },
+        { "id": "team-heat", "role": "away" }
+      ],
+      "durationMinutes": 150,
+      "sport": "basketball",
+      "competition_phase": "regular_season",
+      "round": 2,
+      "tags": ["division-game"],
+      "required_resources": [
+        { "type": "court", "quantity": 1 },
+        { "type": "official", "quantity": 3 }
+      ]
+    },
+    {
+      "id": "game-007",
+      "participants": [
+        { "id": "team-stars", "role": "home" },
+        { "id": "team-pioneers", "role": "away" }
+      ],
+      "durationMinutes": 150,
+      "sport": "basketball",
+      "competition_phase": "regular_season",
+      "round": 2,
+      "tags": ["conference-game"],
+      "required_resources": [
+        { "type": "court", "quantity": 1 },
+        { "type": "official", "quantity": 3 }
+      ]
+    },
+    {
+      "id": "game-008",
+      "participants": [
+        { "id": "team-waves", "role": "home" },
+        { "id": "team-eagles", "role": "away" }
+      ],
+      "durationMinutes": 150,
+      "sport": "basketball",
+      "competition_phase": "regular_season",
+      "round": 2,
+      "tags": ["interconference-game"],
+      "required_resources": [
+        { "type": "court", "quantity": 1 },
+        { "type": "official", "quantity": 3 }
+      ]
+    }
+  ],
+  "constraints": [
+    {
+      "id": "no_team_overlap",
+      "type": "hard",
+      "rule": "no_overlap_team",
+      "selector": { "entityType": "team" },
+      "priority": 1,
+      "enabled": true,
+      "tags": ["feasibility", "core"]
+    },
+    {
+      "id": "no_venue_overlap",
+      "type": "hard",
+      "rule": "no_overlap_venue_resource",
+      "selector": { "entityType": "venue" },
+      "priority": 1,
+      "enabled": true,
+      "tags": ["feasibility", "core"]
+    },
+    {
+      "id": "min_rest_72h",
+      "type": "hard",
+      "rule": "min_rest_time",
+      "selector": { "entityType": "team" },
+      "params": { "min_hours": 72 },
+      "priority": 2,
+      "enabled": true,
+      "tags": ["health", "player-welfare"]
+    },
+    {
+      "id": "max_3_games_per_week",
+      "type": "hard",
+      "rule": "max_games_per_week",
+      "selector": { "entityType": "team" },
+      "params": { "max_games": 3 },
+      "priority": 2,
+      "enabled": true,
+      "tags": ["health", "workload"]
+    },
+    {
+      "id": "broadcast_prime_time_national",
+      "type": "hard",
+      "rule": "broadcast_window",
+      "selector": {
+        "entityType": "fixture",
+        "tags": ["nationally-televised"]
+      },
+      "params": {
+        "windows": [
+          {
+            "days": ["Friday", "Saturday", "Sunday"],
+            "start_time": "19:00",
+            "end_time": "22:00"
+          }
+        ]
+      },
+      "priority": 3,
+      "enabled": true,
+      "tags": ["broadcast", "revenue"]
+    },
+    {
+      "id": "home_away_balance",
+      "type": "soft",
+      "rule": "home_away_balance",
+      "selector": { "entityType": "team" },
+      "params": { "max_delta": 2 },
+      "penalty": { "model": "quadratic", "weight": 10.0 },
+      "priority": 1,
+      "enabled": true,
+      "tags": ["fairness", "competitive-balance"]
+    },
+    {
+      "id": "minimize_travel_distance",
+      "type": "soft",
+      "rule": "minimize_travel",
+      "selector": { "entityType": "team" },
+      "params": { "method": "haversine" },
+      "penalty": { "model": "linear", "weight": 1.0 },
+      "priority": 2,
+      "enabled": true,
+      "tags": ["cost", "sustainability"]
+    },
+    {
+      "id": "max_travel_per_week",
+      "type": "soft",
+      "rule": "max_travel_distance",
+      "selector": { "entityType": "team" },
+      "params": { "max_km": 3000, "window_days": 7 },
+      "penalty": { "model": "quadratic", "weight": 5.0, "exponent": 2.0 },
+      "priority": 2,
+      "enabled": true,
+      "tags": ["player-welfare", "travel"]
+    },
+    {
+      "id": "opponent_spacing_5_games",
+      "type": "soft",
+      "rule": "opponent_spacing",
+      "selector": { "entityType": "team" },
+      "params": { "min_games_between": 5 },
+      "penalty": { "model": "linear", "weight": 3.0 },
+      "priority": 3,
+      "enabled": true,
+      "tags": ["competitive-balance", "variety"]
+    },
+    {
+      "id": "rivalry_games_weekend",
+      "type": "soft",
+      "rule": "broadcast_window",
+      "selector": {
+        "entityType": "fixture",
+        "tags": ["rivalry"]
+      },
+      "params": {
+        "windows": [
+          {
+            "days": ["Saturday", "Sunday"],
+            "start_time": "19:00",
+            "end_time": "21:00"
+          }
+        ],
+        "preference_weight": 0.8
+      },
+      "penalty": { "model": "linear", "weight": 8.0 },
+      "priority": 3,
+      "enabled": true,
+      "tags": ["broadcast", "fan-experience"]
+    },
+    {
+      "id": "back_to_back_minimize",
+      "type": "soft",
+      "rule": "back_to_back_games",
+      "selector": { "entityType": "team" },
+      "params": { "max_count": 10 },
+      "penalty": { "model": "step", "weight": 50.0, "threshold": 10 },
+      "priority": 2,
+      "enabled": true,
+      "tags": ["player-welfare", "quality"]
+    }
+  ],
+  "objectives": [
+    {
+      "metric": "travel_distance_km",
+      "aggregation": "sum",
+      "weight": 1.0,
+      "direction": "minimize",
+      "enabled": true
+    },
+    {
+      "metric": "home_away_delta",
+      "aggregation": "max",
+      "weight": 10.0,
+      "direction": "minimize",
+      "enabled": true
+    },
+    {
+      "metric": "prime_time_games",
+      "aggregation": "sum",
+      "weight": 5.0,
+      "direction": "maximize",
+      "selector": {
+        "entityType": "fixture",
+        "tags": ["nationally-televised"]
+      },
+      "enabled": true
+    },
+    {
+      "metric": "back_to_back_games",
+      "aggregation": "sum",
+      "weight": 15.0,
+      "direction": "minimize",
+      "enabled": true
+    },
+    {
+      "metric": "weekend_game_distribution",
+      "aggregation": "variance",
+      "weight": 3.0,
+      "direction": "minimize",
+      "enabled": true
+    }
+  ],
+  "metadata": {
+    "description": "Professional basketball league with 8 teams across 2 conferences and 4 divisions",
+    "created_by": "League Scheduling Committee",
+    "notes": "Season includes Christmas break and All-Star weekend blackouts"
+  }
+}

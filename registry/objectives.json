@@ -1,0 +1,31 @@
+{
+  "version": "1.0.0",
+  "description": "Canonical OSSS objective metrics registry",
+  "objectives": [
+    {
+      "id": "travel_distance_km",
+      "unit": "km",
+      "description": "Total travel distance for teams"
+    },
+    {
+      "id": "rest_violation_count",
+      "unit": "count",
+      "description": "Number of rest rule violations"
+    },
+    {
+      "id": "home_away_delta",
+      "unit": "count",
+      "description": "Difference between home and away games"
+    },
+    {
+      "id": "prime_time_distribution",
+      "unit": "count",
+      "description": "Distribution of prime-time fixtures across teams"
+    },
+    {
+      "id": "schedule_change_distance",
+      "unit": "count",
+      "description": "Difference from previously published schedule"
+    }
+  ]
+}

@@ -87,7 +87,7 @@ OSSS is governed openly and independently.
 
 SCORE is a founding contributor, but OSSS is **not owned or controlled by SCORE or any commercial entity**.
 
-See: [`CHARTER.md`](./CHARTER.md)
+See: [`ODDD-CHARTER.md`](./OSSS-CHARTER.md)
 
 ---
 

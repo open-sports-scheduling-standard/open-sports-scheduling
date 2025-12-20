@@ -1,0 +1,82 @@
+{
+  "id": "amateur-league-2025",
+  "name": "Regional Amateur League",
+  "timezone": "Europe/Dublin",
+  "season": {
+    "start": "2025-03-01T00:00:00+00:00",
+    "end": "2025-09-30T23:59:59+00:00"
+  },
+  "entities": {
+    "teams": [
+      { "id": "AFC-1", "name": "Amateur FC 1" },
+      { "id": "AFC-2", "name": "Amateur FC 2" },
+      { "id": "AFC-3", "name": "Amateur FC 3" }
+    ],
+    "venues": [
+      { "id": "stadium-north", "name": "North Stadium" },
+      { "id": "stadium-south", "name": "South Stadium" }
+    ]
+  },
+  "fixtures": [
+    {
+      "id": "round1-match1",
+      "participants": ["AFC-1", "AFC-2"],
+      "durationMinutes": 90
+    },
+    {
+      "id": "round1-match2",
+      "participants": ["AFC-2", "AFC-3"],
+      "durationMinutes": 90
+    }
+  ],
+  "constraints": [
+    {
+      "id": "min_rest_72h",
+      "type": "hard",
+      "rule": "min_rest_time",
+      "selector": { "entityType": "team" },
+      "params": { "min_hours": 72 }
+    },
+    {
+      "id": "max_travel_500km",
+      "type": "soft",
+      "rule": "max_travel_distance",
+      "selector": { "entityType": "team" },
+      "params": { "max_km": 500 },
+      "penalty": { "model": "linear", "weight": 0.7 }
+    },
+    {
+      "id": "home_away_balance",
+      "type": "soft",
+      "rule": "home_away_balance",
+      "selector": { "entityType": "team" },
+      "params": { "max_delta": 2 },
+      "penalty": { "model": "linear", "weight": 0.5 }
+    },
+    {
+  "id": "no_overlap_team",
+  "type": "hard",
+  "rule": "no_overlap_team",
+  "selector": { "entityType": "team" }
+},
+{
+  "id": "no_overlap_venue",
+  "type": "hard",
+  "rule": "no_overlap_venue_resource",
+  "selector": { "entityType": "venue" }
+}
+
+  ],
+  "objectives": [
+    {
+      "metric": "travel_distance_km",
+      "aggregation": "sum",
+      "weight": 0.7
+    },
+    {
+      "metric": "home_away_delta",
+      "aggregation": "max",
+      "weight": 0.3
+    }
+  ]
+}

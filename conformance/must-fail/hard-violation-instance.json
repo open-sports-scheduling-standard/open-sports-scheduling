@@ -1,0 +1,32 @@
+{
+  "osssVersion": "1.0.0",
+  "metadata": {
+    "leagueId": "test-league",
+    "seasonId": "2025",
+    "timezone": "UTC"
+  },
+  "teams": [
+    {
+      "id": "team-1",
+      "name": "Team A"
+    }
+  ],
+  "venues": [
+    {
+      "id": "venue-1",
+      "name": "Stadium A"
+    }
+  ],
+  "fixtures": [],
+  "constraints": {
+    "required": [
+      {
+        "ruleId": "no_overlap_team",
+        "type": "hard",
+        "selector": {
+          "teams": "*"
+        }
+      }
+    ]
+  }
+}

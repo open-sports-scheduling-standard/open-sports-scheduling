@@ -1,0 +1,131 @@
+{
+  "$schema": "../schemas/osss-constraints.schema.json",
+  "version": "1.0.0",
+  "profile": {
+    "id": "pro",
+    "name": "OSSS Professional Sports Profile",
+    "description": "Constraint profile for professional leagues. Optimizes for commercial imperatives, broadcast requirements, competitive balance, and high-stakes fairness.",
+    "suitableFor": ["Professional leagues", "Elite competitions", "Broadcast-driven tournaments", "High-revenue sports"],
+    "created": "2025-01-01",
+    "updated": "2025-01-01"
+  },
+  "constraints": {
+    "required": [
+      {
+        "ruleId": "no_overlap_team",
+        "type": "hard",
+        "rationale": "Teams cannot be in two places at once.",
+        "selector": {
+          "teams": "*"
+        }
+      },
+      {
+        "ruleId": "no_overlap_venue_resource",
+        "type": "hard",
+        "rationale": "Stadiums can only host one match at a time.",
+        "selector": {
+          "venues": "*"
+        }
+      },
+      {
+        "ruleId": "min_rest_time",
+        "type": "hard",
+        "params": {
+          "min_hours": 48
+        },
+        "rationale": "Professional athletes require minimum recovery between matches. 48 hours is standard for most professional sports to maintain performance and reduce injury risk.",
+        "selector": {
+          "teams": "*"
+        }
+      },
+      {
+        "ruleId": "venue_availability",
+        "type": "hard",
+        "rationale": "Professional stadiums host concerts, other sports, and events. Strict availability windows are critical.",
+        "selector": {
+          "venues": "*"
+        }
+      },
+      {
+        "ruleId": "broadcast_window",
+        "type": "hard",
+        "params": {
+          "allowed_windows": []
+        },
+        "rationale": "Broadcast contracts dictate fixture timing. Violations can breach multi-million dollar agreements.",
+        "selector": {
+          "fixtures": "*"
+        }
+      }
+    ],
+    "recommended": [
+      {
+        "ruleId": "home_away_balance",
+        "type": "soft",
+        "params": {
+          "max_delta": 1
+        },
+        "penalty": {
+          "perViolation": 100
+        },
+        "rationale": "Competitive integrity is paramount. Even small imbalances can affect league standings and playoff qualification worth millions.",
+        "selector": {
+          "teams": "*"
+        }
+      },
+      {
+        "ruleId": "opponent_spacing",
+        "type": "soft",
+        "params": {
+          "min_days": 7
+        },
+        "penalty": {
+          "perViolation": 50
+        },
+        "rationale": "Back-to-back fixtures against the same opponent reduce fan interest and broadcast value.",
+        "selector": {
+          "fixtures": "*"
+        }
+      },
+      {
+        "ruleId": "minimize_travel",
+        "type": "soft",
+        "penalty": {
+          "perKm": 1
+        },
+        "rationale": "Excessive travel impacts performance, increases costs, and affects recovery time.",
+        "selector": {
+          "teams": "*"
+        }
+      },
+      {
+        "ruleId": "max_travel_distance",
+        "type": "hard",
+        "params": {
+          "max_km": 5000
+        },
+        "rationale": "Extreme travel can compromise competitive fairness and player welfare, even in professional contexts.",
+        "selector": {
+          "teams": "*"
+        }
+      },
+      {
+        "ruleId": "max_games_per_day",
+        "type": "hard",
+        "params": {
+          "max_games": 1
+        },
+        "rationale": "Professional matches require peak performance. Multiple games per day are generally prohibited except in special tournament formats.",
+        "selector": {
+          "teams": "*"
+        }
+      }
+    ]
+  },
+  "metadata": {
+    "adoptionImpact": "Professional leagues gain transparent, auditable schedules with explicit commercial and competitive constraints",
+    "minimumCompliance": false,
+    "extensible": true,
+    "focusAreas": ["broadcast compliance", "competitive balance", "commercial optimization", "player welfare", "fairness"]
+  }
+}

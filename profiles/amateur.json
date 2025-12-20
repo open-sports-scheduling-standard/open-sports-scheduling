@@ -1,0 +1,112 @@
+{
+  "$schema": "../schemas/osss-constraints.schema.json",
+  "version": "1.0.0",
+  "profile": {
+    "id": "amateur",
+    "name": "OSSS Amateur Sports Profile",
+    "description": "Constraint profile for amateur and semi-professional leagues. Balances competitive integrity with participant availability and resource constraints.",
+    "suitableFor": ["Community leagues", "Adult recreational leagues", "Semi-pro competitions", "University/college sports"],
+    "created": "2025-01-01",
+    "updated": "2025-01-01"
+  },
+  "constraints": {
+    "required": [
+      {
+        "ruleId": "no_overlap_team",
+        "type": "hard",
+        "rationale": "Teams cannot be in two places at once.",
+        "selector": {
+          "teams": "*"
+        }
+      },
+      {
+        "ruleId": "no_overlap_venue_resource",
+        "type": "hard",
+        "rationale": "Venues can only host one match at a time.",
+        "selector": {
+          "venues": "*"
+        }
+      },
+      {
+        "ruleId": "min_rest_time",
+        "type": "hard",
+        "params": {
+          "min_hours": 48
+        },
+        "rationale": "Amateur players often balance sport with work/study. 48 hours provides adequate recovery and schedule flexibility.",
+        "selector": {
+          "teams": "*"
+        }
+      },
+      {
+        "ruleId": "venue_availability",
+        "type": "hard",
+        "rationale": "Amateur leagues typically share venues with other organizations and face booking constraints.",
+        "selector": {
+          "venues": "*"
+        }
+      }
+    ],
+    "recommended": [
+      {
+        "ruleId": "home_away_balance",
+        "type": "soft",
+        "params": {
+          "max_delta": 3
+        },
+        "penalty": {
+          "perViolation": 15
+        },
+        "rationale": "Competitive fairness requires reasonably balanced schedules, though some flexibility is acceptable.",
+        "selector": {
+          "teams": "*"
+        }
+      },
+      {
+        "ruleId": "minimize_travel",
+        "type": "soft",
+        "penalty": {
+          "perKm": 2
+        },
+        "rationale": "Amateur players typically cover their own travel costs. Minimizing distance reduces financial burden.",
+        "selector": {
+          "teams": "*"
+        }
+      },
+      {
+        "ruleId": "max_games_per_day",
+        "type": "soft",
+        "params": {
+          "max_games": 2
+        },
+        "penalty": {
+          "perViolation": 20
+        },
+        "rationale": "Most amateur players can handle 2 games in tournament formats, but prefer single-game days for regular season.",
+        "selector": {
+          "teams": "*"
+        }
+      },
+      {
+        "ruleId": "opponent_spacing",
+        "type": "soft",
+        "params": {
+          "min_days": 14
+        },
+        "penalty": {
+          "perViolation": 8
+        },
+        "rationale": "Variety in matchups maintains competitive interest and fairness across the season.",
+        "selector": {
+          "fixtures": "*"
+        }
+      }
+    ]
+  },
+  "metadata": {
+    "adoptionImpact": "Amateur leagues gain professional-grade scheduling with appropriate constraints for non-professional contexts",
+    "minimumCompliance": false,
+    "extensible": true,
+    "focusAreas": ["competitive integrity", "participant flexibility", "cost efficiency", "venue optimization"]
+  }
+}

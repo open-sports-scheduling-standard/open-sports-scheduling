@@ -1,0 +1,54 @@
+{
+  "osssVersion": "1.0.0",
+  "metadata": {
+    "leagueId": "test-league",
+    "seasonId": "2025",
+    "timezone": "UTC",
+    "description": "Baseline conformance test with core constraints"
+  },
+  "teams": [
+    {
+      "id": "team-1",
+      "name": "Test Team A"
+    },
+    {
+      "id": "team-2",
+      "name": "Test Team B"
+    }
+  ],
+  "venues": [
+    {
+      "id": "venue-1",
+      "name": "Test Stadium"
+    }
+  ],
+  "fixtures": [],
+  "constraints": {
+    "required": [
+      {
+        "ruleId": "no_overlap_team",
+        "type": "hard",
+        "selector": {
+          "teams": "*"
+        }
+      },
+      {
+        "ruleId": "no_overlap_venue_resource",
+        "type": "hard",
+        "selector": {
+          "venues": "*"
+        }
+      },
+      {
+        "ruleId": "min_rest_time",
+        "type": "hard",
+        "params": {
+          "min_hours": 24
+        },
+        "selector": {
+          "teams": "*"
+        }
+      }
+    ]
+  }
+}

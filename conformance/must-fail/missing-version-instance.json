@@ -1,0 +1,11 @@
+{
+  "metadata": {
+    "leagueId": "test-league",
+    "seasonId": "2025",
+    "timezone": "UTC"
+  },
+  "teams": [],
+  "venues": [],
+  "fixtures": [],
+  "constraints": {}
+}

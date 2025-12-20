@@ -1,0 +1,58 @@
+{
+  "$schema": "../schemas/osss-constraints.schema.json",
+  "version": "1.0.0",
+  "profile": {
+    "id": "baseline",
+    "name": "OSSS Baseline Profile",
+    "description": "Minimum viable constraint set for any sports league. Ensures physical feasibility and prevents scheduling conflicts.",
+    "suitableFor": ["Any sports league requiring basic schedule feasibility"],
+    "created": "2025-01-01",
+    "updated": "2025-01-01"
+  },
+  "constraints": {
+    "required": [
+      {
+        "ruleId": "no_overlap_team",
+        "type": "hard",
+        "rationale": "A team cannot physically be in two places at once. This prevents impossible schedules.",
+        "selector": {
+          "teams": "*"
+        }
+      },
+      {
+        "ruleId": "no_overlap_venue_resource",
+        "type": "hard",
+        "rationale": "A venue can only host one match at a time. Prevents double-booking facilities.",
+        "selector": {
+          "venues": "*"
+        }
+      },
+      {
+        "ruleId": "min_rest_time",
+        "type": "hard",
+        "params": {
+          "min_hours": 24
+        },
+        "rationale": "Teams need minimum recovery time between matches. 24 hours is the absolute minimum for player safety and logistics.",
+        "selector": {
+          "teams": "*"
+        }
+      }
+    ],
+    "recommended": [
+      {
+        "ruleId": "venue_availability",
+        "type": "hard",
+        "rationale": "Most venues have availability constraints (maintenance, other events, etc.). Recommended unless venues are dedicated 24/7.",
+        "selector": {
+          "venues": "*"
+        }
+      }
+    ]
+  },
+  "metadata": {
+    "adoptionImpact": "Leagues can be compliant in minutes by selecting this profile",
+    "minimumCompliance": true,
+    "extensible": true
+  }
+}

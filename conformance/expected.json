@@ -1,0 +1,158 @@
+{
+  "version": "1.0.0",
+  "description": "OSSS Conformance Test Suite - Defines compliance requirements",
+  "updated": "2025-01-01",
+  "conformanceLevel": "baseline",
+  "testSuites": {
+    "mustPass": {
+      "description": "Test cases that MUST pass validation for OSSS conformance",
+      "location": "./must-pass/",
+      "requirements": [
+        "All instances must validate against osss-core.schema.json",
+        "All instances must include required fields: osssVersion, metadata, teams, venues, fixtures",
+        "All results must validate against osss-results.schema.json",
+        "All constraint ruleIds must exist in the canonical registry",
+        "All hard constraint violations must be detected",
+        "All soft constraint penalties must be calculated correctly"
+      ]
+    },
+    "mustFail": {
+      "description": "Test cases that MUST fail validation (catch invalid inputs)",
+      "location": "./must-fail/",
+      "requirements": [
+        "Invalid JSON must be rejected",
+        "Missing required fields must be rejected",
+        "Unknown constraint ruleIds must be rejected",
+        "Invalid parameter types must be rejected",
+        "Schema violations must be detected"
+      ]
+    }
+  },
+  "testCases": {
+    "mustPass": [
+      {
+        "id": "baseline-minimal",
+        "name": "Minimal valid instance",
+        "description": "Simplest possible valid OSSS instance",
+        "files": ["baseline-minimal-instance.json"],
+        "expectedOutcome": {
+          "schemaValid": true,
+          "registryValid": true,
+          "exitCode": 0
+        }
+      },
+      {
+        "id": "baseline-with-constraints",
+        "name": "Instance with baseline constraints",
+        "description": "Valid instance with no_overlap_team and no_overlap_venue_resource",
+        "files": ["baseline-with-constraints-instance.json"],
+        "expectedOutcome": {
+          "schemaValid": true,
+          "registryValid": true,
+          "exitCode": 0
+        }
+      },
+      {
+        "id": "feasible-result",
+        "name": "Feasible result with no violations",
+        "description": "Valid result that satisfies all hard constraints",
+        "files": [
+          "feasible-result-instance.json",
+          "feasible-result-result.json"
+        ],
+        "expectedOutcome": {
+          "schemaValid": true,
+          "feasible": true,
+          "hardConstraintViolations": 0,
+          "exitCode": 0
+        }
+      },
+      {
+        "id": "soft-penalties",
+        "name": "Result with soft constraint penalties",
+        "description": "Valid result that is feasible but has soft constraint penalties",
+        "files": [
+          "soft-penalties-instance.json",
+          "soft-penalties-result.json"
+        ],
+        "expectedOutcome": {
+          "schemaValid": true,
+          "feasible": true,
+          "hardConstraintViolations": 0,
+          "softConstraintPenalties": ">0",
+          "exitCode": 0
+        }
+      }
+    ],
+    "mustFail": [
+      {
+        "id": "missing-version",
+        "name": "Instance missing osssVersion",
+        "description": "Should fail schema validation",
+        "files": ["missing-version-instance.json"],
+        "expectedOutcome": {
+          "schemaValid": false,
+          "exitCode": 1,
+          "errorContains": ["osssVersion", "required"]
+        }
+      },
+      {
+        "id": "unknown-constraint",
+        "name": "Instance with unknown constraint ruleId",
+        "description": "Should fail registry validation",
+        "files": ["unknown-constraint-instance.json"],
+        "expectedOutcome": {
+          "registryValid": false,
+          "exitCode": 1,
+          "errorContains": ["unknown", "ruleId", "registry"]
+        }
+      },
+      {
+        "id": "invalid-params",
+        "name": "Constraint with invalid parameter type",
+        "description": "Should fail parameter validation",
+        "files": ["invalid-params-instance.json"],
+        "expectedOutcome": {
+          "exitCode": 1,
+          "errorContains": ["parameter", "type", "invalid"]
+        }
+      },
+      {
+        "id": "hard-violation",
+        "name": "Result with hard constraint violation",
+        "description": "Should be detected as infeasible",
+        "files": [
+          "hard-violation-instance.json",
+          "hard-violation-result.json"
+        ],
+        "expectedOutcome": {
+          "feasible": false,
+          "hardConstraintViolations": ">0",
+          "exitCode": 1
+        }
+      }
+    ]
+  },
+  "validatorRequirements": {
+    "description": "Minimum requirements for a conformant OSSS validator",
+    "required": [
+      "JSON schema validation against osss-core.schema.json",
+      "JSON schema validation against osss-results.schema.json",
+      "Constraint registry lookup and validation",
+      "Hard constraint violation detection",
+      "Soft constraint penalty calculation",
+      "Exit code: 0 for pass, non-zero for fail"
+    ],
+    "recommended": [
+      "Constraint parameter schema validation",
+      "Selector support verification",
+      "Human-readable error messages",
+      "JSON output format support"
+    ]
+  },
+  "complianceBadge": {
+    "name": "OSSS Conformant",
+    "criteria": "Validator passes all must-pass tests and correctly rejects all must-fail tests",
+    "version": "1.0.0"
+  }
+}

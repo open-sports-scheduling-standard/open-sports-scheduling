@@ -1,0 +1,43 @@
+{
+  "osssVersion": "1.0.0",
+  "metadata": {
+    "solverName": "test-solver",
+    "solverVersion": "1.0.0",
+    "generatedAt": "2025-01-01T00:00:00Z"
+  },
+  "schedule": {
+    "fixtures": [
+      {
+        "id": "fixture-1",
+        "homeTeam": "team-1",
+        "awayTeam": "team-2",
+        "venue": "venue-1",
+        "startTime": "2025-01-15T14:00:00Z",
+        "endTime": "2025-01-15T16:00:00Z"
+      },
+      {
+        "id": "fixture-2",
+        "homeTeam": "team-1",
+        "awayTeam": "team-3",
+        "venue": "venue-2",
+        "startTime": "2025-01-15T14:30:00Z",
+        "endTime": "2025-01-15T16:30:00Z"
+      }
+    ]
+  },
+  "validation": {
+    "feasible": false,
+    "hardConstraintViolations": [
+      {
+        "ruleId": "no_overlap_team",
+        "message": "Team team-1 has overlapping fixtures",
+        "context": {
+          "teamId": "team-1",
+          "fixtureIds": ["fixture-1", "fixture-2"]
+        }
+      }
+    ],
+    "softConstraintPenalties": [],
+    "totalPenalty": 0
+  }
+}

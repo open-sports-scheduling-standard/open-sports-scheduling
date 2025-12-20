@@ -1,0 +1,112 @@
+{
+  "$schema": "../schemas/osss-constraints.schema.json",
+  "version": "1.0.0",
+  "profile": {
+    "id": "youth",
+    "name": "OSSS Youth Sports Profile",
+    "description": "Constraint profile optimized for youth leagues. Prioritizes player development, safety, fairness, and family-friendly scheduling.",
+    "suitableFor": ["Youth recreational leagues", "School sports", "U8-U18 competitions"],
+    "created": "2025-01-01",
+    "updated": "2025-01-01"
+  },
+  "constraints": {
+    "required": [
+      {
+        "ruleId": "no_overlap_team",
+        "type": "hard",
+        "rationale": "Teams cannot be in two places at once.",
+        "selector": {
+          "teams": "*"
+        }
+      },
+      {
+        "ruleId": "no_overlap_venue_resource",
+        "type": "hard",
+        "rationale": "Venues can only host one match at a time.",
+        "selector": {
+          "venues": "*"
+        }
+      },
+      {
+        "ruleId": "min_rest_time",
+        "type": "hard",
+        "params": {
+          "min_hours": 72
+        },
+        "rationale": "Youth players need longer recovery. 72 hours (3 days) prevents burnout and injury in developing athletes.",
+        "selector": {
+          "teams": "*"
+        }
+      },
+      {
+        "ruleId": "max_games_per_day",
+        "type": "hard",
+        "params": {
+          "max_games": 1
+        },
+        "rationale": "Youth players should not play multiple games per day except in tournament settings.",
+        "selector": {
+          "teams": "*"
+        }
+      },
+      {
+        "ruleId": "venue_availability",
+        "type": "hard",
+        "rationale": "Youth leagues often share facilities with schools and other programs.",
+        "selector": {
+          "venues": "*"
+        }
+      }
+    ],
+    "recommended": [
+      {
+        "ruleId": "home_away_balance",
+        "type": "soft",
+        "params": {
+          "max_delta": 2
+        },
+        "penalty": {
+          "perViolation": 10
+        },
+        "rationale": "Fairness is critical in youth sports. Balanced home/away schedules ensure equal travel burden on families.",
+        "selector": {
+          "teams": "*"
+        }
+      },
+      {
+        "ruleId": "max_travel_distance",
+        "type": "soft",
+        "params": {
+          "max_km": 50
+        },
+        "penalty": {
+          "perKm": 5
+        },
+        "rationale": "Minimize travel burden on families. Youth leagues should prioritize local play.",
+        "selector": {
+          "teams": "*"
+        }
+      },
+      {
+        "ruleId": "opponent_spacing",
+        "type": "soft",
+        "params": {
+          "min_days": 21
+        },
+        "penalty": {
+          "perViolation": 5
+        },
+        "rationale": "Variety in opponents improves development and maintains player engagement.",
+        "selector": {
+          "fixtures": "*"
+        }
+      }
+    ]
+  },
+  "metadata": {
+    "adoptionImpact": "Youth leagues can immediately adopt safe, fair scheduling practices",
+    "minimumCompliance": false,
+    "extensible": true,
+    "focusAreas": ["player safety", "family convenience", "fairness", "development"]
+  }
+}

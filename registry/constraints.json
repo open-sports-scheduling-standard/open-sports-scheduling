@@ -1,94 +1,399 @@
 {
-  "version": "1.0.0",
-  "description": "Canonical OSSS constraint registry",
+  "version": "2.0.0",
+  "description": "Canonical OSSS constraint registry with semantic definitions",
+  "updated": "2025-01-01",
   "constraints": [
     {
-      "id": "no_overlap_team",
+      "ruleId": "no_overlap_team",
       "category": "feasibility",
-      "applies_to": "team",
+      "appliesTo": "team",
       "type": "hard",
-      "description": "A team cannot be scheduled for overlapping fixtures"
+      "description": "A team cannot be scheduled for overlapping fixtures",
+      "paramsSchema": {},
+      "selectorSupport": {
+        "teams": true,
+        "venues": false,
+        "fixtures": false,
+        "phases": false
+      },
+      "units": null,
+      "recommendedRanges": null,
+      "defaultPenaltyModel": null,
+      "references": {
+        "rationale": "Physical impossibility - a team cannot be in two places at once",
+        "standardCompliance": ["OSSS-CORE-001"],
+        "useCases": ["All leagues"]
+      }
     },
     {
-      "id": "no_overlap_venue_resource",
+      "ruleId": "no_overlap_venue_resource",
       "category": "feasibility",
-      "applies_to": "venue",
+      "appliesTo": "venue",
       "type": "hard",
-      "description": "A venue resource cannot host overlapping fixtures"
-    },
-    {
-      "id": "min_rest_time",
-      "category": "time",
-      "applies_to": "team",
-      "type": "hard_or_soft",
-      "params": {
-        "min_hours": "number"
+      "description": "A venue resource cannot host overlapping fixtures",
+      "paramsSchema": {},
+      "selectorSupport": {
+        "teams": false,
+        "venues": true,
+        "fixtures": false,
+        "phases": false
       },
-      "description": "Minimum rest time required between fixtures"
+      "units": null,
+      "recommendedRanges": null,
+      "defaultPenaltyModel": null,
+      "references": {
+        "rationale": "Physical impossibility - a venue can only host one match at a time",
+        "standardCompliance": ["OSSS-CORE-002"],
+        "useCases": ["All leagues"]
+      }
     },
     {
-      "id": "max_games_per_day",
+      "ruleId": "min_rest_time",
       "category": "time",
-      "applies_to": "team",
+      "appliesTo": "team",
       "type": "hard_or_soft",
-      "params": {
-        "max_games": "number"
+      "description": "Minimum rest time required between fixtures",
+      "paramsSchema": {
+        "type": "object",
+        "required": ["min_hours"],
+        "properties": {
+          "min_hours": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Minimum hours between fixture end and next fixture start"
+          }
+        }
       },
-      "description": "Maximum games a team can play in a single day"
+      "selectorSupport": {
+        "teams": true,
+        "venues": false,
+        "fixtures": false,
+        "phases": true
+      },
+      "units": {
+        "min_hours": "hours"
+      },
+      "recommendedRanges": {
+        "min_hours": {
+          "youth": [72, 168],
+          "amateur": [48, 96],
+          "pro": [48, 72],
+          "minimum": 24
+        }
+      },
+      "defaultPenaltyModel": {
+        "type": "linear",
+        "perHourViolation": 10,
+        "description": "Penalty increases linearly with hours below minimum"
+      },
+      "references": {
+        "rationale": "Player recovery, injury prevention, and operational logistics",
+        "standardCompliance": ["OSSS-TIME-001"],
+        "useCases": ["All leagues"],
+        "relatedRules": ["max_games_per_day"]
+      }
     },
     {
-      "id": "venue_availability",
+      "ruleId": "max_games_per_day",
+      "category": "time",
+      "appliesTo": "team",
+      "type": "hard_or_soft",
+      "description": "Maximum games a team can play in a single day",
+      "paramsSchema": {
+        "type": "object",
+        "required": ["max_games"],
+        "properties": {
+          "max_games": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Maximum number of games per calendar day"
+          }
+        }
+      },
+      "selectorSupport": {
+        "teams": true,
+        "venues": false,
+        "fixtures": false,
+        "phases": true
+      },
+      "units": {
+        "max_games": "games"
+      },
+      "recommendedRanges": {
+        "max_games": {
+          "youth": [1, 1],
+          "amateur": [1, 2],
+          "pro": [1, 1],
+          "tournament": [2, 3]
+        }
+      },
+      "defaultPenaltyModel": {
+        "type": "exponential",
+        "perViolation": 50,
+        "multiplier": 2,
+        "description": "Penalty doubles for each additional game beyond max"
+      },
+      "references": {
+        "rationale": "Player welfare, performance quality, injury prevention",
+        "standardCompliance": ["OSSS-TIME-002"],
+        "useCases": ["Youth leagues (hard)", "Amateur leagues (soft)", "Tournaments (adjusted max)"],
+        "relatedRules": ["min_rest_time"]
+      }
+    },
+    {
+      "ruleId": "venue_availability",
       "category": "venue",
-      "applies_to": "venue",
+      "appliesTo": "venue",
       "type": "hard",
-      "description": "Fixtures must fall within venue availability windows"
+      "description": "Fixtures must fall within venue availability windows",
+      "paramsSchema": {},
+      "selectorSupport": {
+        "teams": false,
+        "venues": true,
+        "fixtures": false,
+        "phases": false
+      },
+      "units": null,
+      "recommendedRanges": null,
+      "defaultPenaltyModel": null,
+      "references": {
+        "rationale": "Venues have operational constraints (maintenance, shared usage, opening hours)",
+        "standardCompliance": ["OSSS-VENUE-001"],
+        "useCases": ["All leagues with limited venue access"],
+        "note": "Availability windows should be defined in venue.availability array"
+      }
     },
     {
-      "id": "max_travel_distance",
+      "ruleId": "max_travel_distance",
       "category": "travel",
-      "applies_to": "team",
+      "appliesTo": "team",
       "type": "hard_or_soft",
-      "params": {
-        "max_km": "number"
+      "description": "Maximum allowable travel distance between consecutive fixtures",
+      "paramsSchema": {
+        "type": "object",
+        "required": ["max_km"],
+        "properties": {
+          "max_km": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Maximum kilometers from team home to fixture venue"
+          }
+        }
       },
-      "description": "Maximum allowable travel distance"
+      "selectorSupport": {
+        "teams": true,
+        "venues": false,
+        "fixtures": false,
+        "phases": true
+      },
+      "units": {
+        "max_km": "kilometers"
+      },
+      "recommendedRanges": {
+        "max_km": {
+          "youth": [50, 100],
+          "amateur": [100, 300],
+          "pro": [500, 5000],
+          "regional": [200, 500]
+        }
+      },
+      "defaultPenaltyModel": {
+        "type": "linear",
+        "perKmOver": 5,
+        "description": "Penalty per kilometer over the maximum"
+      },
+      "references": {
+        "rationale": "Cost control, player welfare, environmental impact, fairness",
+        "standardCompliance": ["OSSS-TRAVEL-001"],
+        "useCases": ["Youth leagues (family burden)", "Amateur leagues (cost sharing)", "Environmental sustainability goals"],
+        "relatedRules": ["minimize_travel"]
+      }
     },
     {
-      "id": "minimize_travel",
+      "ruleId": "minimize_travel",
       "category": "travel",
-      "applies_to": "team",
+      "appliesTo": "team",
       "type": "soft",
-      "description": "Minimize total travel distance across fixtures"
-    },
-    {
-      "id": "home_away_balance",
-      "category": "fairness",
-      "applies_to": "team",
-      "type": "soft",
-      "params": {
-        "max_delta": "number"
+      "description": "Minimize total travel distance across all fixtures",
+      "paramsSchema": {},
+      "selectorSupport": {
+        "teams": true,
+        "venues": false,
+        "fixtures": false,
+        "phases": true
       },
-      "description": "Balance home and away games"
-    },
-    {
-      "id": "opponent_spacing",
-      "category": "fairness",
-      "applies_to": "fixture",
-      "type": "soft",
-      "params": {
-        "min_days": "number"
+      "units": {
+        "totalDistance": "kilometers"
       },
-      "description": "Avoid repeat opponents within a short time window"
+      "recommendedRanges": null,
+      "defaultPenaltyModel": {
+        "type": "linear",
+        "perKm": 1,
+        "description": "Penalty per kilometer of total travel distance"
+      },
+      "references": {
+        "rationale": "Cost efficiency, environmental impact, player fatigue reduction",
+        "standardCompliance": ["OSSS-TRAVEL-002"],
+        "useCases": ["Cost-sensitive leagues", "Environmental goals", "Regional optimization"],
+        "relatedRules": ["max_travel_distance"]
+      }
     },
     {
-      "id": "broadcast_window",
+      "ruleId": "home_away_balance",
+      "category": "fairness",
+      "appliesTo": "team",
+      "type": "soft",
+      "description": "Balance the number of home and away games for each team",
+      "paramsSchema": {
+        "type": "object",
+        "required": ["max_delta"],
+        "properties": {
+          "max_delta": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Maximum allowable difference between home and away game counts"
+          }
+        }
+      },
+      "selectorSupport": {
+        "teams": true,
+        "venues": false,
+        "fixtures": false,
+        "phases": true
+      },
+      "units": {
+        "max_delta": "games"
+      },
+      "recommendedRanges": {
+        "max_delta": {
+          "youth": [1, 2],
+          "amateur": [2, 3],
+          "pro": [0, 1],
+          "strict": [0, 0]
+        }
+      },
+      "defaultPenaltyModel": {
+        "type": "quadratic",
+        "perGameImbalance": 15,
+        "exponent": 2,
+        "description": "Penalty increases quadratically with imbalance (1 game = 15, 2 games = 60, 3 games = 135)"
+      },
+      "references": {
+        "rationale": "Competitive fairness, revenue equity (for ticketed games), fan experience",
+        "standardCompliance": ["OSSS-FAIRNESS-001"],
+        "useCases": ["Professional leagues (strict)", "Competitive amateur leagues", "Revenue-driven leagues"],
+        "note": "Critical for leagues where home advantage is significant"
+      }
+    },
+    {
+      "ruleId": "opponent_spacing",
+      "category": "fairness",
+      "appliesTo": "fixture",
+      "type": "soft",
+      "description": "Ensure minimum spacing between repeat matchups against the same opponent",
+      "paramsSchema": {
+        "type": "object",
+        "required": ["min_days"],
+        "properties": {
+          "min_days": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Minimum days between fixtures against the same opponent"
+          }
+        }
+      },
+      "selectorSupport": {
+        "teams": true,
+        "venues": false,
+        "fixtures": true,
+        "phases": true
+      },
+      "units": {
+        "min_days": "days"
+      },
+      "recommendedRanges": {
+        "min_days": {
+          "youth": [14, 28],
+          "amateur": [7, 21],
+          "pro": [7, 14],
+          "seasonal": [21, 60]
+        }
+      },
+      "defaultPenaltyModel": {
+        "type": "linear",
+        "perDayViolation": 8,
+        "description": "Penalty per day below minimum spacing"
+      },
+      "references": {
+        "rationale": "Competitive variety, fan engagement, strategic preparation time, fairness",
+        "standardCompliance": ["OSSS-FAIRNESS-002"],
+        "useCases": ["Regular season leagues", "Broadcast-driven schedules (avoid repetition)", "Fan interest maintenance"]
+      }
+    },
+    {
+      "ruleId": "broadcast_window",
       "category": "broadcast",
-      "applies_to": "fixture",
+      "appliesTo": "fixture",
       "type": "hard_or_soft",
-      "params": {
-        "allowed_windows": "array"
+      "description": "Fixtures must occur within broadcast-approved time windows",
+      "paramsSchema": {
+        "type": "object",
+        "required": ["allowed_windows"],
+        "properties": {
+          "allowed_windows": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "dayOfWeek": {
+                  "type": "string",
+                  "enum": ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
+                },
+                "startTime": {
+                  "type": "string",
+                  "pattern": "^([0-1][0-9]|2[0-3]):[0-5][0-9]$"
+                },
+                "endTime": {
+                  "type": "string",
+                  "pattern": "^([0-1][0-9]|2[0-3]):[0-5][0-9]$"
+                }
+              },
+              "required": ["dayOfWeek", "startTime", "endTime"]
+            },
+            "description": "Array of allowed broadcast windows"
+          }
+        }
       },
-      "description": "Fixtures must occur within broadcast-approved windows"
+      "selectorSupport": {
+        "teams": true,
+        "venues": false,
+        "fixtures": true,
+        "phases": true
+      },
+      "units": null,
+      "recommendedRanges": {
+        "examples": {
+          "primetime": "Saturday 19:00-21:00, Sunday 14:00-16:00",
+          "weekend": "Saturday-Sunday 10:00-22:00",
+          "weeknight": "Tuesday-Thursday 19:00-21:00"
+        }
+      },
+      "defaultPenaltyModel": {
+        "type": "flat",
+        "perViolation": 1000,
+        "description": "High flat penalty for broadcast contract violations"
+      },
+      "references": {
+        "rationale": "Broadcast contract compliance, revenue maximization, viewership optimization",
+        "standardCompliance": ["OSSS-BROADCAST-001"],
+        "useCases": ["Professional leagues with TV deals", "Revenue-driven competitions"],
+        "note": "Often a hard constraint due to contractual obligations worth millions"
+      }
     }
-  ]
+  ],
+  "metadata": {
+    "adoptionImpact": "Vendors and researchers can implement constraints consistently with clear parameter schemas and penalty models",
+    "versioning": "Semantic versioning - breaking changes increment major version",
+    "deprecationPolicy": "Deprecated constraints remain in registry for 2 major versions with warnings"
+  }
 }

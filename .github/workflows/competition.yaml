@@ -1,0 +1,208 @@
+# ============================================================
+# 🏆 OSSS COMPETITION JUDGE
+# ------------------------------------------------------------
+# This GitHub Action is the *sole authority* for:
+#  - validating submissions
+#  - re-scoring results (anti-cheat)
+#  - enforcing OSSS conformance
+#  - updating leaderboards
+#
+# If this workflow passes, the submission is REAL.
+# If it fails, the leaderboard does not lie.
+# ============================================================
+
+name: 🏟️ OSSS Competition Judge
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - "submissions/**.json"
+
+concurrency:
+  # Prevent leaderboard race conditions
+  group: osss-competition-${{ github.event.pull_request.base.ref }}
+  cancel-in-progress: false
+
+jobs:
+  judge:
+    name: ⚖️ Validate, Score & Judge Submission
+    runs-on: ubuntu-latest
+
+    env:
+      NODE_VERSION: 20
+      TRACK_DIR: instances
+      SUBMISSION_DIR: submissions
+      LEADERBOARD_DIR: leaderboard
+
+    steps:
+      # ------------------------------------------------------------
+      # 1️⃣ Checkout repository
+      # ------------------------------------------------------------
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # ------------------------------------------------------------
+      # 2️⃣ Setup Node (validator runtime)
+      # ------------------------------------------------------------
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      # ------------------------------------------------------------
+      # 3️⃣ Install OSSS Validator
+      # ------------------------------------------------------------
+      - name: 📦 Install OSSS Validator
+        run: |
+          echo "🔧 Installing OSSS validator..."
+          npm ci
+
+      # ------------------------------------------------------------
+      # 4️⃣ Locate submission file (STRICT)
+      # ------------------------------------------------------------
+      - name: 🔍 Locate submission file
+        id: submission
+        run: |
+          set -e
+          echo "🔎 Searching for submission JSON..."
+          FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD | grep '^submissions/.*\.json$' || true)
+
+          COUNT=$(echo "$FILES" | wc -l)
+          if [ "$COUNT" -ne 1 ]; then
+            echo "❌ Exactly ONE submission JSON must be modified per PR."
+            echo "Found:"
+            echo "$FILES"
+            exit 1
+          fi
+
+          FILE=$(echo "$FILES" | head -n 1)
+          echo "✅ Submission found: $FILE"
+          echo "file=$FILE" >> $GITHUB_OUTPUT
+
+      # ------------------------------------------------------------
+      # 5️⃣ Extract competition metadata
+      # ------------------------------------------------------------
+      - name: 🧾 Parse submission metadata
+        id: meta
+        run: |
+          set -e
+          FILE="${{ steps.submission.outputs.file }}"
+          TRACK=$(jq -r '.track' "$FILE")
+          SOLVER=$(jq -r '.solver.name' "$FILE")
+
+          if [ "$TRACK" = "null" ] || [ "$SOLVER" = "null" ]; then
+            echo "❌ Submission missing required fields: track, solver.name"
+            exit 1
+          fi
+
+          INSTANCE_FILE="${TRACK_DIR}/${TRACK}.json"
+          if [ ! -f "$INSTANCE_FILE" ]; then
+            echo "❌ No instance found for track '$TRACK'"
+            exit 1
+          fi
+
+          echo "track=$TRACK" >> $GITHUB_OUTPUT
+          echo "solver=$SOLVER" >> $GITHUB_OUTPUT
+          echo "instance=$INSTANCE_FILE" >> $GITHUB_OUTPUT
+
+          echo "🏁 Track: $TRACK"
+          echo "🤖 Solver: $SOLVER"
+
+      # ------------------------------------------------------------
+      # 6️⃣ Validate + Re-score (ANTI-CHEAT MODE)
+      # ------------------------------------------------------------
+      - name: ⚖️ Run OSSS Validator (authoritative scoring)
+        id: validate
+        run: |
+          set -e
+          FILE="${{ steps.submission.outputs.file }}"
+          INSTANCE="${{ steps.meta.outputs.instance }}"
+
+          echo "🧠 Running validator..."
+          npx osss-validate result \
+            --instance "$INSTANCE" \
+            --result "$FILE" \
+            --schemas schemas \
+            --registry registry \
+            --fix-scores \
+            --out validated.json
+
+          echo "✅ Validation complete"
+
+      # ------------------------------------------------------------
+      # 7️⃣ Update leaderboard (best-score-wins)
+      # ------------------------------------------------------------
+      - name: 🏆 Update leaderboard
+        run: |
+          set -e
+          TRACK="${{ steps.meta.outputs.track }}"
+          SOLVER="${{ steps.meta.outputs.solver }}"
+          BOARD="${LEADERBOARD_DIR}/${TRACK}.json"
+
+          echo "📊 Updating leaderboard for track '$TRACK'..."
+
+          node scripts/updateLeaderboard.js \
+            --leaderboard "$BOARD" \
+            --validated validated.json \
+            --solver "$SOLVER"
+
+          echo "✅ Leaderboard updated"
+
+      # ------------------------------------------------------------
+      # 8️⃣ Commit leaderboard update
+      # ------------------------------------------------------------
+      - name: 💾 Commit leaderboard changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "🏆 Update leaderboard for ${{ steps.meta.outputs.solver }}"
+          file_pattern: leaderboard/*.json
+          commit_user_name: "OSSS Judge Bot"
+          commit_user_email: "judge@opensportsscheduling.org"
+
+      # ------------------------------------------------------------
+      # 9️⃣ Comment result on PR (human-friendly)
+      # ------------------------------------------------------------
+      - name: 💬 Comment on Pull Request
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require("fs");
+            const result = JSON.parse(fs.readFileSync("validated.json", "utf8"));
+
+            const penalty = result.scores.totalPenalty;
+            const feasible = result.feasible ? "✅ Feasible" : "⚠️ Infeasible";
+
+            const body = `
+            ## 🏟️ OSSS Submission Judged
+
+            **Solver:** \`${{ steps.meta.outputs.solver }}\`  
+            **Track:** \`${{ steps.meta.outputs.track }}\`
+
+            **Result:** ${feasible}  
+            **Total Penalty:** **${penalty}**
+
+            🔒 Scores were **recomputed by the OSSS Validator**  
+            🧠 Solver-reported scores are ignored by design  
+
+            👉 See \`leaderboard/${{ steps.meta.outputs.track }}.json\` for ranking
+            `;
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body
+            });
+
+      # ------------------------------------------------------------
+      # 🔚 Final word
+      # ------------------------------------------------------------
+      - name: 🎉 Verdict
+        run: |
+          echo "🏁 OSSS Judge complete."
+          echo "If it passed, it's real."
+          echo "If it failed, fix your solver."

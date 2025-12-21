@@ -599,5 +599,125 @@ export async function main(argv) {
       }
     });
 
+  // ✅ Dataset: Generate synthetic datasets
+  program
+    .command("dataset-generate")
+    .option("--track <track>", "competition track (youth|amateur|professional)", "amateur")
+    .option("--num-teams <n>", "number of teams", parseInt, 16)
+    .option("--num-venues <n>", "number of venues", parseInt, 8)
+    .option("--season-weeks <n>", "season length in weeks", parseInt, 20)
+    .option("--complexity <level>", "difficulty (low|moderate|high)", "moderate")
+    .option("--seed <seed>", "random seed for reproducibility", parseInt)
+    .option("--output <path>", "output file path", "generated-instance.json")
+    .description("Generate a synthetic OSSS instance")
+    .action(async (opts) => {
+      const { generateInstance } = await import("./dataset-generator.js");
+
+      const instance = generateInstance({
+        track: opts.track,
+        numTeams: opts.numTeams,
+        numVenues: opts.numVenues,
+        seasonWeeks: opts.seasonWeeks,
+        complexity: opts.complexity,
+        seed: opts.seed
+      });
+
+      await fs.writeFile(opts.output, JSON.stringify(instance, null, 2));
+
+      console.log(`✅ Generated synthetic instance: ${opts.output}`);
+      console.log(`   Track: ${opts.track}`);
+      console.log(`   Teams: ${opts.numTeams}`);
+      console.log(`   Venues: ${opts.numVenues}`);
+      console.log(`   Season: ${opts.seasonWeeks} weeks`);
+      console.log(`   Complexity: ${opts.complexity}`);
+      if (opts.seed) {
+        console.log(`   Seed: ${opts.seed} (reproducible)`);
+      }
+      process.exit(0);
+    });
+
+  // ✅ Dataset: Anonymize real-world datasets
+  program
+    .command("dataset-anonymize")
+    .requiredOption("--input <path>", "input instance file")
+    .requiredOption("--output <path>", "output anonymized file")
+    .option("--preserve-structure", "preserve instance structure", true)
+    .option("--remove-pii", "remove personally identifiable information", true)
+    .option("--fuzzy-locations", "add noise to venue locations", true)
+    .option("--relative-dates", "convert to relative dates", true)
+    .option("--verify", "verify anonymization quality", false)
+    .description("Anonymize a real-world OSSS instance for public sharing")
+    .action(async (opts) => {
+      const { anonymizeInstance, verifyAnonymization, generateAnonymizationReport } =
+        await import("./dataset-anonymizer.js");
+
+      const instance = await readJson(opts.input);
+
+      const anonymized = anonymizeInstance(instance, {
+        preserveStructure: opts.preserveStructure,
+        removePII: opts.removePii,
+        fuzzyLocations: opts.fuzzyLocations,
+        relativeDates: opts.relativeDates
+      });
+
+      await fs.writeFile(opts.output, JSON.stringify(anonymized, null, 2));
+
+      console.log(`✅ Anonymized instance saved: ${opts.output}`);
+
+      if (opts.verify) {
+        const report = generateAnonymizationReport(instance, anonymized);
+
+        console.log(`\n📊 Anonymization Report:`);
+        console.log(`   Quality Score: ${report.qualityScore}/100`);
+        console.log(`   Teams Renamed: ${report.transformations.teamsRenamed}`);
+        console.log(`   Venues Renamed: ${report.transformations.venuesRenamed}`);
+        console.log(`   Locations Fuzzed: ${report.transformations.locationsFuzzed}`);
+        console.log(`   Dates Relativized: ${report.transformations.datesRelativized}`);
+        console.log(`   Recommendation: ${report.recommendation}`);
+
+        if (report.verification.warnings.length > 0) {
+          console.log(`\n⚠️  Warnings:`);
+          for (const warning of report.verification.warnings) {
+            console.log(`   • ${warning}`);
+          }
+        }
+      }
+
+      process.exit(0);
+    });
+
+  // ✅ Dataset: Mutate existing datasets
+  program
+    .command("dataset-mutate")
+    .requiredOption("--input <path>", "input instance file")
+    .requiredOption("--mutation <type>", "mutation type (add-teams|remove-venues|tighten-rest)")
+    .requiredOption("--output <path>", "output mutated file")
+    .option("--num-teams <n>", "number of teams to add (for add-teams)", parseInt, 4)
+    .option("--num-venues <n>", "number of venues to remove (for remove-venues)", parseInt, 2)
+    .option("--hours <n>", "hours to reduce rest by (for tighten-rest)", parseInt, 24)
+    .description("Create a mutated variant of an existing instance")
+    .action(async (opts) => {
+      const { mutateInstance } = await import("./dataset-generator.js");
+
+      const instance = await readJson(opts.input);
+
+      const mutation = {
+        type: opts.mutation,
+        numTeams: opts.numTeams,
+        numVenues: opts.numVenues,
+        hours: opts.hours
+      };
+
+      const mutated = mutateInstance(instance, mutation);
+
+      await fs.writeFile(opts.output, JSON.stringify(mutated, null, 2));
+
+      console.log(`✅ Mutated instance saved: ${opts.output}`);
+      console.log(`   Mutation: ${opts.mutation}`);
+      console.log(`   Original: ${instance.metadata.datasetId}`);
+      console.log(`   New: ${mutated.metadata.datasetId}`);
+      process.exit(0);
+    });
+
   await program.parseAsync(argv);
 }

@@ -1,31 +1,120 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://opensportsscheduling.org/schemas/osss-objectives.schema.json",
-  "title": "OSSS Objectives Schema",
+  "title": "OSSS Objectives Schema (Enhanced v2)",
+  "description": "Schema for optimization objectives beyond constraints - enables consistent comparison",
   "type": "object",
   "required": ["objectives"],
   "properties": {
     "objectives": {
       "type": "array",
+      "description": "Optimization objectives to evaluate",
       "items": { "$ref": "#/$defs/objective" }
+    },
+    "aggregation": {
+      "$ref": "#/$defs/aggregationMode",
+      "description": "How to combine multiple objective scores (default: weighted_sum)"
     }
   },
 
   "$defs": {
     "objective": {
       "type": "object",
-      "required": ["metric", "aggregation", "weight"],
+      "required": ["objectiveId", "weight"],
       "properties": {
-        "metric": {
+        "objectiveId": {
           "type": "string",
-          "description": "Metric identifier from registry"
-        },
-        "aggregation": {
-          "enum": ["sum", "average", "max", "minimax"]
+          "description": "Identifier for the objective (from objectives registry)"
         },
         "weight": {
           "type": "number",
-          "minimum": 0
+          "minimum": 0,
+          "description": "Weight for this objective in aggregation"
+        },
+        "params": {
+          "type": "object",
+          "description": "Objective-specific parameters"
+        },
+        "selector": {
+          "type": "object",
+          "description": "Scope for this objective (teams, fixtures, venues, etc.)"
+        },
+        "target": {
+          "type": "object",
+          "description": "Target values or thresholds for this objective",
+          "properties": {
+            "min": {
+              "type": "number",
+              "description": "Minimum acceptable value"
+            },
+            "max": {
+              "type": "number",
+              "description": "Maximum acceptable value"
+            },
+            "ideal": {
+              "type": "number",
+              "description": "Ideal target value"
+            }
+          }
+        }
+      }
+    },
+    "aggregationMode": {
+      "type": "object",
+      "required": ["mode"],
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": ["weighted_sum", "max", "min", "percentile", "lexicographic"],
+          "description": "Method for combining objective scores"
+        },
+        "percentile": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "For percentile mode: which percentile to use (e.g., 95 for p95)"
+        },
+        "priorities": {
+          "type": "array",
+          "description": "For lexicographic mode: objective IDs in priority order",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "objectiveResult": {
+      "type": "object",
+      "description": "Result of objective evaluation (in results.objectives[])",
+      "required": ["objectiveId", "score"],
+      "properties": {
+        "objectiveId": {
+          "type": "string"
+        },
+        "score": {
+          "type": "number",
+          "description": "Raw score for this objective"
+        },
+        "weightedScore": {
+          "type": "number",
+          "description": "Score after applying weight"
+        },
+        "normalized": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Normalized score on 0-1 scale (optional)"
+        },
+        "details": {
+          "type": "object",
+          "description": "Objective-specific details and breakdowns"
+        },
+        "targetComparison": {
+          "type": "object",
+          "description": "Comparison against targets",
+          "properties": {
+            "meetsMin": { "type": "boolean" },
+            "meetsMax": { "type": "boolean" },
+            "deviationFromIdeal": { "type": "number" }
+          }
         }
       }
     }

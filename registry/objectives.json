@@ -1,31 +1,311 @@
 {
-  "version": "1.0.0",
-  "description": "Canonical OSSS objective metrics registry",
+  "registryVersion": "2.1.0",
+  "osssVersion": "0.1.0",
+  "description": "Canonical OSSS objective metrics registry with lifecycle management",
+  "updated": "2025-01-01",
   "objectives": [
     {
-      "id": "travel_distance_km",
-      "unit": "km",
-      "description": "Total travel distance for teams"
+      "objectiveId": "total_travel_distance",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "travel",
+      "unit": "kilometers",
+      "optimizationGoal": "minimize",
+      "description": "Total travel distance for all teams across the season",
+      "calculation": "sum",
+      "appliesTo": "team",
+      "paramsSchema": {},
+      "targetRanges": {
+        "youth": { "ideal": 5000, "max": 10000 },
+        "amateur": { "ideal": 15000, "max": 30000 },
+        "pro": { "ideal": 50000, "max": 100000 }
+      },
+      "references": {
+        "rationale": "Minimize costs, environmental impact, and player fatigue",
+        "relatedObjectives": ["max_team_travel", "travel_balance"]
+      }
     },
     {
-      "id": "rest_violation_count",
-      "unit": "count",
-      "description": "Number of rest rule violations"
+      "objectiveId": "max_team_travel",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "travel",
+      "unit": "kilometers",
+      "optimizationGoal": "minimize",
+      "description": "Maximum travel distance for any single team (fairness metric)",
+      "calculation": "max",
+      "appliesTo": "team",
+      "paramsSchema": {},
+      "targetRanges": {
+        "youth": { "ideal": 500, "max": 1000 },
+        "amateur": { "ideal": 2000, "max": 4000 },
+        "pro": { "ideal": 8000, "max": 15000 }
+      },
+      "references": {
+        "rationale": "Ensure fairness - no team bears excessive travel burden",
+        "relatedObjectives": ["total_travel_distance", "travel_balance"]
+      }
     },
     {
-      "id": "home_away_delta",
-      "unit": "count",
-      "description": "Difference between home and away games"
+      "objectiveId": "travel_balance",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "fairness",
+      "unit": "kilometers",
+      "optimizationGoal": "minimize",
+      "description": "Standard deviation of team travel distances (fairness)",
+      "calculation": "stddev",
+      "appliesTo": "team",
+      "paramsSchema": {},
+      "targetRanges": {
+        "ideal": 500,
+        "max": 2000
+      },
+      "references": {
+        "rationale": "Minimize disparity in travel burden across teams",
+        "relatedObjectives": ["max_team_travel"]
+      }
     },
     {
-      "id": "prime_time_distribution",
-      "unit": "count",
-      "description": "Distribution of prime-time fixtures across teams"
+      "objectiveId": "home_away_balance",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "fairness",
+      "unit": "games",
+      "optimizationGoal": "minimize",
+      "description": "Maximum difference between home and away games for any team",
+      "calculation": "max",
+      "appliesTo": "team",
+      "paramsSchema": {},
+      "targetRanges": {
+        "youth": { "ideal": 0, "max": 2 },
+        "amateur": { "ideal": 0, "max": 2 },
+        "pro": { "ideal": 0, "max": 1 }
+      },
+      "references": {
+        "rationale": "Competitive fairness and revenue equity",
+        "relatedObjectives": ["home_streak_length"]
+      }
     },
     {
-      "id": "schedule_change_distance",
+      "objectiveId": "home_streak_length",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "quality",
+      "unit": "games",
+      "optimizationGoal": "minimize",
+      "description": "Maximum consecutive home or away games for any team",
+      "calculation": "max",
+      "appliesTo": "team",
+      "paramsSchema": {},
+      "targetRanges": {
+        "ideal": 2,
+        "max": 4
+      },
+      "references": {
+        "rationale": "Avoid long stretches without home games (fan engagement) or away games (travel fatigue)",
+        "relatedObjectives": ["home_away_balance"]
+      }
+    },
+    {
+      "objectiveId": "rest_time_average",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "player_welfare",
+      "unit": "hours",
+      "optimizationGoal": "maximize",
+      "description": "Average rest time between fixtures across all teams",
+      "calculation": "average",
+      "appliesTo": "team",
+      "paramsSchema": {},
+      "targetRanges": {
+        "youth": { "min": 96, "ideal": 120 },
+        "amateur": { "min": 60, "ideal": 84 },
+        "pro": { "min": 60, "ideal": 72 }
+      },
+      "references": {
+        "rationale": "Player recovery and performance quality",
+        "relatedObjectives": ["min_rest_time"]
+      }
+    },
+    {
+      "objectiveId": "min_rest_time",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "player_welfare",
+      "unit": "hours",
+      "optimizationGoal": "maximize",
+      "description": "Minimum rest time between fixtures for any team",
+      "calculation": "min",
+      "appliesTo": "team",
+      "paramsSchema": {},
+      "targetRanges": {
+        "youth": { "min": 72, "ideal": 96 },
+        "amateur": { "min": 48, "ideal": 72 },
+        "pro": { "min": 48, "ideal": 60 }
+      },
+      "references": {
+        "rationale": "Ensure no team has dangerously short recovery periods",
+        "relatedObjectives": ["rest_time_average"]
+      }
+    },
+    {
+      "objectiveId": "venue_utilization",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "efficiency",
+      "unit": "percentage",
+      "optimizationGoal": "maximize",
+      "description": "Average venue utilization rate",
+      "calculation": "average",
+      "appliesTo": "venue",
+      "paramsSchema": {},
+      "targetRanges": {
+        "min": 40,
+        "ideal": 70,
+        "max": 90
+      },
+      "references": {
+        "rationale": "Efficient use of facilities without oversaturation",
+        "relatedObjectives": ["venue_balance"]
+      }
+    },
+    {
+      "objectiveId": "venue_balance",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "efficiency",
+      "unit": "games",
+      "optimizationGoal": "minimize",
+      "description": "Standard deviation of fixtures per venue",
+      "calculation": "stddev",
+      "appliesTo": "venue",
+      "paramsSchema": {},
+      "targetRanges": {
+        "ideal": 2,
+        "max": 5
+      },
+      "references": {
+        "rationale": "Distribute load across available venues",
+        "relatedObjectives": ["venue_utilization"]
+      }
+    },
+    {
+      "objectiveId": "primetime_distribution",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "commercial",
       "unit": "count",
-      "description": "Difference from previously published schedule"
+      "optimizationGoal": "balance",
+      "description": "Fairness of primetime fixture distribution across teams",
+      "calculation": "stddev",
+      "appliesTo": "team",
+      "paramsSchema": {
+        "primetimeWindows": {
+          "type": "array",
+          "description": "Definition of primetime windows"
+        }
+      },
+      "targetRanges": {
+        "ideal": 1,
+        "max": 3
+      },
+      "references": {
+        "rationale": "Fair distribution of broadcast revenue opportunities",
+        "relatedObjectives": []
+      }
+    },
+    {
+      "objectiveId": "opponent_variety",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "quality",
+      "unit": "days",
+      "optimizationGoal": "maximize",
+      "description": "Average spacing between repeat opponent matchups",
+      "calculation": "average",
+      "appliesTo": "fixture",
+      "paramsSchema": {},
+      "targetRanges": {
+        "min": 7,
+        "ideal": 21,
+        "max": 60
+      },
+      "references": {
+        "rationale": "Fan engagement and competitive variety",
+        "relatedObjectives": []
+      }
+    },
+    {
+      "objectiveId": "schedule_compactness",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "efficiency",
+      "unit": "days",
+      "optimizationGoal": "minimize",
+      "description": "Total season length (start of first fixture to end of last)",
+      "calculation": "range",
+      "appliesTo": "season",
+      "paramsSchema": {},
+      "targetRanges": {
+        "youth": { "ideal": 90, "max": 150 },
+        "amateur": { "ideal": 120, "max": 180 },
+        "pro": { "ideal": 270, "max": 300 }
+      },
+      "references": {
+        "rationale": "Complete season in reasonable timeframe",
+        "relatedObjectives": []
+      }
+    },
+    {
+      "objectiveId": "schedule_stability",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "operational",
+      "unit": "count",
+      "optimizationGoal": "minimize",
+      "description": "Number of changes from previous published schedule",
+      "calculation": "count",
+      "appliesTo": "fixture",
+      "paramsSchema": {
+        "previousSchedule": {
+          "type": "object",
+          "description": "Reference to previous schedule"
+        }
+      },
+      "targetRanges": {
+        "ideal": 0,
+        "max": 10
+      },
+      "references": {
+        "rationale": "Minimize disruption when rescheduling",
+        "relatedObjectives": []
+      }
     }
-  ]
+  ],
+  "metadata": {
+    "adoptionImpact": "Enables consistent optimization comparison across solvers and competitions",
+    "versioningPolicy": "See VERSIONING.md for full policy. Semantic versioning applies. Breaking changes increment major version.",
+    "deprecationPolicy": "Minimum 18 months notice before objective removal. See VERSIONING.md for full deprecation process.",
+    "statusValues": {
+      "draft": "Under development, may change without notice",
+      "experimental": "Available but unstable, may change in minor versions",
+      "stable": "Production-ready, backwards compatible within major version",
+      "deprecated": "Discouraged, will be removed after sunset date",
+      "removed": "No longer supported, will cause validation error if used"
+    }
+  }
 }

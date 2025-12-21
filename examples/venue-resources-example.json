@@ -1,0 +1,219 @@
+{
+  "osssVersion": "1.0.0",
+  "metadata": {
+    "leagueId": "city-sports-complex",
+    "seasonId": "2025",
+    "timezone": "America/New_York",
+    "description": "Example showing venue resources and availability"
+  },
+  "teams": [
+    {
+      "id": "team-1",
+      "name": "City FC",
+      "homeVenueId": "venue-1"
+    },
+    {
+      "id": "team-2",
+      "name": "United SC",
+      "homeVenueId": "venue-1"
+    }
+  ],
+  "venues": [
+    {
+      "id": "venue-1",
+      "name": "City Sports Complex",
+      "capacity": 5000,
+      "location": {
+        "lat": 40.7128,
+        "lon": -74.0060
+      },
+      "resources": [
+        {
+          "id": "field-a",
+          "name": "Main Field A",
+          "type": "field",
+          "surface": "grass",
+          "capacity": 3000,
+          "dimensions": {
+            "length": 105,
+            "width": 68,
+            "unit": "meters"
+          },
+          "suitableFor": ["soccer", "football"],
+          "changeoverMinutes": 30
+        },
+        {
+          "id": "field-b",
+          "name": "Training Field B",
+          "type": "field",
+          "surface": "artificial_turf",
+          "capacity": 500,
+          "dimensions": {
+            "length": 100,
+            "width": 64,
+            "unit": "meters"
+          },
+          "suitableFor": ["soccer", "practice"],
+          "changeoverMinutes": 15
+        },
+        {
+          "id": "court-1",
+          "name": "Indoor Court 1",
+          "type": "court",
+          "surface": "hard_court",
+          "capacity": 200,
+          "suitableFor": ["basketball", "volleyball"],
+          "changeoverMinutes": 10
+        }
+      ],
+      "availability": [
+        {
+          "start": "2025-01-01T00:00:00Z",
+          "end": "2025-12-31T23:59:59Z",
+          "recurring": {
+            "pattern": "weekly",
+            "daysOfWeek": [6, 0],
+            "startTime": "08:00",
+            "endTime": "22:00"
+          },
+          "priority": 8,
+          "notes": "Weekend availability (full day)"
+        },
+        {
+          "start": "2025-01-01T00:00:00Z",
+          "end": "2025-12-31T23:59:59Z",
+          "recurring": {
+            "pattern": "weekly",
+            "daysOfWeek": [1, 2, 3, 4, 5],
+            "startTime": "17:00",
+            "endTime": "22:00"
+          },
+          "priority": 6,
+          "notes": "Weekday evenings only"
+        },
+        {
+          "start": "2025-07-01T00:00:00Z",
+          "end": "2025-07-15T23:59:59Z",
+          "resourceIds": ["field-a"],
+          "priority": 1,
+          "notes": "Field A closed for maintenance"
+        }
+      ],
+      "changeoverMinutes": 20,
+      "preferredFor": ["team-1", "team-2"],
+      "operationalConstraints": {
+        "maxFixturesPerDay": 8,
+        "maxConsecutiveHours": 12,
+        "requiredGapHours": 2
+      }
+    },
+    {
+      "id": "venue-2",
+      "name": "Regional Stadium",
+      "capacity": 15000,
+      "location": {
+        "lat": 40.7580,
+        "lon": -73.9855
+      },
+      "resources": [
+        {
+          "id": "main-pitch",
+          "name": "Main Pitch",
+          "type": "pitch",
+          "surface": "grass",
+          "capacity": 15000,
+          "dimensions": {
+            "length": 110,
+            "width": 75,
+            "unit": "meters"
+          },
+          "suitableFor": ["soccer", "rugby"],
+          "changeoverMinutes": 60,
+          "availability": [
+            {
+              "start": "2025-01-01T00:00:00Z",
+              "end": "2025-12-31T23:59:59Z",
+              "recurring": {
+                "pattern": "weekly",
+                "daysOfWeek": [6, 0],
+                "startTime": "12:00",
+                "endTime": "21:00"
+              },
+              "priority": 10,
+              "cost": 1000,
+              "notes": "Premium weekend slots (broadcast quality)"
+            }
+          ]
+        }
+      ],
+      "availability": [
+        {
+          "start": "2025-01-01T00:00:00Z",
+          "end": "2025-12-31T23:59:59Z",
+          "recurring": {
+            "pattern": "weekly",
+            "daysOfWeek": [6, 0],
+            "startTime": "10:00",
+            "endTime": "22:00"
+          },
+          "priority": 9
+        }
+      ],
+      "changeoverMinutes": 45,
+      "operationalConstraints": {
+        "maxFixturesPerDay": 2,
+        "maxConsecutiveHours": 6
+      }
+    }
+  ],
+  "fixtures": [],
+  "constraints": {
+    "required": [
+      {
+        "ruleId": "venue_availability",
+        "type": "hard",
+        "selector": {
+          "venues": "*"
+        },
+        "description": "All fixtures must fall within venue availability windows"
+      },
+      {
+        "ruleId": "resource_availability",
+        "type": "hard",
+        "selector": {
+          "venues": "*"
+        },
+        "description": "Fixtures must be assigned to available resources"
+      },
+      {
+        "ruleId": "changeover_time",
+        "type": "hard",
+        "selector": {
+          "venues": "*"
+        },
+        "description": "Minimum changeover time between fixtures at the same resource"
+      }
+    ],
+    "recommended": [
+      {
+        "ruleId": "preferred_venue",
+        "type": "soft",
+        "penalty": {
+          "perViolation": 50
+        },
+        "selector": {
+          "teams": "*"
+        },
+        "description": "Prefer home venues for home teams"
+      },
+      {
+        "ruleId": "minimize_venue_cost",
+        "type": "soft",
+        "penalty": {
+          "perCostUnit": 1
+        },
+        "description": "Minimize total venue rental costs"
+      }
+    ]
+  }
+}

@@ -1,0 +1,184 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opensportsscheduling.org/schemas/osss-venue-resources.schema.json",
+  "title": "OSSS Venue Resources and Availability Schema Extension",
+  "description": "Extends the core venue schema with resources, availability windows, and operational constraints",
+  "type": "object",
+  "properties": {
+    "resources": {
+      "type": "array",
+      "description": "Individual bookable resources within the venue (fields, courts, pitches)",
+      "items": {
+        "$ref": "#/$defs/resource"
+      }
+    },
+    "availability": {
+      "type": "array",
+      "description": "Time windows when the venue/resources are available for scheduling",
+      "items": {
+        "$ref": "#/$defs/availabilityWindow"
+      }
+    },
+    "changeoverMinutes": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Minimum time required between fixtures for setup/cleanup",
+      "default": 0
+    },
+    "preferredFor": {
+      "type": "array",
+      "description": "Team IDs that have preference for this venue",
+      "items": {
+        "type": "string"
+      }
+    },
+    "operationalConstraints": {
+      "type": "object",
+      "description": "Additional operational limits",
+      "properties": {
+        "maxFixturesPerDay": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Maximum fixtures the venue can host in one day"
+        },
+        "maxConsecutiveHours": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Maximum consecutive hours of operation"
+        },
+        "requiredGapHours": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Required gap after reaching max consecutive hours"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "resource": {
+      "type": "object",
+      "required": ["id", "name", "type"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the resource"
+        },
+        "name": {
+          "type": "string",
+          "description": "Human-readable name (e.g., 'Field A', 'Court 1')"
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type",
+          "enum": ["field", "court", "pitch", "arena", "track", "pool", "rink"]
+        },
+        "surface": {
+          "type": "string",
+          "description": "Playing surface type",
+          "enum": ["grass", "artificial_turf", "clay", "hard_court", "indoor", "ice", "water"]
+        },
+        "capacity": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Spectator capacity for this specific resource"
+        },
+        "dimensions": {
+          "type": "object",
+          "description": "Resource dimensions",
+          "properties": {
+            "length": { "type": "number", "minimum": 0 },
+            "width": { "type": "number", "minimum": 0 },
+            "unit": {
+              "type": "string",
+              "enum": ["meters", "feet", "yards"]
+            }
+          }
+        },
+        "suitableFor": {
+          "type": "array",
+          "description": "Sports or fixture types this resource supports",
+          "items": { "type": "string" }
+        },
+        "availability": {
+          "type": "array",
+          "description": "Resource-specific availability (overrides venue availability)",
+          "items": {
+            "$ref": "#/$defs/availabilityWindow"
+          }
+        },
+        "changeoverMinutes": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Changeover time for this specific resource"
+        }
+      }
+    },
+    "availabilityWindow": {
+      "type": "object",
+      "required": ["start", "end"],
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start of availability window (ISO 8601)"
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End of availability window (ISO 8601)"
+        },
+        "resourceIds": {
+          "type": "array",
+          "description": "If specified, applies only to these resources. Otherwise applies to entire venue.",
+          "items": { "type": "string" }
+        },
+        "recurring": {
+          "type": "object",
+          "description": "For recurring availability patterns",
+          "properties": {
+            "pattern": {
+              "type": "string",
+              "enum": ["daily", "weekly", "monthly"],
+              "description": "Recurrence pattern"
+            },
+            "daysOfWeek": {
+              "type": "array",
+              "description": "For weekly patterns: which days (0=Sunday, 6=Saturday)",
+              "items": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 6
+              }
+            },
+            "startTime": {
+              "type": "string",
+              "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$",
+              "description": "Daily start time (HH:MM)"
+            },
+            "endTime": {
+              "type": "string",
+              "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$",
+              "description": "Daily end time (HH:MM)"
+            }
+          }
+        },
+        "priority": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10,
+          "description": "Priority level (1=lowest, 10=highest). Higher priority windows are preferred.",
+          "default": 5
+        },
+        "cost": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Cost per hour for this time window (for optimization)"
+        },
+        "notes": {
+          "type": "string",
+          "description": "Additional notes about this availability window"
+        }
+      }
+    }
+  }
+}

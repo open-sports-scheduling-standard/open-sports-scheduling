@@ -1,10 +1,14 @@
 {
-  "version": "2.0.0",
-  "description": "Canonical OSSS constraint registry with semantic definitions",
+  "registryVersion": "2.1.0",
+  "osssVersion": "0.1.0",
+  "description": "Canonical OSSS constraint registry with semantic definitions and lifecycle management",
   "updated": "2025-01-01",
   "constraints": [
     {
       "ruleId": "no_overlap_team",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
       "category": "feasibility",
       "appliesTo": "team",
       "type": "hard",
@@ -27,6 +31,9 @@
     },
     {
       "ruleId": "no_overlap_venue_resource",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
       "category": "feasibility",
       "appliesTo": "venue",
       "type": "hard",
@@ -49,6 +56,9 @@
     },
     {
       "ruleId": "min_rest_time",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
       "category": "time",
       "appliesTo": "team",
       "type": "hard_or_soft",
@@ -95,6 +105,9 @@
     },
     {
       "ruleId": "max_games_per_day",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
       "category": "time",
       "appliesTo": "team",
       "type": "hard_or_soft",
@@ -142,6 +155,9 @@
     },
     {
       "ruleId": "venue_availability",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
       "category": "venue",
       "appliesTo": "venue",
       "type": "hard",
@@ -165,6 +181,9 @@
     },
     {
       "ruleId": "max_travel_distance",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
       "category": "travel",
       "appliesTo": "team",
       "type": "hard_or_soft",
@@ -211,6 +230,9 @@
     },
     {
       "ruleId": "minimize_travel",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
       "category": "travel",
       "appliesTo": "team",
       "type": "soft",
@@ -240,6 +262,9 @@
     },
     {
       "ruleId": "home_away_balance",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
       "category": "fairness",
       "appliesTo": "team",
       "type": "soft",
@@ -287,6 +312,9 @@
     },
     {
       "ruleId": "opponent_spacing",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
       "category": "fairness",
       "appliesTo": "fixture",
       "type": "soft",
@@ -332,6 +360,9 @@
     },
     {
       "ruleId": "broadcast_window",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
       "category": "broadcast",
       "appliesTo": "fixture",
       "type": "hard_or_soft",
@@ -393,7 +424,14 @@
   ],
   "metadata": {
     "adoptionImpact": "Vendors and researchers can implement constraints consistently with clear parameter schemas and penalty models",
-    "versioning": "Semantic versioning - breaking changes increment major version",
-    "deprecationPolicy": "Deprecated constraints remain in registry for 2 major versions with warnings"
+    "versioningPolicy": "See VERSIONING.md for full policy. Semantic versioning applies. Breaking changes increment major version.",
+    "deprecationPolicy": "Minimum 18 months notice before rule removal. See VERSIONING.md for full deprecation process.",
+    "statusValues": {
+      "draft": "Under development, may change without notice",
+      "experimental": "Available but unstable, may change in minor versions",
+      "stable": "Production-ready, backwards compatible within major version",
+      "deprecated": "Discouraged, will be removed after sunset date",
+      "removed": "No longer supported, will cause validation error if used"
+    }
   }
 }

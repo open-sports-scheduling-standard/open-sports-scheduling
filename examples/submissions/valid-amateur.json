@@ -1,0 +1,36 @@
+{
+  "submissionId": "b6a3c5e0-9f3c-4b6e-8fdd-9a8a93d0a222",
+  "track": "amateur",
+  "solver": {
+    "name": "HyperSchedule",
+    "version": "1.2.3",
+    "url": "https://github.com/example/hyperschedule",
+    "commit": "9fbc31e"
+  },
+  "declaredAt": "2025-03-14T18:42:00Z",
+  "result": {
+    "feasible": true,
+    "assignments": [
+      {
+        "fixtureId": "match-001",
+        "startTime": "2025-09-06T19:00:00-05:00",
+        "endTime": "2025-09-06T21:30:00-05:00",
+        "venueId": "venue-001",
+        "venueResourceId": "rink-1a",
+        "homeTeamId": "team-001",
+        "awayTeamId": "team-002"
+      }
+    ],
+    "scores": {
+      "totalPenalty": 1234,
+      "byConstraint": [
+        {
+          "constraintId": "max_travel_distance",
+          "violations": 3,
+          "penalty": 1234
+        }
+      ]
+    }
+  },
+  "notes": "First public OSSS competition submission."
+}

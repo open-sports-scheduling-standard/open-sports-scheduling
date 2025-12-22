@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opensportsscheduling.org/schemas/osss-submission.schema.json",
+  "title": "OSSS Submission",
+  "description": "Envelope for solver submissions to OSSS competitions, wrapping solver metadata and OSSS result output.",
+  "type": "object",
+  "required": ["track", "solver", "result"],
+  "additionalProperties": false,
+
+  "properties": {
+    "submissionId": {
+      "type": "string",
+      "description": "Optional unique identifier for the submission (UUID recommended)."
+    },
+
+    "track": {
+      "type": "string",
+      "description": "Competition track identifier (e.g. amateur, youth, pro).",
+      "pattern": "^[a-z0-9_-]+$"
+    },
+
+    "solver": {
+      "type": "object",
+      "required": ["name"],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Public solver name."
+        },
+        "version": {
+          "type": "string",
+          "description": "Solver version or git tag."
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Optional solver homepage or repository."
+        },
+        "commit": {
+          "type": "string",
+          "description": "Optional git commit hash for reproducibility."
+        }
+      }
+    },
+
+    "result": {
+      "$ref": "https://opensportsscheduling.org/schemas/osss-results.schema.json",
+      "description": "Solver-produced OSSS result object."
+    },
+
+    "notes": {
+      "type": "string",
+      "description": "Optional human-readable notes from the solver author."
+    },
+
+    "declaredAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Optional timestamp when the solver generated this submission."
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "solver": {
+    "name": "BrokenSolver"
+  },
+  "result": {
+    "feasible": true,
+    "assignments": []
+  }
+}

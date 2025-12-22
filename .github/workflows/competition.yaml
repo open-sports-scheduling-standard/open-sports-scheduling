@@ -94,6 +94,21 @@ jobs:
           FILE=$(echo "$FILES" | head -n 1)
           echo "file=$FILE" >> $GITHUB_OUTPUT
           echo "✅ Submission: $FILE"
+      # ------------------------------------------------------------
+      # 🧾 Validate OSSS submission schema
+      # ------------------------------------------------------------
+      - name: 🧾 Validate submission schema
+        run: |
+          set -e
+          FILE="${{ steps.submission.outputs.file }}"
+
+          echo "🔎 Validating submission against OSSS submission schema..."
+          npx ajv validate \
+            -s schemas/osss-submission.schema.json \
+            -d "$FILE" \
+            --strict=false
+
+          echo "✅ Submission schema valid"
 
       # ------------------------------------------------------------
       # 6️⃣ Parse submission metadata

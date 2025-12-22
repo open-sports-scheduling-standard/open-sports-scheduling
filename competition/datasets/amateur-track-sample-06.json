@@ -1,0 +1,51 @@
+{
+  "osssVersion": "0.1.0",
+  "instance": {
+    "metadata": {
+      "name": "Regional Amateur Volleyball Weekend Open",
+      "track": "amateur",
+      "sport": "Volleyball",
+      "season": "March 2026",
+      "timezone": "America/Denver",
+      "difficulty": "⭐⭐⭐⭐",
+      "estimatedComplexity": "high",
+      "competitionDataset": true
+    },
+    "teams": [
+      {"teamId": "vb-01", "name": "Summit VC"},
+      {"teamId": "vb-02", "name": "High Plains"},
+      {"teamId": "vb-03", "name": "Front Range"},
+      {"teamId": "vb-04", "name": "Aspen Attack"},
+      {"teamId": "vb-05", "name": "Boulder Spikes"},
+      {"teamId": "vb-06", "name": "Denver United"}
+    ],
+    "venues": [
+      {
+        "venueId": "vb-complex",
+        "name": "Convention Center",
+        "resources": [
+          {"resourceId": "court-1", "resourceType": "court"},
+          {"resourceId": "court-2", "resourceType": "court"},
+          {"resourceId": "court-3", "resourceType": "court"}
+        ]
+      }
+    ],
+    "fixtures": [
+      {"fixtureId": "v1", "homeTeamId": "vb-01", "awayTeamId": "vb-02"},
+      {"fixtureId": "v2", "homeTeamId": "vb-03", "awayTeamId": "vb-04"},
+      {"fixtureId": "v3", "homeTeamId": "vb-05", "awayTeamId": "vb-06"},
+
+      {"fixtureId": "v4", "homeTeamId": "vb-01", "awayTeamId": "vb-03"},
+      {"fixtureId": "v5", "homeTeamId": "vb-02", "awayTeamId": "vb-04"},
+      {"fixtureId": "v6", "homeTeamId": "vb-05", "awayTeamId": "vb-01"},
+
+      {"fixtureId": "v7", "homeTeamId": "vb-02", "awayTeamId": "vb-03"},
+      {"fixtureId": "v8", "homeTeamId": "vb-04", "awayTeamId": "vb-06"},
+      {"fixtureId": "v9", "homeTeamId": "vb-05", "awayTeamId": "vb-03"}
+    ],
+    "constraints": [
+      {"constraintId": "max_matches_per_day", "type": "hard", "params": {"per_team": 3}},
+      {"constraintId": "same_day_recovery", "type": "soft", "weight": 10}
+    ]
+  }
+}

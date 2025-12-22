@@ -1,0 +1,368 @@
+{
+  "version": "0.1.0",
+  "metadata": {
+    "instanceId": "comp-multi-div-track-02",
+    "name": "North American Professional Hockey System - 2025/26 Season",
+    "description": "Multi-division track competition dataset featuring 20 teams across 3 professional tiers (NHL, AHL, ECHL) with parent-affiliate relationships, shared arena scheduling, cross-border logistics, and player call-up/send-down implications. Difficulty: ⭐⭐⭐⭐⭐",
+    "sport": "ice hockey",
+    "season": "2025/26",
+    "competitionDataset": true,
+    "track": "multi-division",
+    "difficultyRating": 5,
+    "createdBy": "OSSS Competition Team",
+    "createdAt": "2025-12-21T00:00:00Z",
+    "notes": "This dataset tests schedulers on: three-tier professional system with affiliate relationships, shared arena coordination between tiers, parent club call-up windows (AHL teams can't play when NHL team is home), cross-border travel (US/Canada customs), TV broadcast blackout coordination, and emergency recall scheduling buffers."
+  },
+  "timeBounds": {
+    "seasonStart": "2025-10-10T00:00:00Z",
+    "seasonEnd": "2026-04-15T23:59:59Z",
+    "blackoutPeriods": [
+      {
+        "start": "2025-12-24T00:00:00Z",
+        "end": "2025-12-27T23:59:59Z",
+        "reason": "Holiday Break"
+      },
+      {
+        "start": "2026-02-06T00:00:00Z",
+        "end": "2026-02-09T23:59:59Z",
+        "reason": "Olympic Break / All-Star Weekend"
+      }
+    ]
+  },
+  "teams": [
+    {
+      "teamId": "nhl-01",
+      "name": "Toronto Maple Leafs",
+      "division": "NHL",
+      "tier": 1,
+      "homeVenue": "venue-001",
+      "location": {"city": "Toronto", "state": "ON", "lat": 43.6435, "lon": -79.3791},
+      "metadata": {"league": "NHL", "affiliateAHL": "ahl-01", "country": "Canada"}
+    },
+    {
+      "teamId": "nhl-02",
+      "name": "Boston Bruins",
+      "division": "NHL",
+      "tier": 1,
+      "homeVenue": "venue-002",
+      "location": {"city": "Boston", "state": "MA", "lat": 42.3662, "lon": -71.0621},
+      "metadata": {"league": "NHL", "affiliateAHL": "ahl-02", "country": "USA"}
+    },
+    {
+      "teamId": "nhl-03",
+      "name": "Montreal Canadiens",
+      "division": "NHL",
+      "tier": 1,
+      "homeVenue": "venue-003",
+      "location": {"city": "Montreal", "state": "QC", "lat": 45.4961, "lon": -73.5694},
+      "metadata": {"league": "NHL", "affiliateAHL": "ahl-03", "country": "Canada"}
+    },
+    {
+      "teamId": "nhl-04",
+      "name": "Detroit Red Wings",
+      "division": "NHL",
+      "tier": 1,
+      "homeVenue": "venue-004",
+      "location": {"city": "Detroit", "state": "MI", "lat": 42.3410, "lon": -83.0550},
+      "metadata": {"league": "NHL", "affiliateAHL": "ahl-04", "country": "USA"}
+    },
+    {
+      "teamId": "nhl-05",
+      "name": "Tampa Bay Lightning",
+      "division": "NHL",
+      "tier": 1,
+      "homeVenue": "venue-005",
+      "location": {"city": "Tampa", "state": "FL", "lat": 27.9425, "lon": -82.4517},
+      "metadata": {"league": "NHL", "affiliateAHL": "ahl-05", "country": "USA"}
+    },
+    {
+      "teamId": "nhl-06",
+      "name": "New York Rangers",
+      "division": "NHL",
+      "tier": 1,
+      "homeVenue": "venue-006",
+      "location": {"city": "New York", "state": "NY", "lat": 40.7505, "lon": -73.9934},
+      "metadata": {"league": "NHL", "affiliateAHL": "ahl-06", "country": "USA"}
+    },
+    {
+      "teamId": "ahl-01",
+      "name": "Toronto Marlies",
+      "division": "AHL",
+      "tier": 2,
+      "homeVenue": "venue-001",
+      "location": {"city": "Toronto", "state": "ON", "lat": 43.6435, "lon": -79.3791},
+      "metadata": {"league": "AHL", "parentNHL": "nhl-01", "affiliateECHL": "echl-01", "country": "Canada"}
+    },
+    {
+      "teamId": "ahl-02",
+      "name": "Providence Bruins",
+      "division": "AHL",
+      "tier": 2,
+      "homeVenue": "venue-007",
+      "location": {"city": "Providence", "state": "RI", "lat": 41.8236, "lon": -71.4222},
+      "metadata": {"league": "AHL", "parentNHL": "nhl-02", "affiliateECHL": "echl-02", "country": "USA"}
+    },
+    {
+      "teamId": "ahl-03",
+      "name": "Laval Rocket",
+      "division": "AHL",
+      "tier": 2,
+      "homeVenue": "venue-008",
+      "location": {"city": "Laval", "state": "QC", "lat": 45.5598, "lon": -73.7124},
+      "metadata": {"league": "AHL", "parentNHL": "nhl-03", "affiliateECHL": "echl-03", "country": "Canada"}
+    },
+    {
+      "teamId": "ahl-04",
+      "name": "Grand Rapids Griffins",
+      "division": "AHL",
+      "tier": 2,
+      "homeVenue": "venue-009",
+      "location": {"city": "Grand Rapids", "state": "MI", "lat": 42.9634, "lon": -85.6681},
+      "metadata": {"league": "AHL", "parentNHL": "nhl-04", "affiliateECHL": "echl-04", "country": "USA"}
+    },
+    {
+      "teamId": "ahl-05",
+      "name": "Syracuse Crunch",
+      "division": "AHL",
+      "tier": 2,
+      "homeVenue": "venue-010",
+      "location": {"city": "Syracuse", "state": "NY", "lat": 43.0481, "lon": -76.1474},
+      "metadata": {"league": "AHL", "parentNHL": "nhl-05", "affiliateECHL": "echl-05", "country": "USA"}
+    },
+    {
+      "teamId": "ahl-06",
+      "name": "Hartford Wolf Pack",
+      "division": "AHL",
+      "tier": 2,
+      "homeVenue": "venue-011",
+      "location": {"city": "Hartford", "state": "CT", "lat": 41.7658, "lon": -72.6734},
+      "metadata": {"league": "AHL", "parentNHL": "nhl-06", "affiliateECHL": "echl-06", "country": "USA"}
+    },
+    {
+      "teamId": "echl-01",
+      "name": "Newfoundland Growlers",
+      "division": "ECHL",
+      "tier": 3,
+      "homeVenue": "venue-012",
+      "location": {"city": "St. John's", "state": "NL", "lat": 47.5615, "lon": -52.7126},
+      "metadata": {"league": "ECHL", "parentAHL": "ahl-01", "country": "Canada", "isolated": true}
+    },
+    {
+      "teamId": "echl-02",
+      "name": "Maine Mariners",
+      "division": "ECHL",
+      "tier": 3,
+      "homeVenue": "venue-013",
+      "location": {"city": "Portland", "state": "ME", "lat": 43.6591, "lon": -70.2568},
+      "metadata": {"league": "ECHL", "parentAHL": "ahl-02", "country": "USA"}
+    },
+    {
+      "teamId": "echl-03",
+      "name": "Trois-Rivières Lions",
+      "division": "ECHL",
+      "tier": 3,
+      "homeVenue": "venue-014",
+      "location": {"city": "Trois-Rivières", "state": "QC", "lat": 46.3432, "lon": -72.5477},
+      "metadata": {"league": "ECHL", "parentAHL": "ahl-03", "country": "Canada"}
+    },
+    {
+      "teamId": "echl-04",
+      "name": "Toledo Walleye",
+      "division": "ECHL",
+      "tier": 3,
+      "homeVenue": "venue-015",
+      "location": {"city": "Toledo", "state": "OH", "lat": 41.6528, "lon": -83.5379},
+      "metadata": {"league": "ECHL", "parentAHL": "ahl-04", "country": "USA"}
+    },
+    {
+      "teamId": "echl-05",
+      "name": "Orlando Solar Bears",
+      "division": "ECHL",
+      "tier": 3,
+      "homeVenue": "venue-016",
+      "location": {"city": "Orlando", "state": "FL", "lat": 28.5392, "lon": -81.3839},
+      "metadata": {"league": "ECHL", "parentAHL": "ahl-05", "country": "USA"}
+    },
+    {
+      "teamId": "echl-06",
+      "name": "Worcester Railers",
+      "division": "ECHL",
+      "tier": 3,
+      "homeVenue": "venue-017",
+      "location": {"city": "Worcester", "state": "MA", "lat": 42.2626, "lon": -71.8023},
+      "metadata": {"league": "ECHL", "parentAHL": "ahl-06", "country": "USA"}
+    }
+  ],
+  "fixtures": [],
+  "venues": [
+    {
+      "venueId": "venue-001",
+      "name": "Scotiabank Arena",
+      "location": {"city": "Toronto", "state": "ON", "lat": 43.6435, "lon": -79.3791},
+      "capacity": 18800,
+      "resources": [{"resourceId": "main-ice", "capacity": 18800}],
+      "availability": [
+        {"dayOfWeek": "Monday", "startTime": "19:00", "endTime": "22:00"},
+        {"dayOfWeek": "Wednesday", "startTime": "19:00", "endTime": "22:00"},
+        {"dayOfWeek": "Friday", "startTime": "19:30", "endTime": "22:30"},
+        {"dayOfWeek": "Saturday", "startTime": "19:00", "endTime": "22:00"},
+        {"dayOfWeek": "Sunday", "startTime": "15:00", "endTime": "18:00"}
+      ],
+      "sharedBy": ["nhl-01", "ahl-01"],
+      "metadata": {"indoor": true, "concertVenue": true}
+    }
+  ],
+  "constraints": [
+    {
+      "constraintId": "no_overlap_team",
+      "type": "hard",
+      "params": {}
+    },
+    {
+      "constraintId": "no_overlap_venue",
+      "type": "hard",
+      "params": {}
+    },
+    {
+      "constraintId": "min_rest_time",
+      "type": "hard",
+      "params": {
+        "min_hours": 48
+      }
+    },
+    {
+      "constraintId": "venue_availability",
+      "type": "hard",
+      "params": {}
+    },
+    {
+      "constraintId": "season_bounds",
+      "type": "hard",
+      "params": {}
+    },
+    {
+      "constraintId": "parent_club_priority",
+      "type": "hard",
+      "params": {
+        "selectorV2": {
+          "when": {
+            "team.metadata.parentNHL": {"exists": true},
+            "venue.sharedBy": {"contains": ["nhl", "ahl"]}
+          },
+          "apply": {
+            "blockAHLWhenNHLHome": true,
+            "minSeparationHours": 24
+          }
+        }
+      },
+      "description": "AHL teams sharing arena with NHL parent cannot play home games when NHL team has home game within 24 hours"
+    },
+    {
+      "constraintId": "cross_border_buffer",
+      "type": "hard",
+      "params": {
+        "selectorV2": {
+          "when": {
+            "travel.crossesBorder": true
+          },
+          "apply": {
+            "minBufferHours": 12
+          }
+        }
+      },
+      "description": "Teams crossing US/Canada border need 12-hour buffer for customs clearance"
+    },
+    {
+      "constraintId": "tv_broadcast_deconfliction",
+      "type": "soft",
+      "weight": 9,
+      "params": {
+        "selectorV2": {
+          "when": {
+            "team.tier": 1,
+            "fixture.dayOfWeek": {"in": ["Wednesday", "Saturday"]}
+          },
+          "apply": {
+            "maxSimultaneousGames": 2,
+            "staggerStartTimes": 30
+          }
+        }
+      },
+      "description": "NHL games on national TV nights should be staggered to avoid broadcast conflicts"
+    },
+    {
+      "constraintId": "call_up_buffer",
+      "type": "soft",
+      "weight": 7,
+      "params": {
+        "selectorV2": {
+          "when": {
+            "team.metadata.parentNHL": {"exists": true}
+          },
+          "apply": {
+            "avoidBackToBackBeforeNHLHome": true
+          }
+        }
+      },
+      "description": "AHL teams should avoid back-to-back games before NHL parent home games to allow emergency call-ups"
+    },
+    {
+      "constraintId": "isolated_team_clustering",
+      "type": "soft",
+      "weight": 8,
+      "params": {
+        "selectorV2": {
+          "when": {
+            "team.metadata.isolated": true
+          },
+          "apply": {
+            "clusterHomeGames": true,
+            "minHomestand": 3,
+            "maxHomestand": 6
+          }
+        }
+      },
+      "description": "Geographically isolated teams (e.g., Newfoundland) should have clustered home/road segments"
+    }
+  ],
+  "objectives": [
+    {
+      "objectiveId": "minimize_total_travel",
+      "weight": 6,
+      "params": {}
+    },
+    {
+      "objectiveId": "balance_home_away",
+      "weight": 4,
+      "params": {
+        "maxDeviation": 2
+      }
+    },
+    {
+      "objectiveId": "shared_venue_efficiency",
+      "weight": 7,
+      "params": {
+        "maximizeUtilization": true,
+        "minimizeConflicts": true
+      },
+      "description": "Optimize shared arena usage between NHL/AHL teams"
+    },
+    {
+      "objectiveId": "tier_competitive_balance",
+      "weight": 5,
+      "params": {
+        "balanceWithinTier": true,
+        "avoidWeakStartOrEnd": true
+      },
+      "description": "Ensure fair strength of schedule within each tier"
+    },
+    {
+      "objectiveId": "minimize_border_crossings",
+      "weight": 6,
+      "params": {
+        "clusterInternationalTrips": true
+      },
+      "description": "Cluster cross-border travel to minimize customs/immigration processing"
+    }
+  ]
+}

@@ -1,0 +1,460 @@
+{
+  "version": "0.1.0",
+  "metadata": {
+    "instanceId": "comp-amateur-track-02",
+    "name": "Pacific Coast Volleyball Association - 2026 Spring Season",
+    "description": "Amateur track competition dataset featuring 12 teams in 3 conferences with mixed intra/inter-conference play, beach venue constraints, and tournament weekend scheduling. Difficulty: ⭐⭐⭐",
+    "sport": "volleyball",
+    "season": "2026 Spring",
+    "competitionDataset": true,
+    "track": "amateur",
+    "difficultyRating": 3,
+    "createdBy": "OSSS Competition Team",
+    "createdAt": "2025-12-21T00:00:00Z",
+    "notes": "This dataset tests schedulers on: three-conference structure with asymmetric scheduling, venue weather dependencies (outdoor beach courts), tournament weekend clustering, ferry travel scheduling (island teams), and conference championship seeding fairness."
+  },
+  "timeBounds": {
+    "seasonStart": "2026-04-01T00:00:00Z",
+    "seasonEnd": "2026-06-30T23:59:59Z",
+    "blackoutPeriods": [
+      {
+        "start": "2026-05-23T00:00:00Z",
+        "end": "2026-05-25T23:59:59Z",
+        "reason": "Memorial Day Weekend - No Regular Season Games"
+      },
+      {
+        "start": "2026-06-20T00:00:00Z",
+        "end": "2026-06-22T23:59:59Z",
+        "reason": "Conference Championship Tournament"
+      }
+    ]
+  },
+  "teams": [
+    {
+      "teamId": "team-north-01",
+      "name": "Seattle Surge",
+      "division": "North",
+      "homeVenue": "venue-001",
+      "location": {"city": "Seattle", "state": "WA", "lat": 47.6205, "lon": -122.3493},
+      "metadata": {"conference": "North", "ferryDependent": false}
+    },
+    {
+      "teamId": "team-north-02",
+      "name": "Vancouver Vipers",
+      "division": "North",
+      "homeVenue": "venue-002",
+      "location": {"city": "Vancouver", "state": "WA", "lat": 45.6387, "lon": -122.6615},
+      "metadata": {"conference": "North", "ferryDependent": false}
+    },
+    {
+      "teamId": "team-north-03",
+      "name": "Bainbridge Island Breakers",
+      "division": "North",
+      "homeVenue": "venue-003",
+      "location": {"city": "Bainbridge Island", "state": "WA", "lat": 47.6262, "lon": -122.5212},
+      "metadata": {"conference": "North", "ferryDependent": true}
+    },
+    {
+      "teamId": "team-north-04",
+      "name": "Bellingham Bay Blasters",
+      "division": "North",
+      "homeVenue": "venue-004",
+      "location": {"city": "Bellingham", "state": "WA", "lat": 48.7519, "lon": -122.4787},
+      "metadata": {"conference": "North", "ferryDependent": false}
+    },
+    {
+      "teamId": "team-central-01",
+      "name": "Portland Storm",
+      "division": "Central",
+      "homeVenue": "venue-005",
+      "location": {"city": "Portland", "state": "OR", "lat": 45.5152, "lon": -122.6784},
+      "metadata": {"conference": "Central", "ferryDependent": false}
+    },
+    {
+      "teamId": "team-central-02",
+      "name": "Eugene Emeralds",
+      "division": "Central",
+      "homeVenue": "venue-006",
+      "location": {"city": "Eugene", "state": "OR", "lat": 44.0521, "lon": -123.0868},
+      "metadata": {"conference": "Central", "ferryDependent": false}
+    },
+    {
+      "teamId": "team-central-03",
+      "name": "Salem Cyclones",
+      "division": "Central",
+      "homeVenue": "venue-007",
+      "location": {"city": "Salem", "state": "OR", "lat": 44.9429, "lon": -123.0351},
+      "metadata": {"conference": "Central", "ferryDependent": false}
+    },
+    {
+      "teamId": "team-central-04",
+      "name": "Bend Beachcombers",
+      "division": "Central",
+      "homeVenue": "venue-008",
+      "location": {"city": "Bend", "state": "OR", "lat": 44.0582, "lon": -121.3153},
+      "metadata": {"conference": "Central", "ferryDependent": false}
+    },
+    {
+      "teamId": "team-south-01",
+      "name": "San Francisco Spikes",
+      "division": "South",
+      "homeVenue": "venue-009",
+      "location": {"city": "San Francisco", "state": "CA", "lat": 37.7749, "lon": -122.4194},
+      "metadata": {"conference": "South", "ferryDependent": false}
+    },
+    {
+      "teamId": "team-south-02",
+      "name": "Santa Cruz Waves",
+      "division": "South",
+      "homeVenue": "venue-010",
+      "location": {"city": "Santa Cruz", "state": "CA", "lat": 36.9741, "lon": -122.0308},
+      "metadata": {"conference": "South", "ferryDependent": false}
+    },
+    {
+      "teamId": "team-south-03",
+      "name": "Monterey Bay Mavericks",
+      "division": "South",
+      "homeVenue": "venue-011",
+      "location": {"city": "Monterey", "state": "CA", "lat": 36.6002, "lon": -121.8947},
+      "metadata": {"conference": "South", "ferryDependent": false}
+    },
+    {
+      "teamId": "team-south-04",
+      "name": "Berkeley Breeze",
+      "division": "South",
+      "homeVenue": "venue-012",
+      "location": {"city": "Berkeley", "state": "CA", "lat": 37.8715, "lon": -122.2730},
+      "metadata": {"conference": "South", "ferryDependent": false}
+    }
+  ],
+  "fixtures": [
+    {"fixtureId": "fix-north-001", "homeTeam": "team-north-01", "awayTeam": "team-north-02", "fixtureType": "conference"},
+    {"fixtureId": "fix-north-002", "homeTeam": "team-north-01", "awayTeam": "team-north-03", "fixtureType": "conference"},
+    {"fixtureId": "fix-north-003", "homeTeam": "team-north-01", "awayTeam": "team-north-04", "fixtureType": "conference"},
+    {"fixtureId": "fix-north-004", "homeTeam": "team-north-02", "awayTeam": "team-north-01", "fixtureType": "conference"},
+    {"fixtureId": "fix-north-005", "homeTeam": "team-north-02", "awayTeam": "team-north-03", "fixtureType": "conference"},
+    {"fixtureId": "fix-north-006", "homeTeam": "team-north-02", "awayTeam": "team-north-04", "fixtureType": "conference"},
+    {"fixtureId": "fix-north-007", "homeTeam": "team-north-03", "awayTeam": "team-north-01", "fixtureType": "conference"},
+    {"fixtureId": "fix-north-008", "homeTeam": "team-north-03", "awayTeam": "team-north-02", "fixtureType": "conference"},
+    {"fixtureId": "fix-north-009", "homeTeam": "team-north-03", "awayTeam": "team-north-04", "fixtureType": "conference"},
+    {"fixtureId": "fix-north-010", "homeTeam": "team-north-04", "awayTeam": "team-north-01", "fixtureType": "conference"},
+    {"fixtureId": "fix-north-011", "homeTeam": "team-north-04", "awayTeam": "team-north-02", "fixtureType": "conference"},
+    {"fixtureId": "fix-north-012", "homeTeam": "team-north-04", "awayTeam": "team-north-03", "fixtureType": "conference"},
+    {"fixtureId": "fix-central-001", "homeTeam": "team-central-01", "awayTeam": "team-central-02", "fixtureType": "conference"},
+    {"fixtureId": "fix-central-002", "homeTeam": "team-central-01", "awayTeam": "team-central-03", "fixtureType": "conference"},
+    {"fixtureId": "fix-central-003", "homeTeam": "team-central-01", "awayTeam": "team-central-04", "fixtureType": "conference"},
+    {"fixtureId": "fix-central-004", "homeTeam": "team-central-02", "awayTeam": "team-central-01", "fixtureType": "conference"},
+    {"fixtureId": "fix-central-005", "homeTeam": "team-central-02", "awayTeam": "team-central-03", "fixtureType": "conference"},
+    {"fixtureId": "fix-central-006", "homeTeam": "team-central-02", "awayTeam": "team-central-04", "fixtureType": "conference"},
+    {"fixtureId": "fix-central-007", "homeTeam": "team-central-03", "awayTeam": "team-central-01", "fixtureType": "conference"},
+    {"fixtureId": "fix-central-008", "homeTeam": "team-central-03", "awayTeam": "team-central-02", "fixtureType": "conference"},
+    {"fixtureId": "fix-central-009", "homeTeam": "team-central-03", "awayTeam": "team-central-04", "fixtureType": "conference"},
+    {"fixtureId": "fix-central-010", "homeTeam": "team-central-04", "awayTeam": "team-central-01", "fixtureType": "conference"},
+    {"fixtureId": "fix-central-011", "homeTeam": "team-central-04", "awayTeam": "team-central-02", "fixtureType": "conference"},
+    {"fixtureId": "fix-central-012", "homeTeam": "team-central-04", "awayTeam": "team-central-03", "fixtureType": "conference"},
+    {"fixtureId": "fix-south-001", "homeTeam": "team-south-01", "awayTeam": "team-south-02", "fixtureType": "conference"},
+    {"fixtureId": "fix-south-002", "homeTeam": "team-south-01", "awayTeam": "team-south-03", "fixtureType": "conference"},
+    {"fixtureId": "fix-south-003", "homeTeam": "team-south-01", "awayTeam": "team-south-04", "fixtureType": "conference"},
+    {"fixtureId": "fix-south-004", "homeTeam": "team-south-02", "awayTeam": "team-south-01", "fixtureType": "conference"},
+    {"fixtureId": "fix-south-005", "homeTeam": "team-south-02", "awayTeam": "team-south-03", "fixtureType": "conference"},
+    {"fixtureId": "fix-south-006", "homeTeam": "team-south-02", "awayTeam": "team-south-04", "fixtureType": "conference"},
+    {"fixtureId": "fix-south-007", "homeTeam": "team-south-03", "awayTeam": "team-south-01", "fixtureType": "conference"},
+    {"fixtureId": "fix-south-008", "homeTeam": "team-south-03", "awayTeam": "team-south-02", "fixtureType": "conference"},
+    {"fixtureId": "fix-south-009", "homeTeam": "team-south-03", "awayTeam": "team-south-04", "fixtureType": "conference"},
+    {"fixtureId": "fix-south-010", "homeTeam": "team-south-04", "awayTeam": "team-south-01", "fixtureType": "conference"},
+    {"fixtureId": "fix-south-011", "homeTeam": "team-south-04", "awayTeam": "team-south-02", "fixtureType": "conference"},
+    {"fixtureId": "fix-south-012", "homeTeam": "team-south-04", "awayTeam": "team-south-03", "fixtureType": "conference"},
+    {"fixtureId": "fix-cross-001", "homeTeam": "team-north-01", "awayTeam": "team-central-01", "fixtureType": "crossConference"},
+    {"fixtureId": "fix-cross-002", "homeTeam": "team-north-02", "awayTeam": "team-central-02", "fixtureType": "crossConference"},
+    {"fixtureId": "fix-cross-003", "homeTeam": "team-north-03", "awayTeam": "team-south-01", "fixtureType": "crossConference"},
+    {"fixtureId": "fix-cross-004", "homeTeam": "team-north-04", "awayTeam": "team-south-02", "fixtureType": "crossConference"},
+    {"fixtureId": "fix-cross-005", "homeTeam": "team-central-01", "awayTeam": "team-south-03", "fixtureType": "crossConference"},
+    {"fixtureId": "fix-cross-006", "homeTeam": "team-central-02", "awayTeam": "team-south-04", "fixtureType": "crossConference"},
+    {"fixtureId": "fix-cross-007", "homeTeam": "team-central-03", "awayTeam": "team-north-01", "fixtureType": "crossConference"},
+    {"fixtureId": "fix-cross-008", "homeTeam": "team-central-04", "awayTeam": "team-north-02", "fixtureType": "crossConference"},
+    {"fixtureId": "fix-cross-009", "homeTeam": "team-south-01", "awayTeam": "team-central-03", "fixtureType": "crossConference"},
+    {"fixtureId": "fix-cross-010", "homeTeam": "team-south-02", "awayTeam": "team-central-04", "fixtureType": "crossConference"},
+    {"fixtureId": "fix-cross-011", "homeTeam": "team-south-03", "awayTeam": "team-north-03", "fixtureType": "crossConference"},
+    {"fixtureId": "fix-cross-012", "homeTeam": "team-south-04", "awayTeam": "team-north-04", "fixtureType": "crossConference"}
+  ],
+  "venues": [
+    {
+      "venueId": "venue-001",
+      "name": "Alki Beach Sand Courts",
+      "location": {"city": "Seattle", "state": "WA", "lat": 47.5806, "lon": -122.4065},
+      "capacity": 300,
+      "resources": [
+        {"resourceId": "court-1", "capacity": 150},
+        {"resourceId": "court-2", "capacity": 150}
+      ],
+      "availability": [
+        {"dayOfWeek": "Saturday", "startTime": "10:00", "endTime": "18:00"},
+        {"dayOfWeek": "Sunday", "startTime": "10:00", "endTime": "18:00"}
+      ],
+      "metadata": {"outdoor": true, "weatherDependent": true}
+    },
+    {
+      "venueId": "venue-002",
+      "name": "Vancouver Waterfront Courts",
+      "location": {"city": "Vancouver", "state": "WA", "lat": 45.6254, "lon": -122.6604},
+      "capacity": 250,
+      "resources": [
+        {"resourceId": "court-1", "capacity": 125},
+        {"resourceId": "court-2", "capacity": 125}
+      ],
+      "availability": [
+        {"dayOfWeek": "Saturday", "startTime": "09:00", "endTime": "17:00"},
+        {"dayOfWeek": "Sunday", "startTime": "11:00", "endTime": "17:00"}
+      ],
+      "metadata": {"outdoor": true, "weatherDependent": true}
+    },
+    {
+      "venueId": "venue-003",
+      "name": "Bainbridge Island Community Center",
+      "location": {"city": "Bainbridge Island", "state": "WA", "lat": 47.6262, "lon": -122.5212},
+      "capacity": 200,
+      "resources": [
+        {"resourceId": "indoor-court", "capacity": 200}
+      ],
+      "availability": [
+        {"dayOfWeek": "Saturday", "startTime": "11:00", "endTime": "19:00"},
+        {"dayOfWeek": "Sunday", "startTime": "12:00", "endTime": "18:00"}
+      ],
+      "metadata": {"outdoor": false, "ferryAccess": true, "lastFerry": "21:00"}
+    },
+    {
+      "venueId": "venue-004",
+      "name": "Bellingham Bay Beach Complex",
+      "location": {"city": "Bellingham", "state": "WA", "lat": 48.7462, "lon": -122.4891},
+      "capacity": 400,
+      "resources": [
+        {"resourceId": "court-1", "capacity": 200},
+        {"resourceId": "court-2", "capacity": 200}
+      ],
+      "availability": [
+        {"dayOfWeek": "Saturday", "startTime": "09:00", "endTime": "19:00"},
+        {"dayOfWeek": "Sunday", "startTime": "10:00", "endTime": "18:00"}
+      ],
+      "metadata": {"outdoor": true, "weatherDependent": true}
+    },
+    {
+      "venueId": "venue-005",
+      "name": "Portland Indoor Sports Arena",
+      "location": {"city": "Portland", "state": "OR", "lat": 45.5231, "lon": -122.6765},
+      "capacity": 500,
+      "resources": [
+        {"resourceId": "court-a", "capacity": 250},
+        {"resourceId": "court-b", "capacity": 250}
+      ],
+      "availability": [
+        {"dayOfWeek": "Friday", "startTime": "18:00", "endTime": "22:00"},
+        {"dayOfWeek": "Saturday", "startTime": "08:00", "endTime": "20:00"},
+        {"dayOfWeek": "Sunday", "startTime": "10:00", "endTime": "18:00"}
+      ],
+      "metadata": {"outdoor": false, "weatherDependent": false}
+    },
+    {
+      "venueId": "venue-006",
+      "name": "Eugene Riverfront Courts",
+      "location": {"city": "Eugene", "state": "OR", "lat": 44.0489, "lon": -123.0917},
+      "capacity": 300,
+      "resources": [
+        {"resourceId": "court-1", "capacity": 150},
+        {"resourceId": "court-2", "capacity": 150}
+      ],
+      "availability": [
+        {"dayOfWeek": "Saturday", "startTime": "10:00", "endTime": "18:00"},
+        {"dayOfWeek": "Sunday", "startTime": "11:00", "endTime": "17:00"}
+      ],
+      "metadata": {"outdoor": true, "weatherDependent": true}
+    },
+    {
+      "venueId": "venue-007",
+      "name": "Salem Civic Center",
+      "location": {"city": "Salem", "state": "OR", "lat": 44.9391, "lon": -123.0331},
+      "capacity": 350,
+      "resources": [
+        {"resourceId": "main-court", "capacity": 350}
+      ],
+      "availability": [
+        {"dayOfWeek": "Saturday", "startTime": "09:00", "endTime": "19:00"},
+        {"dayOfWeek": "Sunday", "startTime": "10:00", "endTime": "18:00"}
+      ],
+      "metadata": {"outdoor": false, "weatherDependent": false}
+    },
+    {
+      "venueId": "venue-008",
+      "name": "Bend High Desert Sports Complex",
+      "location": {"city": "Bend", "state": "OR", "lat": 44.0617, "lon": -121.3088},
+      "capacity": 400,
+      "resources": [
+        {"resourceId": "court-1", "capacity": 200},
+        {"resourceId": "court-2", "capacity": 200}
+      ],
+      "availability": [
+        {"dayOfWeek": "Saturday", "startTime": "09:00", "endTime": "18:00"},
+        {"dayOfWeek": "Sunday", "startTime": "10:00", "endTime": "17:00"}
+      ],
+      "metadata": {"outdoor": true, "weatherDependent": false, "highAltitude": true}
+    },
+    {
+      "venueId": "venue-009",
+      "name": "Ocean Beach Volleyball Center",
+      "location": {"city": "San Francisco", "state": "CA", "lat": 37.7594, "lon": -122.5107},
+      "capacity": 500,
+      "resources": [
+        {"resourceId": "court-1", "capacity": 250},
+        {"resourceId": "court-2", "capacity": 250}
+      ],
+      "availability": [
+        {"dayOfWeek": "Saturday", "startTime": "10:00", "endTime": "19:00"},
+        {"dayOfWeek": "Sunday", "startTime": "11:00", "endTime": "19:00"}
+      ],
+      "metadata": {"outdoor": true, "weatherDependent": true}
+    },
+    {
+      "venueId": "venue-010",
+      "name": "Santa Cruz Beach Courts",
+      "location": {"city": "Santa Cruz", "state": "CA", "lat": 36.9647, "lon": -122.0243},
+      "capacity": 350,
+      "resources": [
+        {"resourceId": "court-1", "capacity": 175},
+        {"resourceId": "court-2", "capacity": 175}
+      ],
+      "availability": [
+        {"dayOfWeek": "Saturday", "startTime": "09:00", "endTime": "18:00"},
+        {"dayOfWeek": "Sunday", "startTime": "10:00", "endTime": "18:00"}
+      ],
+      "metadata": {"outdoor": true, "weatherDependent": true}
+    },
+    {
+      "venueId": "venue-011",
+      "name": "Monterey Bay Sports Park",
+      "location": {"city": "Monterey", "state": "CA", "lat": 36.5946, "lon": -121.8929},
+      "capacity": 300,
+      "resources": [
+        {"resourceId": "court-1", "capacity": 150},
+        {"resourceId": "court-2", "capacity": 150}
+      ],
+      "availability": [
+        {"dayOfWeek": "Saturday", "startTime": "10:00", "endTime": "18:00"},
+        {"dayOfWeek": "Sunday", "startTime": "11:00", "endTime": "17:00"}
+      ],
+      "metadata": {"outdoor": true, "weatherDependent": true}
+    },
+    {
+      "venueId": "venue-012",
+      "name": "Berkeley Marina Courts",
+      "location": {"city": "Berkeley", "state": "CA", "lat": 37.8652, "lon": -122.3136},
+      "capacity": 400,
+      "resources": [
+        {"resourceId": "court-1", "capacity": 200},
+        {"resourceId": "court-2", "capacity": 200}
+      ],
+      "availability": [
+        {"dayOfWeek": "Saturday", "startTime": "09:00", "endTime": "19:00"},
+        {"dayOfWeek": "Sunday", "startTime": "10:00", "endTime": "18:00"}
+      ],
+      "metadata": {"outdoor": true, "weatherDependent": true}
+    }
+  ],
+  "constraints": [
+    {
+      "constraintId": "no_overlap_team",
+      "type": "hard",
+      "params": {}
+    },
+    {
+      "constraintId": "no_overlap_venue",
+      "type": "hard",
+      "params": {}
+    },
+    {
+      "constraintId": "min_rest_time",
+      "type": "hard",
+      "params": {
+        "min_hours": 72
+      }
+    },
+    {
+      "constraintId": "venue_availability",
+      "type": "hard",
+      "params": {}
+    },
+    {
+      "constraintId": "season_bounds",
+      "type": "hard",
+      "params": {}
+    },
+    {
+      "constraintId": "ferry_schedule_constraint",
+      "type": "hard",
+      "params": {
+        "selectorV2": {
+          "when": {
+            "venue.metadata.ferryAccess": true
+          },
+          "apply": {
+            "maxEndTime": "20:00"
+          }
+        }
+      },
+      "description": "Games at ferry-dependent venues must end by 8 PM to allow travel home"
+    },
+    {
+      "constraintId": "max_consecutive_away",
+      "type": "soft",
+      "weight": 7,
+      "params": {
+        "max_consecutive": 2
+      }
+    },
+    {
+      "constraintId": "weather_backup_constraint",
+      "type": "soft",
+      "weight": 5,
+      "params": {
+        "selectorV2": {
+          "when": {
+            "venue.metadata.weatherDependent": true
+          },
+          "apply": {
+            "requireBackupDate": true
+          }
+        }
+      },
+      "description": "Outdoor beach courts need weather backup scheduling"
+    }
+  ],
+  "objectives": [
+    {
+      "objectiveId": "minimize_total_travel",
+      "weight": 4,
+      "params": {}
+    },
+    {
+      "objectiveId": "balance_conference_play",
+      "weight": 5,
+      "params": {
+        "distributeEvenlyAcrossSeason": true
+      },
+      "description": "Spread conference games evenly throughout season to maintain competitive balance"
+    },
+    {
+      "objectiveId": "cluster_cross_conference_trips",
+      "weight": 6,
+      "params": {
+        "preferDoubleHeaders": true,
+        "maxTravelDistance": 300
+      },
+      "description": "When teams travel for cross-conference games, cluster multiple games to reduce trips"
+    },
+    {
+      "objectiveId": "balance_home_away",
+      "weight": 3,
+      "params": {
+        "maxDeviation": 1
+      }
+    }
+  ]
+}

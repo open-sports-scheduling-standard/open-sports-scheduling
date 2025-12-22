@@ -1,0 +1,820 @@
+{
+  "version": "0.1.0",
+  "metadata": {
+    "instanceId": "comp-multi-div-track-01",
+    "name": "Continental Soccer League - 2025/26 Unified Championship",
+    "description": "Multi-division track competition dataset featuring 24 teams across 4 divisions with complex inter-division dynamics, shared venues, international travel, promotion/relegation implications, and division-specific constraints. Difficulty: ⭐⭐⭐⭐⭐",
+    "sport": "soccer",
+    "season": "2025/26",
+    "competitionDataset": true,
+    "track": "multi-division",
+    "difficultyRating": 5,
+    "createdBy": "OSSS Competition Team",
+    "createdAt": "2025-12-21T00:00:00Z",
+    "notes": "This dataset tests schedulers on: multi-division formats, shared venue coordination, conditional constraints via Selector DSL v2, promotion/relegation scheduling implications, cross-division cup fixtures, international travel optimization, division-specific broadcast priorities, and complex fairness balancing across competitive tiers."
+  },
+  "timeBounds": {
+    "seasonStart": "2025-08-15T00:00:00Z",
+    "seasonEnd": "2026-05-25T23:59:59Z",
+    "blackoutPeriods": [
+      {
+        "start": "2025-12-20T00:00:00Z",
+        "end": "2026-01-05T23:59:59Z",
+        "reason": "Winter Break"
+      },
+      {
+        "start": "2026-03-20T00:00:00Z",
+        "end": "2026-03-31T23:59:59Z",
+        "reason": "International Match Window"
+      }
+    ]
+  },
+  "teams": [
+    {
+      "teamId": "team-prem-01",
+      "name": "London FC",
+      "division": "Premier",
+      "tier": 1,
+      "homeVenue": "venue-001",
+      "location": {"city": "London", "country": "England", "lat": 51.5074, "lon": -0.1278},
+      "metadata": {"marketSize": "large", "timezone": "Europe/London", "broadcasters": ["Sky Sports", "BT Sport"]}
+    },
+    {
+      "teamId": "team-prem-02",
+      "name": "Manchester United",
+      "division": "Premier",
+      "tier": 1,
+      "homeVenue": "venue-002",
+      "location": {"city": "Manchester", "country": "England", "lat": 53.4631, "lon": -2.2914},
+      "metadata": {"marketSize": "large", "timezone": "Europe/London", "broadcasters": ["Sky Sports", "BT Sport"]}
+    },
+    {
+      "teamId": "team-prem-03",
+      "name": "Barcelona SC",
+      "division": "Premier",
+      "tier": 1,
+      "homeVenue": "venue-003",
+      "location": {"city": "Barcelona", "country": "Spain", "lat": 41.3874, "lon": 2.1686},
+      "metadata": {"marketSize": "large", "timezone": "Europe/Madrid", "broadcasters": ["La Liga TV"]}
+    },
+    {
+      "teamId": "team-prem-04",
+      "name": "Paris Saint-Germain",
+      "division": "Premier",
+      "tier": 1,
+      "homeVenue": "venue-004",
+      "location": {"city": "Paris", "country": "France", "lat": 48.8418, "lon": 2.2531},
+      "metadata": {"marketSize": "large", "timezone": "Europe/Paris", "broadcasters": ["Canal+"]}
+    },
+    {
+      "teamId": "team-prem-05",
+      "name": "Bayern Munich",
+      "division": "Premier",
+      "tier": 1,
+      "homeVenue": "venue-005",
+      "location": {"city": "Munich", "country": "Germany", "lat": 48.2188, "lon": 11.6247},
+      "metadata": {"marketSize": "large", "timezone": "Europe/Berlin", "broadcasters": ["Sky Deutschland"]}
+    },
+    {
+      "teamId": "team-prem-06",
+      "name": "Inter Milan",
+      "division": "Premier",
+      "tier": 1,
+      "homeVenue": "venue-006",
+      "location": {"city": "Milan", "country": "Italy", "lat": 45.4781, "lon": 9.1240},
+      "metadata": {"marketSize": "large", "timezone": "Europe/Rome", "broadcasters": ["DAZN Italia"]}
+    },
+    {
+      "teamId": "team-champ-01",
+      "name": "Liverpool Reserves",
+      "division": "Championship",
+      "tier": 2,
+      "homeVenue": "venue-001",
+      "location": {"city": "London", "country": "England", "lat": 51.5074, "lon": -0.1278},
+      "metadata": {"marketSize": "medium", "timezone": "Europe/London", "parentClub": "team-prem-01"}
+    },
+    {
+      "teamId": "team-champ-02",
+      "name": "Birmingham City",
+      "division": "Championship",
+      "tier": 2,
+      "homeVenue": "venue-007",
+      "location": {"city": "Birmingham", "country": "England", "lat": 52.4750, "lon": -1.8681},
+      "metadata": {"marketSize": "medium", "timezone": "Europe/London"}
+    },
+    {
+      "teamId": "team-champ-03",
+      "name": "Valencia CF",
+      "division": "Championship",
+      "tier": 2,
+      "homeVenue": "venue-008",
+      "location": {"city": "Valencia", "country": "Spain", "lat": 39.4747, "lon": -0.3589},
+      "metadata": {"marketSize": "medium", "timezone": "Europe/Madrid"}
+    },
+    {
+      "teamId": "team-champ-04",
+      "name": "Lyon Academy",
+      "division": "Championship",
+      "tier": 2,
+      "homeVenue": "venue-009",
+      "location": {"city": "Lyon", "country": "France", "lat": 45.7485, "lon": 4.8467},
+      "metadata": {"marketSize": "medium", "timezone": "Europe/Paris"}
+    },
+    {
+      "teamId": "team-champ-05",
+      "name": "Borussia Dortmund II",
+      "division": "Championship",
+      "tier": 2,
+      "homeVenue": "venue-010",
+      "location": {"city": "Dortmund", "country": "Germany", "lat": 51.4925, "lon": 7.4515},
+      "metadata": {"marketSize": "medium", "timezone": "Europe/Berlin"}
+    },
+    {
+      "teamId": "team-champ-06",
+      "name": "Roma Youth",
+      "division": "Championship",
+      "tier": 2,
+      "homeVenue": "venue-011",
+      "location": {"city": "Rome", "country": "Italy", "lat": 41.9342, "lon": 12.4549},
+      "metadata": {"marketSize": "medium", "timezone": "Europe/Rome"}
+    },
+    {
+      "teamId": "team-lo1-01",
+      "name": "Brighton United",
+      "division": "LeagueOne",
+      "tier": 3,
+      "homeVenue": "venue-012",
+      "location": {"city": "Brighton", "country": "England", "lat": 50.8615, "lon": -0.0838},
+      "metadata": {"marketSize": "small", "timezone": "Europe/London"}
+    },
+    {
+      "teamId": "team-lo1-02",
+      "name": "Norwich City",
+      "division": "LeagueOne",
+      "tier": 3,
+      "homeVenue": "venue-013",
+      "location": {"city": "Norwich", "country": "England", "lat": 52.6243, "lon": 1.2927},
+      "metadata": {"marketSize": "small", "timezone": "Europe/London"}
+    },
+    {
+      "teamId": "team-lo1-03",
+      "name": "Sevilla B",
+      "division": "LeagueOne",
+      "tier": 3,
+      "homeVenue": "venue-014",
+      "location": {"city": "Seville", "country": "Spain", "lat": 37.3886, "lon": -5.9823},
+      "metadata": {"marketSize": "small", "timezone": "Europe/Madrid"}
+    },
+    {
+      "teamId": "team-lo1-04",
+      "name": "Marseille Youth",
+      "division": "LeagueOne",
+      "tier": 3,
+      "homeVenue": "venue-015",
+      "location": {"city": "Marseille", "country": "France", "lat": 43.2964, "lon": 5.3698},
+      "metadata": {"marketSize": "small", "timezone": "Europe/Paris"}
+    },
+    {
+      "teamId": "team-lo1-05",
+      "name": "Stuttgart II",
+      "division": "LeagueOne",
+      "tier": 3,
+      "homeVenue": "venue-016",
+      "location": {"city": "Stuttgart", "country": "Germany", "lat": 48.7921, "lon": 9.2360},
+      "metadata": {"marketSize": "small", "timezone": "Europe/Berlin"}
+    },
+    {
+      "teamId": "team-lo1-06",
+      "name": "Napoli Primavera",
+      "division": "LeagueOne",
+      "tier": 3,
+      "homeVenue": "venue-017",
+      "location": {"city": "Naples", "country": "Italy", "lat": 40.8538, "lon": 14.3051},
+      "metadata": {"marketSize": "small", "timezone": "Europe/Rome"}
+    },
+    {
+      "teamId": "team-lo2-01",
+      "name": "Plymouth Argyle",
+      "division": "LeagueTwo",
+      "tier": 4,
+      "homeVenue": "venue-018",
+      "location": {"city": "Plymouth", "country": "England", "lat": 50.3879, "lon": -4.1426},
+      "metadata": {"marketSize": "small", "timezone": "Europe/London"}
+    },
+    {
+      "teamId": "team-lo2-02",
+      "name": "Exeter City",
+      "division": "LeagueTwo",
+      "tier": 4,
+      "homeVenue": "venue-019",
+      "location": {"city": "Exeter", "country": "England", "lat": 50.7184, "lon": -3.5339},
+      "metadata": {"marketSize": "small", "timezone": "Europe/London"}
+    },
+    {
+      "teamId": "team-lo2-03",
+      "name": "Malaga CF",
+      "division": "LeagueTwo",
+      "tier": 4,
+      "homeVenue": "venue-020",
+      "location": {"city": "Malaga", "country": "Spain", "lat": 36.7196, "lon": -4.4200},
+      "metadata": {"marketSize": "small", "timezone": "Europe/Madrid"}
+    },
+    {
+      "teamId": "team-lo2-04",
+      "name": "Nice Academy",
+      "division": "LeagueTwo",
+      "tier": 4,
+      "homeVenue": "venue-021",
+      "location": {"city": "Nice", "country": "France", "lat": 43.7009, "lon": 7.2684},
+      "metadata": {"marketSize": "small", "timezone": "Europe/Paris"}
+    },
+    {
+      "teamId": "team-lo2-05",
+      "name": "Freiburg Youth",
+      "division": "LeagueTwo",
+      "tier": 4,
+      "homeVenue": "venue-022",
+      "location": {"city": "Freiburg", "country": "Germany", "lat": 47.9959, "lon": 7.8522},
+      "metadata": {"marketSize": "small", "timezone": "Europe/Berlin"}
+    },
+    {
+      "teamId": "team-lo2-06",
+      "name": "Palermo Juniors",
+      "division": "LeagueTwo",
+      "tier": 4,
+      "homeVenue": "venue-023",
+      "location": {"city": "Palermo", "country": "Italy", "lat": 38.1321, "lon": 13.3356},
+      "metadata": {"marketSize": "small", "timezone": "Europe/Rome"}
+    }
+  ],
+  "fixtures": [
+    {"fixtureId": "prem-001", "homeTeam": "team-prem-01", "awayTeam": "team-prem-02", "fixtureType": "league"},
+    {"fixtureId": "prem-002", "homeTeam": "team-prem-01", "awayTeam": "team-prem-03", "fixtureType": "league"},
+    {"fixtureId": "prem-003", "homeTeam": "team-prem-01", "awayTeam": "team-prem-04", "fixtureType": "league"},
+    {"fixtureId": "prem-004", "homeTeam": "team-prem-01", "awayTeam": "team-prem-05", "fixtureType": "league"},
+    {"fixtureId": "prem-005", "homeTeam": "team-prem-01", "awayTeam": "team-prem-06", "fixtureType": "league"},
+    {"fixtureId": "prem-006", "homeTeam": "team-prem-02", "awayTeam": "team-prem-01", "fixtureType": "league"},
+    {"fixtureId": "prem-007", "homeTeam": "team-prem-02", "awayTeam": "team-prem-03", "fixtureType": "league"},
+    {"fixtureId": "prem-008", "homeTeam": "team-prem-02", "awayTeam": "team-prem-04", "fixtureType": "league"},
+    {"fixtureId": "prem-009", "homeTeam": "team-prem-02", "awayTeam": "team-prem-05", "fixtureType": "league"},
+    {"fixtureId": "prem-010", "homeTeam": "team-prem-02", "awayTeam": "team-prem-06", "fixtureType": "league"},
+    {"fixtureId": "prem-011", "homeTeam": "team-prem-03", "awayTeam": "team-prem-01", "fixtureType": "league"},
+    {"fixtureId": "prem-012", "homeTeam": "team-prem-03", "awayTeam": "team-prem-02", "fixtureType": "league"},
+    {"fixtureId": "prem-013", "homeTeam": "team-prem-03", "awayTeam": "team-prem-04", "fixtureType": "league"},
+    {"fixtureId": "prem-014", "homeTeam": "team-prem-03", "awayTeam": "team-prem-05", "fixtureType": "league"},
+    {"fixtureId": "prem-015", "homeTeam": "team-prem-03", "awayTeam": "team-prem-06", "fixtureType": "league"},
+    {"fixtureId": "prem-016", "homeTeam": "team-prem-04", "awayTeam": "team-prem-01", "fixtureType": "league"},
+    {"fixtureId": "prem-017", "homeTeam": "team-prem-04", "awayTeam": "team-prem-02", "fixtureType": "league"},
+    {"fixtureId": "prem-018", "homeTeam": "team-prem-04", "awayTeam": "team-prem-03", "fixtureType": "league"},
+    {"fixtureId": "prem-019", "homeTeam": "team-prem-04", "awayTeam": "team-prem-05", "fixtureType": "league"},
+    {"fixtureId": "prem-020", "homeTeam": "team-prem-04", "awayTeam": "team-prem-06", "fixtureType": "league"},
+    {"fixtureId": "prem-021", "homeTeam": "team-prem-05", "awayTeam": "team-prem-01", "fixtureType": "league"},
+    {"fixtureId": "prem-022", "homeTeam": "team-prem-05", "awayTeam": "team-prem-02", "fixtureType": "league"},
+    {"fixtureId": "prem-023", "homeTeam": "team-prem-05", "awayTeam": "team-prem-03", "fixtureType": "league"},
+    {"fixtureId": "prem-024", "homeTeam": "team-prem-05", "awayTeam": "team-prem-04", "fixtureType": "league"},
+    {"fixtureId": "prem-025", "homeTeam": "team-prem-05", "awayTeam": "team-prem-06", "fixtureType": "league"},
+    {"fixtureId": "prem-026", "homeTeam": "team-prem-06", "awayTeam": "team-prem-01", "fixtureType": "league"},
+    {"fixtureId": "prem-027", "homeTeam": "team-prem-06", "awayTeam": "team-prem-02", "fixtureType": "league"},
+    {"fixtureId": "prem-028", "homeTeam": "team-prem-06", "awayTeam": "team-prem-03", "fixtureType": "league"},
+    {"fixtureId": "prem-029", "homeTeam": "team-prem-06", "awayTeam": "team-prem-04", "fixtureType": "league"},
+    {"fixtureId": "prem-030", "homeTeam": "team-prem-06", "awayTeam": "team-prem-05", "fixtureType": "league"},
+    {"fixtureId": "champ-001", "homeTeam": "team-champ-01", "awayTeam": "team-champ-02", "fixtureType": "league"},
+    {"fixtureId": "champ-002", "homeTeam": "team-champ-01", "awayTeam": "team-champ-03", "fixtureType": "league"},
+    {"fixtureId": "champ-003", "homeTeam": "team-champ-01", "awayTeam": "team-champ-04", "fixtureType": "league"},
+    {"fixtureId": "champ-004", "homeTeam": "team-champ-01", "awayTeam": "team-champ-05", "fixtureType": "league"},
+    {"fixtureId": "champ-005", "homeTeam": "team-champ-01", "awayTeam": "team-champ-06", "fixtureType": "league"},
+    {"fixtureId": "champ-006", "homeTeam": "team-champ-02", "awayTeam": "team-champ-01", "fixtureType": "league"},
+    {"fixtureId": "champ-007", "homeTeam": "team-champ-02", "awayTeam": "team-champ-03", "fixtureType": "league"},
+    {"fixtureId": "champ-008", "homeTeam": "team-champ-02", "awayTeam": "team-champ-04", "fixtureType": "league"},
+    {"fixtureId": "champ-009", "homeTeam": "team-champ-02", "awayTeam": "team-champ-05", "fixtureType": "league"},
+    {"fixtureId": "champ-010", "homeTeam": "team-champ-02", "awayTeam": "team-champ-06", "fixtureType": "league"},
+    {"fixtureId": "champ-011", "homeTeam": "team-champ-03", "awayTeam": "team-champ-01", "fixtureType": "league"},
+    {"fixtureId": "champ-012", "homeTeam": "team-champ-03", "awayTeam": "team-champ-02", "fixtureType": "league"},
+    {"fixtureId": "champ-013", "homeTeam": "team-champ-03", "awayTeam": "team-champ-04", "fixtureType": "league"},
+    {"fixtureId": "champ-014", "homeTeam": "team-champ-03", "awayTeam": "team-champ-05", "fixtureType": "league"},
+    {"fixtureId": "champ-015", "homeTeam": "team-champ-03", "awayTeam": "team-champ-06", "fixtureType": "league"},
+    {"fixtureId": "champ-016", "homeTeam": "team-champ-04", "awayTeam": "team-champ-01", "fixtureType": "league"},
+    {"fixtureId": "champ-017", "homeTeam": "team-champ-04", "awayTeam": "team-champ-02", "fixtureType": "league"},
+    {"fixtureId": "champ-018", "homeTeam": "team-champ-04", "awayTeam": "team-champ-03", "fixtureType": "league"},
+    {"fixtureId": "champ-019", "homeTeam": "team-champ-04", "awayTeam": "team-champ-05", "fixtureType": "league"},
+    {"fixtureId": "champ-020", "homeTeam": "team-champ-04", "awayTeam": "team-champ-06", "fixtureType": "league"},
+    {"fixtureId": "champ-021", "homeTeam": "team-champ-05", "awayTeam": "team-champ-01", "fixtureType": "league"},
+    {"fixtureId": "champ-022", "homeTeam": "team-champ-05", "awayTeam": "team-champ-02", "fixtureType": "league"},
+    {"fixtureId": "champ-023", "homeTeam": "team-champ-05", "awayTeam": "team-champ-03", "fixtureType": "league"},
+    {"fixtureId": "champ-024", "homeTeam": "team-champ-05", "awayTeam": "team-champ-04", "fixtureType": "league"},
+    {"fixtureId": "champ-025", "homeTeam": "team-champ-05", "awayTeam": "team-champ-06", "fixtureType": "league"},
+    {"fixtureId": "champ-026", "homeTeam": "team-champ-06", "awayTeam": "team-champ-01", "fixtureType": "league"},
+    {"fixtureId": "champ-027", "homeTeam": "team-champ-06", "awayTeam": "team-champ-02", "fixtureType": "league"},
+    {"fixtureId": "champ-028", "homeTeam": "team-champ-06", "awayTeam": "team-champ-03", "fixtureType": "league"},
+    {"fixtureId": "champ-029", "homeTeam": "team-champ-06", "awayTeam": "team-champ-04", "fixtureType": "league"},
+    {"fixtureId": "champ-030", "homeTeam": "team-champ-06", "awayTeam": "team-champ-05", "fixtureType": "league"},
+    {"fixtureId": "lo1-001", "homeTeam": "team-lo1-01", "awayTeam": "team-lo1-02", "fixtureType": "league"},
+    {"fixtureId": "lo1-002", "homeTeam": "team-lo1-01", "awayTeam": "team-lo1-03", "fixtureType": "league"},
+    {"fixtureId": "lo1-003", "homeTeam": "team-lo1-01", "awayTeam": "team-lo1-04", "fixtureType": "league"},
+    {"fixtureId": "lo1-004", "homeTeam": "team-lo1-01", "awayTeam": "team-lo1-05", "fixtureType": "league"},
+    {"fixtureId": "lo1-005", "homeTeam": "team-lo1-01", "awayTeam": "team-lo1-06", "fixtureType": "league"},
+    {"fixtureId": "lo1-006", "homeTeam": "team-lo1-02", "awayTeam": "team-lo1-01", "fixtureType": "league"},
+    {"fixtureId": "lo1-007", "homeTeam": "team-lo1-02", "awayTeam": "team-lo1-03", "fixtureType": "league"},
+    {"fixtureId": "lo1-008", "homeTeam": "team-lo1-02", "awayTeam": "team-lo1-04", "fixtureType": "league"},
+    {"fixtureId": "lo1-009", "homeTeam": "team-lo1-02", "awayTeam": "team-lo1-05", "fixtureType": "league"},
+    {"fixtureId": "lo1-010", "homeTeam": "team-lo1-02", "awayTeam": "team-lo1-06", "fixtureType": "league"},
+    {"fixtureId": "lo1-011", "homeTeam": "team-lo1-03", "awayTeam": "team-lo1-01", "fixtureType": "league"},
+    {"fixtureId": "lo1-012", "homeTeam": "team-lo1-03", "awayTeam": "team-lo1-02", "fixtureType": "league"},
+    {"fixtureId": "lo1-013", "homeTeam": "team-lo1-03", "awayTeam": "team-lo1-04", "fixtureType": "league"},
+    {"fixtureId": "lo1-014", "homeTeam": "team-lo1-03", "awayTeam": "team-lo1-05", "fixtureType": "league"},
+    {"fixtureId": "lo1-015", "homeTeam": "team-lo1-03", "awayTeam": "team-lo1-06", "fixtureType": "league"},
+    {"fixtureId": "lo1-016", "homeTeam": "team-lo1-04", "awayTeam": "team-lo1-01", "fixtureType": "league"},
+    {"fixtureId": "lo1-017", "homeTeam": "team-lo1-04", "awayTeam": "team-lo1-02", "fixtureType": "league"},
+    {"fixtureId": "lo1-018", "homeTeam": "team-lo1-04", "awayTeam": "team-lo1-03", "fixtureType": "league"},
+    {"fixtureId": "lo1-019", "homeTeam": "team-lo1-04", "awayTeam": "team-lo1-05", "fixtureType": "league"},
+    {"fixtureId": "lo1-020", "homeTeam": "team-lo1-04", "awayTeam": "team-lo1-06", "fixtureType": "league"},
+    {"fixtureId": "lo1-021", "homeTeam": "team-lo1-05", "awayTeam": "team-lo1-01", "fixtureType": "league"},
+    {"fixtureId": "lo1-022", "homeTeam": "team-lo1-05", "awayTeam": "team-lo1-02", "fixtureType": "league"},
+    {"fixtureId": "lo1-023", "homeTeam": "team-lo1-05", "awayTeam": "team-lo1-03", "fixtureType": "league"},
+    {"fixtureId": "lo1-024", "homeTeam": "team-lo1-05", "awayTeam": "team-lo1-04", "fixtureType": "league"},
+    {"fixtureId": "lo1-025", "homeTeam": "team-lo1-05", "awayTeam": "team-lo1-06", "fixtureType": "league"},
+    {"fixtureId": "lo1-026", "homeTeam": "team-lo1-06", "awayTeam": "team-lo1-01", "fixtureType": "league"},
+    {"fixtureId": "lo1-027", "homeTeam": "team-lo1-06", "awayTeam": "team-lo1-02", "fixtureType": "league"},
+    {"fixtureId": "lo1-028", "homeTeam": "team-lo1-06", "awayTeam": "team-lo1-03", "fixtureType": "league"},
+    {"fixtureId": "lo1-029", "homeTeam": "team-lo1-06", "awayTeam": "team-lo1-04", "fixtureType": "league"},
+    {"fixtureId": "lo1-030", "homeTeam": "team-lo1-06", "awayTeam": "team-lo1-05", "fixtureType": "league"},
+    {"fixtureId": "lo2-001", "homeTeam": "team-lo2-01", "awayTeam": "team-lo2-02", "fixtureType": "league"},
+    {"fixtureId": "lo2-002", "homeTeam": "team-lo2-01", "awayTeam": "team-lo2-03", "fixtureType": "league"},
+    {"fixtureId": "lo2-003", "homeTeam": "team-lo2-01", "awayTeam": "team-lo2-04", "fixtureType": "league"},
+    {"fixtureId": "lo2-004", "homeTeam": "team-lo2-01", "awayTeam": "team-lo2-05", "fixtureType": "league"},
+    {"fixtureId": "lo2-005", "homeTeam": "team-lo2-01", "awayTeam": "team-lo2-06", "fixtureType": "league"},
+    {"fixtureId": "lo2-006", "homeTeam": "team-lo2-02", "awayTeam": "team-lo2-01", "fixtureType": "league"},
+    {"fixtureId": "lo2-007", "homeTeam": "team-lo2-02", "awayTeam": "team-lo2-03", "fixtureType": "league"},
+    {"fixtureId": "lo2-008", "homeTeam": "team-lo2-02", "awayTeam": "team-lo2-04", "fixtureType": "league"},
+    {"fixtureId": "lo2-009", "homeTeam": "team-lo2-02", "awayTeam": "team-lo2-05", "fixtureType": "league"},
+    {"fixtureId": "lo2-010", "homeTeam": "team-lo2-02", "awayTeam": "team-lo2-06", "fixtureType": "league"},
+    {"fixtureId": "lo2-011", "homeTeam": "team-lo2-03", "awayTeam": "team-lo2-01", "fixtureType": "league"},
+    {"fixtureId": "lo2-012", "homeTeam": "team-lo2-03", "awayTeam": "team-lo2-02", "fixtureType": "league"},
+    {"fixtureId": "lo2-013", "homeTeam": "team-lo2-03", "awayTeam": "team-lo2-04", "fixtureType": "league"},
+    {"fixtureId": "lo2-014", "homeTeam": "team-lo2-03", "awayTeam": "team-lo2-05", "fixtureType": "league"},
+    {"fixtureId": "lo2-015", "homeTeam": "team-lo2-03", "awayTeam": "team-lo2-06", "fixtureType": "league"},
+    {"fixtureId": "lo2-016", "homeTeam": "team-lo2-04", "awayTeam": "team-lo2-01", "fixtureType": "league"},
+    {"fixtureId": "lo2-017", "homeTeam": "team-lo2-04", "awayTeam": "team-lo2-02", "fixtureType": "league"},
+    {"fixtureId": "lo2-018", "homeTeam": "team-lo2-04", "awayTeam": "team-lo2-03", "fixtureType": "league"},
+    {"fixtureId": "lo2-019", "homeTeam": "team-lo2-04", "awayTeam": "team-lo2-05", "fixtureType": "league"},
+    {"fixtureId": "lo2-020", "homeTeam": "team-lo2-04", "awayTeam": "team-lo2-06", "fixtureType": "league"},
+    {"fixtureId": "lo2-021", "homeTeam": "team-lo2-05", "awayTeam": "team-lo2-01", "fixtureType": "league"},
+    {"fixtureId": "lo2-022", "homeTeam": "team-lo2-05", "awayTeam": "team-lo2-02", "fixtureType": "league"},
+    {"fixtureId": "lo2-023", "homeTeam": "team-lo2-05", "awayTeam": "team-lo2-03", "fixtureType": "league"},
+    {"fixtureId": "lo2-024", "homeTeam": "team-lo2-05", "awayTeam": "team-lo2-04", "fixtureType": "league"},
+    {"fixtureId": "lo2-025", "homeTeam": "team-lo2-05", "awayTeam": "team-lo2-06", "fixtureType": "league"},
+    {"fixtureId": "lo2-026", "homeTeam": "team-lo2-06", "awayTeam": "team-lo2-01", "fixtureType": "league"},
+    {"fixtureId": "lo2-027", "homeTeam": "team-lo2-06", "awayTeam": "team-lo2-02", "fixtureType": "league"},
+    {"fixtureId": "lo2-028", "homeTeam": "team-lo2-06", "awayTeam": "team-lo2-03", "fixtureType": "league"},
+    {"fixtureId": "lo2-029", "homeTeam": "team-lo2-06", "awayTeam": "team-lo2-04", "fixtureType": "league"},
+    {"fixtureId": "lo2-030", "homeTeam": "team-lo2-06", "awayTeam": "team-lo2-05", "fixtureType": "league"},
+    {"fixtureId": "cup-r1-01", "homeTeam": "team-champ-01", "awayTeam": "team-lo2-01", "fixtureType": "cup"},
+    {"fixtureId": "cup-r1-02", "homeTeam": "team-champ-02", "awayTeam": "team-lo2-02", "fixtureType": "cup"},
+    {"fixtureId": "cup-r1-03", "homeTeam": "team-champ-03", "awayTeam": "team-lo2-03", "fixtureType": "cup"},
+    {"fixtureId": "cup-r1-04", "homeTeam": "team-lo1-01", "awayTeam": "team-lo1-04", "fixtureType": "cup"},
+    {"fixtureId": "cup-r1-05", "homeTeam": "team-lo1-02", "awayTeam": "team-lo1-05", "fixtureType": "cup"},
+    {"fixtureId": "cup-r1-06", "homeTeam": "team-lo1-03", "awayTeam": "team-lo1-06", "fixtureType": "cup"},
+    {"fixtureId": "cup-qf-01", "homeTeam": "team-prem-01", "awayTeam": "team-champ-04", "fixtureType": "cup"},
+    {"fixtureId": "cup-qf-02", "homeTeam": "team-prem-02", "awayTeam": "team-champ-05", "fixtureType": "cup"},
+    {"fixtureId": "cup-qf-03", "homeTeam": "team-prem-03", "awayTeam": "team-champ-06", "fixtureType": "cup"},
+    {"fixtureId": "cup-qf-04", "homeTeam": "team-prem-04", "awayTeam": "team-prem-05", "fixtureType": "cup"}
+  ],
+  "venues": [
+    {
+      "venueId": "venue-001",
+      "name": "Wembley Stadium",
+      "location": {"city": "London", "country": "England", "lat": 51.5560, "lon": -0.2796},
+      "capacity": 90000,
+      "resources": [
+        {"resourceId": "main-pitch", "capacity": 90000},
+        {"resourceId": "training-pitch", "capacity": 5000}
+      ],
+      "availability": [
+        {"dayOfWeek": "Saturday", "startTime": "15:00", "endTime": "17:00"},
+        {"dayOfWeek": "Saturday", "startTime": "19:45", "endTime": "21:45"},
+        {"dayOfWeek": "Sunday", "startTime": "16:00", "endTime": "18:00"},
+        {"dayOfWeek": "Wednesday", "startTime": "19:45", "endTime": "21:45"}
+      ],
+      "sharedBy": ["team-prem-01", "team-champ-01"]
+    },
+    {
+      "venueId": "venue-002",
+      "name": "Old Trafford",
+      "location": {"city": "Manchester", "country": "England", "lat": 53.4631, "lon": -2.2914},
+      "capacity": 74879,
+      "resources": [{"resourceId": "main-pitch", "capacity": 74879}],
+      "availability": [
+        {"dayOfWeek": "Saturday", "startTime": "12:30", "endTime": "14:30"},
+        {"dayOfWeek": "Saturday", "startTime": "17:30", "endTime": "19:30"},
+        {"dayOfWeek": "Sunday", "startTime": "14:00", "endTime": "16:00"},
+        {"dayOfWeek": "Tuesday", "startTime": "20:00", "endTime": "22:00"}
+      ]
+    },
+    {
+      "venueId": "venue-003",
+      "name": "Camp Nou",
+      "location": {"city": "Barcelona", "country": "Spain", "lat": 41.3809, "lon": 2.1228},
+      "capacity": 99354,
+      "resources": [{"resourceId": "main-pitch", "capacity": 99354}],
+      "availability": [
+        {"dayOfWeek": "Saturday", "startTime": "16:00", "endTime": "18:00"},
+        {"dayOfWeek": "Saturday", "startTime": "20:00", "endTime": "22:00"},
+        {"dayOfWeek": "Sunday", "startTime": "21:00", "endTime": "23:00"},
+        {"dayOfWeek": "Wednesday", "startTime": "21:00", "endTime": "23:00"}
+      ]
+    },
+    {
+      "venueId": "venue-004",
+      "name": "Parc des Princes",
+      "location": {"city": "Paris", "country": "France", "lat": 48.8418, "lon": 2.2531},
+      "capacity": 47929,
+      "resources": [{"resourceId": "main-pitch", "capacity": 47929}],
+      "availability": [
+        {"dayOfWeek": "Saturday", "startTime": "17:00", "endTime": "19:00"},
+        {"dayOfWeek": "Saturday", "startTime": "21:00", "endTime": "23:00"},
+        {"dayOfWeek": "Sunday", "startTime": "20:45", "endTime": "22:45"},
+        {"dayOfWeek": "Wednesday", "startTime": "21:00", "endTime": "23:00"}
+      ]
+    },
+    {
+      "venueId": "venue-005",
+      "name": "Allianz Arena",
+      "location": {"city": "Munich", "country": "Germany", "lat": 48.2188, "lon": 11.6247},
+      "capacity": 75024,
+      "resources": [{"resourceId": "main-pitch", "capacity": 75024}],
+      "availability": [
+        {"dayOfWeek": "Saturday", "startTime": "15:30", "endTime": "17:30"},
+        {"dayOfWeek": "Saturday", "startTime": "18:30", "endTime": "20:30"},
+        {"dayOfWeek": "Sunday", "startTime": "17:30", "endTime": "19:30"},
+        {"dayOfWeek": "Tuesday", "startTime": "20:45", "endTime": "22:45"}
+      ]
+    },
+    {
+      "venueId": "venue-006",
+      "name": "San Siro",
+      "location": {"city": "Milan", "country": "Italy", "lat": 45.4781, "lon": 9.1240},
+      "capacity": 80018,
+      "resources": [{"resourceId": "main-pitch", "capacity": 80018}],
+      "availability": [
+        {"dayOfWeek": "Saturday", "startTime": "18:00", "endTime": "20:00"},
+        {"dayOfWeek": "Saturday", "startTime": "20:45", "endTime": "22:45"},
+        {"dayOfWeek": "Sunday", "startTime": "20:45", "endTime": "22:45"},
+        {"dayOfWeek": "Wednesday", "startTime": "20:45", "endTime": "22:45"}
+      ]
+    },
+    {
+      "venueId": "venue-007",
+      "name": "St Andrew's Stadium",
+      "location": {"city": "Birmingham", "country": "England", "lat": 52.4750, "lon": -1.8681},
+      "capacity": 29409,
+      "resources": [{"resourceId": "main-pitch", "capacity": 29409}],
+      "availability": [
+        {"dayOfWeek": "Saturday", "startTime": "15:00", "endTime": "17:00"},
+        {"dayOfWeek": "Tuesday", "startTime": "19:45", "endTime": "21:45"}
+      ]
+    },
+    {
+      "venueId": "venue-008",
+      "name": "Mestalla Stadium",
+      "location": {"city": "Valencia", "country": "Spain", "lat": 39.4747, "lon": -0.3589},
+      "capacity": 49430,
+      "resources": [{"resourceId": "main-pitch", "capacity": 49430}],
+      "availability": [
+        {"dayOfWeek": "Saturday", "startTime": "16:00", "endTime": "18:00"},
+        {"dayOfWeek": "Sunday", "startTime": "18:30", "endTime": "20:30"}
+      ]
+    },
+    {
+      "venueId": "venue-009",
+      "name": "Groupama Stadium",
+      "location": {"city": "Lyon", "country": "France", "lat": 45.7485, "lon": 4.8467},
+      "capacity": 59186,
+      "resources": [{"resourceId": "main-pitch", "capacity": 59186}],
+      "availability": [
+        {"dayOfWeek": "Saturday", "startTime": "17:00", "endTime": "19:00"},
+        {"dayOfWeek": "Sunday", "startTime": "21:00", "endTime": "23:00"}
+      ]
+    },
+    {
+      "venueId": "venue-010",
+      "name": "Signal Iduna Park",
+      "location": {"city": "Dortmund", "country": "Germany", "lat": 51.4925, "lon": 7.4515},
+      "capacity": 81365,
+      "resources": [{"resourceId": "main-pitch", "capacity": 81365}],
+      "availability": [
+        {"dayOfWeek": "Saturday", "startTime": "15:30", "endTime": "17:30"},
+        {"dayOfWeek": "Sunday", "startTime": "15:30", "endTime": "17:30"}
+      ]
+    },
+    {
+      "venueId": "venue-011",
+      "name": "Stadio Olimpico",
+      "location": {"city": "Rome", "country": "Italy", "lat": 41.9342, "lon": 12.4549},
+      "capacity": 70634,
+      "resources": [{"resourceId": "main-pitch", "capacity": 70634}],
+      "availability": [
+        {"dayOfWeek": "Saturday", "startTime": "18:00", "endTime": "20:00"},
+        {"dayOfWeek": "Sunday", "startTime": "20:45", "endTime": "22:45"}
+      ]
+    },
+    {
+      "venueId": "venue-012",
+      "name": "Falmer Stadium",
+      "location": {"city": "Brighton", "country": "England", "lat": 50.8615, "lon": -0.0838},
+      "capacity": 30750,
+      "resources": [{"resourceId": "main-pitch", "capacity": 30750}],
+      "availability": [
+        {"dayOfWeek": "Saturday", "startTime": "15:00", "endTime": "17:00"}
+      ]
+    },
+    {
+      "venueId": "venue-013",
+      "name": "Carrow Road",
+      "location": {"city": "Norwich", "country": "England", "lat": 52.6243, "lon": 1.2927},
+      "capacity": 27244,
+      "resources": [{"resourceId": "main-pitch", "capacity": 27244}],
+      "availability": [
+        {"dayOfWeek": "Saturday", "startTime": "15:00", "endTime": "17:00"}
+      ]
+    },
+    {
+      "venueId": "venue-014",
+      "name": "Ramon Sanchez Pizjuan",
+      "location": {"city": "Seville", "country": "Spain", "lat": 37.3886, "lon": -5.9823},
+      "capacity": 43883,
+      "resources": [{"resourceId": "main-pitch", "capacity": 43883}],
+      "availability": [
+        {"dayOfWeek": "Saturday", "startTime": "16:00", "endTime": "18:00"}
+      ]
+    },
+    {
+      "venueId": "venue-015",
+      "name": "Stade Velodrome",
+      "location": {"city": "Marseille", "country": "France", "lat": 43.2964, "lon": 5.3698},
+      "capacity": 67394,
+      "resources": [{"resourceId": "main-pitch", "capacity": 67394}],
+      "availability": [
+        {"dayOfWeek": "Saturday", "startTime": "17:00", "endTime": "19:00"}
+      ]
+    },
+    {
+      "venueId": "venue-016",
+      "name": "Mercedes-Benz Arena",
+      "location": {"city": "Stuttgart", "country": "Germany", "lat": 48.7921, "lon": 9.2360},
+      "capacity": 60449,
+      "resources": [{"resourceId": "main-pitch", "capacity": 60449}],
+      "availability": [
+        {"dayOfWeek": "Saturday", "startTime": "15:30", "endTime": "17:30"}
+      ]
+    },
+    {
+      "venueId": "venue-017",
+      "name": "Stadio Diego Maradona",
+      "location": {"city": "Naples", "country": "Italy", "lat": 40.8538, "lon": 14.3051},
+      "capacity": 54726,
+      "resources": [{"resourceId": "main-pitch", "capacity": 54726}],
+      "availability": [
+        {"dayOfWeek": "Saturday", "startTime": "18:00", "endTime": "20:00"}
+      ]
+    },
+    {
+      "venueId": "venue-018",
+      "name": "Home Park",
+      "location": {"city": "Plymouth", "country": "England", "lat": 50.3879, "lon": -4.1426},
+      "capacity": 17900,
+      "resources": [{"resourceId": "main-pitch", "capacity": 17900}],
+      "availability": [
+        {"dayOfWeek": "Saturday", "startTime": "15:00", "endTime": "17:00"}
+      ]
+    },
+    {
+      "venueId": "venue-019",
+      "name": "St James Park",
+      "location": {"city": "Exeter", "country": "England", "lat": 50.7184, "lon": -3.5339},
+      "capacity": 8696,
+      "resources": [{"resourceId": "main-pitch", "capacity": 8696}],
+      "availability": [
+        {"dayOfWeek": "Saturday", "startTime": "15:00", "endTime": "17:00"}
+      ]
+    },
+    {
+      "venueId": "venue-020",
+      "name": "La Rosaleda",
+      "location": {"city": "Malaga", "country": "Spain", "lat": 36.7196, "lon": -4.4200},
+      "capacity": 30044,
+      "resources": [{"resourceId": "main-pitch", "capacity": 30044}],
+      "availability": [
+        {"dayOfWeek": "Saturday", "startTime": "16:00", "endTime": "18:00"}
+      ]
+    },
+    {
+      "venueId": "venue-021",
+      "name": "Allianz Riviera",
+      "location": {"city": "Nice", "country": "France", "lat": 43.7009, "lon": 7.2684},
+      "capacity": 36178,
+      "resources": [{"resourceId": "main-pitch", "capacity": 36178}],
+      "availability": [
+        {"dayOfWeek": "Saturday", "startTime": "17:00", "endTime": "19:00"}
+      ]
+    },
+    {
+      "venueId": "venue-022",
+      "name": "Schwarzwald-Stadion",
+      "location": {"city": "Freiburg", "country": "Germany", "lat": 47.9959, "lon": 7.8522},
+      "capacity": 34700,
+      "resources": [{"resourceId": "main-pitch", "capacity": 34700}],
+      "availability": [
+        {"dayOfWeek": "Saturday", "startTime": "15:30", "endTime": "17:30"}
+      ]
+    },
+    {
+      "venueId": "venue-023",
+      "name": "Stadio Renzo Barbera",
+      "location": {"city": "Palermo", "country": "Italy", "lat": 38.1321, "lon": 13.3356},
+      "capacity": 36349,
+      "resources": [{"resourceId": "main-pitch", "capacity": 36349}],
+      "availability": [
+        {"dayOfWeek": "Saturday", "startTime": "18:00", "endTime": "20:00"}
+      ]
+    }
+  ],
+  "constraints": [
+    {
+      "constraintId": "no_overlap_team",
+      "type": "hard",
+      "params": {}
+    },
+    {
+      "constraintId": "no_overlap_venue",
+      "type": "hard",
+      "params": {}
+    },
+    {
+      "constraintId": "min_rest_time",
+      "type": "hard",
+      "params": {
+        "min_hours": 72
+      }
+    },
+    {
+      "constraintId": "venue_availability",
+      "type": "hard",
+      "params": {}
+    },
+    {
+      "constraintId": "max_consecutive_away",
+      "type": "hard",
+      "params": {
+        "max_consecutive": 2
+      }
+    },
+    {
+      "constraintId": "season_bounds",
+      "type": "hard",
+      "params": {}
+    },
+    {
+      "constraintId": "division_specific_rest",
+      "type": "hard",
+      "params": {
+        "selectorV2": {
+          "when": {
+            "team.tier": {"equals": 1}
+          },
+          "apply": {
+            "min_hours": 96
+          }
+        }
+      },
+      "description": "Premier division teams require 96 hours rest instead of standard 72 hours"
+    },
+    {
+      "constraintId": "shared_venue_separation",
+      "type": "hard",
+      "params": {
+        "selectorV2": {
+          "when": {
+            "venue.sharedBy": {"count": {"greaterThan": 1}}
+          },
+          "apply": {
+            "min_separation_hours": 24
+          }
+        }
+      },
+      "description": "Shared venues must have 24 hours between fixtures"
+    },
+    {
+      "constraintId": "cup_fixture_priority",
+      "type": "soft",
+      "weight": 8,
+      "params": {
+        "selectorV2": {
+          "when": {
+            "fixture.fixtureType": {"equals": "cup"}
+          },
+          "apply": {
+            "preferredSlots": [
+              {"dayOfWeek": "Wednesday", "startTime": "19:45", "endTime": "21:45"}
+            ]
+          }
+        }
+      },
+      "description": "Cup fixtures should be scheduled on Wednesday evenings when possible"
+    },
+    {
+      "constraintId": "international_travel_buffer",
+      "type": "soft",
+      "weight": 7,
+      "params": {
+        "selectorV2": {
+          "when": {
+            "travel.crosses_timezone": true
+          },
+          "apply": {
+            "min_buffer_hours": 48
+          }
+        }
+      },
+      "description": "International travel should include 48-hour buffer when crossing time zones"
+    },
+    {
+      "constraintId": "promotion_zone_fairness",
+      "type": "soft",
+      "weight": 9,
+      "params": {
+        "selectorV2": {
+          "when": {
+            "fixture.homeTeam.tier": {"in": [2, 3, 4]},
+            "fixture.awayTeam.tier": {"in": [2, 3, 4]}
+          },
+          "apply": {
+            "balanceHomeAwaySequence": true,
+            "maxConsecutiveSameSide": 2
+          }
+        }
+      },
+      "description": "Lower division teams in promotion contention need balanced home/away schedules"
+    }
+  ],
+  "objectives": [
+    {
+      "objectiveId": "minimize_total_travel",
+      "weight": 5,
+      "params": {}
+    },
+    {
+      "objectiveId": "balance_home_away",
+      "weight": 4,
+      "params": {
+        "maxDeviation": 1
+      }
+    },
+    {
+      "objectiveId": "tier_based_broadcast_priority",
+      "weight": 6,
+      "params": {
+        "tierWeights": {
+          "1": 3.0,
+          "2": 2.0,
+          "3": 1.5,
+          "4": 1.0
+        },
+        "primeTimeSlots": {
+          "Saturday_15:00-17:00": 1.0,
+          "Saturday_17:30-20:00": 1.5,
+          "Saturday_20:00-23:00": 1.8,
+          "Sunday_16:00-20:00": 1.4,
+          "Wednesday_19:45-22:00": 1.3
+        }
+      },
+      "description": "Higher tier divisions get priority for premium broadcast windows"
+    },
+    {
+      "objectiveId": "cross_division_excitement",
+      "weight": 4,
+      "params": {
+        "spreadCupFixtures": true,
+        "avoidClumping": true
+      },
+      "description": "Distribute cup fixtures (cross-division) throughout the season"
+    },
+    {
+      "objectiveId": "shared_venue_optimization",
+      "weight": 5,
+      "params": {
+        "minimizeConflicts": true,
+        "preferAlternatingUse": true
+      },
+      "description": "Optimize schedules for teams sharing venues to minimize conflicts and maximize facility utilization"
+    },
+    {
+      "objectiveId": "international_travel_clustering",
+      "weight": 3,
+      "params": {
+        "clusterInternationalGames": true,
+        "maxClusterSize": 3
+      },
+      "description": "When teams travel internationally, cluster multiple away games to reduce total travel"
+    }
+  ]
+}

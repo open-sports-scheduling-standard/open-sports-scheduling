@@ -1,0 +1,52 @@
+{
+  "osssVersion": "0.1.0",
+  "instance": {
+    "metadata": {
+      "name": "Coastal Amateur Rugby League - 2026",
+      "track": "amateur",
+      "sport": "Rugby Union",
+      "season": "Spring 2026",
+      "timezone": "America/Los_Angeles",
+      "difficulty": "⭐⭐⭐⭐",
+      "estimatedComplexity": "high",
+      "competitionDataset": true
+    },
+    "teams": [
+      {"teamId": "rug-01", "name": "Bay RFC"},
+      {"teamId": "rug-02", "name": "Golden Gate"},
+      {"teamId": "rug-03", "name": "Redwood RFC"},
+      {"teamId": "rug-04", "name": "Valley Warriors"},
+      {"teamId": "rug-05", "name": "Pacific Stags"},
+      {"teamId": "rug-06", "name": "Coastal Bears"}
+    ],
+    "venues": [
+      {"venueId": "rug-field-01", "name": "Regional Rugby Grounds"}
+    ],
+    "fixtures": [
+      {"fixtureId": "r1", "homeTeamId": "rug-01", "awayTeamId": "rug-02"},
+      {"fixtureId": "r2", "homeTeamId": "rug-01", "awayTeamId": "rug-03"},
+      {"fixtureId": "r3", "homeTeamId": "rug-01", "awayTeamId": "rug-04"},
+      {"fixtureId": "r4", "homeTeamId": "rug-01", "awayTeamId": "rug-05"},
+      {"fixtureId": "r5", "homeTeamId": "rug-01", "awayTeamId": "rug-06"},
+
+      {"fixtureId": "r6", "homeTeamId": "rug-02", "awayTeamId": "rug-03"},
+      {"fixtureId": "r7", "homeTeamId": "rug-02", "awayTeamId": "rug-04"},
+      {"fixtureId": "r8", "homeTeamId": "rug-02", "awayTeamId": "rug-05"},
+      {"fixtureId": "r9", "homeTeamId": "rug-02", "awayTeamId": "rug-06"},
+
+      {"fixtureId": "r10", "homeTeamId": "rug-03", "awayTeamId": "rug-04"},
+      {"fixtureId": "r11", "homeTeamId": "rug-03", "awayTeamId": "rug-05"},
+      {"fixtureId": "r12", "homeTeamId": "rug-03", "awayTeamId": "rug-06"},
+
+      {"fixtureId": "r13", "homeTeamId": "rug-04", "awayTeamId": "rug-05"},
+      {"fixtureId": "r14", "homeTeamId": "rug-04", "awayTeamId": "rug-06"},
+
+      {"fixtureId": "r15", "homeTeamId": "rug-05", "awayTeamId": "rug-06"}
+    ],
+    "constraints": [
+      {"constraintId": "biweekly_play", "type": "hard"},
+      {"constraintId": "min_rest_time", "type": "hard", "params": {"min_hours": 120}},
+      {"constraintId": "travel_distance", "type": "soft", "weight": 10}
+    ]
+  }
+}

@@ -1,0 +1,257 @@
+{
+  "version": "0.1.0",
+  "metadata": {
+    "instanceId": "comp-youth-track-02",
+    "name": "County Youth Basketball League - 2026 Winter Season",
+    "description": "Youth track competition dataset featuring 8 teams with shared gymnasium scheduling challenges, parent transportation constraints, and academic calendar blackouts. Difficulty: ⭐⭐",
+    "sport": "basketball",
+    "season": "2026 Winter",
+    "competitionDataset": true,
+    "track": "youth",
+    "difficultyRating": 2,
+    "createdBy": "OSSS Competition Team",
+    "createdAt": "2025-12-21T00:00:00Z",
+    "notes": "This dataset tests schedulers on: shared venue coordination (multiple teams per gym), school schedule alignment, parent transportation windows (no games during work hours), and academic blackout periods (exam weeks, school breaks)."
+  },
+  "timeBounds": {
+    "seasonStart": "2026-01-10T00:00:00Z",
+    "seasonEnd": "2026-03-15T23:59:59Z",
+    "blackoutPeriods": [
+      {
+        "start": "2026-02-14T00:00:00Z",
+        "end": "2026-02-22T23:59:59Z",
+        "reason": "Mid-Winter Break"
+      },
+      {
+        "start": "2026-03-01T00:00:00Z",
+        "end": "2026-03-05T23:59:59Z",
+        "reason": "Midterm Exam Week"
+      }
+    ]
+  },
+  "teams": [
+    {
+      "teamId": "team-001",
+      "name": "Lincoln Elementary Lions",
+      "division": "U10",
+      "homeVenue": "venue-001",
+      "location": {"city": "Springfield", "state": "IL", "lat": 39.7817, "lon": -89.6501},
+      "metadata": {"schoolBased": true, "ageGroup": "U10"}
+    },
+    {
+      "teamId": "team-002",
+      "name": "Washington Elementary Warriors",
+      "division": "U10",
+      "homeVenue": "venue-001",
+      "location": {"city": "Springfield", "state": "IL", "lat": 39.7817, "lon": -89.6501},
+      "metadata": {"schoolBased": true, "ageGroup": "U10"}
+    },
+    {
+      "teamId": "team-003",
+      "name": "Jefferson Middle Jaguars",
+      "division": "U12",
+      "homeVenue": "venue-002",
+      "location": {"city": "Springfield", "state": "IL", "lat": 39.7990, "lon": -89.6440},
+      "metadata": {"schoolBased": true, "ageGroup": "U12"}
+    },
+    {
+      "teamId": "team-004",
+      "name": "Madison Middle Mustangs",
+      "division": "U12",
+      "homeVenue": "venue-002",
+      "location": {"city": "Springfield", "state": "IL", "lat": 39.7990, "lon": -89.6440},
+      "metadata": {"schoolBased": true, "ageGroup": "U12"}
+    },
+    {
+      "teamId": "team-005",
+      "name": "Riverside Recreation Raptors",
+      "division": "U10",
+      "homeVenue": "venue-003",
+      "location": {"city": "Chatham", "state": "IL", "lat": 39.6711, "lon": -89.7190},
+      "metadata": {"schoolBased": false, "ageGroup": "U10"}
+    },
+    {
+      "teamId": "team-006",
+      "name": "Parkside Community Panthers",
+      "division": "U10",
+      "homeVenue": "venue-003",
+      "location": {"city": "Chatham", "state": "IL", "lat": 39.6711, "lon": -89.7190},
+      "metadata": {"schoolBased": false, "ageGroup": "U10"}
+    },
+    {
+      "teamId": "team-007",
+      "name": "Oak Ridge Eagles",
+      "division": "U12",
+      "homeVenue": "venue-004",
+      "location": {"city": "Sherman", "state": "IL", "lat": 39.8939, "lon": -89.6062},
+      "metadata": {"schoolBased": false, "ageGroup": "U12"}
+    },
+    {
+      "teamId": "team-008",
+      "name": "Maple Grove Hornets",
+      "division": "U12",
+      "homeVenue": "venue-004",
+      "location": {"city": "Sherman", "state": "IL", "lat": 39.8939, "lon": -89.6062},
+      "metadata": {"schoolBased": false, "ageGroup": "U12"}
+    }
+  ],
+  "fixtures": [
+    {"fixtureId": "fix-001", "homeTeam": "team-001", "awayTeam": "team-002"},
+    {"fixtureId": "fix-002", "homeTeam": "team-001", "awayTeam": "team-005"},
+    {"fixtureId": "fix-003", "homeTeam": "team-001", "awayTeam": "team-006"},
+    {"fixtureId": "fix-004", "homeTeam": "team-002", "awayTeam": "team-001"},
+    {"fixtureId": "fix-005", "homeTeam": "team-002", "awayTeam": "team-005"},
+    {"fixtureId": "fix-006", "homeTeam": "team-002", "awayTeam": "team-006"},
+    {"fixtureId": "fix-007", "homeTeam": "team-005", "awayTeam": "team-001"},
+    {"fixtureId": "fix-008", "homeTeam": "team-005", "awayTeam": "team-002"},
+    {"fixtureId": "fix-009", "homeTeam": "team-005", "awayTeam": "team-006"},
+    {"fixtureId": "fix-010", "homeTeam": "team-006", "awayTeam": "team-001"},
+    {"fixtureId": "fix-011", "homeTeam": "team-006", "awayTeam": "team-002"},
+    {"fixtureId": "fix-012", "homeTeam": "team-006", "awayTeam": "team-005"},
+    {"fixtureId": "fix-013", "homeTeam": "team-003", "awayTeam": "team-004"},
+    {"fixtureId": "fix-014", "homeTeam": "team-003", "awayTeam": "team-007"},
+    {"fixtureId": "fix-015", "homeTeam": "team-003", "awayTeam": "team-008"},
+    {"fixtureId": "fix-016", "homeTeam": "team-004", "awayTeam": "team-003"},
+    {"fixtureId": "fix-017", "homeTeam": "team-004", "awayTeam": "team-007"},
+    {"fixtureId": "fix-018", "homeTeam": "team-004", "awayTeam": "team-008"},
+    {"fixtureId": "fix-019", "homeTeam": "team-007", "awayTeam": "team-003"},
+    {"fixtureId": "fix-020", "homeTeam": "team-007", "awayTeam": "team-004"},
+    {"fixtureId": "fix-021", "homeTeam": "team-007", "awayTeam": "team-008"},
+    {"fixtureId": "fix-022", "homeTeam": "team-008", "awayTeam": "team-003"},
+    {"fixtureId": "fix-023", "homeTeam": "team-008", "awayTeam": "team-004"},
+    {"fixtureId": "fix-024", "homeTeam": "team-008", "awayTeam": "team-007"}
+  ],
+  "venues": [
+    {
+      "venueId": "venue-001",
+      "name": "Lincoln-Washington Shared Gymnasium",
+      "location": {"city": "Springfield", "state": "IL", "lat": 39.7817, "lon": -89.6501},
+      "capacity": 200,
+      "resources": [
+        {"resourceId": "main-court", "capacity": 200}
+      ],
+      "availability": [
+        {"dayOfWeek": "Saturday", "startTime": "09:00", "endTime": "11:00"},
+        {"dayOfWeek": "Saturday", "startTime": "13:00", "endTime": "15:00"},
+        {"dayOfWeek": "Sunday", "startTime": "13:00", "endTime": "17:00"}
+      ],
+      "sharedBy": ["team-001", "team-002"]
+    },
+    {
+      "venueId": "venue-002",
+      "name": "Jefferson-Madison Middle School Gym",
+      "location": {"city": "Springfield", "state": "IL", "lat": 39.7990, "lon": -89.6440},
+      "capacity": 300,
+      "resources": [
+        {"resourceId": "main-court", "capacity": 300}
+      ],
+      "availability": [
+        {"dayOfWeek": "Saturday", "startTime": "10:00", "endTime": "12:00"},
+        {"dayOfWeek": "Saturday", "startTime": "14:00", "endTime": "16:00"},
+        {"dayOfWeek": "Sunday", "startTime": "14:00", "endTime": "18:00"}
+      ],
+      "sharedBy": ["team-003", "team-004"]
+    },
+    {
+      "venueId": "venue-003",
+      "name": "Riverside Community Center",
+      "location": {"city": "Chatham", "state": "IL", "lat": 39.6711, "lon": -89.7190},
+      "capacity": 150,
+      "resources": [
+        {"resourceId": "main-court", "capacity": 150}
+      ],
+      "availability": [
+        {"dayOfWeek": "Saturday", "startTime": "08:00", "endTime": "12:00"},
+        {"dayOfWeek": "Saturday", "startTime": "13:00", "endTime": "17:00"},
+        {"dayOfWeek": "Sunday", "startTime": "12:00", "endTime": "16:00"}
+      ],
+      "sharedBy": ["team-005", "team-006"]
+    },
+    {
+      "venueId": "venue-004",
+      "name": "Sherman Sports Complex",
+      "location": {"city": "Sherman", "state": "IL", "lat": 39.8939, "lon": -89.6062},
+      "capacity": 250,
+      "resources": [
+        {"resourceId": "court-a", "capacity": 150},
+        {"resourceId": "court-b", "capacity": 100}
+      ],
+      "availability": [
+        {"dayOfWeek": "Saturday", "startTime": "09:00", "endTime": "13:00"},
+        {"dayOfWeek": "Saturday", "startTime": "14:00", "endTime": "18:00"},
+        {"dayOfWeek": "Sunday", "startTime": "10:00", "endTime": "16:00"}
+      ],
+      "sharedBy": ["team-007", "team-008"]
+    }
+  ],
+  "constraints": [
+    {
+      "constraintId": "no_overlap_team",
+      "type": "hard",
+      "params": {}
+    },
+    {
+      "constraintId": "no_overlap_venue",
+      "type": "hard",
+      "params": {}
+    },
+    {
+      "constraintId": "min_rest_time",
+      "type": "hard",
+      "params": {
+        "min_hours": 120
+      }
+    },
+    {
+      "constraintId": "venue_availability",
+      "type": "hard",
+      "params": {}
+    },
+    {
+      "constraintId": "max_games_per_day",
+      "type": "hard",
+      "params": {
+        "max_games": 1
+      }
+    },
+    {
+      "constraintId": "season_bounds",
+      "type": "hard",
+      "params": {}
+    },
+    {
+      "constraintId": "shared_venue_buffer",
+      "type": "soft",
+      "weight": 8,
+      "params": {
+        "min_buffer_minutes": 60
+      },
+      "description": "Allow 1 hour between games at shared venues for cleanup and transition"
+    }
+  ],
+  "objectives": [
+    {
+      "objectiveId": "minimize_total_travel",
+      "weight": 2,
+      "params": {}
+    },
+    {
+      "objectiveId": "maximize_weekend_afternoon_slots",
+      "weight": 5,
+      "params": {
+        "preferredWindows": [
+          {"dayOfWeek": "Saturday", "startTime": "13:00", "endTime": "17:00"},
+          {"dayOfWeek": "Sunday", "startTime": "13:00", "endTime": "17:00"}
+        ]
+      },
+      "description": "Prefer afternoon slots when parents are more available for transportation"
+    },
+    {
+      "objectiveId": "balance_home_away",
+      "weight": 3,
+      "params": {
+        "maxDeviation": 1
+      }
+    }
+  ]
+}

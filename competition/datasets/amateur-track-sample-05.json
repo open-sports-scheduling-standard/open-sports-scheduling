@@ -1,0 +1,53 @@
+{
+  "osssVersion": "0.1.0",
+  "instance": {
+    "metadata": {
+      "name": "Community Amateur Basketball League - 2026",
+      "track": "amateur",
+      "sport": "Basketball",
+      "season": "Winter 2026",
+      "timezone": "America/Toronto",
+      "difficulty": "⭐⭐⭐",
+      "competitionDataset": true
+    },
+    "teams": [
+      {"teamId": "bb-01", "name": "Raptors Club"},
+      {"teamId": "bb-02", "name": "Downtown Ballers"},
+      {"teamId": "bb-03", "name": "North Hoops"},
+      {"teamId": "bb-04", "name": "East Court"},
+      {"teamId": "bb-05", "name": "West Side"},
+      {"teamId": "bb-06", "name": "Lakeshore"}
+    ],
+    "venues": [
+      {
+        "venueId": "gym-01",
+        "name": "Community Gym",
+        "resources": [
+          {"resourceId": "court-a", "resourceType": "court"},
+          {"resourceId": "court-b", "resourceType": "court"}
+        ]
+      }
+    ],
+    "fixtures": [
+      {"fixtureId": "b1", "homeTeamId": "bb-01", "awayTeamId": "bb-02"},
+      {"fixtureId": "b2", "homeTeamId": "bb-03", "awayTeamId": "bb-04"},
+      {"fixtureId": "b3", "homeTeamId": "bb-05", "awayTeamId": "bb-06"},
+
+      {"fixtureId": "b4", "homeTeamId": "bb-01", "awayTeamId": "bb-03"},
+      {"fixtureId": "b5", "homeTeamId": "bb-02", "awayTeamId": "bb-04"},
+      {"fixtureId": "b6", "homeTeamId": "bb-05", "awayTeamId": "bb-01"},
+
+      {"fixtureId": "b7", "homeTeamId": "bb-02", "awayTeamId": "bb-03"},
+      {"fixtureId": "b8", "homeTeamId": "bb-04", "awayTeamId": "bb-06"},
+      {"fixtureId": "b9", "homeTeamId": "bb-05", "awayTeamId": "bb-03"},
+
+      {"fixtureId": "b10", "homeTeamId": "bb-06", "awayTeamId": "bb-01"},
+      {"fixtureId": "b11", "homeTeamId": "bb-02", "awayTeamId": "bb-05"},
+      {"fixtureId": "b12", "homeTeamId": "bb-04", "awayTeamId": "bb-01"},
+
+      {"fixtureId": "b13", "homeTeamId": "bb-06", "awayTeamId": "bb-02"},
+      {"fixtureId": "b14", "homeTeamId": "bb-03", "awayTeamId": "bb-06"},
+      {"fixtureId": "b15", "homeTeamId": "bb-04", "awayTeamId": "bb-05"}
+    ]
+  }
+}

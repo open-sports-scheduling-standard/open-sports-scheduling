@@ -1,0 +1,390 @@
+{
+  "osssVersion": "0.1.0",
+  "instance": {
+    "metadata": {
+      "name": "Regional Amateur Hockey League - Fall 2025",
+      "description": "Amateur track competition dataset: 16 teams, 12-week season, balance of cost efficiency and competitive fairness",
+      "track": "amateur",
+      "difficulty": "⭐⭐⭐",
+      "season": "Fall 2025",
+      "sport": "Ice Hockey",
+      "timezone": "America/Chicago",
+      "estimatedComplexity": "high",
+      "competitionDataset": true,
+      "datasetVersion": "1.0.0",
+      "releaseDate": "2025-01-01"
+    },
+    "teams": [
+      {"teamId": "team-001", "name": "North Stars", "division": "Premier", "homeVenue": "venue-001", "location": {"lat": 41.8781, "lon": -87.6298}},
+      {"teamId": "team-002", "name": "Ice Hawks", "division": "Premier", "homeVenue": "venue-002", "location": {"lat": 42.3314, "lon": -83.0458}},
+      {"teamId": "team-003", "name": "Thunder Bay", "division": "Premier", "homeVenue": "venue-003", "location": {"lat": 43.0731, "lon": -89.4012}},
+      {"teamId": "team-004", "name": "Storm Front", "division": "Premier", "homeVenue": "venue-004", "location": {"lat": 41.2565, "lon": -95.9345}},
+      {"teamId": "team-005", "name": "Blizzard", "division": "Premier", "homeVenue": "venue-005", "location": {"lat": 44.9778, "lon": -93.2650}},
+      {"teamId": "team-006", "name": "Frost Giants", "division": "Premier", "homeVenue": "venue-006", "location": {"lat": 39.0997, "lon": -94.5786}},
+      {"teamId": "team-007", "name": "Polar Bears", "division": "Premier", "homeVenue": "venue-007", "location": {"lat": 43.0389, "lon": -87.9065}},
+      {"teamId": "team-008", "name": "Arctic Wolves", "division": "Premier", "homeVenue": "venue-008", "location": {"lat": 41.5868, "lon": -93.6250}},
+      {"teamId": "team-009", "name": "Silver Blades", "division": "Division 1", "homeVenue": "venue-001", "location": {"lat": 41.8781, "lon": -87.6298}},
+      {"teamId": "team-010", "name": "Ice Breakers", "division": "Division 1", "homeVenue": "venue-002", "location": {"lat": 42.3314, "lon": -83.0458}},
+      {"teamId": "team-011", "name": "Rapids", "division": "Division 1", "homeVenue": "venue-003", "location": {"lat": 43.0731, "lon": -89.4012}},
+      {"teamId": "team-012", "name": "Avalanche", "division": "Division 1", "homeVenue": "venue-004", "location": {"lat": 41.2565, "lon": -95.9345}},
+      {"teamId": "team-013", "name": "Glaciers", "division": "Division 1", "homeVenue": "venue-005", "location": {"lat": 44.9778, "lon": -93.2650}},
+      {"teamId": "team-014", "name": "Freeze", "division": "Division 1", "homeVenue": "venue-006", "location": {"lat": 39.0997, "lon": -94.5786}},
+      {"teamId": "team-015", "name": "Northern Lights", "division": "Division 1", "homeVenue": "venue-007", "location": {"lat": 43.0389, "lon": -87.9065}},
+      {"teamId": "team-016", "name": "Tundra", "division": "Division 1", "homeVenue": "venue-008", "location": {"lat": 41.5868, "lon": -93.6250}}
+    ],
+    "venues": [
+      {
+        "venueId": "venue-001",
+        "name": "Metro Ice Arena",
+        "location": {"lat": 41.8781, "lon": -87.6298},
+        "surfaceType": "ice",
+        "capacity": 1200,
+        "venueType": "arena",
+        "resources": [
+          {"resourceId": "rink-1a", "resourceType": "rink", "surfaceType": "ice", "capacity": 1200}
+        ],
+        "availability": [
+          {
+            "dateRange": {"start": "2025-09-01", "end": "2025-11-30"},
+            "recurringPattern": {
+              "daysOfWeek": ["friday", "saturday", "sunday"],
+              "timeWindows": [{"start": "18:00", "end": "23:00"}]
+            },
+            "cost": 350
+          },
+          {
+            "dateRange": {"start": "2025-09-01", "end": "2025-11-30"},
+            "recurringPattern": {
+              "daysOfWeek": ["saturday", "sunday"],
+              "timeWindows": [{"start": "10:00", "end": "18:00"}]
+            },
+            "cost": 250
+          }
+        ],
+        "changeoverTime": 30,
+        "operationalConstraints": {
+          "maxFixturesPerDay": 6,
+          "requiredGapHours": 0.5
+        }
+      },
+      {
+        "venueId": "venue-002",
+        "name": "Lakeside Rink",
+        "location": {"lat": 42.3314, "lon": -83.0458},
+        "surfaceType": "ice",
+        "capacity": 800,
+        "venueType": "rink",
+        "resources": [
+          {"resourceId": "rink-2a", "resourceType": "rink", "surfaceType": "ice", "capacity": 800}
+        ],
+        "availability": [
+          {
+            "dateRange": {"start": "2025-09-01", "end": "2025-11-30"},
+            "recurringPattern": {
+              "daysOfWeek": ["friday", "saturday", "sunday"],
+              "timeWindows": [{"start": "17:00", "end": "23:00"}]
+            },
+            "cost": 300
+          }
+        ],
+        "changeoverTime": 30,
+        "operationalConstraints": {
+          "maxFixturesPerDay": 4,
+          "requiredGapHours": 0.5
+        }
+      },
+      {
+        "venueId": "venue-003",
+        "name": "Capitol Ice Complex",
+        "location": {"lat": 43.0731, "lon": -89.4012},
+        "surfaceType": "ice",
+        "capacity": 1500,
+        "venueType": "arena",
+        "resources": [
+          {"resourceId": "rink-3a", "resourceType": "rink", "surfaceType": "ice", "capacity": 1500},
+          {"resourceId": "rink-3b", "resourceType": "rink", "surfaceType": "ice", "capacity": 600}
+        ],
+        "availability": [
+          {
+            "dateRange": {"start": "2025-09-01", "end": "2025-11-30"},
+            "recurringPattern": {
+              "daysOfWeek": ["friday", "saturday", "sunday"],
+              "timeWindows": [{"start": "16:00", "end": "23:00"}]
+            },
+            "cost": 400
+          }
+        ],
+        "changeoverTime": 30,
+        "operationalConstraints": {
+          "maxFixturesPerDay": 8,
+          "requiredGapHours": 0.5
+        }
+      },
+      {
+        "venueId": "venue-004",
+        "name": "Prairie View Ice Center",
+        "location": {"lat": 41.2565, "lon": -95.9345},
+        "surfaceType": "ice",
+        "capacity": 900,
+        "venueType": "rink",
+        "resources": [
+          {"resourceId": "rink-4a", "resourceType": "rink", "surfaceType": "ice", "capacity": 900}
+        ],
+        "availability": [
+          {
+            "dateRange": {"start": "2025-09-01", "end": "2025-11-30"},
+            "recurringPattern": {
+              "daysOfWeek": ["saturday", "sunday"],
+              "timeWindows": [{"start": "14:00", "end": "22:00"}]
+            },
+            "cost": 280
+          }
+        ],
+        "changeoverTime": 30,
+        "operationalConstraints": {
+          "maxFixturesPerDay": 4,
+          "requiredGapHours": 0.5
+        }
+      },
+      {
+        "venueId": "venue-005",
+        "name": "Twin Cities Arena",
+        "location": {"lat": 44.9778, "lon": -93.2650},
+        "surfaceType": "ice",
+        "capacity": 2000,
+        "venueType": "arena",
+        "resources": [
+          {"resourceId": "rink-5a", "resourceType": "rink", "surfaceType": "ice", "capacity": 2000}
+        ],
+        "availability": [
+          {
+            "dateRange": {"start": "2025-09-01", "end": "2025-11-30"},
+            "recurringPattern": {
+              "daysOfWeek": ["friday", "saturday"],
+              "timeWindows": [{"start": "19:00", "end": "23:00"}]
+            },
+            "cost": 500,
+            "priority": 1
+          }
+        ],
+        "changeoverTime": 45,
+        "operationalConstraints": {
+          "maxFixturesPerDay": 3,
+          "requiredGapHours": 0.75
+        }
+      },
+      {
+        "venueId": "venue-006",
+        "name": "Heartland Ice Facility",
+        "location": {"lat": 39.0997, "lon": -94.5786},
+        "surfaceType": "ice",
+        "capacity": 1000,
+        "venueType": "rink",
+        "resources": [
+          {"resourceId": "rink-6a", "resourceType": "rink", "surfaceType": "ice", "capacity": 1000}
+        ],
+        "availability": [
+          {
+            "dateRange": {"start": "2025-09-01", "end": "2025-11-30"},
+            "recurringPattern": {
+              "daysOfWeek": ["friday", "saturday", "sunday"],
+              "timeWindows": [{"start": "18:00", "end": "23:00"}]
+            },
+            "cost": 320
+          }
+        ],
+        "changeoverTime": 30,
+        "operationalConstraints": {
+          "maxFixturesPerDay": 4,
+          "requiredGapHours": 0.5
+        }
+      },
+      {
+        "venueId": "venue-007",
+        "name": "Lakeshore Ice Arena",
+        "location": {"lat": 43.0389, "lon": -87.9065},
+        "surfaceType": "ice",
+        "capacity": 1100,
+        "venueType": "arena",
+        "resources": [
+          {"resourceId": "rink-7a", "resourceType": "rink", "surfaceType": "ice", "capacity": 1100}
+        ],
+        "availability": [
+          {
+            "dateRange": {"start": "2025-09-01", "end": "2025-11-30"},
+            "recurringPattern": {
+              "daysOfWeek": ["friday", "saturday", "sunday"],
+              "timeWindows": [{"start": "17:00", "end": "23:00"}]
+            },
+            "cost": 340
+          }
+        ],
+        "changeoverTime": 30,
+        "operationalConstraints": {
+          "maxFixturesPerDay": 5,
+          "requiredGapHours": 0.5
+        }
+      },
+      {
+        "venueId": "venue-008",
+        "name": "Central Iowa Ice House",
+        "location": {"lat": 41.5868, "lon": -93.6250},
+        "surfaceType": "ice",
+        "capacity": 750,
+        "venueType": "rink",
+        "resources": [
+          {"resourceId": "rink-8a", "resourceType": "rink", "surfaceType": "ice", "capacity": 750}
+        ],
+        "availability": [
+          {
+            "dateRange": {"start": "2025-09-01", "end": "2025-11-30"},
+            "recurringPattern": {
+              "daysOfWeek": ["saturday", "sunday"],
+              "timeWindows": [{"start": "15:00", "end": "22:00"}]
+            },
+            "cost": 260
+          }
+        ],
+        "changeoverTime": 30,
+        "operationalConstraints": {
+          "maxFixturesPerDay": 3,
+          "requiredGapHours": 0.5
+        }
+      }
+    ],
+    "fixtures": [
+      {"fixtureId": "match-001", "homeTeamId": "team-001", "awayTeamId": "team-002", "estimatedDuration": 150},
+      {"fixtureId": "match-002", "homeTeamId": "team-001", "awayTeamId": "team-003", "estimatedDuration": 150},
+      {"fixtureId": "match-003", "homeTeamId": "team-001", "awayTeamId": "team-004", "estimatedDuration": 150},
+      {"fixtureId": "match-004", "homeTeamId": "team-001", "awayTeamId": "team-005", "estimatedDuration": 150},
+      {"fixtureId": "match-005", "homeTeamId": "team-001", "awayTeamId": "team-006", "estimatedDuration": 150},
+      {"fixtureId": "match-006", "homeTeamId": "team-001", "awayTeamId": "team-007", "estimatedDuration": 150},
+      {"fixtureId": "match-007", "homeTeamId": "team-001", "awayTeamId": "team-008", "estimatedDuration": 150},
+      {"fixtureId": "match-008", "homeTeamId": "team-002", "awayTeamId": "team-001", "estimatedDuration": 150},
+      {"fixtureId": "match-009", "homeTeamId": "team-002", "awayTeamId": "team-003", "estimatedDuration": 150},
+      {"fixtureId": "match-010", "homeTeamId": "team-002", "awayTeamId": "team-004", "estimatedDuration": 150},
+      {"fixtureId": "match-011", "homeTeamId": "team-002", "awayTeamId": "team-005", "estimatedDuration": 150},
+      {"fixtureId": "match-012", "homeTeamId": "team-002", "awayTeamId": "team-006", "estimatedDuration": 150},
+      {"fixtureId": "match-013", "homeTeamId": "team-002", "awayTeamId": "team-007", "estimatedDuration": 150},
+      {"fixtureId": "match-014", "homeTeamId": "team-002", "awayTeamId": "team-008", "estimatedDuration": 150},
+      {"fixtureId": "match-015", "homeTeamId": "team-003", "awayTeamId": "team-001", "estimatedDuration": 150},
+      {"fixtureId": "match-016", "homeTeamId": "team-003", "awayTeamId": "team-002", "estimatedDuration": 150},
+      {"fixtureId": "match-017", "homeTeamId": "team-003", "awayTeamId": "team-004", "estimatedDuration": 150},
+      {"fixtureId": "match-018", "homeTeamId": "team-003", "awayTeamId": "team-005", "estimatedDuration": 150},
+      {"fixtureId": "match-019", "homeTeamId": "team-003", "awayTeamId": "team-006", "estimatedDuration": 150},
+      {"fixtureId": "match-020", "homeTeamId": "team-003", "awayTeamId": "team-007", "estimatedDuration": 150},
+      {"fixtureId": "match-021", "homeTeamId": "team-003", "awayTeamId": "team-008", "estimatedDuration": 150},
+      {"fixtureId": "match-022", "homeTeamId": "team-004", "awayTeamId": "team-001", "estimatedDuration": 150},
+      {"fixtureId": "match-023", "homeTeamId": "team-004", "awayTeamId": "team-002", "estimatedDuration": 150},
+      {"fixtureId": "match-024", "homeTeamId": "team-004", "awayTeamId": "team-003", "estimatedDuration": 150},
+      {"fixtureId": "match-025", "homeTeamId": "team-004", "awayTeamId": "team-005", "estimatedDuration": 150},
+      {"fixtureId": "match-026", "homeTeamId": "team-004", "awayTeamId": "team-006", "estimatedDuration": 150},
+      {"fixtureId": "match-027", "homeTeamId": "team-004", "awayTeamId": "team-007", "estimatedDuration": 150},
+      {"fixtureId": "match-028", "homeTeamId": "team-004", "awayTeamId": "team-008", "estimatedDuration": 150},
+      {"fixtureId": "match-029", "homeTeamId": "team-005", "awayTeamId": "team-001", "estimatedDuration": 150},
+      {"fixtureId": "match-030", "homeTeamId": "team-005", "awayTeamId": "team-002", "estimatedDuration": 150},
+      {"fixtureId": "match-031", "homeTeamId": "team-005", "awayTeamId": "team-003", "estimatedDuration": 150},
+      {"fixtureId": "match-032", "homeTeamId": "team-005", "awayTeamId": "team-004", "estimatedDuration": 150},
+      {"fixtureId": "match-033", "homeTeamId": "team-005", "awayTeamId": "team-006", "estimatedDuration": 150},
+      {"fixtureId": "match-034", "homeTeamId": "team-005", "awayTeamId": "team-007", "estimatedDuration": 150},
+      {"fixtureId": "match-035", "homeTeamId": "team-005", "awayTeamId": "team-008", "estimatedDuration": 150},
+      {"fixtureId": "match-036", "homeTeamId": "team-006", "awayTeamId": "team-001", "estimatedDuration": 150},
+      {"fixtureId": "match-037", "homeTeamId": "team-006", "awayTeamId": "team-002", "estimatedDuration": 150},
+      {"fixtureId": "match-038", "homeTeamId": "team-006", "awayTeamId": "team-003", "estimatedDuration": 150},
+      {"fixtureId": "match-039", "homeTeamId": "team-006", "awayTeamId": "team-004", "estimatedDuration": 150},
+      {"fixtureId": "match-040", "homeTeamId": "team-006", "awayTeamId": "team-005", "estimatedDuration": 150},
+      {"fixtureId": "match-041", "homeTeamId": "team-006", "awayTeamId": "team-007", "estimatedDuration": 150},
+      {"fixtureId": "match-042", "homeTeamId": "team-006", "awayTeamId": "team-008", "estimatedDuration": 150},
+      {"fixtureId": "match-043", "homeTeamId": "team-007", "awayTeamId": "team-001", "estimatedDuration": 150},
+      {"fixtureId": "match-044", "homeTeamId": "team-007", "awayTeamId": "team-002", "estimatedDuration": 150},
+      {"fixtureId": "match-045", "homeTeamId": "team-007", "awayTeamId": "team-003", "estimatedDuration": 150},
+      {"fixtureId": "match-046", "homeTeamId": "team-007", "awayTeamId": "team-004", "estimatedDuration": 150},
+      {"fixtureId": "match-047", "homeTeamId": "team-007", "awayTeamId": "team-005", "estimatedDuration": 150},
+      {"fixtureId": "match-048", "homeTeamId": "team-007", "awayTeamId": "team-006", "estimatedDuration": 150},
+      {"fixtureId": "match-049", "homeTeamId": "team-007", "awayTeamId": "team-008", "estimatedDuration": 150},
+      {"fixtureId": "match-050", "homeTeamId": "team-008", "awayTeamId": "team-001", "estimatedDuration": 150},
+      {"fixtureId": "match-051", "homeTeamId": "team-008", "awayTeamId": "team-002", "estimatedDuration": 150},
+      {"fixtureId": "match-052", "homeTeamId": "team-008", "awayTeamId": "team-003", "estimatedDuration": 150},
+      {"fixtureId": "match-053", "homeTeamId": "team-008", "awayTeamId": "team-004", "estimatedDuration": 150},
+      {"fixtureId": "match-054", "homeTeamId": "team-008", "awayTeamId": "team-005", "estimatedDuration": 150},
+      {"fixtureId": "match-055", "homeTeamId": "team-008", "awayTeamId": "team-006", "estimatedDuration": 150},
+      {"fixtureId": "match-056", "homeTeamId": "team-008", "awayTeamId": "team-007", "estimatedDuration": 150},
+      {"fixtureId": "match-057", "homeTeamId": "team-009", "awayTeamId": "team-010", "estimatedDuration": 150},
+      {"fixtureId": "match-058", "homeTeamId": "team-009", "awayTeamId": "team-011", "estimatedDuration": 150},
+      {"fixtureId": "match-059", "homeTeamId": "team-009", "awayTeamId": "team-012", "estimatedDuration": 150},
+      {"fixtureId": "match-060", "homeTeamId": "team-009", "awayTeamId": "team-013", "estimatedDuration": 150},
+      {"fixtureId": "match-061", "homeTeamId": "team-009", "awayTeamId": "team-014", "estimatedDuration": 150},
+      {"fixtureId": "match-062", "homeTeamId": "team-009", "awayTeamId": "team-015", "estimatedDuration": 150},
+      {"fixtureId": "match-063", "homeTeamId": "team-009", "awayTeamId": "team-016", "estimatedDuration": 150},
+      {"fixtureId": "match-064", "homeTeamId": "team-010", "awayTeamId": "team-009", "estimatedDuration": 150},
+      {"fixtureId": "match-065", "homeTeamId": "team-010", "awayTeamId": "team-011", "estimatedDuration": 150},
+      {"fixtureId": "match-066", "homeTeamId": "team-010", "awayTeamId": "team-012", "estimatedDuration": 150},
+      {"fixtureId": "match-067", "homeTeamId": "team-010", "awayTeamId": "team-013", "estimatedDuration": 150},
+      {"fixtureId": "match-068", "homeTeamId": "team-010", "awayTeamId": "team-014", "estimatedDuration": 150},
+      {"fixtureId": "match-069", "homeTeamId": "team-010", "awayTeamId": "team-015", "estimatedDuration": 150},
+      {"fixtureId": "match-070", "homeTeamId": "team-010", "awayTeamId": "team-016", "estimatedDuration": 150},
+      {"fixtureId": "match-071", "homeTeamId": "team-011", "awayTeamId": "team-009", "estimatedDuration": 150},
+      {"fixtureId": "match-072", "homeTeamId": "team-011", "awayTeamId": "team-010", "estimatedDuration": 150},
+      {"fixtureId": "match-073", "homeTeamId": "team-011", "awayTeamId": "team-012", "estimatedDuration": 150},
+      {"fixtureId": "match-074", "homeTeamId": "team-011", "awayTeamId": "team-013", "estimatedDuration": 150},
+      {"fixtureId": "match-075", "homeTeamId": "team-011", "awayTeamId": "team-014", "estimatedDuration": 150},
+      {"fixtureId": "match-076", "homeTeamId": "team-011", "awayTeamId": "team-015", "estimatedDuration": 150},
+      {"fixtureId": "match-077", "homeTeamId": "team-011", "awayTeamId": "team-016", "estimatedDuration": 150},
+      {"fixtureId": "match-078", "homeTeamId": "team-012", "awayTeamId": "team-009", "estimatedDuration": 150},
+      {"fixtureId": "match-079", "homeTeamId": "team-012", "awayTeamId": "team-010", "estimatedDuration": 150},
+      {"fixtureId": "match-080", "homeTeamId": "team-012", "awayTeamId": "team-011", "estimatedDuration": 150},
+      {"fixtureId": "match-081", "homeTeamId": "team-012", "awayTeamId": "team-013", "estimatedDuration": 150},
+      {"fixtureId": "match-082", "homeTeamId": "team-012", "awayTeamId": "team-014", "estimatedDuration": 150},
+      {"fixtureId": "match-083", "homeTeamId": "team-012", "awayTeamId": "team-015", "estimatedDuration": 150},
+      {"fixtureId": "match-084", "homeTeamId": "team-012", "awayTeamId": "team-016", "estimatedDuration": 150},
+      {"fixtureId": "match-085", "homeTeamId": "team-013", "awayTeamId": "team-009", "estimatedDuration": 150},
+      {"fixtureId": "match-086", "homeTeamId": "team-013", "awayTeamId": "team-010", "estimatedDuration": 150},
+      {"fixtureId": "match-087", "homeTeamId": "team-013", "awayTeamId": "team-011", "estimatedDuration": 150},
+      {"fixtureId": "match-088", "homeTeamId": "team-013", "awayTeamId": "team-012", "estimatedDuration": 150},
+      {"fixtureId": "match-089", "homeTeamId": "team-013", "awayTeamId": "team-014", "estimatedDuration": 150},
+      {"fixtureId": "match-090", "homeTeamId": "team-013", "awayTeamId": "team-015", "estimatedDuration": 150},
+      {"fixtureId": "match-091", "homeTeamId": "team-013", "awayTeamId": "team-016", "estimatedDuration": 150},
+      {"fixtureId": "match-092", "homeTeamId": "team-014", "awayTeamId": "team-009", "estimatedDuration": 150},
+      {"fixtureId": "match-093", "homeTeamId": "team-014", "awayTeamId": "team-010", "estimatedDuration": 150},
+      {"fixtureId": "match-094", "homeTeamId": "team-014", "awayTeamId": "team-011", "estimatedDuration": 150},
+      {"fixtureId": "match-095", "homeTeamId": "team-014", "awayTeamId": "team-012", "estimatedDuration": 150},
+      {"fixtureId": "match-096", "homeTeamId": "team-014", "awayTeamId": "team-013", "estimatedDuration": 150},
+      {"fixtureId": "match-097", "homeTeamId": "team-014", "awayTeamId": "team-015", "estimatedDuration": 150},
+      {"fixtureId": "match-098", "homeTeamId": "team-014", "awayTeamId": "team-016", "estimatedDuration": 150},
+      {"fixtureId": "match-099", "homeTeamId": "team-015", "awayTeamId": "team-009", "estimatedDuration": 150},
+      {"fixtureId": "match-100", "homeTeamId": "team-015", "awayTeamId": "team-010", "estimatedDuration": 150},
+      {"fixtureId": "match-101", "homeTeamId": "team-015", "awayTeamId": "team-011", "estimatedDuration": 150},
+      {"fixtureId": "match-102", "homeTeamId": "team-015", "awayTeamId": "team-012", "estimatedDuration": 150},
+      {"fixtureId": "match-103", "homeTeamId": "team-015", "awayTeamId": "team-013", "estimatedDuration": 150},
+      {"fixtureId": "match-104", "homeTeamId": "team-015", "awayTeamId": "team-014", "estimatedDuration": 150},
+      {"fixtureId": "match-105", "homeTeamId": "team-015", "awayTeamId": "team-016", "estimatedDuration": 150},
+      {"fixtureId": "match-106", "homeTeamId": "team-016", "awayTeamId": "team-009", "estimatedDuration": 150},
+      {"fixtureId": "match-107", "homeTeamId": "team-016", "awayTeamId": "team-010", "estimatedDuration": 150},
+      {"fixtureId": "match-108", "homeTeamId": "team-016", "awayTeamId": "team-011", "estimatedDuration": 150},
+      {"fixtureId": "match-109", "homeTeamId": "team-016", "awayTeamId": "team-012", "estimatedDuration": 150},
+      {"fixtureId": "match-110", "homeTeamId": "team-016", "awayTeamId": "team-013", "estimatedDuration": 150},
+      {"fixtureId": "match-111", "homeTeamId": "team-016", "awayTeamId": "team-014", "estimatedDuration": 150},
+      {"fixtureId": "match-112", "homeTeamId": "team-016", "awayTeamId": "team-015", "estimatedDuration": 150}
+    ],
+    "constraints": [
+      {"constraintId": "no_overlap_team", "type": "hard", "params": {}, "rationale": "Teams cannot play multiple games simultaneously"},
+      {"constraintId": "no_overlap_venue_resource", "type": "hard", "params": {}, "rationale": "Venue resources cannot host multiple games simultaneously"},
+      {"constraintId": "min_rest_time", "type": "hard", "params": {"min_hours": 72}, "rationale": "Minimum 72 hours rest between games"},
+      {"constraintId": "venue_availability", "type": "hard", "params": {}, "rationale": "Games must respect venue availability windows"},
+      {"constraintId": "max_travel_distance", "type": "soft", "params": {"max_km": 400}, "weight": 10, "rationale": "Minimize travel costs - target within 400km"},
+      {"constraintId": "home_away_balance", "type": "soft", "params": {"max_delta": 2}, "weight": 8, "rationale": "Balance home and away games"},
+      {"constraintId": "opponent_spacing", "type": "soft", "params": {"min_days": 14}, "weight": 6, "rationale": "Space out repeat matchups"},
+      {"constraintId": "max_consecutive_fixtures", "type": "soft", "params": {"max_consecutive": 2}, "weight": 5, "rationale": "Avoid excessive consecutive home/away games"}
+    ],
+    "objectives": [
+      {"objectiveId": "total_travel_distance", "weight": 15, "target": {"ideal": 25000, "max": 40000}, "rationale": "Minimize total league travel costs"},
+      {"objectiveId": "max_team_travel", "weight": 10, "target": {"ideal": 2500, "max": 4000}, "rationale": "Ensure no team bears excessive travel burden"},
+      {"objectiveId": "home_away_balance", "weight": 8, "target": {"ideal": 0, "max": 2}, "rationale": "Fair home/away distribution"},
+      {"objectiveId": "venue_utilization", "weight": 6, "target": {"min": 50, "ideal": 70, "max": 85}, "rationale": "Efficient venue usage"},
+      {"objectiveId": "schedule_compactness", "weight": 5, "target": {"ideal": 84, "max": 90}, "rationale": "Complete season in reasonable timeframe"}
+    ],
+    "blackoutPeriods": [
+      {"start": "2025-11-27T00:00:00-06:00", "end": "2025-11-30T23:59:59-06:00", "reason": "Thanksgiving weekend"}
+    ]
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "osssVersion": "0.1.0",
+  "instance": {
+    "metadata": {
+      "name": "Regional Amateur Hockey League - Winter 2026",
+      "track": "amateur",
+      "sport": "Ice Hockey",
+      "season": "Winter 2026",
+      "timezone": "America/Chicago",
+      "difficulty": "⭐⭐⭐⭐",
+      "estimatedComplexity": "high",
+      "competitionDataset": true
+    },
+    "teams": [
+      {"teamId": "hok-01", "name": "Ice Kings"},
+      {"teamId": "hok-02", "name": "Frostbite"},
+      {"teamId": "hok-03", "name": "North Blades"},
+      {"teamId": "hok-04", "name": "Steel Pucks"},
+      {"teamId": "hok-05", "name": "Glaciers"},
+      {"teamId": "hok-06", "name": "Cold Front"}
+    ],
+    "venues": [
+      {
+        "venueId": "rink-01",
+        "name": "Community Ice Center",
+        "resources": [{"resourceId": "rink-a", "resourceType": "rink"}],
+        "availability": [{
+          "recurringPattern": {
+            "daysOfWeek": ["friday", "saturday"],
+            "timeWindows": [{"start": "18:00", "end": "23:00"}]
+          }
+        }]
+      }
+    ],
+    "fixtures": [
+      {"fixtureId": "h1", "homeTeamId": "hok-01", "awayTeamId": "hok-02"},
+      {"fixtureId": "h2", "homeTeamId": "hok-01", "awayTeamId": "hok-03"},
+      {"fixtureId": "h3", "homeTeamId": "hok-01", "awayTeamId": "hok-04"},
+      {"fixtureId": "h4", "homeTeamId": "hok-01", "awayTeamId": "hok-05"},
+      {"fixtureId": "h5", "homeTeamId": "hok-01", "awayTeamId": "hok-06"},
+
+      {"fixtureId": "h6", "homeTeamId": "hok-02", "awayTeamId": "hok-03"},
+      {"fixtureId": "h7", "homeTeamId": "hok-02", "awayTeamId": "hok-04"},
+      {"fixtureId": "h8", "homeTeamId": "hok-02", "awayTeamId": "hok-05"},
+      {"fixtureId": "h9", "homeTeamId": "hok-02", "awayTeamId": "hok-06"},
+
+      {"fixtureId": "h10", "homeTeamId": "hok-03", "awayTeamId": "hok-04"},
+      {"fixtureId": "h11", "homeTeamId": "hok-03", "awayTeamId": "hok-05"},
+      {"fixtureId": "h12", "homeTeamId": "hok-03", "awayTeamId": "hok-06"},
+
+      {"fixtureId": "h13", "homeTeamId": "hok-04", "awayTeamId": "hok-05"},
+      {"fixtureId": "h14", "homeTeamId": "hok-04", "awayTeamId": "hok-06"},
+
+      {"fixtureId": "h15", "homeTeamId": "hok-05", "awayTeamId": "hok-06"}
+    ],
+    "constraints": [
+      {"constraintId": "single_rink_conflict", "type": "hard"},
+      {"constraintId": "min_rest_time", "type": "hard", "params": {"min_hours": 72}}
+    ]
+  }
+}

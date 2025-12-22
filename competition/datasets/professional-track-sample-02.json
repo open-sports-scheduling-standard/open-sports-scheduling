@@ -1,0 +1,298 @@
+{
+  "version": "0.1.0",
+  "metadata": {
+    "instanceId": "comp-prof-track-02",
+    "name": "National Professional Baseball League - 2026 Summer Season",
+    "description": "Professional track competition dataset featuring 18 teams with series-based scheduling (3-4 game series), doubleheader management, weather postponements, and travel series optimization. Difficulty: ⭐⭐⭐⭐",
+    "sport": "baseball",
+    "season": "2026 Summer",
+    "competitionDataset": true,
+    "track": "professional",
+    "difficultyRating": 4,
+    "createdBy": "OSSS Competition Team",
+    "createdAt": "2025-12-21T00:00:00Z",
+    "notes": "This dataset tests schedulers on: series-based scheduling patterns (teams play 3-game series), doubleheader slot allocation, outdoor venue weather buffer zones, travel series clustering (visit multiple teams in one road trip), mid-season All-Star break, and competitive balance with unbalanced schedule format."
+  },
+  "timeBounds": {
+    "seasonStart": "2026-04-01T00:00:00Z",
+    "seasonEnd": "2026-09-30T23:59:59Z",
+    "blackoutPeriods": [
+      {
+        "start": "2026-07-13T00:00:00Z",
+        "end": "2026-07-16T23:59:59Z",
+        "reason": "All-Star Break"
+      }
+    ]
+  },
+  "teams": [
+    {
+      "teamId": "team-al-east-01",
+      "name": "New York Yankees",
+      "division": "AL East",
+      "homeVenue": "venue-001",
+      "location": {"city": "New York", "state": "NY", "lat": 40.8296, "lon": -73.9262},
+      "metadata": {"league": "American", "division": "East"}
+    },
+    {
+      "teamId": "team-al-east-02",
+      "name": "Boston Red Sox",
+      "division": "AL East",
+      "homeVenue": "venue-002",
+      "location": {"city": "Boston", "state": "MA", "lat": 42.3467, "lon": -71.0972},
+      "metadata": {"league": "American", "division": "East"}
+    },
+    {
+      "teamId": "team-al-east-03",
+      "name": "Toronto Blue Jays",
+      "division": "AL East",
+      "homeVenue": "venue-003",
+      "location": {"city": "Toronto", "state": "ON", "lat": 43.6414, "lon": -79.3894},
+      "metadata": {"league": "American", "division": "East"}
+    },
+    {
+      "teamId": "team-al-central-01",
+      "name": "Chicago White Sox",
+      "division": "AL Central",
+      "homeVenue": "venue-004",
+      "location": {"city": "Chicago", "state": "IL", "lat": 41.8299, "lon": -87.6338},
+      "metadata": {"league": "American", "division": "Central"}
+    },
+    {
+      "teamId": "team-al-central-02",
+      "name": "Cleveland Guardians",
+      "division": "AL Central",
+      "homeVenue": "venue-005",
+      "location": {"city": "Cleveland", "state": "OH", "lat": 41.4962, "lon": -81.6852},
+      "metadata": {"league": "American", "division": "Central"}
+    },
+    {
+      "teamId": "team-al-central-03",
+      "name": "Detroit Tigers",
+      "division": "AL Central",
+      "homeVenue": "venue-006",
+      "location": {"city": "Detroit", "state": "MI", "lat": 42.3390, "lon": -83.0485},
+      "metadata": {"league": "American", "division": "Central"}
+    },
+    {
+      "teamId": "team-al-west-01",
+      "name": "Los Angeles Angels",
+      "division": "AL West",
+      "homeVenue": "venue-007",
+      "location": {"city": "Anaheim", "state": "CA", "lat": 33.8003, "lon": -117.8827},
+      "metadata": {"league": "American", "division": "West"}
+    },
+    {
+      "teamId": "team-al-west-02",
+      "name": "Seattle Mariners",
+      "division": "AL West",
+      "homeVenue": "venue-008",
+      "location": {"city": "Seattle", "state": "WA", "lat": 47.5914, "lon": -122.3325},
+      "metadata": {"league": "American", "division": "West"}
+    },
+    {
+      "teamId": "team-al-west-03",
+      "name": "Texas Rangers",
+      "division": "AL West",
+      "homeVenue": "venue-009",
+      "location": {"city": "Arlington", "state": "TX", "lat": 32.7513, "lon": -97.0832},
+      "metadata": {"league": "American", "division": "West"}
+    },
+    {
+      "teamId": "team-nl-east-01",
+      "name": "Atlanta Braves",
+      "division": "NL East",
+      "homeVenue": "venue-010",
+      "location": {"city": "Atlanta", "state": "GA", "lat": 33.8907, "lon": -84.4677},
+      "metadata": {"league": "National", "division": "East"}
+    },
+    {
+      "teamId": "team-nl-east-02",
+      "name": "Philadelphia Phillies",
+      "division": "NL East",
+      "homeVenue": "venue-011",
+      "location": {"city": "Philadelphia", "state": "PA", "lat": 39.9061, "lon": -75.1665},
+      "metadata": {"league": "National", "division": "East"}
+    },
+    {
+      "teamId": "team-nl-east-03",
+      "name": "Miami Marlins",
+      "division": "NL East",
+      "homeVenue": "venue-012",
+      "location": {"city": "Miami", "state": "FL", "lat": 25.7781, "lon": -80.2197},
+      "metadata": {"league": "National", "division": "East"}
+    },
+    {
+      "teamId": "team-nl-central-01",
+      "name": "Chicago Cubs",
+      "division": "NL Central",
+      "homeVenue": "venue-013",
+      "location": {"city": "Chicago", "state": "IL", "lat": 41.9484, "lon": -87.6553},
+      "metadata": {"league": "National", "division": "Central"}
+    },
+    {
+      "teamId": "team-nl-central-02",
+      "name": "Milwaukee Brewers",
+      "division": "NL Central",
+      "homeVenue": "venue-014",
+      "location": {"city": "Milwaukee", "state": "WI", "lat": 43.0280, "lon": -87.9712},
+      "metadata": {"league": "National", "division": "Central"}
+    },
+    {
+      "teamId": "team-nl-central-03",
+      "name": "St. Louis Cardinals",
+      "division": "NL Central",
+      "homeVenue": "venue-015",
+      "location": {"city": "St. Louis", "state": "MO", "lat": 38.6226, "lon": -90.1928},
+      "metadata": {"league": "National", "division": "Central"}
+    },
+    {
+      "teamId": "team-nl-west-01",
+      "name": "Los Angeles Dodgers",
+      "division": "NL West",
+      "homeVenue": "venue-016",
+      "location": {"city": "Los Angeles", "state": "CA", "lat": 34.0739, "lon": -118.2400},
+      "metadata": {"league": "National", "division": "West"}
+    },
+    {
+      "teamId": "team-nl-west-02",
+      "name": "San Francisco Giants",
+      "division": "NL West",
+      "homeVenue": "venue-017",
+      "location": {"city": "San Francisco", "state": "CA", "lat": 37.7786, "lon": -122.3893},
+      "metadata": {"league": "National", "division": "West"}
+    },
+    {
+      "teamId": "team-nl-west-03",
+      "name": "San Diego Padres",
+      "division": "NL West",
+      "homeVenue": "venue-018",
+      "location": {"city": "San Diego", "state": "CA", "lat": 32.7073, "lon": -117.1566},
+      "metadata": {"league": "National", "division": "West"}
+    }
+  ],
+  "fixtures": [],
+  "fixtureGroups": [
+    {
+      "groupId": "series-001",
+      "groupType": "series",
+      "fixtures": [
+        {"fixtureId": "s001-g1", "homeTeam": "team-al-east-01", "awayTeam": "team-al-east-02"},
+        {"fixtureId": "s001-g2", "homeTeam": "team-al-east-01", "awayTeam": "team-al-east-02"},
+        {"fixtureId": "s001-g3", "homeTeam": "team-al-east-01", "awayTeam": "team-al-east-02"}
+      ],
+      "metadata": {"seriesLength": 3, "division": "AL East"}
+    }
+  ],
+  "venues": [
+    {
+      "venueId": "venue-001",
+      "name": "Yankee Stadium",
+      "location": {"city": "New York", "state": "NY", "lat": 40.8296, "lon": -73.9262},
+      "capacity": 46537,
+      "resources": [{"resourceId": "main-field", "capacity": 46537}],
+      "availability": [
+        {"dayOfWeek": "Monday", "startTime": "13:05", "endTime": "16:00"},
+        {"dayOfWeek": "Monday", "startTime": "19:05", "endTime": "22:30"},
+        {"dayOfWeek": "Tuesday", "startTime": "19:05", "endTime": "22:30"},
+        {"dayOfWeek": "Wednesday", "startTime": "19:05", "endTime": "22:30"},
+        {"dayOfWeek": "Thursday", "startTime": "13:05", "endTime": "16:00"},
+        {"dayOfWeek": "Friday", "startTime": "19:05", "endTime": "22:30"},
+        {"dayOfWeek": "Saturday", "startTime": "13:05", "endTime": "16:00"},
+        {"dayOfWeek": "Saturday", "startTime": "19:05", "endTime": "22:30"},
+        {"dayOfWeek": "Sunday", "startTime": "13:05", "endTime": "16:30"}
+      ],
+      "metadata": {"outdoor": true, "retractableRoof": false}
+    }
+  ],
+  "constraints": [
+    {
+      "constraintId": "no_overlap_team",
+      "type": "hard",
+      "params": {}
+    },
+    {
+      "constraintId": "no_overlap_venue",
+      "type": "hard",
+      "params": {}
+    },
+    {
+      "constraintId": "min_rest_time",
+      "type": "hard",
+      "params": {
+        "min_hours": 18
+      }
+    },
+    {
+      "constraintId": "series_integrity",
+      "type": "hard",
+      "params": {
+        "maxGapBetweenSeriesGames": 24,
+        "seriesLength": [3, 4]
+      },
+      "description": "Games in a series must be played on consecutive days with same home/away matchup"
+    },
+    {
+      "constraintId": "venue_availability",
+      "type": "hard",
+      "params": {}
+    },
+    {
+      "constraintId": "season_bounds",
+      "type": "hard",
+      "params": {}
+    },
+    {
+      "constraintId": "max_consecutive_away",
+      "type": "soft",
+      "weight": 9,
+      "params": {
+        "max_consecutive": 10
+      }
+    },
+    {
+      "constraintId": "doubleheader_limit",
+      "type": "soft",
+      "weight": 8,
+      "params": {
+        "maxDoubleheadersPerSeason": 5,
+        "minHoursBetweenGames": 4
+      },
+      "description": "Limit doubleheaders to 5 per team per season, minimum 4 hours between games"
+    }
+  ],
+  "objectives": [
+    {
+      "objectiveId": "minimize_total_travel",
+      "weight": 6,
+      "params": {}
+    },
+    {
+      "objectiveId": "cluster_road_trips",
+      "weight": 7,
+      "params": {
+        "preferGeographicClustering": true,
+        "maxRoadTripLength": 10
+      },
+      "description": "When teams go on road trips, visit geographically close teams in sequence"
+    },
+    {
+      "objectiveId": "balance_home_away",
+      "weight": 4,
+      "params": {
+        "maxDeviation": 2
+      }
+    },
+    {
+      "objectiveId": "maximize_weekend_premium_slots",
+      "weight": 5,
+      "params": {
+        "premiumSlots": [
+          {"dayOfWeek": "Friday", "startTime": "19:00", "endTime": "22:00"},
+          {"dayOfWeek": "Saturday", "startTime": "19:00", "endTime": "22:00"},
+          {"dayOfWeek": "Sunday", "startTime": "13:00", "endTime": "16:30"}
+        ]
+      },
+      "description": "Maximize games in premium broadcast windows"
+    }
+  ]
+}

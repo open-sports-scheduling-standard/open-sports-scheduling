@@ -1,0 +1,509 @@
+{
+  "osssVersion": "0.1.0",
+  "instance": {
+    "metadata": {
+      "name": "Metro Youth Soccer League - Spring 2025",
+      "description": "Youth track competition dataset: 10 teams, 8-week season, emphasis on player welfare and family convenience",
+      "track": "youth",
+      "difficulty": "⭐⭐",
+      "season": "Spring 2025",
+      "sport": "Soccer",
+      "timezone": "America/New_York",
+      "estimatedComplexity": "moderate",
+      "competitionDataset": true,
+      "datasetVersion": "1.0.0",
+      "releaseDate": "2025-01-01"
+    },
+    "teams": [
+      {
+        "teamId": "team-001",
+        "name": "Lightning FC",
+        "division": "U-12 Boys",
+        "ageGroup": "U-12",
+        "homeVenue": "venue-001",
+        "location": {
+          "lat": 40.7128,
+          "lon": -74.0060
+        }
+      },
+      {
+        "teamId": "team-002",
+        "name": "Thunder SC",
+        "division": "U-12 Boys",
+        "ageGroup": "U-12",
+        "homeVenue": "venue-002",
+        "location": {
+          "lat": 40.7589,
+          "lon": -73.9851
+        }
+      },
+      {
+        "teamId": "team-003",
+        "name": "Storm United",
+        "division": "U-12 Boys",
+        "ageGroup": "U-12",
+        "homeVenue": "venue-003",
+        "location": {
+          "lat": 40.6782,
+          "lon": -73.9442
+        }
+      },
+      {
+        "teamId": "team-004",
+        "name": "Rapids FC",
+        "division": "U-12 Boys",
+        "ageGroup": "U-12",
+        "homeVenue": "venue-004",
+        "location": {
+          "lat": 40.7282,
+          "lon": -73.7949
+        }
+      },
+      {
+        "teamId": "team-005",
+        "name": "Avalanche SC",
+        "division": "U-12 Boys",
+        "ageGroup": "U-12",
+        "homeVenue": "venue-005",
+        "location": {
+          "lat": 40.7489,
+          "lon": -73.9680
+        }
+      },
+      {
+        "teamId": "team-006",
+        "name": "Phoenix FC",
+        "division": "U-12 Girls",
+        "ageGroup": "U-12",
+        "homeVenue": "venue-001",
+        "location": {
+          "lat": 40.7128,
+          "lon": -74.0060
+        }
+      },
+      {
+        "teamId": "team-007",
+        "name": "Firebirds SC",
+        "division": "U-12 Girls",
+        "ageGroup": "U-12",
+        "homeVenue": "venue-002",
+        "location": {
+          "lat": 40.7589,
+          "lon": -73.9851
+        }
+      },
+      {
+        "teamId": "team-008",
+        "name": "Blaze United",
+        "division": "U-12 Girls",
+        "ageGroup": "U-12",
+        "homeVenue": "venue-003",
+        "location": {
+          "lat": 40.6782,
+          "lon": -73.9442
+        }
+      },
+      {
+        "teamId": "team-009",
+        "name": "Inferno FC",
+        "division": "U-12 Girls",
+        "ageGroup": "U-12",
+        "homeVenue": "venue-004",
+        "location": {
+          "lat": 40.7282,
+          "lon": -73.7949
+        }
+      },
+      {
+        "teamId": "team-010",
+        "name": "Flames SC",
+        "division": "U-12 Girls",
+        "ageGroup": "U-12",
+        "homeVenue": "venue-005",
+        "location": {
+          "lat": 40.7489,
+          "lon": -73.9680
+        }
+      }
+    ],
+    "venues": [
+      {
+        "venueId": "venue-001",
+        "name": "Central Park Field",
+        "location": {
+          "lat": 40.7128,
+          "lon": -74.0060
+        },
+        "surfaceType": "grass",
+        "capacity": 200,
+        "venueType": "field",
+        "resources": [
+          {
+            "resourceId": "field-1a",
+            "resourceType": "field",
+            "surfaceType": "grass",
+            "capacity": 200
+          }
+        ],
+        "availability": [
+          {
+            "dateRange": {
+              "start": "2025-03-01",
+              "end": "2025-05-31"
+            },
+            "recurringPattern": {
+              "daysOfWeek": ["saturday", "sunday"],
+              "timeWindows": [
+                {
+                  "start": "09:00",
+                  "end": "17:00"
+                }
+              ]
+            }
+          }
+        ],
+        "changeoverTime": 30,
+        "operationalConstraints": {
+          "maxFixturesPerDay": 4,
+          "requiredGapHours": 0.5
+        }
+      },
+      {
+        "venueId": "venue-002",
+        "name": "Riverside Sports Complex",
+        "location": {
+          "lat": 40.7589,
+          "lon": -73.9851
+        },
+        "surfaceType": "artificial_turf",
+        "capacity": 300,
+        "venueType": "field",
+        "resources": [
+          {
+            "resourceId": "field-2a",
+            "resourceType": "field",
+            "surfaceType": "artificial_turf",
+            "capacity": 300
+          },
+          {
+            "resourceId": "field-2b",
+            "resourceType": "field",
+            "surfaceType": "artificial_turf",
+            "capacity": 250
+          }
+        ],
+        "availability": [
+          {
+            "dateRange": {
+              "start": "2025-03-01",
+              "end": "2025-05-31"
+            },
+            "recurringPattern": {
+              "daysOfWeek": ["saturday", "sunday"],
+              "timeWindows": [
+                {
+                  "start": "08:00",
+                  "end": "18:00"
+                }
+              ]
+            }
+          }
+        ],
+        "changeoverTime": 20,
+        "operationalConstraints": {
+          "maxFixturesPerDay": 6,
+          "requiredGapHours": 0.33
+        }
+      },
+      {
+        "venueId": "venue-003",
+        "name": "Eastside Community Field",
+        "location": {
+          "lat": 40.6782,
+          "lon": -73.9442
+        },
+        "surfaceType": "grass",
+        "capacity": 150,
+        "venueType": "field",
+        "resources": [
+          {
+            "resourceId": "field-3a",
+            "resourceType": "field",
+            "surfaceType": "grass",
+            "capacity": 150
+          }
+        ],
+        "availability": [
+          {
+            "dateRange": {
+              "start": "2025-03-01",
+              "end": "2025-05-31"
+            },
+            "recurringPattern": {
+              "daysOfWeek": ["saturday"],
+              "timeWindows": [
+                {
+                  "start": "09:00",
+                  "end": "15:00"
+                }
+              ]
+            }
+          },
+          {
+            "dateRange": {
+              "start": "2025-03-01",
+              "end": "2025-05-31"
+            },
+            "recurringPattern": {
+              "daysOfWeek": ["sunday"],
+              "timeWindows": [
+                {
+                  "start": "13:00",
+                  "end": "17:00"
+                }
+              ]
+            },
+            "notes": "Sunday mornings reserved for church services"
+          }
+        ],
+        "changeoverTime": 30,
+        "operationalConstraints": {
+          "maxFixturesPerDay": 3,
+          "requiredGapHours": 0.5
+        }
+      },
+      {
+        "venueId": "venue-004",
+        "name": "Westbrook Field",
+        "location": {
+          "lat": 40.7282,
+          "lon": -73.7949
+        },
+        "surfaceType": "grass",
+        "capacity": 180,
+        "venueType": "field",
+        "resources": [
+          {
+            "resourceId": "field-4a",
+            "resourceType": "field",
+            "surfaceType": "grass",
+            "capacity": 180
+          }
+        ],
+        "availability": [
+          {
+            "dateRange": {
+              "start": "2025-03-01",
+              "end": "2025-05-31"
+            },
+            "recurringPattern": {
+              "daysOfWeek": ["saturday", "sunday"],
+              "timeWindows": [
+                {
+                  "start": "10:00",
+                  "end": "16:00"
+                }
+              ]
+            }
+          }
+        ],
+        "changeoverTime": 30,
+        "operationalConstraints": {
+          "maxFixturesPerDay": 3,
+          "requiredGapHours": 0.5
+        }
+      },
+      {
+        "venueId": "venue-005",
+        "name": "Northside Athletic Park",
+        "location": {
+          "lat": 40.7489,
+          "lon": -73.9680
+        },
+        "surfaceType": "artificial_turf",
+        "capacity": 250,
+        "venueType": "field",
+        "resources": [
+          {
+            "resourceId": "field-5a",
+            "resourceType": "field",
+            "surfaceType": "artificial_turf",
+            "capacity": 250
+          }
+        ],
+        "availability": [
+          {
+            "dateRange": {
+              "start": "2025-03-01",
+              "end": "2025-05-31"
+            },
+            "recurringPattern": {
+              "daysOfWeek": ["saturday", "sunday"],
+              "timeWindows": [
+                {
+                  "start": "08:00",
+                  "end": "17:00"
+                }
+              ]
+            }
+          }
+        ],
+        "changeoverTime": 20,
+        "operationalConstraints": {
+          "maxFixturesPerDay": 4,
+          "requiredGapHours": 0.33
+        }
+      }
+    ],
+    "fixtures": [
+      {"fixtureId": "match-001", "homeTeamId": "team-001", "awayTeamId": "team-002", "estimatedDuration": 90},
+      {"fixtureId": "match-002", "homeTeamId": "team-001", "awayTeamId": "team-003", "estimatedDuration": 90},
+      {"fixtureId": "match-003", "homeTeamId": "team-001", "awayTeamId": "team-004", "estimatedDuration": 90},
+      {"fixtureId": "match-004", "homeTeamId": "team-001", "awayTeamId": "team-005", "estimatedDuration": 90},
+      {"fixtureId": "match-005", "homeTeamId": "team-002", "awayTeamId": "team-001", "estimatedDuration": 90},
+      {"fixtureId": "match-006", "homeTeamId": "team-002", "awayTeamId": "team-003", "estimatedDuration": 90},
+      {"fixtureId": "match-007", "homeTeamId": "team-002", "awayTeamId": "team-004", "estimatedDuration": 90},
+      {"fixtureId": "match-008", "homeTeamId": "team-002", "awayTeamId": "team-005", "estimatedDuration": 90},
+      {"fixtureId": "match-009", "homeTeamId": "team-003", "awayTeamId": "team-001", "estimatedDuration": 90},
+      {"fixtureId": "match-010", "homeTeamId": "team-003", "awayTeamId": "team-002", "estimatedDuration": 90},
+      {"fixtureId": "match-011", "homeTeamId": "team-003", "awayTeamId": "team-004", "estimatedDuration": 90},
+      {"fixtureId": "match-012", "homeTeamId": "team-003", "awayTeamId": "team-005", "estimatedDuration": 90},
+      {"fixtureId": "match-013", "homeTeamId": "team-004", "awayTeamId": "team-001", "estimatedDuration": 90},
+      {"fixtureId": "match-014", "homeTeamId": "team-004", "awayTeamId": "team-002", "estimatedDuration": 90},
+      {"fixtureId": "match-015", "homeTeamId": "team-004", "awayTeamId": "team-003", "estimatedDuration": 90},
+      {"fixtureId": "match-016", "homeTeamId": "team-004", "awayTeamId": "team-005", "estimatedDuration": 90},
+      {"fixtureId": "match-017", "homeTeamId": "team-005", "awayTeamId": "team-001", "estimatedDuration": 90},
+      {"fixtureId": "match-018", "homeTeamId": "team-005", "awayTeamId": "team-002", "estimatedDuration": 90},
+      {"fixtureId": "match-019", "homeTeamId": "team-005", "awayTeamId": "team-003", "estimatedDuration": 90},
+      {"fixtureId": "match-020", "homeTeamId": "team-005", "awayTeamId": "team-004", "estimatedDuration": 90},
+      {"fixtureId": "match-021", "homeTeamId": "team-006", "awayTeamId": "team-007", "estimatedDuration": 90},
+      {"fixtureId": "match-022", "homeTeamId": "team-006", "awayTeamId": "team-008", "estimatedDuration": 90},
+      {"fixtureId": "match-023", "homeTeamId": "team-006", "awayTeamId": "team-009", "estimatedDuration": 90},
+      {"fixtureId": "match-024", "homeTeamId": "team-006", "awayTeamId": "team-010", "estimatedDuration": 90},
+      {"fixtureId": "match-025", "homeTeamId": "team-007", "awayTeamId": "team-006", "estimatedDuration": 90},
+      {"fixtureId": "match-026", "homeTeamId": "team-007", "awayTeamId": "team-008", "estimatedDuration": 90},
+      {"fixtureId": "match-027", "homeTeamId": "team-007", "awayTeamId": "team-009", "estimatedDuration": 90},
+      {"fixtureId": "match-028", "homeTeamId": "team-007", "awayTeamId": "team-010", "estimatedDuration": 90},
+      {"fixtureId": "match-029", "homeTeamId": "team-008", "awayTeamId": "team-006", "estimatedDuration": 90},
+      {"fixtureId": "match-030", "homeTeamId": "team-008", "awayTeamId": "team-007", "estimatedDuration": 90},
+      {"fixtureId": "match-031", "homeTeamId": "team-008", "awayTeamId": "team-009", "estimatedDuration": 90},
+      {"fixtureId": "match-032", "homeTeamId": "team-008", "awayTeamId": "team-010", "estimatedDuration": 90},
+      {"fixtureId": "match-033", "homeTeamId": "team-009", "awayTeamId": "team-006", "estimatedDuration": 90},
+      {"fixtureId": "match-034", "homeTeamId": "team-009", "awayTeamId": "team-007", "estimatedDuration": 90},
+      {"fixtureId": "match-035", "homeTeamId": "team-009", "awayTeamId": "team-008", "estimatedDuration": 90},
+      {"fixtureId": "match-036", "homeTeamId": "team-009", "awayTeamId": "team-010", "estimatedDuration": 90},
+      {"fixtureId": "match-037", "homeTeamId": "team-010", "awayTeamId": "team-006", "estimatedDuration": 90},
+      {"fixtureId": "match-038", "homeTeamId": "team-010", "awayTeamId": "team-007", "estimatedDuration": 90},
+      {"fixtureId": "match-039", "homeTeamId": "team-010", "awayTeamId": "team-008", "estimatedDuration": 90},
+      {"fixtureId": "match-040", "homeTeamId": "team-010", "awayTeamId": "team-009", "estimatedDuration": 90}
+    ],
+    "constraints": [
+      {
+        "constraintId": "no_overlap_team",
+        "type": "hard",
+        "params": {},
+        "rationale": "Teams cannot play multiple games simultaneously"
+      },
+      {
+        "constraintId": "no_overlap_venue_resource",
+        "type": "hard",
+        "params": {},
+        "rationale": "Venue resources cannot host multiple games simultaneously"
+      },
+      {
+        "constraintId": "min_rest_time",
+        "type": "hard",
+        "params": {
+          "min_hours": 96
+        },
+        "rationale": "Youth players require minimum 96 hours rest for development and injury prevention"
+      },
+      {
+        "constraintId": "max_games_per_day",
+        "type": "hard",
+        "params": {
+          "max_games": 1
+        },
+        "rationale": "Youth players limited to 1 game per day maximum"
+      },
+      {
+        "constraintId": "venue_availability",
+        "type": "hard",
+        "params": {},
+        "rationale": "Games must respect venue availability windows"
+      },
+      {
+        "constraintId": "max_travel_distance",
+        "type": "soft",
+        "params": {
+          "max_km": 40
+        },
+        "weight": 10,
+        "rationale": "Minimize family travel burden - target within 40km"
+      },
+      {
+        "constraintId": "home_away_balance",
+        "type": "soft",
+        "params": {
+          "max_delta": 1
+        },
+        "weight": 8,
+        "rationale": "Balance home and away games for fairness"
+      },
+      {
+        "constraintId": "opponent_spacing",
+        "type": "soft",
+        "params": {
+          "min_days": 21
+        },
+        "weight": 5,
+        "rationale": "Space out games against same opponent for variety"
+      }
+    ],
+    "objectives": [
+      {
+        "objectiveId": "total_travel_distance",
+        "weight": 10,
+        "target": {
+          "ideal": 3000,
+          "max": 5000
+        },
+        "rationale": "Minimize cumulative travel for all families"
+      },
+      {
+        "objectiveId": "home_away_balance",
+        "weight": 8,
+        "target": {
+          "ideal": 0,
+          "max": 1
+        },
+        "rationale": "Ensure fair home/away distribution"
+      },
+      {
+        "objectiveId": "rest_time_average",
+        "weight": 6,
+        "target": {
+          "min": 120,
+          "ideal": 144
+        },
+        "rationale": "Maximize rest between games (target 6 days average)"
+      },
+      {
+        "objectiveId": "venue_balance",
+        "weight": 4,
+        "target": {
+          "ideal": 2,
+          "max": 4
+        },
+        "rationale": "Distribute games across available venues"
+      }
+    ],
+    "blackoutPeriods": [
+      {
+        "start": "2025-04-18T00:00:00-04:00",
+        "end": "2025-04-21T23:59:59-04:00",
+        "reason": "Spring break - no games"
+      }
+    ]
+  }
+}

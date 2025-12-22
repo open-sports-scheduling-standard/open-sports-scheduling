@@ -1,0 +1,979 @@
+{
+  "version": "0.1.0",
+  "metadata": {
+    "instanceId": "comp-prof-track-01",
+    "name": "National Professional Basketball League - 2025/26 Season",
+    "description": "Professional track competition dataset featuring 20 teams, double round-robin format (380 fixtures), broadcast windows, revenue optimization, and national travel logistics. Difficulty: ⭐⭐⭐⭐",
+    "sport": "basketball",
+    "season": "2025/26",
+    "competitionDataset": true,
+    "track": "professional",
+    "difficultyRating": 4,
+    "createdBy": "OSSS Competition Team",
+    "createdAt": "2025-12-21T00:00:00Z",
+    "notes": "This dataset tests schedulers on: broadcast window allocation, revenue maximization through optimal slot selection, strict competitive balance, long-distance travel optimization, and arena availability coordination."
+  },
+  "timeBounds": {
+    "seasonStart": "2025-10-15T00:00:00Z",
+    "seasonEnd": "2026-04-30T23:59:59Z",
+    "blackoutPeriods": [
+      {
+        "start": "2025-12-24T00:00:00Z",
+        "end": "2025-12-26T23:59:59Z",
+        "reason": "Holiday Break"
+      },
+      {
+        "start": "2026-02-13T00:00:00Z",
+        "end": "2026-02-16T23:59:59Z",
+        "reason": "All-Star Weekend"
+      }
+    ]
+  },
+  "teams": [
+    {
+      "teamId": "team-001",
+      "name": "New York Metros",
+      "division": "Eastern",
+      "homeVenue": "venue-001",
+      "location": {"city": "New York", "state": "NY", "lat": 40.7489, "lon": -73.9680},
+      "metadata": {"marketSize": "large", "timezone": "America/New_York"}
+    },
+    {
+      "teamId": "team-002",
+      "name": "Boston Celts",
+      "division": "Eastern",
+      "homeVenue": "venue-002",
+      "location": {"city": "Boston", "state": "MA", "lat": 42.3662, "lon": -71.0621},
+      "metadata": {"marketSize": "large", "timezone": "America/New_York"}
+    },
+    {
+      "teamId": "team-003",
+      "name": "Philadelphia Union",
+      "division": "Eastern",
+      "homeVenue": "venue-003",
+      "location": {"city": "Philadelphia", "state": "PA", "lat": 39.9012, "lon": -75.1720},
+      "metadata": {"marketSize": "large", "timezone": "America/New_York"}
+    },
+    {
+      "teamId": "team-004",
+      "name": "Toronto North",
+      "division": "Eastern",
+      "homeVenue": "venue-004",
+      "location": {"city": "Toronto", "state": "ON", "lat": 43.6435, "lon": -79.3791},
+      "metadata": {"marketSize": "large", "timezone": "America/Toronto"}
+    },
+    {
+      "teamId": "team-005",
+      "name": "Miami Heat Wave",
+      "division": "Eastern",
+      "homeVenue": "venue-005",
+      "location": {"city": "Miami", "state": "FL", "lat": 25.7814, "lon": -80.1870},
+      "metadata": {"marketSize": "medium", "timezone": "America/New_York"}
+    },
+    {
+      "teamId": "team-006",
+      "name": "Atlanta Hawks",
+      "division": "Eastern",
+      "homeVenue": "venue-006",
+      "location": {"city": "Atlanta", "state": "GA", "lat": 33.7573, "lon": -84.3963},
+      "metadata": {"marketSize": "large", "timezone": "America/New_York"}
+    },
+    {
+      "teamId": "team-007",
+      "name": "Chicago Bulls",
+      "division": "Eastern",
+      "homeVenue": "venue-007",
+      "location": {"city": "Chicago", "state": "IL", "lat": 41.8807, "lon": -87.6742},
+      "metadata": {"marketSize": "large", "timezone": "America/Chicago"}
+    },
+    {
+      "teamId": "team-008",
+      "name": "Detroit Pistons",
+      "division": "Eastern",
+      "homeVenue": "venue-008",
+      "location": {"city": "Detroit", "state": "MI", "lat": 42.6970, "lon": -83.2455},
+      "metadata": {"marketSize": "medium", "timezone": "America/Detroit"}
+    },
+    {
+      "teamId": "team-009",
+      "name": "Cleveland Cavaliers",
+      "division": "Eastern",
+      "homeVenue": "venue-009",
+      "location": {"city": "Cleveland", "state": "OH", "lat": 41.4965, "lon": -81.6882},
+      "metadata": {"marketSize": "medium", "timezone": "America/New_York"}
+    },
+    {
+      "teamId": "team-010",
+      "name": "Washington Wizards",
+      "division": "Eastern",
+      "homeVenue": "venue-010",
+      "location": {"city": "Washington", "state": "DC", "lat": 38.8981, "lon": -77.0209},
+      "metadata": {"marketSize": "large", "timezone": "America/New_York"}
+    },
+    {
+      "teamId": "team-011",
+      "name": "Los Angeles Lakers",
+      "division": "Western",
+      "homeVenue": "venue-011",
+      "location": {"city": "Los Angeles", "state": "CA", "lat": 34.0430, "lon": -118.2673},
+      "metadata": {"marketSize": "large", "timezone": "America/Los_Angeles"}
+    },
+    {
+      "teamId": "team-012",
+      "name": "Golden State Warriors",
+      "division": "Western",
+      "homeVenue": "venue-012",
+      "location": {"city": "San Francisco", "state": "CA", "lat": 37.7680, "lon": -122.3878},
+      "metadata": {"marketSize": "large", "timezone": "America/Los_Angeles"}
+    },
+    {
+      "teamId": "team-013",
+      "name": "Phoenix Suns",
+      "division": "Western",
+      "homeVenue": "venue-013",
+      "location": {"city": "Phoenix", "state": "AZ", "lat": 33.4457, "lon": -112.0712},
+      "metadata": {"marketSize": "large", "timezone": "America/Phoenix"}
+    },
+    {
+      "teamId": "team-014",
+      "name": "Dallas Mavericks",
+      "division": "Western",
+      "homeVenue": "venue-014",
+      "location": {"city": "Dallas", "state": "TX", "lat": 32.7905, "lon": -96.8103},
+      "metadata": {"marketSize": "large", "timezone": "America/Chicago"}
+    },
+    {
+      "teamId": "team-015",
+      "name": "Houston Rockets",
+      "division": "Western",
+      "homeVenue": "venue-015",
+      "location": {"city": "Houston", "state": "TX", "lat": 29.7508, "lon": -95.3621},
+      "metadata": {"marketSize": "large", "timezone": "America/Chicago"}
+    },
+    {
+      "teamId": "team-016",
+      "name": "Denver Nuggets",
+      "division": "Western",
+      "homeVenue": "venue-016",
+      "location": {"city": "Denver", "state": "CO", "lat": 39.7486, "lon": -105.0076},
+      "metadata": {"marketSize": "medium", "timezone": "America/Denver"}
+    },
+    {
+      "teamId": "team-017",
+      "name": "Portland Trail Blazers",
+      "division": "Western",
+      "homeVenue": "venue-017",
+      "location": {"city": "Portland", "state": "OR", "lat": 45.5316, "lon": -122.6668},
+      "metadata": {"marketSize": "medium", "timezone": "America/Los_Angeles"}
+    },
+    {
+      "teamId": "team-018",
+      "name": "Seattle Storm",
+      "division": "Western",
+      "homeVenue": "venue-018",
+      "location": {"city": "Seattle", "state": "WA", "lat": 47.6221, "lon": -122.3540},
+      "metadata": {"marketSize": "medium", "timezone": "America/Los_Angeles"}
+    },
+    {
+      "teamId": "team-019",
+      "name": "Minnesota Timberwolves",
+      "division": "Western",
+      "homeVenue": "venue-019",
+      "location": {"city": "Minneapolis", "state": "MN", "lat": 44.9795, "lon": -93.2760},
+      "metadata": {"marketSize": "medium", "timezone": "America/Chicago"}
+    },
+    {
+      "teamId": "team-020",
+      "name": "Las Vegas Aces",
+      "division": "Western",
+      "homeVenue": "venue-020",
+      "location": {"city": "Las Vegas", "state": "NV", "lat": 36.0909, "lon": -115.1766},
+      "metadata": {"marketSize": "medium", "timezone": "America/Los_Angeles"}
+    }
+  ],
+  "fixtures": [
+    {"fixtureId": "fix-001", "homeTeam": "team-001", "awayTeam": "team-002"},
+    {"fixtureId": "fix-002", "homeTeam": "team-001", "awayTeam": "team-003"},
+    {"fixtureId": "fix-003", "homeTeam": "team-001", "awayTeam": "team-004"},
+    {"fixtureId": "fix-004", "homeTeam": "team-001", "awayTeam": "team-005"},
+    {"fixtureId": "fix-005", "homeTeam": "team-001", "awayTeam": "team-006"},
+    {"fixtureId": "fix-006", "homeTeam": "team-001", "awayTeam": "team-007"},
+    {"fixtureId": "fix-007", "homeTeam": "team-001", "awayTeam": "team-008"},
+    {"fixtureId": "fix-008", "homeTeam": "team-001", "awayTeam": "team-009"},
+    {"fixtureId": "fix-009", "homeTeam": "team-001", "awayTeam": "team-010"},
+    {"fixtureId": "fix-010", "homeTeam": "team-001", "awayTeam": "team-011"},
+    {"fixtureId": "fix-011", "homeTeam": "team-001", "awayTeam": "team-012"},
+    {"fixtureId": "fix-012", "homeTeam": "team-001", "awayTeam": "team-013"},
+    {"fixtureId": "fix-013", "homeTeam": "team-001", "awayTeam": "team-014"},
+    {"fixtureId": "fix-014", "homeTeam": "team-001", "awayTeam": "team-015"},
+    {"fixtureId": "fix-015", "homeTeam": "team-001", "awayTeam": "team-016"},
+    {"fixtureId": "fix-016", "homeTeam": "team-001", "awayTeam": "team-017"},
+    {"fixtureId": "fix-017", "homeTeam": "team-001", "awayTeam": "team-018"},
+    {"fixtureId": "fix-018", "homeTeam": "team-001", "awayTeam": "team-019"},
+    {"fixtureId": "fix-019", "homeTeam": "team-001", "awayTeam": "team-020"},
+    {"fixtureId": "fix-020", "homeTeam": "team-002", "awayTeam": "team-001"},
+    {"fixtureId": "fix-021", "homeTeam": "team-002", "awayTeam": "team-003"},
+    {"fixtureId": "fix-022", "homeTeam": "team-002", "awayTeam": "team-004"},
+    {"fixtureId": "fix-023", "homeTeam": "team-002", "awayTeam": "team-005"},
+    {"fixtureId": "fix-024", "homeTeam": "team-002", "awayTeam": "team-006"},
+    {"fixtureId": "fix-025", "homeTeam": "team-002", "awayTeam": "team-007"},
+    {"fixtureId": "fix-026", "homeTeam": "team-002", "awayTeam": "team-008"},
+    {"fixtureId": "fix-027", "homeTeam": "team-002", "awayTeam": "team-009"},
+    {"fixtureId": "fix-028", "homeTeam": "team-002", "awayTeam": "team-010"},
+    {"fixtureId": "fix-029", "homeTeam": "team-002", "awayTeam": "team-011"},
+    {"fixtureId": "fix-030", "homeTeam": "team-002", "awayTeam": "team-012"},
+    {"fixtureId": "fix-031", "homeTeam": "team-002", "awayTeam": "team-013"},
+    {"fixtureId": "fix-032", "homeTeam": "team-002", "awayTeam": "team-014"},
+    {"fixtureId": "fix-033", "homeTeam": "team-002", "awayTeam": "team-015"},
+    {"fixtureId": "fix-034", "homeTeam": "team-002", "awayTeam": "team-016"},
+    {"fixtureId": "fix-035", "homeTeam": "team-002", "awayTeam": "team-017"},
+    {"fixtureId": "fix-036", "homeTeam": "team-002", "awayTeam": "team-018"},
+    {"fixtureId": "fix-037", "homeTeam": "team-002", "awayTeam": "team-019"},
+    {"fixtureId": "fix-038", "homeTeam": "team-002", "awayTeam": "team-020"},
+    {"fixtureId": "fix-039", "homeTeam": "team-003", "awayTeam": "team-001"},
+    {"fixtureId": "fix-040", "homeTeam": "team-003", "awayTeam": "team-002"},
+    {"fixtureId": "fix-041", "homeTeam": "team-003", "awayTeam": "team-004"},
+    {"fixtureId": "fix-042", "homeTeam": "team-003", "awayTeam": "team-005"},
+    {"fixtureId": "fix-043", "homeTeam": "team-003", "awayTeam": "team-006"},
+    {"fixtureId": "fix-044", "homeTeam": "team-003", "awayTeam": "team-007"},
+    {"fixtureId": "fix-045", "homeTeam": "team-003", "awayTeam": "team-008"},
+    {"fixtureId": "fix-046", "homeTeam": "team-003", "awayTeam": "team-009"},
+    {"fixtureId": "fix-047", "homeTeam": "team-003", "awayTeam": "team-010"},
+    {"fixtureId": "fix-048", "homeTeam": "team-003", "awayTeam": "team-011"},
+    {"fixtureId": "fix-049", "homeTeam": "team-003", "awayTeam": "team-012"},
+    {"fixtureId": "fix-050", "homeTeam": "team-003", "awayTeam": "team-013"},
+    {"fixtureId": "fix-051", "homeTeam": "team-003", "awayTeam": "team-014"},
+    {"fixtureId": "fix-052", "homeTeam": "team-003", "awayTeam": "team-015"},
+    {"fixtureId": "fix-053", "homeTeam": "team-003", "awayTeam": "team-016"},
+    {"fixtureId": "fix-054", "homeTeam": "team-003", "awayTeam": "team-017"},
+    {"fixtureId": "fix-055", "homeTeam": "team-003", "awayTeam": "team-018"},
+    {"fixtureId": "fix-056", "homeTeam": "team-003", "awayTeam": "team-019"},
+    {"fixtureId": "fix-057", "homeTeam": "team-003", "awayTeam": "team-020"},
+    {"fixtureId": "fix-058", "homeTeam": "team-004", "awayTeam": "team-001"},
+    {"fixtureId": "fix-059", "homeTeam": "team-004", "awayTeam": "team-002"},
+    {"fixtureId": "fix-060", "homeTeam": "team-004", "awayTeam": "team-003"},
+    {"fixtureId": "fix-061", "homeTeam": "team-004", "awayTeam": "team-005"},
+    {"fixtureId": "fix-062", "homeTeam": "team-004", "awayTeam": "team-006"},
+    {"fixtureId": "fix-063", "homeTeam": "team-004", "awayTeam": "team-007"},
+    {"fixtureId": "fix-064", "homeTeam": "team-004", "awayTeam": "team-008"},
+    {"fixtureId": "fix-065", "homeTeam": "team-004", "awayTeam": "team-009"},
+    {"fixtureId": "fix-066", "homeTeam": "team-004", "awayTeam": "team-010"},
+    {"fixtureId": "fix-067", "homeTeam": "team-004", "awayTeam": "team-011"},
+    {"fixtureId": "fix-068", "homeTeam": "team-004", "awayTeam": "team-012"},
+    {"fixtureId": "fix-069", "homeTeam": "team-004", "awayTeam": "team-013"},
+    {"fixtureId": "fix-070", "homeTeam": "team-004", "awayTeam": "team-014"},
+    {"fixtureId": "fix-071", "homeTeam": "team-004", "awayTeam": "team-015"},
+    {"fixtureId": "fix-072", "homeTeam": "team-004", "awayTeam": "team-016"},
+    {"fixtureId": "fix-073", "homeTeam": "team-004", "awayTeam": "team-017"},
+    {"fixtureId": "fix-074", "homeTeam": "team-004", "awayTeam": "team-018"},
+    {"fixtureId": "fix-075", "homeTeam": "team-004", "awayTeam": "team-019"},
+    {"fixtureId": "fix-076", "homeTeam": "team-004", "awayTeam": "team-020"},
+    {"fixtureId": "fix-077", "homeTeam": "team-005", "awayTeam": "team-001"},
+    {"fixtureId": "fix-078", "homeTeam": "team-005", "awayTeam": "team-002"},
+    {"fixtureId": "fix-079", "homeTeam": "team-005", "awayTeam": "team-003"},
+    {"fixtureId": "fix-080", "homeTeam": "team-005", "awayTeam": "team-004"},
+    {"fixtureId": "fix-081", "homeTeam": "team-005", "awayTeam": "team-006"},
+    {"fixtureId": "fix-082", "homeTeam": "team-005", "awayTeam": "team-007"},
+    {"fixtureId": "fix-083", "homeTeam": "team-005", "awayTeam": "team-008"},
+    {"fixtureId": "fix-084", "homeTeam": "team-005", "awayTeam": "team-009"},
+    {"fixtureId": "fix-085", "homeTeam": "team-005", "awayTeam": "team-010"},
+    {"fixtureId": "fix-086", "homeTeam": "team-005", "awayTeam": "team-011"},
+    {"fixtureId": "fix-087", "homeTeam": "team-005", "awayTeam": "team-012"},
+    {"fixtureId": "fix-088", "homeTeam": "team-005", "awayTeam": "team-013"},
+    {"fixtureId": "fix-089", "homeTeam": "team-005", "awayTeam": "team-014"},
+    {"fixtureId": "fix-090", "homeTeam": "team-005", "awayTeam": "team-015"},
+    {"fixtureId": "fix-091", "homeTeam": "team-005", "awayTeam": "team-016"},
+    {"fixtureId": "fix-092", "homeTeam": "team-005", "awayTeam": "team-017"},
+    {"fixtureId": "fix-093", "homeTeam": "team-005", "awayTeam": "team-018"},
+    {"fixtureId": "fix-094", "homeTeam": "team-005", "awayTeam": "team-019"},
+    {"fixtureId": "fix-095", "homeTeam": "team-005", "awayTeam": "team-020"},
+    {"fixtureId": "fix-096", "homeTeam": "team-006", "awayTeam": "team-001"},
+    {"fixtureId": "fix-097", "homeTeam": "team-006", "awayTeam": "team-002"},
+    {"fixtureId": "fix-098", "homeTeam": "team-006", "awayTeam": "team-003"},
+    {"fixtureId": "fix-099", "homeTeam": "team-006", "awayTeam": "team-004"},
+    {"fixtureId": "fix-100", "homeTeam": "team-006", "awayTeam": "team-005"},
+    {"fixtureId": "fix-101", "homeTeam": "team-006", "awayTeam": "team-007"},
+    {"fixtureId": "fix-102", "homeTeam": "team-006", "awayTeam": "team-008"},
+    {"fixtureId": "fix-103", "homeTeam": "team-006", "awayTeam": "team-009"},
+    {"fixtureId": "fix-104", "homeTeam": "team-006", "awayTeam": "team-010"},
+    {"fixtureId": "fix-105", "homeTeam": "team-006", "awayTeam": "team-011"},
+    {"fixtureId": "fix-106", "homeTeam": "team-006", "awayTeam": "team-012"},
+    {"fixtureId": "fix-107", "homeTeam": "team-006", "awayTeam": "team-013"},
+    {"fixtureId": "fix-108", "homeTeam": "team-006", "awayTeam": "team-014"},
+    {"fixtureId": "fix-109", "homeTeam": "team-006", "awayTeam": "team-015"},
+    {"fixtureId": "fix-110", "homeTeam": "team-006", "awayTeam": "team-016"},
+    {"fixtureId": "fix-111", "homeTeam": "team-006", "awayTeam": "team-017"},
+    {"fixtureId": "fix-112", "homeTeam": "team-006", "awayTeam": "team-018"},
+    {"fixtureId": "fix-113", "homeTeam": "team-006", "awayTeam": "team-019"},
+    {"fixtureId": "fix-114", "homeTeam": "team-006", "awayTeam": "team-020"},
+    {"fixtureId": "fix-115", "homeTeam": "team-007", "awayTeam": "team-001"},
+    {"fixtureId": "fix-116", "homeTeam": "team-007", "awayTeam": "team-002"},
+    {"fixtureId": "fix-117", "homeTeam": "team-007", "awayTeam": "team-003"},
+    {"fixtureId": "fix-118", "homeTeam": "team-007", "awayTeam": "team-004"},
+    {"fixtureId": "fix-119", "homeTeam": "team-007", "awayTeam": "team-005"},
+    {"fixtureId": "fix-120", "homeTeam": "team-007", "awayTeam": "team-006"},
+    {"fixtureId": "fix-121", "homeTeam": "team-007", "awayTeam": "team-008"},
+    {"fixtureId": "fix-122", "homeTeam": "team-007", "awayTeam": "team-009"},
+    {"fixtureId": "fix-123", "homeTeam": "team-007", "awayTeam": "team-010"},
+    {"fixtureId": "fix-124", "homeTeam": "team-007", "awayTeam": "team-011"},
+    {"fixtureId": "fix-125", "homeTeam": "team-007", "awayTeam": "team-012"},
+    {"fixtureId": "fix-126", "homeTeam": "team-007", "awayTeam": "team-013"},
+    {"fixtureId": "fix-127", "homeTeam": "team-007", "awayTeam": "team-014"},
+    {"fixtureId": "fix-128", "homeTeam": "team-007", "awayTeam": "team-015"},
+    {"fixtureId": "fix-129", "homeTeam": "team-007", "awayTeam": "team-016"},
+    {"fixtureId": "fix-130", "homeTeam": "team-007", "awayTeam": "team-017"},
+    {"fixtureId": "fix-131", "homeTeam": "team-007", "awayTeam": "team-018"},
+    {"fixtureId": "fix-132", "homeTeam": "team-007", "awayTeam": "team-019"},
+    {"fixtureId": "fix-133", "homeTeam": "team-007", "awayTeam": "team-020"},
+    {"fixtureId": "fix-134", "homeTeam": "team-008", "awayTeam": "team-001"},
+    {"fixtureId": "fix-135", "homeTeam": "team-008", "awayTeam": "team-002"},
+    {"fixtureId": "fix-136", "homeTeam": "team-008", "awayTeam": "team-003"},
+    {"fixtureId": "fix-137", "homeTeam": "team-008", "awayTeam": "team-004"},
+    {"fixtureId": "fix-138", "homeTeam": "team-008", "awayTeam": "team-005"},
+    {"fixtureId": "fix-139", "homeTeam": "team-008", "awayTeam": "team-006"},
+    {"fixtureId": "fix-140", "homeTeam": "team-008", "awayTeam": "team-007"},
+    {"fixtureId": "fix-141", "homeTeam": "team-008", "awayTeam": "team-009"},
+    {"fixtureId": "fix-142", "homeTeam": "team-008", "awayTeam": "team-010"},
+    {"fixtureId": "fix-143", "homeTeam": "team-008", "awayTeam": "team-011"},
+    {"fixtureId": "fix-144", "homeTeam": "team-008", "awayTeam": "team-012"},
+    {"fixtureId": "fix-145", "homeTeam": "team-008", "awayTeam": "team-013"},
+    {"fixtureId": "fix-146", "homeTeam": "team-008", "awayTeam": "team-014"},
+    {"fixtureId": "fix-147", "homeTeam": "team-008", "awayTeam": "team-015"},
+    {"fixtureId": "fix-148", "homeTeam": "team-008", "awayTeam": "team-016"},
+    {"fixtureId": "fix-149", "homeTeam": "team-008", "awayTeam": "team-017"},
+    {"fixtureId": "fix-150", "homeTeam": "team-008", "awayTeam": "team-018"},
+    {"fixtureId": "fix-151", "homeTeam": "team-008", "awayTeam": "team-019"},
+    {"fixtureId": "fix-152", "homeTeam": "team-008", "awayTeam": "team-020"},
+    {"fixtureId": "fix-153", "homeTeam": "team-009", "awayTeam": "team-001"},
+    {"fixtureId": "fix-154", "homeTeam": "team-009", "awayTeam": "team-002"},
+    {"fixtureId": "fix-155", "homeTeam": "team-009", "awayTeam": "team-003"},
+    {"fixtureId": "fix-156", "homeTeam": "team-009", "awayTeam": "team-004"},
+    {"fixtureId": "fix-157", "homeTeam": "team-009", "awayTeam": "team-005"},
+    {"fixtureId": "fix-158", "homeTeam": "team-009", "awayTeam": "team-006"},
+    {"fixtureId": "fix-159", "homeTeam": "team-009", "awayTeam": "team-007"},
+    {"fixtureId": "fix-160", "homeTeam": "team-009", "awayTeam": "team-008"},
+    {"fixtureId": "fix-161", "homeTeam": "team-009", "awayTeam": "team-010"},
+    {"fixtureId": "fix-162", "homeTeam": "team-009", "awayTeam": "team-011"},
+    {"fixtureId": "fix-163", "homeTeam": "team-009", "awayTeam": "team-012"},
+    {"fixtureId": "fix-164", "homeTeam": "team-009", "awayTeam": "team-013"},
+    {"fixtureId": "fix-165", "homeTeam": "team-009", "awayTeam": "team-014"},
+    {"fixtureId": "fix-166", "homeTeam": "team-009", "awayTeam": "team-015"},
+    {"fixtureId": "fix-167", "homeTeam": "team-009", "awayTeam": "team-016"},
+    {"fixtureId": "fix-168", "homeTeam": "team-009", "awayTeam": "team-017"},
+    {"fixtureId": "fix-169", "homeTeam": "team-009", "awayTeam": "team-018"},
+    {"fixtureId": "fix-170", "homeTeam": "team-009", "awayTeam": "team-019"},
+    {"fixtureId": "fix-171", "homeTeam": "team-009", "awayTeam": "team-020"},
+    {"fixtureId": "fix-172", "homeTeam": "team-010", "awayTeam": "team-001"},
+    {"fixtureId": "fix-173", "homeTeam": "team-010", "awayTeam": "team-002"},
+    {"fixtureId": "fix-174", "homeTeam": "team-010", "awayTeam": "team-003"},
+    {"fixtureId": "fix-175", "homeTeam": "team-010", "awayTeam": "team-004"},
+    {"fixtureId": "fix-176", "homeTeam": "team-010", "awayTeam": "team-005"},
+    {"fixtureId": "fix-177", "homeTeam": "team-010", "awayTeam": "team-006"},
+    {"fixtureId": "fix-178", "homeTeam": "team-010", "awayTeam": "team-007"},
+    {"fixtureId": "fix-179", "homeTeam": "team-010", "awayTeam": "team-008"},
+    {"fixtureId": "fix-180", "homeTeam": "team-010", "awayTeam": "team-009"},
+    {"fixtureId": "fix-181", "homeTeam": "team-010", "awayTeam": "team-011"},
+    {"fixtureId": "fix-182", "homeTeam": "team-010", "awayTeam": "team-012"},
+    {"fixtureId": "fix-183", "homeTeam": "team-010", "awayTeam": "team-013"},
+    {"fixtureId": "fix-184", "homeTeam": "team-010", "awayTeam": "team-014"},
+    {"fixtureId": "fix-185", "homeTeam": "team-010", "awayTeam": "team-015"},
+    {"fixtureId": "fix-186", "homeTeam": "team-010", "awayTeam": "team-016"},
+    {"fixtureId": "fix-187", "homeTeam": "team-010", "awayTeam": "team-017"},
+    {"fixtureId": "fix-188", "homeTeam": "team-010", "awayTeam": "team-018"},
+    {"fixtureId": "fix-189", "homeTeam": "team-010", "awayTeam": "team-019"},
+    {"fixtureId": "fix-190", "homeTeam": "team-010", "awayTeam": "team-020"},
+    {"fixtureId": "fix-191", "homeTeam": "team-011", "awayTeam": "team-001"},
+    {"fixtureId": "fix-192", "homeTeam": "team-011", "awayTeam": "team-002"},
+    {"fixtureId": "fix-193", "homeTeam": "team-011", "awayTeam": "team-003"},
+    {"fixtureId": "fix-194", "homeTeam": "team-011", "awayTeam": "team-004"},
+    {"fixtureId": "fix-195", "homeTeam": "team-011", "awayTeam": "team-005"},
+    {"fixtureId": "fix-196", "homeTeam": "team-011", "awayTeam": "team-006"},
+    {"fixtureId": "fix-197", "homeTeam": "team-011", "awayTeam": "team-007"},
+    {"fixtureId": "fix-198", "homeTeam": "team-011", "awayTeam": "team-008"},
+    {"fixtureId": "fix-199", "homeTeam": "team-011", "awayTeam": "team-009"},
+    {"fixtureId": "fix-200", "homeTeam": "team-011", "awayTeam": "team-010"},
+    {"fixtureId": "fix-201", "homeTeam": "team-011", "awayTeam": "team-012"},
+    {"fixtureId": "fix-202", "homeTeam": "team-011", "awayTeam": "team-013"},
+    {"fixtureId": "fix-203", "homeTeam": "team-011", "awayTeam": "team-014"},
+    {"fixtureId": "fix-204", "homeTeam": "team-011", "awayTeam": "team-015"},
+    {"fixtureId": "fix-205", "homeTeam": "team-011", "awayTeam": "team-016"},
+    {"fixtureId": "fix-206", "homeTeam": "team-011", "awayTeam": "team-017"},
+    {"fixtureId": "fix-207", "homeTeam": "team-011", "awayTeam": "team-018"},
+    {"fixtureId": "fix-208", "homeTeam": "team-011", "awayTeam": "team-019"},
+    {"fixtureId": "fix-209", "homeTeam": "team-011", "awayTeam": "team-020"},
+    {"fixtureId": "fix-210", "homeTeam": "team-012", "awayTeam": "team-001"},
+    {"fixtureId": "fix-211", "homeTeam": "team-012", "awayTeam": "team-002"},
+    {"fixtureId": "fix-212", "homeTeam": "team-012", "awayTeam": "team-003"},
+    {"fixtureId": "fix-213", "homeTeam": "team-012", "awayTeam": "team-004"},
+    {"fixtureId": "fix-214", "homeTeam": "team-012", "awayTeam": "team-005"},
+    {"fixtureId": "fix-215", "homeTeam": "team-012", "awayTeam": "team-006"},
+    {"fixtureId": "fix-216", "homeTeam": "team-012", "awayTeam": "team-007"},
+    {"fixtureId": "fix-217", "homeTeam": "team-012", "awayTeam": "team-008"},
+    {"fixtureId": "fix-218", "homeTeam": "team-012", "awayTeam": "team-009"},
+    {"fixtureId": "fix-219", "homeTeam": "team-012", "awayTeam": "team-010"},
+    {"fixtureId": "fix-220", "homeTeam": "team-012", "awayTeam": "team-011"},
+    {"fixtureId": "fix-221", "homeTeam": "team-012", "awayTeam": "team-013"},
+    {"fixtureId": "fix-222", "homeTeam": "team-012", "awayTeam": "team-014"},
+    {"fixtureId": "fix-223", "homeTeam": "team-012", "awayTeam": "team-015"},
+    {"fixtureId": "fix-224", "homeTeam": "team-012", "awayTeam": "team-016"},
+    {"fixtureId": "fix-225", "homeTeam": "team-012", "awayTeam": "team-017"},
+    {"fixtureId": "fix-226", "homeTeam": "team-012", "awayTeam": "team-018"},
+    {"fixtureId": "fix-227", "homeTeam": "team-012", "awayTeam": "team-019"},
+    {"fixtureId": "fix-228", "homeTeam": "team-012", "awayTeam": "team-020"},
+    {"fixtureId": "fix-229", "homeTeam": "team-013", "awayTeam": "team-001"},
+    {"fixtureId": "fix-230", "homeTeam": "team-013", "awayTeam": "team-002"},
+    {"fixtureId": "fix-231", "homeTeam": "team-013", "awayTeam": "team-003"},
+    {"fixtureId": "fix-232", "homeTeam": "team-013", "awayTeam": "team-004"},
+    {"fixtureId": "fix-233", "homeTeam": "team-013", "awayTeam": "team-005"},
+    {"fixtureId": "fix-234", "homeTeam": "team-013", "awayTeam": "team-006"},
+    {"fixtureId": "fix-235", "homeTeam": "team-013", "awayTeam": "team-007"},
+    {"fixtureId": "fix-236", "homeTeam": "team-013", "awayTeam": "team-008"},
+    {"fixtureId": "fix-237", "homeTeam": "team-013", "awayTeam": "team-009"},
+    {"fixtureId": "fix-238", "homeTeam": "team-013", "awayTeam": "team-010"},
+    {"fixtureId": "fix-239", "homeTeam": "team-013", "awayTeam": "team-011"},
+    {"fixtureId": "fix-240", "homeTeam": "team-013", "awayTeam": "team-012"},
+    {"fixtureId": "fix-241", "homeTeam": "team-013", "awayTeam": "team-014"},
+    {"fixtureId": "fix-242", "homeTeam": "team-013", "awayTeam": "team-015"},
+    {"fixtureId": "fix-243", "homeTeam": "team-013", "awayTeam": "team-016"},
+    {"fixtureId": "fix-244", "homeTeam": "team-013", "awayTeam": "team-017"},
+    {"fixtureId": "fix-245", "homeTeam": "team-013", "awayTeam": "team-018"},
+    {"fixtureId": "fix-246", "homeTeam": "team-013", "awayTeam": "team-019"},
+    {"fixtureId": "fix-247", "homeTeam": "team-013", "awayTeam": "team-020"},
+    {"fixtureId": "fix-248", "homeTeam": "team-014", "awayTeam": "team-001"},
+    {"fixtureId": "fix-249", "homeTeam": "team-014", "awayTeam": "team-002"},
+    {"fixtureId": "fix-250", "homeTeam": "team-014", "awayTeam": "team-003"},
+    {"fixtureId": "fix-251", "homeTeam": "team-014", "awayTeam": "team-004"},
+    {"fixtureId": "fix-252", "homeTeam": "team-014", "awayTeam": "team-005"},
+    {"fixtureId": "fix-253", "homeTeam": "team-014", "awayTeam": "team-006"},
+    {"fixtureId": "fix-254", "homeTeam": "team-014", "awayTeam": "team-007"},
+    {"fixtureId": "fix-255", "homeTeam": "team-014", "awayTeam": "team-008"},
+    {"fixtureId": "fix-256", "homeTeam": "team-014", "awayTeam": "team-009"},
+    {"fixtureId": "fix-257", "homeTeam": "team-014", "awayTeam": "team-010"},
+    {"fixtureId": "fix-258", "homeTeam": "team-014", "awayTeam": "team-011"},
+    {"fixtureId": "fix-259", "homeTeam": "team-014", "awayTeam": "team-012"},
+    {"fixtureId": "fix-260", "homeTeam": "team-014", "awayTeam": "team-013"},
+    {"fixtureId": "fix-261", "homeTeam": "team-014", "awayTeam": "team-015"},
+    {"fixtureId": "fix-262", "homeTeam": "team-014", "awayTeam": "team-016"},
+    {"fixtureId": "fix-263", "homeTeam": "team-014", "awayTeam": "team-017"},
+    {"fixtureId": "fix-264", "homeTeam": "team-014", "awayTeam": "team-018"},
+    {"fixtureId": "fix-265", "homeTeam": "team-014", "awayTeam": "team-019"},
+    {"fixtureId": "fix-266", "homeTeam": "team-014", "awayTeam": "team-020"},
+    {"fixtureId": "fix-267", "homeTeam": "team-015", "awayTeam": "team-001"},
+    {"fixtureId": "fix-268", "homeTeam": "team-015", "awayTeam": "team-002"},
+    {"fixtureId": "fix-269", "homeTeam": "team-015", "awayTeam": "team-003"},
+    {"fixtureId": "fix-270", "homeTeam": "team-015", "awayTeam": "team-004"},
+    {"fixtureId": "fix-271", "homeTeam": "team-015", "awayTeam": "team-005"},
+    {"fixtureId": "fix-272", "homeTeam": "team-015", "awayTeam": "team-006"},
+    {"fixtureId": "fix-273", "homeTeam": "team-015", "awayTeam": "team-007"},
+    {"fixtureId": "fix-274", "homeTeam": "team-015", "awayTeam": "team-008"},
+    {"fixtureId": "fix-275", "homeTeam": "team-015", "awayTeam": "team-009"},
+    {"fixtureId": "fix-276", "homeTeam": "team-015", "awayTeam": "team-010"},
+    {"fixtureId": "fix-277", "homeTeam": "team-015", "awayTeay": "team-011"},
+    {"fixtureId": "fix-278", "homeTeam": "team-015", "awayTeam": "team-012"},
+    {"fixtureId": "fix-279", "homeTeam": "team-015", "awayTeam": "team-013"},
+    {"fixtureId": "fix-280", "homeTeam": "team-015", "awayTeam": "team-014"},
+    {"fixtureId": "fix-281", "homeTeam": "team-015", "awayTeam": "team-016"},
+    {"fixtureId": "fix-282", "homeTeam": "team-015", "awayTeam": "team-017"},
+    {"fixtureId": "fix-283", "homeTeam": "team-015", "awayTeam": "team-018"},
+    {"fixtureId": "fix-284", "homeTeam": "team-015", "awayTeam": "team-019"},
+    {"fixtureId": "fix-285", "homeTeam": "team-015", "awayTeam": "team-020"},
+    {"fixtureId": "fix-286", "homeTeam": "team-016", "awayTeam": "team-001"},
+    {"fixtureId": "fix-287", "homeTeam": "team-016", "awayTeam": "team-002"},
+    {"fixtureId": "fix-288", "homeTeam": "team-016", "awayTeam": "team-003"},
+    {"fixtureId": "fix-289", "homeTeam": "team-016", "awayTeam": "team-004"},
+    {"fixtureId": "fix-290", "homeTeam": "team-016", "awayTeam": "team-005"},
+    {"fixtureId": "fix-291", "homeTeam": "team-016", "awayTeam": "team-006"},
+    {"fixtureId": "fix-292", "homeTeam": "team-016", "awayTeam": "team-007"},
+    {"fixtureId": "fix-293", "homeTeam": "team-016", "awayTeam": "team-008"},
+    {"fixtureId": "fix-294", "homeTeam": "team-016", "awayTeam": "team-009"},
+    {"fixtureId": "fix-295", "homeTeam": "team-016", "awayTeam": "team-010"},
+    {"fixtureId": "fix-296", "homeTeam": "team-016", "awayTeam": "team-011"},
+    {"fixtureId": "fix-297", "homeTeam": "team-016", "awayTeam": "team-012"},
+    {"fixtureId": "fix-298", "homeTeam": "team-016", "awayTeam": "team-013"},
+    {"fixtureId": "fix-299", "homeTeam": "team-016", "awayTeam": "team-014"},
+    {"fixtureId": "fix-300", "homeTeam": "team-016", "awayTeam": "team-015"},
+    {"fixtureId": "fix-301", "homeTeam": "team-016", "awayTeam": "team-017"},
+    {"fixtureId": "fix-302", "homeTeam": "team-016", "awayTeam": "team-018"},
+    {"fixtureId": "fix-303", "homeTeam": "team-016", "awayTeam": "team-019"},
+    {"fixtureId": "fix-304", "homeTeam": "team-016", "awayTeam": "team-020"},
+    {"fixtureId": "fix-305", "homeTeam": "team-017", "awayTeam": "team-001"},
+    {"fixtureId": "fix-306", "homeTeam": "team-017", "awayTeam": "team-002"},
+    {"fixtureId": "fix-307", "homeTeam": "team-017", "awayTeam": "team-003"},
+    {"fixtureId": "fix-308", "homeTeam": "team-017", "awayTeam": "team-004"},
+    {"fixtureId": "fix-309", "homeTeam": "team-017", "awayTeam": "team-005"},
+    {"fixtureId": "fix-310", "homeTeam": "team-017", "awayTeam": "team-006"},
+    {"fixtureId": "fix-311", "homeTeam": "team-017", "awayTeam": "team-007"},
+    {"fixtureId": "fix-312", "homeTeam": "team-017", "awayTeam": "team-008"},
+    {"fixtureId": "fix-313", "homeTeam": "team-017", "awayTeam": "team-009"},
+    {"fixtureId": "fix-314", "homeTeam": "team-017", "awayTeam": "team-010"},
+    {"fixtureId": "fix-315", "homeTeam": "team-017", "awayTeam": "team-011"},
+    {"fixtureId": "fix-316", "homeTeam": "team-017", "awayTeam": "team-012"},
+    {"fixtureId": "fix-317", "homeTeam": "team-017", "awayTeam": "team-013"},
+    {"fixtureId": "fix-318", "homeTeam": "team-017", "awayTeam": "team-014"},
+    {"fixtureId": "fix-319", "homeTeam": "team-017", "awayTeam": "team-015"},
+    {"fixtureId": "fix-320", "homeTeam": "team-017", "awayTeam": "team-016"},
+    {"fixtureId": "fix-321", "homeTeam": "team-017", "awayTeam": "team-018"},
+    {"fixtureId": "fix-322", "homeTeam": "team-017", "awayTeam": "team-019"},
+    {"fixtureId": "fix-323", "homeTeam": "team-017", "awayTeam": "team-020"},
+    {"fixtureId": "fix-324", "homeTeam": "team-018", "awayTeam": "team-001"},
+    {"fixtureId": "fix-325", "homeTeam": "team-018", "awayTeam": "team-002"},
+    {"fixtureId": "fix-326", "homeTeam": "team-018", "awayTeam": "team-003"},
+    {"fixtureId": "fix-327", "homeTeam": "team-018", "awayTeam": "team-004"},
+    {"fixtureId": "fix-328", "homeTeam": "team-018", "awayTeam": "team-005"},
+    {"fixtureId": "fix-329", "homeTeam": "team-018", "awayTeam": "team-006"},
+    {"fixtureId": "fix-330", "homeTeam": "team-018", "awayTeam": "team-007"},
+    {"fixtureId": "fix-331", "homeTeam": "team-018", "awayTeam": "team-008"},
+    {"fixtureId": "fix-332", "homeTeam": "team-018", "awayTeam": "team-009"},
+    {"fixtureId": "fix-333", "homeTeam": "team-018", "awayTeam": "team-010"},
+    {"fixtureId": "fix-334", "homeTeam": "team-018", "awayTeam": "team-011"},
+    {"fixtureId": "fix-335", "homeTeam": "team-018", "awayTeam": "team-012"},
+    {"fixtureId": "fix-336", "homeTeam": "team-018", "awayTeam": "team-013"},
+    {"fixtureId": "fix-337", "homeTeam": "team-018", "awayTeam": "team-014"},
+    {"fixtureId": "fix-338", "homeTeam": "team-018", "awayTeam": "team-015"},
+    {"fixtureId": "fix-339", "homeTeam": "team-018", "awayTeam": "team-016"},
+    {"fixtureId": "fix-340", "homeTeam": "team-018", "awayTeam": "team-017"},
+    {"fixtureId": "fix-341", "homeTeam": "team-018", "awayTeam": "team-019"},
+    {"fixtureId": "fix-342", "homeTeam": "team-018", "awayTeam": "team-020"},
+    {"fixtureId": "fix-343", "homeTeam": "team-019", "awayTeam": "team-001"},
+    {"fixtureId": "fix-344", "homeTeam": "team-019", "awayTeam": "team-002"},
+    {"fixtureId": "fix-345", "homeTeam": "team-019", "awayTeam": "team-003"},
+    {"fixtureId": "fix-346", "homeTeam": "team-019", "awayTeam": "team-004"},
+    {"fixtureId": "fix-347", "homeTeam": "team-019", "awayTeam": "team-005"},
+    {"fixtureId": "fix-348", "homeTeam": "team-019", "awayTeam": "team-006"},
+    {"fixtureId": "fix-349", "homeTeam": "team-019", "awayTeam": "team-007"},
+    {"fixtureId": "fix-350", "homeTeam": "team-019", "awayTeam": "team-008"},
+    {"fixtureId": "fix-351", "homeTeam": "team-019", "awayTeam": "team-009"},
+    {"fixtureId": "fix-352", "homeTeam": "team-019", "awayTeam": "team-010"},
+    {"fixtureId": "fix-353", "homeTeam": "team-019", "awayTeam": "team-011"},
+    {"fixtureId": "fix-354", "homeTeam": "team-019", "awayTeam": "team-012"},
+    {"fixtureId": "fix-355", "homeTeam": "team-019", "awayTeam": "team-013"},
+    {"fixtureId": "fix-356", "homeTeam": "team-019", "awayTeam": "team-014"},
+    {"fixtureId": "fix-357", "homeTeam": "team-019", "awayTeam": "team-015"},
+    {"fixtureId": "fix-358", "homeTeam": "team-019", "awayTeam": "team-016"},
+    {"fixtureId": "fix-359", "homeTeam": "team-019", "awayTeam": "team-017"},
+    {"fixtureId": "fix-360", "homeTeam": "team-019", "awayTeam": "team-018"},
+    {"fixtureId": "fix-361", "homeTeam": "team-019", "awayTeam": "team-020"},
+    {"fixtureId": "fix-362", "homeTeam": "team-020", "awayTeam": "team-001"},
+    {"fixtureId": "fix-363", "homeTeam": "team-020", "awayTeam": "team-002"},
+    {"fixtureId": "fix-364", "homeTeam": "team-020", "awayTeam": "team-003"},
+    {"fixtureId": "fix-365", "homeTeam": "team-020", "awayTeam": "team-004"},
+    {"fixtureId": "fix-366", "homeTeam": "team-020", "awayTeam": "team-005"},
+    {"fixtureId": "fix-367", "homeTeam": "team-020", "awayTeam": "team-006"},
+    {"fixtureId": "fix-368", "homeTeam": "team-020", "awayTeam": "team-007"},
+    {"fixtureId": "fix-369", "homeTeam": "team-020", "awayTeam": "team-008"},
+    {"fixtureId": "fix-370", "homeTeam": "team-020", "awayTeam": "team-009"},
+    {"fixtureId": "fix-371", "homeTeam": "team-020", "awayTeam": "team-010"},
+    {"fixtureId": "fix-372", "homeTeam": "team-020", "awayTeam": "team-011"},
+    {"fixtureId": "fix-373", "homeTeam": "team-020", "awayTeam": "team-012"},
+    {"fixtureId": "fix-374", "homeTeam": "team-020", "awayTeam": "team-013"},
+    {"fixtureId": "fix-375", "homeTeam": "team-020", "awayTeam": "team-014"},
+    {"fixtureId": "fix-376", "homeTeam": "team-020", "awayTeam": "team-015"},
+    {"fixtureId": "fix-377", "homeTeam": "team-020", "awayTeam": "team-016"},
+    {"fixtureId": "fix-378", "homeTeam": "team-020", "awayTeam": "team-017"},
+    {"fixtureId": "fix-379", "homeTeam": "team-020", "awayTeam": "team-018"},
+    {"fixtureId": "fix-380", "homeTeam": "team-020", "awayTeam": "team-019"}
+  ],
+  "venues": [
+    {
+      "venueId": "venue-001",
+      "name": "Madison Square Garden",
+      "location": {"city": "New York", "state": "NY", "lat": 40.7505, "lon": -73.9934},
+      "capacity": 19812,
+      "resources": [
+        {"resourceId": "main-court", "capacity": 19812}
+      ],
+      "availability": [
+        {"dayOfWeek": "Tuesday", "startTime": "19:00", "endTime": "22:00"},
+        {"dayOfWeek": "Wednesday", "startTime": "19:00", "endTime": "22:00"},
+        {"dayOfWeek": "Friday", "startTime": "19:30", "endTime": "22:30"},
+        {"dayOfWeek": "Saturday", "startTime": "15:00", "endTime": "18:00"},
+        {"dayOfWeek": "Saturday", "startTime": "19:30", "endTime": "22:30"},
+        {"dayOfWeek": "Sunday", "startTime": "13:00", "endTime": "16:00"}
+      ]
+    },
+    {
+      "venueId": "venue-002",
+      "name": "TD Garden",
+      "location": {"city": "Boston", "state": "MA", "lat": 42.3662, "lon": -71.0621},
+      "capacity": 19156,
+      "resources": [
+        {"resourceId": "main-court", "capacity": 19156}
+      ],
+      "availability": [
+        {"dayOfWeek": "Tuesday", "startTime": "19:00", "endTime": "22:00"},
+        {"dayOfWeek": "Thursday", "startTime": "19:00", "endTime": "22:00"},
+        {"dayOfWeek": "Friday", "startTime": "19:30", "endTime": "22:30"},
+        {"dayOfWeek": "Saturday", "startTime": "18:00", "endTime": "21:00"},
+        {"dayOfWeek": "Sunday", "startTime": "18:00", "endTime": "21:00"}
+      ]
+    },
+    {
+      "venueId": "venue-003",
+      "name": "Wells Fargo Center",
+      "location": {"city": "Philadelphia", "state": "PA", "lat": 39.9012, "lon": -75.1720},
+      "capacity": 20478,
+      "resources": [
+        {"resourceId": "main-court", "capacity": 20478}
+      ],
+      "availability": [
+        {"dayOfWeek": "Monday", "startTime": "19:00", "endTime": "22:00"},
+        {"dayOfWeek": "Wednesday", "startTime": "19:00", "endTime": "22:00"},
+        {"dayOfWeek": "Friday", "startTime": "19:00", "endTime": "22:00"},
+        {"dayOfWeek": "Saturday", "startTime": "19:00", "endTime": "22:00"}
+      ]
+    },
+    {
+      "venueId": "venue-004",
+      "name": "Scotiabank Arena",
+      "location": {"city": "Toronto", "state": "ON", "lat": 43.6435, "lon": -79.3791},
+      "capacity": 19800,
+      "resources": [
+        {"resourceId": "main-court", "capacity": 19800}
+      ],
+      "availability": [
+        {"dayOfWeek": "Tuesday", "startTime": "19:30", "endTime": "22:30"},
+        {"dayOfWeek": "Wednesday", "startTime": "19:00", "endTime": "22:00"},
+        {"dayOfWeek": "Friday", "startTime": "19:00", "endTime": "22:00"},
+        {"dayOfWeek": "Saturday", "startTime": "19:00", "endTime": "22:00"},
+        {"dayOfWeek": "Sunday", "startTime": "18:00", "endTime": "21:00"}
+      ]
+    },
+    {
+      "venueId": "venue-005",
+      "name": "FTX Arena",
+      "location": {"city": "Miami", "state": "FL", "lat": 25.7814, "lon": -80.1870},
+      "capacity": 19600,
+      "resources": [
+        {"resourceId": "main-court", "capacity": 19600}
+      ],
+      "availability": [
+        {"dayOfWeek": "Monday", "startTime": "19:30", "endTime": "22:30"},
+        {"dayOfWeek": "Wednesday", "startTime": "19:30", "endTime": "22:30"},
+        {"dayOfWeek": "Friday", "startTime": "19:30", "endTime": "22:30"},
+        {"dayOfWeek": "Saturday", "startTime": "19:00", "endTime": "22:00"},
+        {"dayOfWeek": "Sunday", "startTime": "18:00", "endTime": "21:00"}
+      ]
+    },
+    {
+      "venueId": "venue-006",
+      "name": "State Farm Arena",
+      "location": {"city": "Atlanta", "state": "GA", "lat": 33.7573, "lon": -84.3963},
+      "capacity": 18118,
+      "resources": [
+        {"resourceId": "main-court", "capacity": 18118}
+      ],
+      "availability": [
+        {"dayOfWeek": "Tuesday", "startTime": "19:30", "endTime": "22:30"},
+        {"dayOfWeek": "Thursday", "startTime": "19:30", "endTime": "22:30"},
+        {"dayOfWeek": "Friday", "startTime": "19:00", "endTime": "22:00"},
+        {"dayOfWeek": "Saturday", "startTime": "19:00", "endTime": "22:00"}
+      ]
+    },
+    {
+      "venueId": "venue-007",
+      "name": "United Center",
+      "location": {"city": "Chicago", "state": "IL", "lat": 41.8807, "lon": -87.6742},
+      "capacity": 20917,
+      "resources": [
+        {"resourceId": "main-court", "capacity": 20917}
+      ],
+      "availability": [
+        {"dayOfWeek": "Monday", "startTime": "19:00", "endTime": "22:00"},
+        {"dayOfWeek": "Wednesday", "startTime": "19:00", "endTime": "22:00"},
+        {"dayOfWeek": "Friday", "startTime": "19:30", "endTime": "22:30"},
+        {"dayOfWeek": "Saturday", "startTime": "19:00", "endTime": "22:00"},
+        {"dayOfWeek": "Sunday", "startTime": "17:00", "endTime": "20:00"}
+      ]
+    },
+    {
+      "venueId": "venue-008",
+      "name": "Little Caesars Arena",
+      "location": {"city": "Detroit", "state": "MI", "lat": 42.6970, "lon": -83.2455},
+      "capacity": 20332,
+      "resources": [
+        {"resourceId": "main-court", "capacity": 20332}
+      ],
+      "availability": [
+        {"dayOfWeek": "Tuesday", "startTime": "19:00", "endTime": "22:00"},
+        {"dayOfWeek": "Thursday", "startTime": "19:00", "endTime": "22:00"},
+        {"dayOfWeek": "Saturday", "startTime": "19:00", "endTime": "22:00"},
+        {"dayOfWeek": "Sunday", "startTime": "18:00", "endTime": "21:00"}
+      ]
+    },
+    {
+      "venueId": "venue-009",
+      "name": "Rocket Mortgage FieldHouse",
+      "location": {"city": "Cleveland", "state": "OH", "lat": 41.4965, "lon": -81.6882},
+      "capacity": 19432,
+      "resources": [
+        {"resourceId": "main-court", "capacity": 19432}
+      ],
+      "availability": [
+        {"dayOfWeek": "Monday", "startTime": "19:00", "endTime": "22:00"},
+        {"dayOfWeek": "Wednesday", "startTime": "19:00", "endTime": "22:00"},
+        {"dayOfWeek": "Friday", "startTime": "19:30", "endTime": "22:30"},
+        {"dayOfWeek": "Saturday", "startTime": "18:00", "endTime": "21:00"}
+      ]
+    },
+    {
+      "venueId": "venue-010",
+      "name": "Capital One Arena",
+      "location": {"city": "Washington", "state": "DC", "lat": 38.8981, "lon": -77.0209},
+      "capacity": 20356,
+      "resources": [
+        {"resourceId": "main-court", "capacity": 20356}
+      ],
+      "availability": [
+        {"dayOfWeek": "Tuesday", "startTime": "19:00", "endTime": "22:00"},
+        {"dayOfWeek": "Wednesday", "startTime": "19:00", "endTime": "22:00"},
+        {"dayOfWeek": "Friday", "startTime": "19:00", "endTime": "22:00"},
+        {"dayOfWeek": "Saturday", "startTime": "19:00", "endTime": "22:00"},
+        {"dayOfWeek": "Sunday", "startTime": "18:00", "endTime": "21:00"}
+      ]
+    },
+    {
+      "venueId": "venue-011",
+      "name": "Crypto.com Arena",
+      "location": {"city": "Los Angeles", "state": "CA", "lat": 34.0430, "lon": -118.2673},
+      "capacity": 19068,
+      "resources": [
+        {"resourceId": "main-court", "capacity": 19068}
+      ],
+      "availability": [
+        {"dayOfWeek": "Tuesday", "startTime": "19:30", "endTime": "22:30"},
+        {"dayOfWeek": "Thursday", "startTime": "19:30", "endTime": "22:30"},
+        {"dayOfWeek": "Friday", "startTime": "19:30", "endTime": "22:30"},
+        {"dayOfWeek": "Saturday", "startTime": "19:00", "endTime": "22:00"},
+        {"dayOfWeek": "Sunday", "startTime": "15:30", "endTime": "18:30"}
+      ]
+    },
+    {
+      "venueId": "venue-012",
+      "name": "Chase Center",
+      "location": {"city": "San Francisco", "state": "CA", "lat": 37.7680, "lon": -122.3878},
+      "capacity": 18064,
+      "resources": [
+        {"resourceId": "main-court", "capacity": 18064}
+      ],
+      "availability": [
+        {"dayOfWeek": "Monday", "startTime": "19:30", "endTime": "22:30"},
+        {"dayOfWeek": "Wednesday", "startTime": "19:30", "endTime": "22:30"},
+        {"dayOfWeek": "Friday", "startTime": "19:30", "endTime": "22:30"},
+        {"dayOfWeek": "Saturday", "startTime": "17:00", "endTime": "20:00"},
+        {"dayOfWeek": "Sunday", "startTime": "18:00", "endTime": "21:00"}
+      ]
+    },
+    {
+      "venueId": "venue-013",
+      "name": "Footprint Center",
+      "location": {"city": "Phoenix", "state": "AZ", "lat": 33.4457, "lon": -112.0712},
+      "capacity": 18055,
+      "resources": [
+        {"resourceId": "main-court", "capacity": 18055}
+      ],
+      "availability": [
+        {"dayOfWeek": "Monday", "startTime": "19:00", "endTime": "22:00"},
+        {"dayOfWeek": "Wednesday", "startTime": "19:00", "endTime": "22:00"},
+        {"dayOfWeek": "Friday", "startTime": "19:00", "endTime": "22:00"},
+        {"dayOfWeek": "Saturday", "startTime": "19:00", "endTime": "22:00"},
+        {"dayOfWeek": "Sunday", "startTime": "18:00", "endTime": "21:00"}
+      ]
+    },
+    {
+      "venueId": "venue-014",
+      "name": "American Airlines Center",
+      "location": {"city": "Dallas", "state": "TX", "lat": 32.7905, "lon": -96.8103},
+      "capacity": 19200,
+      "resources": [
+        {"resourceId": "main-court", "capacity": 19200}
+      ],
+      "availability": [
+        {"dayOfWeek": "Tuesday", "startTime": "19:30", "endTime": "22:30"},
+        {"dayOfWeek": "Thursday", "startTime": "19:30", "endTime": "22:30"},
+        {"dayOfWeek": "Friday", "startTime": "19:00", "endTime": "22:00"},
+        {"dayOfWeek": "Saturday", "startTime": "19:00", "endTime": "22:00"}
+      ]
+    },
+    {
+      "venueId": "venue-015",
+      "name": "Toyota Center",
+      "location": {"city": "Houston", "state": "TX", "lat": 29.7508, "lon": -95.3621},
+      "capacity": 18055,
+      "resources": [
+        {"resourceId": "main-court", "capacity": 18055}
+      ],
+      "availability": [
+        {"dayOfWeek": "Monday", "startTime": "19:00", "endTime": "22:00"},
+        {"dayOfWeek": "Wednesday", "startTime": "19:00", "endTime": "22:00"},
+        {"dayOfWeek": "Friday", "startTime": "19:00", "endTime": "22:00"},
+        {"dayOfWeek": "Saturday", "startTime": "19:00", "endTime": "22:00"},
+        {"dayOfWeek": "Sunday", "startTime": "18:00", "endTime": "21:00"}
+      ]
+    },
+    {
+      "venueId": "venue-016",
+      "name": "Ball Arena",
+      "location": {"city": "Denver", "state": "CO", "lat": 39.7486, "lon": -105.0076},
+      "capacity": 19520,
+      "resources": [
+        {"resourceId": "main-court", "capacity": 19520}
+      ],
+      "availability": [
+        {"dayOfWeek": "Tuesday", "startTime": "19:00", "endTime": "22:00"},
+        {"dayOfWeek": "Thursday", "startTime": "19:00", "endTime": "22:00"},
+        {"dayOfWeek": "Saturday", "startTime": "19:00", "endTime": "22:00"},
+        {"dayOfWeek": "Sunday", "startTime": "18:00", "endTime": "21:00"}
+      ]
+    },
+    {
+      "venueId": "venue-017",
+      "name": "Moda Center",
+      "location": {"city": "Portland", "state": "OR", "lat": 45.5316, "lon": -122.6668},
+      "capacity": 19393,
+      "resources": [
+        {"resourceId": "main-court", "capacity": 19393}
+      ],
+      "availability": [
+        {"dayOfWeek": "Monday", "startTime": "19:00", "endTime": "22:00"},
+        {"dayOfWeek": "Wednesday", "startTime": "19:00", "endTime": "22:00"},
+        {"dayOfWeek": "Friday", "startTime": "19:30", "endTime": "22:30"},
+        {"dayOfWeek": "Saturday", "startTime": "19:00", "endTime": "22:00"}
+      ]
+    },
+    {
+      "venueId": "venue-018",
+      "name": "Climate Pledge Arena",
+      "location": {"city": "Seattle", "state": "WA", "lat": 47.6221, "lon": -122.3540},
+      "capacity": 18100,
+      "resources": [
+        {"resourceId": "main-court", "capacity": 18100}
+      ],
+      "availability": [
+        {"dayOfWeek": "Tuesday", "startTime": "19:00", "endTime": "22:00"},
+        {"dayOfWeek": "Thursday", "startTime": "19:00", "endTime": "22:00"},
+        {"dayOfWeek": "Friday", "startTime": "19:30", "endTime": "22:30"},
+        {"dayOfWeek": "Saturday", "startTime": "19:00", "endTime": "22:00"},
+        {"dayOfWeek": "Sunday", "startTime": "18:00", "endTime": "21:00"}
+      ]
+    },
+    {
+      "venueId": "venue-019",
+      "name": "Target Center",
+      "location": {"city": "Minneapolis", "state": "MN", "lat": 44.9795, "lon": -93.2760},
+      "capacity": 18978,
+      "resources": [
+        {"resourceId": "main-court", "capacity": 18978}
+      ],
+      "availability": [
+        {"dayOfWeek": "Monday", "startTime": "19:00", "endTime": "22:00"},
+        {"dayOfWeek": "Wednesday", "startTime": "19:00", "endTime": "22:00"},
+        {"dayOfWeek": "Friday", "startTime": "19:00", "endTime": "22:00"},
+        {"dayOfWeek": "Saturday", "startTime": "19:00", "endTime": "22:00"}
+      ]
+    },
+    {
+      "venueId": "venue-020",
+      "name": "T-Mobile Arena",
+      "location": {"city": "Las Vegas", "state": "NV", "lat": 36.0909, "lon": -115.1766},
+      "capacity": 20000,
+      "resources": [
+        {"resourceId": "main-court", "capacity": 20000}
+      ],
+      "availability": [
+        {"dayOfWeek": "Tuesday", "startTime": "19:30", "endTime": "22:30"},
+        {"dayOfWeek": "Thursday", "startTime": "19:30", "endTime": "22:30"},
+        {"dayOfWeek": "Friday", "startTime": "20:00", "endTime": "23:00"},
+        {"dayOfWeek": "Saturday", "startTime": "19:00", "endTime": "22:00"},
+        {"dayOfWeek": "Sunday", "startTime": "17:00", "endTime": "20:00"}
+      ]
+    }
+  ],
+  "constraints": [
+    {
+      "constraintId": "no_overlap_team",
+      "type": "hard",
+      "params": {}
+    },
+    {
+      "constraintId": "no_overlap_venue",
+      "type": "hard",
+      "params": {}
+    },
+    {
+      "constraintId": "min_rest_time",
+      "type": "hard",
+      "params": {
+        "min_hours": 48
+      }
+    },
+    {
+      "constraintId": "venue_availability",
+      "type": "hard",
+      "params": {}
+    },
+    {
+      "constraintId": "max_consecutive_away",
+      "type": "hard",
+      "params": {
+        "max_consecutive": 3
+      }
+    },
+    {
+      "constraintId": "max_consecutive_home",
+      "type": "hard",
+      "params": {
+        "max_consecutive": 3
+      }
+    },
+    {
+      "constraintId": "season_bounds",
+      "type": "hard",
+      "params": {}
+    },
+    {
+      "constraintId": "broadcast_windows",
+      "type": "soft",
+      "weight": 10,
+      "params": {
+        "primeTimeSlots": [
+          {"dayOfWeek": "Friday", "startTime": "19:30", "endTime": "22:30"},
+          {"dayOfWeek": "Saturday", "startTime": "19:00", "endTime": "22:00"},
+          {"dayOfWeek": "Sunday", "startTime": "15:00", "endTime": "21:00"}
+        ]
+      }
+    }
+  ],
+  "objectives": [
+    {
+      "objectiveId": "minimize_total_travel",
+      "weight": 3,
+      "params": {}
+    },
+    {
+      "objectiveId": "balance_home_away",
+      "weight": 5,
+      "params": {
+        "maxDeviation": 1
+      }
+    },
+    {
+      "objectiveId": "maximize_revenue",
+      "weight": 4,
+      "params": {
+        "revenueWeights": {
+          "Friday_19:30-22:30": 1.5,
+          "Saturday_19:00-22:00": 1.4,
+          "Sunday_15:00-18:00": 1.3,
+          "weekday_19:00-22:00": 1.0
+        }
+      }
+    },
+    {
+      "objectiveId": "competitive_balance",
+      "weight": 5,
+      "params": {
+        "avoidBackToBacksAgainstSameOpponent": true
+      }
+    }
+  ]
+}

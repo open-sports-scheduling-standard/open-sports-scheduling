@@ -1,0 +1,111 @@
+{
+  "id": "esports-global-tournament-01",
+  "name": "Global Esports Tournament - Sample 01",
+  "version": "0.1.0",
+  "track": "track-5-esports",
+  "difficulty": "hard",
+  "timezone": "UTC",
+  "season": {
+    "start": "2025-08-01T00:00:00Z",
+    "end": "2025-09-15T23:59:59Z"
+  },
+  "competition": {
+    "sport": "esports",
+    "game": "counter-strike-2",
+    "level": "international_major",
+    "format": "group_stage_playoffs"
+  },
+  "entities": {
+    "teams": [
+      { "id": "team-na-1", "name": "Team NA Alpha", "region": "NA", "timezone": "America/New_York", "homeServer": "server-na-east" },
+      { "id": "team-na-2", "name": "Team NA Beta", "region": "NA", "timezone": "America/Los_Angeles", "homeServer": "server-na-west" },
+      { "id": "team-eu-1", "name": "Team EU Prime", "region": "EU", "timezone": "Europe/Paris", "homeServer": "server-eu-west" },
+      { "id": "team-eu-2", "name": "Team EU Elite", "region": "EU", "timezone": "Europe/Stockholm", "homeServer": "server-eu-north" },
+      { "id": "team-apac-1", "name": "Team APAC Storm", "region": "APAC", "timezone": "Asia/Tokyo", "homeServer": "server-apac-jp" },
+      { "id": "team-apac-2", "name": "Team APAC Phoenix", "region": "APAC", "timezone": "Asia/Shanghai", "homeServer": "server-apac-cn" },
+      { "id": "team-sa-1", "name": "Team SA Thunder", "region": "SA", "timezone": "America/Sao_Paulo", "homeServer": "server-sa-br" },
+      { "id": "team-sa-2", "name": "Team SA Lightning", "region": "SA", "timezone": "America/Buenos_Aires", "homeServer": "server-sa-south" }
+    ],
+    "venues": [
+      { "id": "server-na-east", "name": "NA East Server", "type": "virtual", "region": "NA" },
+      { "id": "server-na-west", "name": "NA West Server", "type": "virtual", "region": "NA" },
+      { "id": "server-eu-west", "name": "EU West Server", "type": "virtual", "region": "EU" },
+      { "id": "server-eu-north", "name": "EU North Server", "type": "virtual", "region": "EU" },
+      { "id": "server-apac-jp", "name": "APAC Japan Server", "type": "virtual", "region": "APAC" },
+      { "id": "server-apac-cn", "name": "APAC China Server", "type": "virtual", "region": "APAC" },
+      { "id": "server-sa-br", "name": "SA Brazil Server", "type": "virtual", "region": "SA" },
+      { "id": "server-neutral-iceland", "name": "Neutral Iceland Server", "type": "virtual", "region": "NEUTRAL" }
+    ]
+  },
+  "fixtures": [
+    { "id": "group-a-1", "participants": ["team-na-1", "team-eu-1"], "durationMinutes": 90, "priority": 0.9, "phase": "group_stage" },
+    { "id": "group-a-2", "participants": ["team-na-2", "team-eu-2"], "durationMinutes": 90, "priority": 0.8, "phase": "group_stage" },
+    { "id": "group-b-1", "participants": ["team-apac-1", "team-sa-1"], "durationMinutes": 90, "priority": 0.85, "phase": "group_stage" },
+    { "id": "group-b-2", "participants": ["team-apac-2", "team-sa-2"], "durationMinutes": 90, "priority": 0.75, "phase": "group_stage" },
+    { "id": "cross-1", "participants": ["team-na-1", "team-apac-1"], "durationMinutes": 90, "priority": 0.95, "phase": "group_stage" },
+    { "id": "cross-2", "participants": ["team-eu-1", "team-sa-1"], "durationMinutes": 90, "priority": 0.9, "phase": "group_stage" },
+    { "id": "cross-3", "participants": ["team-na-2", "team-apac-2"], "durationMinutes": 90, "priority": 0.85, "phase": "group_stage" },
+    { "id": "cross-4", "participants": ["team-eu-2", "team-sa-2"], "durationMinutes": 90, "priority": 0.8, "phase": "group_stage" },
+    { "id": "group-a-3", "participants": ["team-na-1", "team-na-2"], "durationMinutes": 90, "priority": 0.7, "phase": "group_stage" },
+    { "id": "group-a-4", "participants": ["team-eu-1", "team-eu-2"], "durationMinutes": 90, "priority": 0.7, "phase": "group_stage" },
+    { "id": "group-b-3", "participants": ["team-apac-1", "team-apac-2"], "durationMinutes": 90, "priority": 0.7, "phase": "group_stage" },
+    { "id": "group-b-4", "participants": ["team-sa-1", "team-sa-2"], "durationMinutes": 90, "priority": 0.65, "phase": "group_stage" }
+  ],
+  "constraints": [
+    {
+      "id": "no_overlap",
+      "type": "hard",
+      "rule": "no_overlap_team",
+      "selector": { "entityType": "team" }
+    },
+    {
+      "id": "latency_fairness",
+      "type": "hard",
+      "rule": "server_latency_fairness",
+      "selector": { "entityType": "fixture" },
+      "params": { "max_ping_ms": 35, "max_delta_ms": 10 }
+    },
+    {
+      "id": "min_rest",
+      "type": "hard",
+      "rule": "min_rest_time",
+      "selector": { "entityType": "team" },
+      "params": { "min_hours": 24 }
+    },
+    {
+      "id": "regional_balance",
+      "type": "hard",
+      "rule": "regional_time_balance",
+      "selector": { "entityType": "fixture" },
+      "params": {
+        "regions": ["NA", "EU", "APAC", "SA"],
+        "primetime_windows": {
+          "NA": ["18:00-23:00 EST"],
+          "EU": ["18:00-23:00 CET"],
+          "APAC": ["18:00-23:00 JST"],
+          "SA": ["18:00-23:00 BRT"]
+        },
+        "min_primetime_matches_per_team": 2
+      }
+    },
+    {
+      "id": "viewership_opt",
+      "type": "soft",
+      "rule": "concurrent_match_viewership",
+      "selector": { "entityType": "fixture" },
+      "params": { "max_concurrent_matches": 2, "match_priority_threshold": 0.8 },
+      "penalty": { "model": "linear", "weight": 100 }
+    }
+  ],
+  "objectives": [
+    { "metric": "regional_fairness", "aggregation": "stddev", "weight": 0.45 },
+    { "metric": "viewership_maximization", "aggregation": "sum", "weight": 0.35 },
+    { "metric": "mental_fatigue_index", "aggregation": "average", "weight": 0.20 }
+  ],
+  "metadata": {
+    "description": "8-team global esports tournament with cross-regional matchups",
+    "expectedDifficulty": "High - global time zone coordination and latency fairness",
+    "baselineScore": null,
+    "tags": ["esports", "global", "cross-region", "latency-sensitive"]
+  }
+}

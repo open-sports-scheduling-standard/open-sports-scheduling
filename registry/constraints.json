@@ -420,6 +420,237 @@
         "useCases": ["Professional leagues with TV deals", "Revenue-driven competitions"],
         "note": "Often a hard constraint due to contractual obligations worth millions"
       }
+    },
+    {
+      "ruleId": "server_latency_fairness",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "esports",
+      "appliesTo": "fixture",
+      "type": "hard",
+      "description": "Ensure fair network latency conditions for all teams in esports matches",
+      "paramsSchema": {
+        "type": "object",
+        "required": ["max_ping_ms", "max_delta_ms"],
+        "properties": {
+          "max_ping_ms": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Maximum acceptable ping for any team in milliseconds"
+          },
+          "max_delta_ms": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Maximum acceptable ping difference between teams in milliseconds"
+          }
+        }
+      },
+      "selectorSupport": {
+        "teams": true,
+        "venues": false,
+        "fixtures": true,
+        "phases": true
+      },
+      "units": {
+        "max_ping_ms": "milliseconds",
+        "max_delta_ms": "milliseconds"
+      },
+      "recommendedRanges": {
+        "max_ping_ms": {
+          "competitive": [30, 40],
+          "casual": [50, 75],
+          "regional": [20, 30]
+        },
+        "max_delta_ms": {
+          "strict": [5, 10],
+          "moderate": [10, 15],
+          "relaxed": [15, 20]
+        }
+      },
+      "defaultPenaltyModel": null,
+      "references": {
+        "rationale": "Competitive integrity - network latency creates unfair advantage similar to home field in traditional sports",
+        "standardCompliance": ["OSSS-ESPORTS-001"],
+        "useCases": ["Global esports tournaments", "Cross-region qualifiers", "Online competitive play"],
+        "note": "Critical for maintaining competitive integrity in skill-based esports"
+      }
+    },
+    {
+      "ruleId": "regional_time_balance",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "esports",
+      "appliesTo": "fixture",
+      "type": "hard_or_soft",
+      "description": "Ensure fair distribution of match times across global regions in esports tournaments",
+      "paramsSchema": {
+        "type": "object",
+        "required": ["regions", "primetime_windows", "min_primetime_matches_per_team"],
+        "properties": {
+          "regions": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "List of regions (e.g., NA, EU, APAC, LATAM)"
+          },
+          "primetime_windows": {
+            "type": "object",
+            "description": "Map of region to primetime windows in local time"
+          },
+          "min_primetime_matches_per_team": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Minimum number of matches each team should play in their home region primetime"
+          }
+        }
+      },
+      "selectorSupport": {
+        "teams": true,
+        "venues": false,
+        "fixtures": true,
+        "phases": true
+      },
+      "units": {
+        "min_primetime_matches_per_team": "matches"
+      },
+      "recommendedRanges": {
+        "min_primetime_matches_per_team": {
+          "global_tournament": [2, 4],
+          "regional_league": [4, 8],
+          "world_championship": [3, 6]
+        }
+      },
+      "defaultPenaltyModel": {
+        "type": "linear",
+        "perMatchViolation": 50,
+        "description": "Penalty for each match below minimum primetime allocation"
+      },
+      "references": {
+        "rationale": "Player welfare (reasonable local times), viewership fairness, competitive integrity",
+        "standardCompliance": ["OSSS-ESPORTS-002"],
+        "useCases": ["Global esports tournaments (LoL Worlds, CS:GO Majors)", "Regional qualifiers spanning multiple time zones"],
+        "note": "Balancing global viewership with player welfare is unique to esports"
+      }
+    },
+    {
+      "ruleId": "concurrent_match_viewership",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "esports",
+      "appliesTo": "fixture",
+      "type": "soft",
+      "description": "Limit concurrent high-profile matches to maximize viewership and prevent audience fragmentation",
+      "paramsSchema": {
+        "type": "object",
+        "required": ["max_concurrent_matches"],
+        "properties": {
+          "max_concurrent_matches": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Maximum number of matches that should occur simultaneously"
+          },
+          "match_priority_threshold": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Priority score threshold above which matches count as 'high-profile' (0-1)"
+          }
+        }
+      },
+      "selectorSupport": {
+        "teams": true,
+        "venues": false,
+        "fixtures": true,
+        "phases": true
+      },
+      "units": {
+        "max_concurrent_matches": "matches"
+      },
+      "recommendedRanges": {
+        "max_concurrent_matches": {
+          "single_stream": [1, 1],
+          "multi_stream": [2, 4],
+          "group_stage": [3, 6]
+        }
+      },
+      "defaultPenaltyModel": {
+        "type": "linear",
+        "perExcessMatch": 100,
+        "description": "High penalty for viewership cannibalization in revenue-driven esports"
+      },
+      "references": {
+        "rationale": "Revenue maximization, viewer experience, sponsor visibility",
+        "standardCompliance": ["OSSS-ESPORTS-003"],
+        "useCases": ["Broadcasted esports tournaments", "Playoffs and finals", "Sponsored competitions"],
+        "note": "Unlike traditional sports, esports viewers can easily switch streams, making concurrent scheduling critical"
+      }
+    },
+    {
+      "ruleId": "server_rotation_fairness",
+      "version": "1.0.0",
+      "status": "experimental",
+      "deprecated": false,
+      "category": "esports",
+      "appliesTo": "team",
+      "type": "soft",
+      "description": "Ensure teams play balanced distribution across home, neutral, and away servers",
+      "paramsSchema": {
+        "type": "object",
+        "required": ["target_home_pct", "target_neutral_pct", "target_away_pct"],
+        "properties": {
+          "target_home_pct": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Target percentage of matches on home region server"
+          },
+          "target_neutral_pct": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Target percentage of matches on neutral server"
+          },
+          "target_away_pct": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Target percentage of matches on opponent region server"
+          }
+        }
+      },
+      "selectorSupport": {
+        "teams": true,
+        "venues": false,
+        "fixtures": false,
+        "phases": true
+      },
+      "units": null,
+      "recommendedRanges": {
+        "balanced": {
+          "target_home_pct": 0.33,
+          "target_neutral_pct": 0.34,
+          "target_away_pct": 0.33
+        },
+        "home_advantage": {
+          "target_home_pct": 0.5,
+          "target_neutral_pct": 0.25,
+          "target_away_pct": 0.25
+        }
+      },
+      "defaultPenaltyModel": {
+        "type": "quadratic",
+        "perPercentageDeviation": 20,
+        "exponent": 2,
+        "description": "Penalty increases quadratically with deviation from target distribution"
+      },
+      "references": {
+        "rationale": "Competitive fairness analogous to home/away balance in traditional sports",
+        "standardCompliance": ["OSSS-ESPORTS-004"],
+        "useCases": ["International esports competitions", "Cross-region leagues"],
+        "note": "Experimental: server location assignment may be handled at different layer than scheduling"
+      }
     }
   ],
   "metadata": {

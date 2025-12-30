@@ -2,7 +2,7 @@
 
 **A neutral, open standard for expressing sports schedules, constraints, and optimization goals.**
 
-The **Open Sports Scheduling Standard (OSSS)** defines a shared, machine-readable language for describing sports scheduling problems and solutions — including teams, venues, fixtures, hard and soft constraints, optimization objectives, and explainable outcomes.
+The **Open Sports Scheduling Standard (OSSS)** defines a shared, machine-readable language for describing sports scheduling problems and solutions — including teams, venues, fixtures, hard and soft constraints, optimization objectives, and explainable outcomes. OSSS applies to traditional sports, esports tournaments, and any competitive scheduling scenario.
 
 OSSS is **vendor-neutral**, **solver-agnostic**, and **openly governed**.
 
@@ -10,14 +10,15 @@ OSSS is **vendor-neutral**, **solver-agnostic**, and **openly governed**.
 
 ## Why OSSS exists
 
-Sports scheduling is one of the most complex operational problems in sport.  
+Sports scheduling is one of the most complex operational problems in traditional sports and esports.
 Yet today:
 
 - Scheduling rules are encoded privately inside vendor systems
 - Constraints are implicit, undocumented, or non-portable
-- Leagues cannot easily audit or explain schedules
+- Leagues and tournament organizers cannot easily audit or explain schedules
 - Switching vendors requires rebuilding rules from scratch
 - AI and optimization research cannot compare solutions fairly
+- Esports face unique challenges: global time zones, server latency, viewership optimization
 
 **OSSS fixes this by standardizing the problem, not the solver.**
 
@@ -27,11 +28,11 @@ Yet today:
 
 OSSS defines:
 
-- A common data model for teams, venues, fixtures, officials, and resources
-- Explicit hard and soft constraints
+- A common data model for teams, venues (physical and virtual), fixtures, officials, and resources
+- Explicit hard and soft constraints (including esports-specific: latency, regional balance)
 - Standardized objective and penalty models
 - Explainable scoring and violation reporting
-- Support for leagues, tournaments, playoffs, and rescheduling
+- Support for leagues, tournaments, playoffs, rescheduling, and global esports events
 - Versioning, locks, and real-world change management
 
 Any compliant scheduling engine can:
@@ -54,25 +55,27 @@ Innovation happens **above** the standard, not inside it.
 
 ## Who OSSS is for
 
-### Leagues & Governing Bodies
-- Transparent and auditable schedules
+### Leagues, Governing Bodies & Tournament Organizers
+- Transparent and auditable schedules (traditional sports and esports)
 - Reduced vendor lock-in
 - Clear codification of policies and rules
+- Fair competitive integrity across regions and time zones
 
 ### Scheduling Vendors
 - Faster integrations
-- One constraint language across leagues
+- One constraint language across sports and esports
 - Competition on quality, not lock-in
 
 ### Researchers & AI Developers
-- Shared benchmarks
+- Shared benchmarks (including esports datasets)
 - Comparable solver results
-- Real-world constraint modeling
+- Real-world constraint modeling across physical and virtual competitions
 
-### Operators & Officials
+### Operators, Officials & Esports Coordinators
 - Clear trade-offs
 - Fewer manual overrides
 - Improved trust in outcomes
+- Server selection and regional fairness transparency
 
 ---
 

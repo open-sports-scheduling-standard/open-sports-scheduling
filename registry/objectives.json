@@ -294,6 +294,157 @@
         "rationale": "Minimize disruption when rescheduling",
         "relatedObjectives": []
       }
+    },
+    {
+      "objectiveId": "regional_fairness",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "esports",
+      "unit": "percentage",
+      "optimizationGoal": "balance",
+      "description": "Fairness of server location distribution (home/neutral/away) for esports teams",
+      "calculation": "stddev",
+      "appliesTo": "team",
+      "paramsSchema": {
+        "target_distribution": {
+          "type": "object",
+          "description": "Target percentages for home/neutral/away server allocation"
+        }
+      },
+      "targetRanges": {
+        "ideal_deviation": 0.05,
+        "max_deviation": 0.15
+      },
+      "references": {
+        "rationale": "Competitive integrity in esports - server location affects latency similar to home field advantage",
+        "relatedObjectives": ["server_latency_balance", "home_away_balance"]
+      }
+    },
+    {
+      "objectiveId": "server_latency_balance",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "esports",
+      "unit": "milliseconds",
+      "optimizationGoal": "minimize",
+      "description": "Standard deviation of average ping across teams in esports tournament",
+      "calculation": "stddev",
+      "appliesTo": "team",
+      "paramsSchema": {},
+      "targetRanges": {
+        "ideal": 5,
+        "max": 10
+      },
+      "references": {
+        "rationale": "Minimize latency advantage disparity across teams",
+        "relatedObjectives": ["regional_fairness"]
+      }
+    },
+    {
+      "objectiveId": "viewership_maximization",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "esports",
+      "unit": "count",
+      "optimizationGoal": "minimize",
+      "description": "Number of high-profile concurrent matches (to maximize total viewership)",
+      "calculation": "sum",
+      "appliesTo": "fixture",
+      "paramsSchema": {
+        "match_priority_threshold": {
+          "type": "number",
+          "description": "Priority score threshold for 'high-profile' classification"
+        }
+      },
+      "targetRanges": {
+        "ideal": 0,
+        "max": 5
+      },
+      "references": {
+        "rationale": "Revenue optimization through viewership - critical in esports where concurrent streams compete",
+        "relatedObjectives": ["primetime_distribution"]
+      }
+    },
+    {
+      "objectiveId": "regional_primetime_coverage",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "esports",
+      "unit": "matches",
+      "optimizationGoal": "balance",
+      "description": "Balance of matches occurring in each region's primetime viewing hours",
+      "calculation": "stddev",
+      "appliesTo": "team",
+      "paramsSchema": {
+        "regions": {
+          "type": "array",
+          "description": "List of regions with primetime definitions"
+        }
+      },
+      "targetRanges": {
+        "ideal_stddev": 1,
+        "max_stddev": 3
+      },
+      "references": {
+        "rationale": "Fair global viewership opportunity and player welfare (reasonable local match times)",
+        "relatedObjectives": ["viewership_maximization", "primetime_distribution"]
+      }
+    },
+    {
+      "objectiveId": "mental_fatigue_index",
+      "version": "1.0.0",
+      "status": "experimental",
+      "deprecated": false,
+      "category": "esports",
+      "unit": "score",
+      "optimizationGoal": "minimize",
+      "description": "Composite score measuring cognitive load (consecutive days, matches per day, rest time)",
+      "calculation": "weighted_sum",
+      "appliesTo": "team",
+      "paramsSchema": {
+        "weights": {
+          "type": "object",
+          "description": "Weights for consecutive_days, matches_per_day, and rest_hours factors"
+        }
+      },
+      "targetRanges": {
+        "ideal": 10,
+        "max": 30
+      },
+      "references": {
+        "rationale": "Esports players face mental fatigue distinct from physical sports - reaction time and decision quality degrade",
+        "relatedObjectives": ["rest_time_average", "min_rest_time"]
+      }
+    },
+    {
+      "objectiveId": "cross_region_balance",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "esports",
+      "unit": "matches",
+      "optimizationGoal": "balance",
+      "description": "Balance of cross-regional matchups to ensure global representation",
+      "calculation": "stddev",
+      "appliesTo": "fixture",
+      "paramsSchema": {
+        "regions": {
+          "type": "array",
+          "description": "List of competitive regions"
+        }
+      },
+      "targetRanges": {
+        "ideal_stddev": 2,
+        "max_stddev": 5
+      },
+      "references": {
+        "rationale": "Competitive variety and global fan engagement in international esports",
+        "relatedObjectives": ["opponent_variety", "regional_fairness"]
+      }
     }
   ],
   "metadata": {

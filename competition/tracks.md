@@ -348,6 +348,105 @@ Available at: `competition/tracks/track-4-multi-division/sample-instance.json`
 
 ---
 
+## Track 5: Global Esports Tournament ⭐⭐⭐⭐
+
+**Target Audience**: Esports organizers, tournament platforms, global competition coordinators
+**Real-World Application**: League of Legends Worlds, CS:GO Majors, Valorant Champions Tour, regional qualifiers
+
+### Problem Characteristics
+
+- **Teams**: 16-32 teams
+- **Tournament Duration**: 4-8 weeks
+- **Matches per Team**: 6-20 matches
+- **Server Locations**: 4-8 global regions (NA, EU, APAC, LATAM, etc.)
+- **Complexity**: High (global coordination, latency fairness, viewership optimization)
+
+### Required Constraints
+
+```json
+{
+  "required": [
+    {
+      "ruleId": "no_overlap_team",
+      "type": "hard"
+    },
+    {
+      "ruleId": "server_latency_fairness",
+      "type": "hard",
+      "params": {
+        "max_ping_ms": 35,
+        "max_delta_ms": 10
+      }
+    },
+    {
+      "ruleId": "min_rest_time",
+      "type": "hard",
+      "params": { "min_hours": 24 }
+    },
+    {
+      "ruleId": "regional_time_balance",
+      "type": "hard",
+      "params": {
+        "regions": ["NA", "EU", "APAC", "LATAM"],
+        "primetime_windows": {
+          "NA": ["18:00-23:00 EST"],
+          "EU": ["18:00-23:00 CET"],
+          "APAC": ["18:00-23:00 KST"],
+          "LATAM": ["18:00-23:00 BRT"]
+        },
+        "min_primetime_matches_per_team": 3
+      }
+    },
+    {
+      "ruleId": "concurrent_match_viewership",
+      "type": "soft",
+      "params": { "max_concurrent_matches": 3 },
+      "penalty": { "perViolation": 50 }
+    }
+  ]
+}
+```
+
+### Optimization Objectives
+
+| Objective | Weight | Target |
+|-----------|--------|--------|
+| regional_fairness | 45% | each team gets 33% home/neutral/away server distribution |
+| viewership_maximization | 35% | minimize concurrent high-profile matches |
+| player_welfare | 20% | maximize rest time, minimize consecutive days |
+
+### Scoring Formula
+
+```
+score = 0.45 × regional_fairness_penalty + 0.35 × viewership_penalty + 0.20 × welfare_penalty
+```
+
+Lower score is better.
+
+### Sample Instance
+
+Available at: `competition/tracks/track-5-esports/sample-instance.json`
+
+### Difficulty Notes
+
+- **Global Time Zone Coordination**: Scheduling matches that are reasonable for all participating regions is extremely complex
+- **Latency Fairness**: Server selection must ensure no team has systematic ping advantage
+- **Viewership Optimization**: Esports revenue depends on concurrent viewership—avoid scheduling marquee matches simultaneously
+- **Patch Version Consistency**: Tournaments must occur on same game version (not modeled in this track but relevant in practice)
+- **Mental Fatigue**: Esports players face cognitive fatigue similar to physical athletes
+- **Broadcast Windows**: Multiple language streams across regions create complex constraints
+
+### Unique Esports Considerations
+
+Unlike traditional sports:
+- **Virtual Venues**: No physical travel, but server location creates "home field advantage" via latency
+- **Global Scale**: Teams from 4+ continents competing simultaneously requires novel fairness constraints
+- **Viewership as Constraint**: Revenue model means schedule quality measured partially by viewership patterns
+- **Rapid Meta Changes**: Game patches can affect competitive balance, requiring version control
+- **Online vs LAN**: Some matches online (latency matters), some at LAN events (latency neutral)
+
+---
+
 ## Track Selection Guide
 
 | If you are... | Start with... | Then try... |
@@ -356,6 +455,7 @@ Available at: `competition/tracks/track-4-multi-division/sample-instance.json`
 | **Commercial vendor** | Track 2 (Amateur) | Track 3 (Professional) |
 | **Academic researcher** | Track 3 (Professional) | Track 4 (Multi-Division) |
 | **Expert optimizer** | Track 3 (Professional) | Track 4 (Multi-Division) |
+| **Esports tournament organizer** | Track 5 (Esports) | Track 4 (Multi-Division) |
 | **Learning OSSS** | Track 1 (Youth) | All tracks |
 
 ---

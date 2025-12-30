@@ -1,0 +1,165 @@
+{
+  "id": "vct-regional-qualifier-2025-result",
+  "instanceId": "vct-regional-qualifier-2025",
+  "version": "0.1.0",
+  "solverMetadata": {
+    "name": "EsportsScheduler Pro",
+    "version": "2.1.0",
+    "algorithmClass": "CP-SAT-Esports",
+    "runtime": 18.7,
+    "timestamp": "2025-05-15T14:30:00Z"
+  },
+  "schedule": {
+    "fixtures": [
+      {
+        "fixtureId": "match-001",
+        "dateTime": "2025-06-05T20:00:00Z",
+        "venueId": "server-neutral-1",
+        "estimatedLatency": {
+          "team-na-1": 90,
+          "team-eu-1": 35
+        },
+        "localTimes": {
+          "team-na-1": "13:00 PST",
+          "team-eu-1": "21:00 BST"
+        }
+      },
+      {
+        "fixtureId": "match-002",
+        "dateTime": "2025-06-06T18:00:00Z",
+        "venueId": "server-eu-west",
+        "estimatedLatency": {
+          "team-na-2": 80,
+          "team-eu-2": 25
+        },
+        "localTimes": {
+          "team-na-2": "14:00 EST",
+          "team-eu-2": "19:00 CET"
+        }
+      },
+      {
+        "fixtureId": "match-003",
+        "dateTime": "2025-06-07T10:00:00Z",
+        "venueId": "server-apac-kr",
+        "estimatedLatency": {
+          "team-apac-1": 60,
+          "team-latam-1": 280
+        },
+        "localTimes": {
+          "team-apac-1": "19:00 SGT",
+          "team-latam-1": "07:00 BRT"
+        },
+        "notes": "Latency delta at upper bound (220ms) - may need neutral server"
+      },
+      {
+        "fixtureId": "match-004",
+        "dateTime": "2025-06-08T22:00:00Z",
+        "venueId": "server-latam-br",
+        "estimatedLatency": {
+          "team-apac-2": 270,
+          "team-latam-2": 15
+        },
+        "localTimes": {
+          "team-apac-2": "07:00 KST (next day)",
+          "team-latam-2": "19:00 CLT"
+        }
+      },
+      {
+        "fixtureId": "match-005",
+        "dateTime": "2025-06-10T00:00:00Z",
+        "venueId": "server-neutral-1",
+        "estimatedLatency": {
+          "team-na-1": 90,
+          "team-apac-1": 260
+        },
+        "localTimes": {
+          "team-na-1": "17:00 PST",
+          "team-apac-1": "09:00 SGT (next day)"
+        }
+      },
+      {
+        "fixtureId": "match-006",
+        "dateTime": "2025-06-11T19:00:00Z",
+        "venueId": "server-eu-west",
+        "estimatedLatency": {
+          "team-eu-1": 10,
+          "team-latam-1": 190
+        },
+        "localTimes": {
+          "team-eu-1": "20:00 BST",
+          "team-latam-1": "16:00 BRT"
+        }
+      }
+    ]
+  },
+  "violations": [
+    {
+      "constraintId": "latency_fairness",
+      "severity": "soft_warning",
+      "fixtureIds": ["match-003"],
+      "message": "Latency delta (220ms) exceeds recommended threshold of 150ms but within hard limit",
+      "penalty": 0
+    }
+  ],
+  "objectives": [
+    {
+      "objectiveId": "regional_fairness",
+      "value": 0.08,
+      "target": { "ideal_deviation": 0.05, "max_deviation": 0.15 },
+      "status": "above_ideal",
+      "perTeamBreakdown": [
+        {
+          "teamId": "team-na-1",
+          "homeMatches": 1,
+          "neutralMatches": 1,
+          "awayMatches": 0,
+          "distribution": { "home": 0.5, "neutral": 0.5, "away": 0.0 }
+        },
+        {
+          "teamId": "team-eu-1",
+          "homeMatches": 1,
+          "neutralMatches": 1,
+          "awayMatches": 0,
+          "distribution": { "home": 0.5, "neutral": 0.5, "away": 0.0 }
+        }
+      ]
+    },
+    {
+      "objectiveId": "viewership_maximization",
+      "value": 0,
+      "target": { "ideal": 0, "max": 5 },
+      "status": "optimal",
+      "details": "No high-profile matches scheduled concurrently"
+    },
+    {
+      "objectiveId": "mental_fatigue_index",
+      "value": 12.4,
+      "target": { "ideal": 10, "max": 30 },
+      "status": "acceptable",
+      "perTeamBreakdown": [
+        { "teamId": "team-na-1", "value": 11.2 },
+        { "teamId": "team-na-2", "value": 10.8 },
+        { "teamId": "team-eu-1", "value": 13.5 },
+        { "teamId": "team-eu-2", "value": 11.9 },
+        { "teamId": "team-apac-1", "value": 14.1 },
+        { "teamId": "team-apac-2", "value": 12.6 },
+        { "teamId": "team-latam-1", "value": 11.7 },
+        { "teamId": "team-latam-2", "value": 13.0 }
+      ]
+    }
+  ],
+  "attestation": {
+    "instanceHash": "sha256:7a9f3e5b2c1d...",
+    "resultHash": "sha256:e4b8f2a6c9d1...",
+    "rulesetHash": "sha256:c3f7a1e5d8b2...",
+    "validatorVersion": "osss-validator@1.0.0"
+  },
+  "metadata": {
+    "generatedAt": "2025-05-15T14:30:00Z",
+    "notes": "Global esports tournament with latency fairness and regional time balance optimization",
+    "recommendations": [
+      "Consider neutral server for match-003 to improve latency fairness",
+      "Regional primetime coverage is balanced across all participating teams"
+    ]
+  }
+}

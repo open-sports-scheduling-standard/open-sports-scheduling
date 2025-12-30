@@ -1,0 +1,287 @@
+{
+  "id": "vct-regional-qualifier-2025",
+  "name": "Valorant Champions Tour - Regional Qualifier",
+  "version": "0.1.0",
+  "timezone": "UTC",
+  "season": {
+    "start": "2025-06-01T00:00:00Z",
+    "end": "2025-07-15T23:59:59Z"
+  },
+  "competition": {
+    "sport": "esports",
+    "game": "valorant",
+    "level": "regional_qualifier",
+    "organizer": "Riot Games"
+  },
+  "entities": {
+    "teams": [
+      {
+        "id": "team-na-1",
+        "name": "Sentinels",
+        "region": "NA",
+        "timezone": "America/Los_Angeles",
+        "homeServer": "server-na-west"
+      },
+      {
+        "id": "team-na-2",
+        "name": "Cloud9",
+        "region": "NA",
+        "timezone": "America/New_York",
+        "homeServer": "server-na-east"
+      },
+      {
+        "id": "team-eu-1",
+        "name": "Fnatic",
+        "region": "EU",
+        "timezone": "Europe/London",
+        "homeServer": "server-eu-west"
+      },
+      {
+        "id": "team-eu-2",
+        "name": "Team Liquid",
+        "region": "EU",
+        "timezone": "Europe/Berlin",
+        "homeServer": "server-eu-central"
+      },
+      {
+        "id": "team-apac-1",
+        "name": "Paper Rex",
+        "region": "APAC",
+        "timezone": "Asia/Singapore",
+        "homeServer": "server-apac-sea"
+      },
+      {
+        "id": "team-apac-2",
+        "name": "DRX",
+        "region": "APAC",
+        "timezone": "Asia/Seoul",
+        "homeServer": "server-apac-kr"
+      },
+      {
+        "id": "team-latam-1",
+        "name": "LOUD",
+        "region": "LATAM",
+        "timezone": "America/Sao_Paulo",
+        "homeServer": "server-latam-br"
+      },
+      {
+        "id": "team-latam-2",
+        "name": "KRÜ Esports",
+        "region": "LATAM",
+        "timezone": "America/Santiago",
+        "homeServer": "server-latam-south"
+      }
+    ],
+    "venues": [
+      {
+        "id": "server-na-west",
+        "name": "NA West Server",
+        "type": "virtual",
+        "region": "NA",
+        "location": { "lat": 37.7749, "lon": -122.4194 },
+        "capacity": 10,
+        "latencyProfiles": {
+          "team-na-1": 10,
+          "team-na-2": 70,
+          "team-eu-1": 150,
+          "team-eu-2": 160,
+          "team-apac-1": 180,
+          "team-apac-2": 170,
+          "team-latam-1": 140,
+          "team-latam-2": 130
+        }
+      },
+      {
+        "id": "server-na-east",
+        "name": "NA East Server",
+        "type": "virtual",
+        "region": "NA",
+        "location": { "lat": 40.7128, "lon": -74.0060 },
+        "capacity": 10,
+        "latencyProfiles": {
+          "team-na-1": 65,
+          "team-na-2": 15,
+          "team-eu-1": 90,
+          "team-eu-2": 85,
+          "team-apac-1": 210,
+          "team-apac-2": 200,
+          "team-latam-1": 120,
+          "team-latam-2": 130
+        }
+      },
+      {
+        "id": "server-eu-west",
+        "name": "EU West Server",
+        "type": "virtual",
+        "region": "EU",
+        "location": { "lat": 51.5074, "lon": -0.1278 },
+        "capacity": 10,
+        "latencyProfiles": {
+          "team-na-1": 140,
+          "team-na-2": 80,
+          "team-eu-1": 10,
+          "team-eu-2": 25,
+          "team-apac-1": 250,
+          "team-apac-2": 240,
+          "team-latam-1": 190,
+          "team-latam-2": 200
+        }
+      },
+      {
+        "id": "server-apac-kr",
+        "name": "APAC Korea Server",
+        "type": "virtual",
+        "region": "APAC",
+        "location": { "lat": 37.5665, "lon": 126.9780 },
+        "capacity": 10,
+        "latencyProfiles": {
+          "team-na-1": 160,
+          "team-na-2": 190,
+          "team-eu-1": 230,
+          "team-eu-2": 240,
+          "team-apac-1": 60,
+          "team-apac-2": 8,
+          "team-latam-1": 280,
+          "team-latam-2": 270
+        }
+      },
+      {
+        "id": "server-neutral-1",
+        "name": "Neutral Server (Iceland)",
+        "type": "virtual",
+        "region": "NEUTRAL",
+        "location": { "lat": 64.1466, "lon": -21.9426 },
+        "capacity": 10,
+        "latencyProfiles": {
+          "team-na-1": 90,
+          "team-na-2": 70,
+          "team-eu-1": 35,
+          "team-eu-2": 40,
+          "team-apac-1": 260,
+          "team-apac-2": 250,
+          "team-latam-1": 150,
+          "team-latam-2": 160
+        }
+      }
+    ]
+  },
+  "fixtures": [
+    {
+      "id": "match-001",
+      "participants": ["team-na-1", "team-eu-1"],
+      "durationMinutes": 120,
+      "priority": 0.9
+    },
+    {
+      "id": "match-002",
+      "participants": ["team-na-2", "team-eu-2"],
+      "durationMinutes": 120,
+      "priority": 0.7
+    },
+    {
+      "id": "match-003",
+      "participants": ["team-apac-1", "team-latam-1"],
+      "durationMinutes": 120,
+      "priority": 0.8
+    },
+    {
+      "id": "match-004",
+      "participants": ["team-apac-2", "team-latam-2"],
+      "durationMinutes": 120,
+      "priority": 0.6
+    },
+    {
+      "id": "match-005",
+      "participants": ["team-na-1", "team-apac-1"],
+      "durationMinutes": 120,
+      "priority": 0.85
+    },
+    {
+      "id": "match-006",
+      "participants": ["team-eu-1", "team-latam-1"],
+      "durationMinutes": 120,
+      "priority": 0.75
+    }
+  ],
+  "constraints": [
+    {
+      "id": "no_team_overlap",
+      "type": "hard",
+      "rule": "no_overlap_team",
+      "selector": { "entityType": "team" }
+    },
+    {
+      "id": "latency_fairness",
+      "type": "hard",
+      "rule": "server_latency_fairness",
+      "selector": { "entityType": "fixture" },
+      "params": {
+        "max_ping_ms": 35,
+        "max_delta_ms": 10
+      }
+    },
+    {
+      "id": "min_rest_24h",
+      "type": "hard",
+      "rule": "min_rest_time",
+      "selector": { "entityType": "team" },
+      "params": { "min_hours": 24 }
+    },
+    {
+      "id": "regional_time_fairness",
+      "type": "hard",
+      "rule": "regional_time_balance",
+      "selector": { "entityType": "fixture" },
+      "params": {
+        "regions": ["NA", "EU", "APAC", "LATAM"],
+        "primetime_windows": {
+          "NA": ["18:00-23:00 PST"],
+          "EU": ["18:00-23:00 CET"],
+          "APAC": ["18:00-23:00 KST"],
+          "LATAM": ["18:00-23:00 BRT"]
+        },
+        "min_primetime_matches_per_team": 2
+      }
+    },
+    {
+      "id": "viewership_optimization",
+      "type": "soft",
+      "rule": "concurrent_match_viewership",
+      "selector": { "entityType": "fixture" },
+      "params": {
+        "max_concurrent_matches": 2,
+        "match_priority_threshold": 0.7
+      },
+      "penalty": { "model": "linear", "weight": 100 }
+    },
+    {
+      "id": "server_rotation",
+      "type": "soft",
+      "rule": "server_rotation_fairness",
+      "selector": { "entityType": "team" },
+      "params": {
+        "target_home_pct": 0.33,
+        "target_neutral_pct": 0.34,
+        "target_away_pct": 0.33
+      },
+      "penalty": { "model": "quadratic", "weight": 50 }
+    }
+  ],
+  "objectives": [
+    {
+      "metric": "regional_fairness",
+      "aggregation": "stddev",
+      "weight": 0.45
+    },
+    {
+      "metric": "viewership_maximization",
+      "aggregation": "sum",
+      "weight": 0.35
+    },
+    {
+      "metric": "mental_fatigue_index",
+      "aggregation": "average",
+      "weight": 0.20
+    }
+  ]
+}

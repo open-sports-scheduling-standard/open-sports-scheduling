@@ -509,6 +509,139 @@ violation = max(0, delta - max_delta)
 
 ---
 
+## Esports-Specific Constraints
+
+The following constraints are specifically designed for esports tournaments and competitions, addressing unique challenges like network latency, global time zones, and viewership optimization.
+
+---
+
+#### `server_latency_fairness`
+**Type:** Hard
+**Purpose:** Ensures fair network latency conditions for all teams in online esports matches.
+
+**Parameters:**
+- `max_ping_ms` (required): Maximum acceptable ping for any team in milliseconds
+- `max_delta_ms` (required): Maximum acceptable ping difference between teams in milliseconds
+
+**Example:**
+```json
+{
+  "id": "latency_fairness",
+  "type": "hard",
+  "rule": "server_latency_fairness",
+  "selector": { "entityType": "fixture" },
+  "params": {
+    "max_ping_ms": 35,
+    "max_delta_ms": 10
+  }
+}
+```
+
+**Rationale:** Network latency creates competitive advantage similar to home field advantage in traditional sports. Ensuring fairness requires both absolute ping limits and relative delta limits between opponents.
+
+**Recommended Ranges:**
+- Competitive tournaments: max_ping_ms: 30-40ms, max_delta_ms: 5-10ms
+- Regional leagues: max_ping_ms: 20-30ms, max_delta_ms: 5ms
+- Casual play: max_ping_ms: 50-75ms, max_delta_ms: 15ms
+
+---
+
+#### `regional_time_balance`
+**Type:** Hard or Soft
+**Purpose:** Ensures fair distribution of match times across global regions in international esports tournaments.
+
+**Parameters:**
+- `regions` (required): Array of region identifiers (e.g., ["NA", "EU", "APAC", "LATAM"])
+- `primetime_windows` (required): Map of region to primetime windows in local time
+- `min_primetime_matches_per_team` (required): Minimum matches each team should play in their home region primetime
+
+**Example:**
+```json
+{
+  "id": "regional_fairness",
+  "type": "hard",
+  "rule": "regional_time_balance",
+  "selector": { "entityType": "fixture" },
+  "params": {
+    "regions": ["NA", "EU", "APAC", "LATAM"],
+    "primetime_windows": {
+      "NA": ["18:00-23:00 EST"],
+      "EU": ["18:00-23:00 CET"],
+      "APAC": ["18:00-23:00 KST"],
+      "LATAM": ["18:00-23:00 BRT"]
+    },
+    "min_primetime_matches_per_team": 3
+  }
+}
+```
+
+**Rationale:** Balancing player welfare (reasonable local times) with viewership fairness across regions. Critical for global tournaments where teams span multiple continents.
+
+---
+
+#### `concurrent_match_viewership`
+**Type:** Soft
+**Purpose:** Limits concurrent high-profile matches to maximize viewership and prevent audience fragmentation.
+
+**Parameters:**
+- `max_concurrent_matches` (required): Maximum number of matches that should occur simultaneously
+- `match_priority_threshold` (optional): Priority score threshold above which matches count as 'high-profile' (0-1)
+
+**Example:**
+```json
+{
+  "id": "viewership_opt",
+  "type": "soft",
+  "rule": "concurrent_match_viewership",
+  "selector": { "entityType": "fixture" },
+  "params": {
+    "max_concurrent_matches": 2,
+    "match_priority_threshold": 0.7
+  },
+  "penalty": { "model": "linear", "weight": 100 }
+}
+```
+
+**Rationale:** Unlike traditional sports where attendance is limited by venue capacity, esports viewers can easily switch between concurrent streams. Revenue optimization requires careful scheduling to avoid viewership cannibalization.
+
+**Recommended Ranges:**
+- Single broadcast stream: max_concurrent_matches: 1
+- Multi-stream production: max_concurrent_matches: 2-4
+- Group stage: max_concurrent_matches: 3-6
+
+---
+
+#### `server_rotation_fairness`
+**Type:** Soft
+**Purpose:** Ensures teams play balanced distribution across home, neutral, and away servers.
+
+**Parameters:**
+- `target_home_pct` (required): Target percentage of matches on home region server (0-1)
+- `target_neutral_pct` (required): Target percentage of matches on neutral server (0-1)
+- `target_away_pct` (required): Target percentage of matches on opponent region server (0-1)
+
+**Example:**
+```json
+{
+  "id": "server_rotation",
+  "type": "soft",
+  "rule": "server_rotation_fairness",
+  "selector": { "entityType": "team" },
+  "params": {
+    "target_home_pct": 0.33,
+    "target_neutral_pct": 0.34,
+    "target_away_pct": 0.33
+  },
+  "penalty": { "model": "quadratic", "weight": 50 }
+}
+```
+
+**Rationale:** Analogous to home/away balance in traditional sports. Server location affects latency, so fair distribution ensures no systematic advantage.
+
+**Note:** Status is experimental - server location assignment may be handled at different architectural layer than scheduling.
+
+---
+
 ## Custom Constraints
 
 Implementations MAY support custom constraints through extension mechanisms. Custom constraints SHOULD follow the same schema structure and MUST clearly document:

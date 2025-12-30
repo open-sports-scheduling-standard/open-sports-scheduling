@@ -2,12 +2,12 @@
 ## Charter
 
 ### Mission
-OSSS exists to define and steward a **neutral, open, and interoperable standard** for sports scheduling.
+OSSS exists to define and steward a **neutral, open, and interoperable standard** for sports scheduling across traditional sports, esports, and all competitive scheduling scenarios.
 
 ### Scope
 OSSS defines:
-- Scheduling entities and resources
-- Hard and soft constraints
+- Scheduling entities and resources (teams, venues physical and virtual, officials)
+- Hard and soft constraints (including esports-specific: latency fairness, regional balance)
 - Optimization objectives
 - Explainable schedule outputs
 

@@ -1,0 +1,47 @@
+{
+  "osssVersion": "0.1.0",
+  "instance": {
+    "metadata": {
+      "name": "Ultimate Frisbee League",
+      "track": "amateur",
+      "sport": "Ultimate Frisbee",
+      "sportType": "Ultimate Frisbee",
+      "season": "Summer 2026",
+      "timezone": "America/Denver",
+      "difficulty": "⭐⭐⭐",
+      "estimatedComplexity": "moderate",
+      "competitionDataset": true
+    },
+    "teams": [
+      {"teamId": "ult-01", "name": "Denver Summit"},
+      {"teamId": "ult-02", "name": "Portland Rhino"},
+      {"teamId": "ult-03", "name": "Seattle Cascades"},
+      {"teamId": "ult-04", "name": "San Francisco Flamethrowers"},
+      {"teamId": "ult-05", "name": "Austin Sol"},
+      {"teamId": "ult-06", "name": "Madison Radicals"}
+    ],
+    "venues": [
+      {
+        "venueId": "field-01",
+        "name": "Ultimate Field",
+        "resources": [{"resourceId": "field-1", "resourceType": "ultimate_field"}],
+        "availability": [{
+          "recurringPattern": {
+            "daysOfWeek": ["saturday", "sunday"],
+            "timeWindows": [{"start": "09:00", "end": "18:00"}]
+          }
+        }]
+      }
+    ],
+    "fixtures": [
+      {"fixtureId": "uf1", "homeTeamId": "ult-01", "awayTeamId": "ult-02", "estimatedDuration": 90},
+      {"fixtureId": "uf2", "homeTeamId": "ult-03", "awayTeamId": "ult-04", "estimatedDuration": 90},
+      {"fixtureId": "uf3", "homeTeamId": "ult-05", "awayTeamId": "ult-06", "estimatedDuration": 90}
+    ],
+    "constraints": [
+      {"constraintId": "no_overlap_team", "type": "hard"},
+      {"constraintId": "no_overlap_venue_resource", "type": "hard"},
+      {"constraintId": "min_rest_time", "type": "hard", "params": {"min_hours": 48}}
+    ]
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "osssVersion": "0.1.0",
+  "instance": {
+    "metadata": {
+      "name": "One Day International Cricket Series",
+      "track": "professional",
+      "sport": "One Day International (ODI)",
+      "sportType": "Cricket",
+      "season": "Summer 2026",
+      "timezone": "Europe/London",
+      "difficulty": "⭐⭐⭐⭐",
+      "estimatedComplexity": "high",
+      "competitionDataset": true
+    },
+    "teams": [
+      {"teamId": "odi-01", "name": "England"},
+      {"teamId": "odi-02", "name": "Australia"},
+      {"teamId": "odi-03", "name": "India"},
+      {"teamId": "odi-04", "name": "Pakistan"},
+      {"teamId": "odi-05", "name": "New Zealand"},
+      {"teamId": "odi-06", "name": "West Indies"}
+    ],
+    "venues": [
+      {
+        "venueId": "lords",
+        "name": "Lord's Cricket Ground",
+        "resources": [{"resourceId": "lords-pitch", "resourceType": "odi_ground"}],
+        "availability": [{
+          "recurringPattern": {
+            "daysOfWeek": ["wednesday", "saturday", "sunday"],
+            "timeWindows": [{"start": "10:30", "end": "19:00"}]
+          }
+        }]
+      }
+    ],
+    "fixtures": [
+      {"fixtureId": "odi1", "homeTeamId": "odi-01", "awayTeamId": "odi-02", "estimatedDuration": 480},
+      {"fixtureId": "odi2", "homeTeamId": "odi-03", "awayTeamId": "odi-04", "estimatedDuration": 480},
+      {"fixtureId": "odi3", "homeTeamId": "odi-05", "awayTeamId": "odi-06", "estimatedDuration": 480}
+    ],
+    "constraints": [
+      {"constraintId": "no_overlap_team", "type": "hard"},
+      {"constraintId": "no_overlap_venue_resource", "type": "hard"},
+      {"constraintId": "min_rest_time", "type": "hard", "params": {"min_hours": 72}}
+    ]
+  }
+}

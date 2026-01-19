@@ -1,0 +1,149 @@
+{
+  "id": "ipl-2026",
+  "name": "Indian Premier League 2026",
+  "version": "1.0.0",
+  "sport": "Twenty20 (T20)",
+  "timezone": "Asia/Kolkata",
+  "season": {
+    "start": "2026-03-20T00:00:00+05:30",
+    "end": "2026-05-25T23:59:59+05:30"
+  },
+  "competition": {
+    "name": "Indian Premier League",
+    "format": "round_robin_playoffs",
+    "organizer": "BCCI"
+  },
+  "entities": {
+    "teams": [
+      {"id": "mi", "name": "Mumbai Indians", "homeVenue": "wankhede"},
+      {"id": "csk", "name": "Chennai Super Kings", "homeVenue": "chepauk"},
+      {"id": "rcb", "name": "Royal Challengers Bangalore", "homeVenue": "chinnaswamy"},
+      {"id": "kkr", "name": "Kolkata Knight Riders", "homeVenue": "eden"},
+      {"id": "dc", "name": "Delhi Capitals", "homeVenue": "kotla"},
+      {"id": "srh", "name": "Sunrisers Hyderabad", "homeVenue": "uppal"},
+      {"id": "rr", "name": "Rajasthan Royals", "homeVenue": "jaipur"},
+      {"id": "pbks", "name": "Punjab Kings", "homeVenue": "mohali"}
+    ],
+    "venues": [
+      {
+        "id": "wankhede",
+        "name": "Wankhede Stadium",
+        "location": {"lat": 18.9388, "lon": 72.8258, "city": "Mumbai"},
+        "capacity": 33108
+      },
+      {
+        "id": "chepauk",
+        "name": "M.A. Chidambaram Stadium",
+        "location": {"lat": 13.0627, "lon": 80.2792, "city": "Chennai"},
+        "capacity": 50000
+      },
+      {
+        "id": "chinnaswamy",
+        "name": "M. Chinnaswamy Stadium",
+        "location": {"lat": 12.9789, "lon": 77.5996, "city": "Bangalore"},
+        "capacity": 40000
+      },
+      {
+        "id": "eden",
+        "name": "Eden Gardens",
+        "location": {"lat": 22.5645, "lon": 88.3433, "city": "Kolkata"},
+        "capacity": 66000
+      },
+      {
+        "id": "kotla",
+        "name": "Arun Jaitley Stadium",
+        "location": {"lat": 28.6377, "lon": 77.2426, "city": "Delhi"},
+        "capacity": 41820
+      },
+      {
+        "id": "uppal",
+        "name": "Rajiv Gandhi International Stadium",
+        "location": {"lat": 17.4065, "lon": 78.5525, "city": "Hyderabad"},
+        "capacity": 55000
+      },
+      {
+        "id": "jaipur",
+        "name": "Sawai Mansingh Stadium",
+        "location": {"lat": 26.8939, "lon": 75.8068, "city": "Jaipur"},
+        "capacity": 30000
+      },
+      {
+        "id": "mohali",
+        "name": "Punjab Cricket Association Stadium",
+        "location": {"lat": 30.6905, "lon": 76.7367, "city": "Mohali"},
+        "capacity": 26000
+      }
+    ]
+  },
+  "fixtures": [
+    {"id": "match-1", "participants": ["mi", "csk"], "durationMinutes": 210},
+    {"id": "match-2", "participants": ["rcb", "kkr"], "durationMinutes": 210},
+    {"id": "match-3", "participants": ["dc", "srh"], "durationMinutes": 210},
+    {"id": "match-4", "participants": ["rr", "pbks"], "durationMinutes": 210}
+  ],
+  "constraints": [
+    {
+      "id": "no_overlap_team",
+      "type": "hard",
+      "rule": "no_overlap_team",
+      "selector": {"entityType": "team"}
+    },
+    {
+      "id": "no_overlap_venue",
+      "type": "hard",
+      "rule": "no_overlap_venue_resource",
+      "selector": {"entityType": "venue"}
+    },
+    {
+      "id": "min_rest_48h",
+      "type": "hard",
+      "rule": "min_rest_time",
+      "selector": {"entityType": "team"},
+      "params": {"min_hours": 48}
+    },
+    {
+      "id": "evening_slots",
+      "type": "soft",
+      "rule": "time_window",
+      "selector": {"entityType": "fixture"},
+      "params": {
+        "preferred_start_times": ["16:00", "20:00"]
+      },
+      "penalty": {"model": "linear", "weight": 100},
+      "comment": "Prime time TV viewership slots"
+    },
+    {
+      "id": "max_back_to_back_away",
+      "type": "soft",
+      "rule": "max_consecutive_away",
+      "selector": {"entityType": "team"},
+      "params": {"max_consecutive": 2},
+      "penalty": {"model": "exponential", "weight": 200}
+    }
+  ],
+  "objectives": [
+    {
+      "metric": "broadcast_viewership",
+      "aggregation": "sum",
+      "weight": 0.5,
+      "direction": "maximize"
+    },
+    {
+      "metric": "total_travel_distance",
+      "aggregation": "sum",
+      "weight": 0.3,
+      "direction": "minimize"
+    },
+    {
+      "metric": "home_away_balance",
+      "aggregation": "variance",
+      "weight": 0.2,
+      "direction": "minimize"
+    }
+  ],
+  "metadata": {
+    "description": "IPL T20 Cricket - world's most popular T20 cricket league",
+    "tags": ["cricket", "t20", "india", "franchise", "broadcast"],
+    "difficulty": "high"
+  }
+}

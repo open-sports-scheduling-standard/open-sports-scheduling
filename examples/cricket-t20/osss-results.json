@@ -1,0 +1,38 @@
+{
+  "instanceId": "ipl-2026",
+  "scheduledFixtures": [
+    {
+      "fixtureId": "match-1",
+      "venue": "wankhede",
+      "startTime": "2026-03-20T20:00:00+05:30",
+      "endTime": "2026-03-20T23:30:00+05:30"
+    },
+    {
+      "fixtureId": "match-2",
+      "venue": "chinnaswamy",
+      "startTime": "2026-03-21T16:00:00+05:30",
+      "endTime": "2026-03-21T19:30:00+05:30"
+    },
+    {
+      "fixtureId": "match-3",
+      "venue": "kotla",
+      "startTime": "2026-03-21T20:00:00+05:30",
+      "endTime": "2026-03-21T23:30:00+05:30"
+    },
+    {
+      "fixtureId": "match-4",
+      "venue": "jaipur",
+      "startTime": "2026-03-22T16:00:00+05:30",
+      "endTime": "2026-03-22T19:30:00+05:30"
+    }
+  ],
+  "score": {
+    "objectives": {
+      "broadcast_viewership": 145000000,
+      "total_travel_distance": 3200,
+      "home_away_balance": 0.5
+    },
+    "violations": [],
+    "totalPenalty": 0
+  }
+}

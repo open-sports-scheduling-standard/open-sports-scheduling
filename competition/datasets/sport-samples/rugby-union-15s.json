@@ -1,0 +1,59 @@
+{
+  "osssVersion": "0.1.0",
+  "instance": {
+    "metadata": {
+      "name": "Rugby Union 15s Championship",
+      "track": "professional",
+      "sport": "Rugby Union 15s",
+      "sportType": "Rugby",
+      "season": "Spring 2026",
+      "timezone": "Europe/London",
+      "difficulty": "⭐⭐⭐⭐",
+      "estimatedComplexity": "high",
+      "competitionDataset": true
+    },
+    "teams": [
+      {"teamId": "ru15-01", "name": "London Warriors"},
+      {"teamId": "ru15-02", "name": "Edinburgh Thunder"},
+      {"teamId": "ru15-03", "name": "Cardiff Dragons"},
+      {"teamId": "ru15-04", "name": "Dublin Lions"},
+      {"teamId": "ru15-05", "name": "Bristol Bears"},
+      {"teamId": "ru15-06", "name": "Leicester Tigers"}
+    ],
+    "venues": [
+      {
+        "venueId": "stadium-01",
+        "name": "International Rugby Stadium",
+        "resources": [{"resourceId": "field-a", "resourceType": "rugby_field"}],
+        "availability": [{
+          "recurringPattern": {
+            "daysOfWeek": ["saturday"],
+            "timeWindows": [{"start": "15:00", "end": "19:00"}]
+          }
+        }]
+      }
+    ],
+    "fixtures": [
+      {"fixtureId": "m1", "homeTeamId": "ru15-01", "awayTeamId": "ru15-02", "estimatedDuration": 100},
+      {"fixtureId": "m2", "homeTeamId": "ru15-01", "awayTeamId": "ru15-03", "estimatedDuration": 100},
+      {"fixtureId": "m3", "homeTeamId": "ru15-01", "awayTeamId": "ru15-04", "estimatedDuration": 100},
+      {"fixtureId": "m4", "homeTeamId": "ru15-01", "awayTeamId": "ru15-05", "estimatedDuration": 100},
+      {"fixtureId": "m5", "homeTeamId": "ru15-01", "awayTeamId": "ru15-06", "estimatedDuration": 100},
+      {"fixtureId": "m6", "homeTeamId": "ru15-02", "awayTeamId": "ru15-03", "estimatedDuration": 100},
+      {"fixtureId": "m7", "homeTeamId": "ru15-02", "awayTeamId": "ru15-04", "estimatedDuration": 100},
+      {"fixtureId": "m8", "homeTeamId": "ru15-02", "awayTeamId": "ru15-05", "estimatedDuration": 100},
+      {"fixtureId": "m9", "homeTeamId": "ru15-02", "awayTeamId": "ru15-06", "estimatedDuration": 100},
+      {"fixtureId": "m10", "homeTeamId": "ru15-03", "awayTeamId": "ru15-04", "estimatedDuration": 100},
+      {"fixtureId": "m11", "homeTeamId": "ru15-03", "awayTeamId": "ru15-05", "estimatedDuration": 100},
+      {"fixtureId": "m12", "homeTeamId": "ru15-03", "awayTeamId": "ru15-06", "estimatedDuration": 100},
+      {"fixtureId": "m13", "homeTeamId": "ru15-04", "awayTeamId": "ru15-05", "estimatedDuration": 100},
+      {"fixtureId": "m14", "homeTeamId": "ru15-04", "awayTeamId": "ru15-06", "estimatedDuration": 100},
+      {"fixtureId": "m15", "homeTeamId": "ru15-05", "awayTeamId": "ru15-06", "estimatedDuration": 100}
+    ],
+    "constraints": [
+      {"constraintId": "no_overlap_team", "type": "hard"},
+      {"constraintId": "no_overlap_venue_resource", "type": "hard"},
+      {"constraintId": "min_rest_time", "type": "hard", "params": {"min_hours": 168}}
+    ]
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "osssVersion": "0.1.0",
+  "instance": {
+    "metadata": {
+      "name": "Singles Tennis Grand Slam",
+      "track": "professional",
+      "sport": "Singles Tennis",
+      "sportType": "Tennis",
+      "season": "Summer 2026",
+      "timezone": "Europe/London",
+      "difficulty": "⭐⭐⭐⭐",
+      "estimatedComplexity": "high",
+      "competitionDataset": true
+    },
+    "teams": [
+      {"teamId": "ten-01", "name": "Player 1"},
+      {"teamId": "ten-02", "name": "Player 2"},
+      {"teamId": "ten-03", "name": "Player 3"},
+      {"teamId": "ten-04", "name": "Player 4"},
+      {"teamId": "ten-05", "name": "Player 5"},
+      {"teamId": "ten-06", "name": "Player 6"},
+      {"teamId": "ten-07", "name": "Player 7"},
+      {"teamId": "ten-08", "name": "Player 8"}
+    ],
+    "venues": [
+      {
+        "venueId": "wimbledon",
+        "name": "All England Club",
+        "resources": [
+          {"resourceId": "centre-court", "resourceType": "grass_court"},
+          {"resourceId": "court-1", "resourceType": "grass_court"},
+          {"resourceId": "court-2", "resourceType": "grass_court"}
+        ],
+        "availability": [{
+          "recurringPattern": {
+            "daysOfWeek": ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"],
+            "timeWindows": [{"start": "11:00", "end": "21:00"}]
+          }
+        }]
+      }
+    ],
+    "fixtures": [
+      {"fixtureId": "t1", "homeTeamId": "ten-01", "awayTeamId": "ten-02", "estimatedDuration": 180},
+      {"fixtureId": "t2", "homeTeamId": "ten-03", "awayTeamId": "ten-04", "estimatedDuration": 180},
+      {"fixtureId": "t3", "homeTeamId": "ten-05", "awayTeamId": "ten-06", "estimatedDuration": 180},
+      {"fixtureId": "t4", "homeTeamId": "ten-07", "awayTeamId": "ten-08", "estimatedDuration": 180}
+    ],
+    "constraints": [
+      {"constraintId": "no_overlap_team", "type": "hard"},
+      {"constraintId": "no_overlap_venue_resource", "type": "hard"},
+      {"constraintId": "min_rest_time", "type": "hard", "params": {"min_hours": 48}}
+    ]
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "osssVersion": "0.1.0",
+  "instance": {
+    "metadata": {
+      "name": "Ice Hockey League",
+      "track": "professional",
+      "sport": "Ice Hockey",
+      "sportType": "Hockey",
+      "season": "Winter 2025-2026",
+      "timezone": "America/Toronto",
+      "difficulty": "⭐⭐⭐⭐",
+      "estimatedComplexity": "high",
+      "competitionDataset": true
+    },
+    "teams": [
+      {"teamId": "ih-01", "name": "Toronto Maple Leafs"},
+      {"teamId": "ih-02", "name": "Montreal Canadiens"},
+      {"teamId": "ih-03", "name": "Ottawa Senators"},
+      {"teamId": "ih-04", "name": "Winnipeg Jets"},
+      {"teamId": "ih-05", "name": "Calgary Flames"},
+      {"teamId": "ih-06", "name": "Vancouver Canucks"}
+    ],
+    "venues": [
+      {
+        "venueId": "arena-01",
+        "name": "Scotiabank Arena",
+        "resources": [{"resourceId": "rink-1", "resourceType": "ice_rink"}],
+        "availability": [{
+          "recurringPattern": {
+            "daysOfWeek": ["tuesday", "thursday", "saturday"],
+            "timeWindows": [{"start": "19:00", "end": "22:00"}]
+          }
+        }]
+      }
+    ],
+    "fixtures": [
+      {"fixtureId": "g1", "homeTeamId": "ih-01", "awayTeamId": "ih-02", "estimatedDuration": 150},
+      {"fixtureId": "g2", "homeTeamId": "ih-03", "awayTeamId": "ih-04", "estimatedDuration": 150},
+      {"fixtureId": "g3", "homeTeamId": "ih-05", "awayTeamId": "ih-06", "estimatedDuration": 150}
+    ],
+    "constraints": [
+      {"constraintId": "no_overlap_team", "type": "hard"},
+      {"constraintId": "no_overlap_venue_resource", "type": "hard"},
+      {"constraintId": "min_rest_time", "type": "hard", "params": {"min_hours": 48}}
+    ]
+  }
+}

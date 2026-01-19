@@ -1,0 +1,47 @@
+{
+  "osssVersion": "0.1.0",
+  "instance": {
+    "metadata": {
+      "name": "Gaelic Football Championship",
+      "track": "amateur",
+      "sport": "Gaelic Football",
+      "sportType": "Gaelic Football",
+      "season": "Summer 2026",
+      "timezone": "Europe/Dublin",
+      "difficulty": "⭐⭐⭐",
+      "estimatedComplexity": "moderate",
+      "competitionDataset": true
+    },
+    "teams": [
+      {"teamId": "gf-01", "name": "Dublin GAA"},
+      {"teamId": "gf-02", "name": "Kerry GAA"},
+      {"teamId": "gf-03", "name": "Mayo GAA"},
+      {"teamId": "gf-04", "name": "Cork GAA"},
+      {"teamId": "gf-05", "name": "Galway GAA"},
+      {"teamId": "gf-06", "name": "Tyrone GAA"}
+    ],
+    "venues": [
+      {
+        "venueId": "park-01",
+        "name": "Croke Park",
+        "resources": [{"resourceId": "pitch-1", "resourceType": "gaelic_pitch"}],
+        "availability": [{
+          "recurringPattern": {
+            "daysOfWeek": ["sunday"],
+            "timeWindows": [{"start": "14:00", "end": "18:00"}]
+          }
+        }]
+      }
+    ],
+    "fixtures": [
+      {"fixtureId": "gf1", "homeTeamId": "gf-01", "awayTeamId": "gf-02", "estimatedDuration": 90},
+      {"fixtureId": "gf2", "homeTeamId": "gf-03", "awayTeamId": "gf-04", "estimatedDuration": 90},
+      {"fixtureId": "gf3", "homeTeamId": "gf-05", "awayTeamId": "gf-06", "estimatedDuration": 90}
+    ],
+    "constraints": [
+      {"constraintId": "no_overlap_team", "type": "hard"},
+      {"constraintId": "no_overlap_venue_resource", "type": "hard"},
+      {"constraintId": "min_rest_time", "type": "hard", "params": {"min_hours": 168}}
+    ]
+  }
+}

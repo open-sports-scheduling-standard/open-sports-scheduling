@@ -1,0 +1,49 @@
+{
+  "osssVersion": "0.1.0",
+  "instance": {
+    "metadata": {
+      "name": "Track 100m Sprint Championship",
+      "track": "professional",
+      "sport": "Track 100m Sprint",
+      "sportType": "Track & Field",
+      "season": "Summer 2026",
+      "timezone": "Europe/Paris",
+      "difficulty": "⭐⭐⭐",
+      "estimatedComplexity": "moderate",
+      "competitionDataset": true
+    },
+    "teams": [
+      {"teamId": "spr-01", "name": "Athlete 1"},
+      {"teamId": "spr-02", "name": "Athlete 2"},
+      {"teamId": "spr-03", "name": "Athlete 3"},
+      {"teamId": "spr-04", "name": "Athlete 4"},
+      {"teamId": "spr-05", "name": "Athlete 5"},
+      {"teamId": "spr-06", "name": "Athlete 6"},
+      {"teamId": "spr-07", "name": "Athlete 7"},
+      {"teamId": "spr-08", "name": "Athlete 8"}
+    ],
+    "venues": [
+      {
+        "venueId": "stadium-01",
+        "name": "Olympic Stadium",
+        "resources": [{"resourceId": "track-lanes", "resourceType": "sprint_track"}],
+        "availability": [{
+          "recurringPattern": {
+            "daysOfWeek": ["friday", "saturday", "sunday"],
+            "timeWindows": [{"start": "10:00", "end": "19:00"}]
+          }
+        }]
+      }
+    ],
+    "fixtures": [
+      {"fixtureId": "heat1", "participants": ["spr-01", "spr-02", "spr-03", "spr-04"], "estimatedDuration": 15, "type": "heat"},
+      {"fixtureId": "heat2", "participants": ["spr-05", "spr-06", "spr-07", "spr-08"], "estimatedDuration": 15, "type": "heat"},
+      {"fixtureId": "final", "participants": ["TBD"], "estimatedDuration": 15, "type": "final"}
+    ],
+    "constraints": [
+      {"constraintId": "no_overlap_team", "type": "hard"},
+      {"constraintId": "no_overlap_venue_resource", "type": "hard"},
+      {"constraintId": "min_rest_time", "type": "hard", "params": {"min_hours": 2}}
+    ]
+  }
+}

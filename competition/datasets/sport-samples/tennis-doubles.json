@@ -1,0 +1,50 @@
+{
+  "osssVersion": "0.1.0",
+  "instance": {
+    "metadata": {
+      "name": "Doubles Tennis Championship",
+      "track": "professional",
+      "sport": "Doubles Tennis",
+      "sportType": "Tennis",
+      "season": "Summer 2026",
+      "timezone": "America/New_York",
+      "difficulty": "⭐⭐⭐⭐",
+      "estimatedComplexity": "high",
+      "competitionDataset": true
+    },
+    "teams": [
+      {"teamId": "td-01", "name": "Team 1 (Player A & B)"},
+      {"teamId": "td-02", "name": "Team 2 (Player C & D)"},
+      {"teamId": "td-03", "name": "Team 3 (Player E & F)"},
+      {"teamId": "td-04", "name": "Team 4 (Player G & H)"},
+      {"teamId": "td-05", "name": "Team 5 (Player I & J)"},
+      {"teamId": "td-06", "name": "Team 6 (Player K & L)"}
+    ],
+    "venues": [
+      {
+        "venueId": "tennis-center",
+        "name": "Tennis Center",
+        "resources": [
+          {"resourceId": "court-1", "resourceType": "hard_court"},
+          {"resourceId": "court-2", "resourceType": "hard_court"}
+        ],
+        "availability": [{
+          "recurringPattern": {
+            "daysOfWeek": ["thursday", "friday", "saturday", "sunday"],
+            "timeWindows": [{"start": "10:00", "end": "20:00"}]
+          }
+        }]
+      }
+    ],
+    "fixtures": [
+      {"fixtureId": "d1", "homeTeamId": "td-01", "awayTeamId": "td-02", "estimatedDuration": 150},
+      {"fixtureId": "d2", "homeTeamId": "td-03", "awayTeamId": "td-04", "estimatedDuration": 150},
+      {"fixtureId": "d3", "homeTeamId": "td-05", "awayTeamId": "td-06", "estimatedDuration": 150}
+    ],
+    "constraints": [
+      {"constraintId": "no_overlap_team", "type": "hard"},
+      {"constraintId": "no_overlap_venue_resource", "type": "hard"},
+      {"constraintId": "min_rest_time", "type": "hard", "params": {"min_hours": 24}}
+    ]
+  }
+}

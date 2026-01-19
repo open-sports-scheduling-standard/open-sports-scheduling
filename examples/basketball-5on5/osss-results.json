@@ -1,0 +1,38 @@
+{
+  "instanceId": "euroleague-2026",
+  "scheduledFixtures": [
+    {
+      "fixtureId": "round1-1",
+      "venue": "wizink",
+      "startTime": "2025-10-03T20:45:00+02:00",
+      "endTime": "2025-10-03T22:45:00+02:00"
+    },
+    {
+      "fixtureId": "round1-2",
+      "venue": "sinan-erdem",
+      "startTime": "2025-10-04T20:00:00+03:00",
+      "endTime": "2025-10-04T22:00:00+03:00"
+    },
+    {
+      "fixtureId": "round2-1",
+      "venue": "wizink",
+      "startTime": "2025-10-10T20:45:00+02:00",
+      "endTime": "2025-10-10T22:45:00+02:00"
+    },
+    {
+      "fixtureId": "round2-2",
+      "venue": "palau",
+      "startTime": "2025-10-11T20:45:00+02:00",
+      "endTime": "2025-10-11T22:45:00+02:00"
+    }
+  ],
+  "score": {
+    "objectives": {
+      "broadcast_coverage": 12500000,
+      "travel_distance": 4200,
+      "rest_fairness": 0.3
+    },
+    "violations": [],
+    "totalPenalty": 0
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "osssVersion": "0.1.0",
+  "instance": {
+    "metadata": {
+      "name": "Singles Squash Championship",
+      "track": "professional",
+      "sport": "Singles Squash",
+      "sportType": "Squash",
+      "season": "2026",
+      "timezone": "Europe/London",
+      "difficulty": "⭐⭐⭐",
+      "estimatedComplexity": "moderate",
+      "competitionDataset": true
+    },
+    "teams": [
+      {"teamId": "sq-01", "name": "Player A"},
+      {"teamId": "sq-02", "name": "Player B"},
+      {"teamId": "sq-03", "name": "Player C"},
+      {"teamId": "sq-04", "name": "Player D"},
+      {"teamId": "sq-05", "name": "Player E"},
+      {"teamId": "sq-06", "name": "Player F"}
+    ],
+    "venues": [
+      {
+        "venueId": "club-01",
+        "name": "Squash Club",
+        "resources": [
+          {"resourceId": "court-1", "resourceType": "squash_court"},
+          {"resourceId": "court-2", "resourceType": "squash_court"}
+        ],
+        "availability": [{
+          "recurringPattern": {
+            "daysOfWeek": ["thursday", "friday", "saturday", "sunday"],
+            "timeWindows": [{"start": "09:00", "end": "21:00"}]
+          }
+        }]
+      }
+    ],
+    "fixtures": [
+      {"fixtureId": "sq1", "homeTeamId": "sq-01", "awayTeamId": "sq-02", "estimatedDuration": 60},
+      {"fixtureId": "sq2", "homeTeamId": "sq-03", "awayTeamId": "sq-04", "estimatedDuration": 60},
+      {"fixtureId": "sq3", "homeTeamId": "sq-05", "awayTeamId": "sq-06", "estimatedDuration": 60}
+    ],
+    "constraints": [
+      {"constraintId": "no_overlap_team", "type": "hard"},
+      {"constraintId": "no_overlap_venue_resource", "type": "hard"},
+      {"constraintId": "min_rest_time", "type": "hard", "params": {"min_hours": 4}}
+    ]
+  }
+}

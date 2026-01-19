@@ -14,6 +14,8 @@ Welcome to the OSSS Scheduling Challenge - an open competition that brings toget
 - **Track 2 (Amateur)** ⭐⭐⭐ - Intermediate, 12-24 teams
 - **Track 3 (Professional)** ⭐⭐⭐⭐ - Advanced, 16-32 teams
 - **Track 4 (Multi-Division)** ⭐⭐⭐⭐⭐ - Expert, 40+ teams
+- **Track 5 (Esports)** ⭐⭐⭐⭐ - Global esports tournaments
+- **Track 6 (Master)** ⭐⭐⭐⭐⭐⭐ - Ultimate challenge: Multi-sport global championship
 
 [Read more about tracks →](./tracks.md)
 
@@ -61,11 +63,15 @@ https://opensportsscheduling.org/competition/leaderboard
 ## Competition Structure
 
 ### Tracks
-Four difficulty levels catering to different expertise:
+Six difficulty levels catering to different expertise:
 - Beginners → Track 1 (Youth)
 - Intermediates → Track 2 (Amateur)
 - Advanced → Track 3 (Professional)
 - Experts → Track 4 (Multi-Division)
+- Esports Specialists → Track 5 (Global Esports)
+- Ultimate Challenge → Track 6 (Master Championship - Multi-Sport Global)
+
+**NEW: Track 6 Master** combines all previous challenges plus multi-sport coordination, hybrid online/LAN scheduling, global time zones, and sustainability goals. The most complex scheduling problem in the competition!
 
 [Full track details →](./tracks.md)
 
@@ -89,6 +95,8 @@ Four difficulty levels catering to different expertise:
 - [**Datasets**](./datasets.md) - Dataset catalog and generation tools
 - [**Leaderboard**](./leaderboard.md) - Ranking methodology
 - [**Badges**](./badges.md) - Recognition and awards
+- [**Testing Guide**](./TESTING-GUIDE.md) - 📋 Complete testing plan for submissions
+- [**GitHub Setup**](./GITHUB-SETUP.md) - 🔧 Fork, clone, and submission workflow
 
 ### Tools
 ```bash
@@ -163,36 +171,45 @@ osss-validate conformance --conformance ../conformance --schemas ../schemas --re
 ## Example Workflow
 
 ```bash
-# Step 1: Generate a training instance
-osss-validate dataset-generate \
-  --track amateur \
-  --num-teams 16 \
-  --num-venues 8 \
-  --season-weeks 20 \
-  --output instance.json \
-  --seed 42
+# Step 1: Fork and clone repository
+git clone https://github.com/YOUR-USERNAME/open-sports-scheduling.git
+cd open-sports-scheduling
+npm install
 
-# Step 2: Develop your solver (your code here)
+# Step 2: Download competition instance
+TRACK="track-2-amateur"
+INSTANCE="amateur-2025-01"
+cp "competition/instances/${TRACK}/${INSTANCE}.json" instance.json
+
+# Step 3: Develop your solver (your code here)
 ./my-solver --input instance.json --output result.json
 
-# Step 3: Validate the result
+# Step 4: Validate the result
 osss-validate result \
   --instance instance.json \
   --result result.json \
-  --schemas ../schemas \
-  --registry ../registry \
-  --attest \
-  --output attestation.json
+  --schemas ./schemas \
+  --registry ./registry \
+  --fix-scores \
+  --output verified.json
 
-# Step 4: Check quality
-osss-validate explain \
-  --instance instance.json \
-  --result result.json \
-  --schemas ../schemas \
-  --registry ../registry
+# Step 5: Test submission locally
+./scripts/test-submission.sh "submissions/${TRACK}/MySolver-${INSTANCE}.json"
 
-# Step 5: Submit for competition
-# Upload result.json + attestation.json to submission portal
+# Step 6: Create submission
+mkdir -p "submissions/${TRACK}"
+cp verified.json "submissions/${TRACK}/MySolver-${INSTANCE}.json"
+
+# Step 7: Submit via Pull Request
+git checkout -b submission/${TRACK}-v1
+git add "submissions/${TRACK}/MySolver-${INSTANCE}.json"
+git commit -m "feat: ${TRACK} submission - MySolver v1.0"
+git push origin submission/${TRACK}-v1
+# Create PR on GitHub
+
+# See detailed guides:
+# - Testing: ./competition/TESTING-GUIDE.md
+# - GitHub Setup: ./competition/GITHUB-SETUP.md
 ```
 
 ---
@@ -252,7 +269,15 @@ A: Yes, your best score counts.
 A: Not required (except for Open Source Award).
 
 **Q: How are results verified?**
-A: Cryptographic attestation + independent verification.
+A: Cryptographic attestation + independent verification. The competition judge automatically re-scores all submissions.
+
+**Q: How do I test my submission before submitting?**
+A: Use our testing guide and scripts:
+- Read: [TESTING-GUIDE.md](./TESTING-GUIDE.md)
+- Run: `./scripts/test-submission.sh your-submission.json`
+
+**Q: How do I submit to the competition?**
+A: Via GitHub Pull Request. See [GITHUB-SETUP.md](./GITHUB-SETUP.md) for complete instructions.
 
 **Q: Can commercial vendors participate?**
 A: Yes! We have a dedicated Commercial Division.
@@ -260,8 +285,11 @@ A: Yes! We have a dedicated Commercial Division.
 **Q: Are there cash prizes?**
 A: Currently recognition-based, sponsorship welcome.
 
+**Q: What if my scores don't match the validator?**
+A: The judge will use the validator's scores. Always run `osss-validate result --fix-scores` before submitting.
+
 **Q: How do I get started?**
-A: Choose a track, download a dataset, build a solver!
+A: Choose a track, download a dataset, build a solver, test locally, then submit via PR!
 
 ---
 
@@ -283,10 +311,11 @@ A: Choose a track, download a dataset, build a solver!
 
 ## Statistics
 
-- **Datasets Available**: 45+ training, 16+ competition
-- **Tracks**: 4
-- **Difficulty Levels**: 5 (⭐ to ⭐⭐⭐⭐⭐)
+- **Datasets Available**: 45+ training, 20+ competition
+- **Tracks**: 6 (Youth, Amateur, Pro, Multi-Division, Esports, Master)
+- **Difficulty Levels**: 6 (⭐⭐ to ⭐⭐⭐⭐⭐⭐)
 - **Divisions**: 3 (Open, Commercial, Academic)
+- **Sports Types**: Traditional sports + Esports + Hybrid
 - **Quarterly Releases**: 4 per year
 - **Recognition Types**: 8+ badge categories
 

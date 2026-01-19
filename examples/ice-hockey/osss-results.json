@@ -1,0 +1,40 @@
+{
+  "instanceId": "nhl-2026-original-six",
+  "scheduledFixtures": [
+    {
+      "fixtureId": "game-1",
+      "venue": "scotiabank",
+      "startTime": "2025-10-11T19:00:00-04:00",
+      "endTime": "2025-10-11T21:30:00-04:00",
+      "notes": "Hockey Night in Canada"
+    },
+    {
+      "fixtureId": "game-2",
+      "venue": "td-garden",
+      "startTime": "2025-10-12T19:00:00-04:00",
+      "endTime": "2025-10-12T21:30:00-04:00"
+    },
+    {
+      "fixtureId": "game-3",
+      "venue": "scotiabank",
+      "startTime": "2025-10-18T19:00:00-04:00",
+      "endTime": "2025-10-18T21:30:00-04:00",
+      "notes": "Hockey Night in Canada"
+    },
+    {
+      "fixtureId": "game-4",
+      "venue": "bell-centre",
+      "startTime": "2025-10-19T19:00:00-04:00",
+      "endTime": "2025-10-19T21:30:00-04:00"
+    }
+  ],
+  "score": {
+    "objectives": {
+      "broadcast_ratings": 8500000,
+      "travel_distance": 1850,
+      "back_to_back_games": 0
+    },
+    "violations": [],
+    "totalPenalty": 0
+  }
+}

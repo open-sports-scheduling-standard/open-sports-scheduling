@@ -1,0 +1,104 @@
+{
+  "instanceId": "six-nations-2026",
+  "scheduledFixtures": [
+    {
+      "fixtureId": "match-1",
+      "venue": "twickenham",
+      "startTime": "2026-02-01T14:15:00Z",
+      "endTime": "2026-02-01T15:55:00Z"
+    },
+    {
+      "fixtureId": "match-2",
+      "venue": "aviva",
+      "startTime": "2026-02-01T16:45:00Z",
+      "endTime": "2026-02-01T18:25:00Z"
+    },
+    {
+      "fixtureId": "match-3",
+      "venue": "stade-de-france",
+      "startTime": "2026-02-01T20:00:00Z",
+      "endTime": "2026-02-01T21:40:00Z"
+    },
+    {
+      "fixtureId": "match-4",
+      "venue": "murrayfield",
+      "startTime": "2026-02-08T14:15:00Z",
+      "endTime": "2026-02-08T15:55:00Z"
+    },
+    {
+      "fixtureId": "match-5",
+      "venue": "twickenham",
+      "startTime": "2026-02-08T16:45:00Z",
+      "endTime": "2026-02-08T18:25:00Z"
+    },
+    {
+      "fixtureId": "match-6",
+      "venue": "aviva",
+      "startTime": "2026-02-08T20:00:00Z",
+      "endTime": "2026-02-08T21:40:00Z"
+    },
+    {
+      "fixtureId": "match-7",
+      "venue": "principality",
+      "startTime": "2026-02-22T14:15:00Z",
+      "endTime": "2026-02-22T15:55:00Z"
+    },
+    {
+      "fixtureId": "match-8",
+      "venue": "olimpico",
+      "startTime": "2026-02-22T16:45:00Z",
+      "endTime": "2026-02-22T18:25:00Z"
+    },
+    {
+      "fixtureId": "match-9",
+      "venue": "stade-de-france",
+      "startTime": "2026-03-07T14:15:00Z",
+      "endTime": "2026-03-07T15:55:00Z"
+    },
+    {
+      "fixtureId": "match-10",
+      "venue": "principality",
+      "startTime": "2026-03-07T16:45:00Z",
+      "endTime": "2026-03-07T18:25:00Z"
+    },
+    {
+      "fixtureId": "match-11",
+      "venue": "murrayfield",
+      "startTime": "2026-03-07T20:00:00Z",
+      "endTime": "2026-03-07T21:40:00Z"
+    },
+    {
+      "fixtureId": "match-12",
+      "venue": "twickenham",
+      "startTime": "2026-03-14T14:15:00Z",
+      "endTime": "2026-03-14T15:55:00Z"
+    },
+    {
+      "fixtureId": "match-13",
+      "venue": "principality",
+      "startTime": "2026-03-14T16:45:00Z",
+      "endTime": "2026-03-14T18:25:00Z"
+    },
+    {
+      "fixtureId": "match-14",
+      "venue": "murrayfield",
+      "startTime": "2026-03-21T12:30:00Z",
+      "endTime": "2026-03-21T14:10:00Z"
+    },
+    {
+      "fixtureId": "match-15",
+      "venue": "olimpico",
+      "startTime": "2026-03-21T15:00:00Z",
+      "endTime": "2026-03-21T16:40:00Z"
+    }
+  ],
+  "score": {
+    "objectives": {
+      "total_travel_distance": 12450,
+      "weekend_fixture_count": 15,
+      "rest_time_fairness": 1.2
+    },
+    "violations": [],
+    "totalPenalty": 0
+  }
+}

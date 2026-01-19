@@ -1,0 +1,50 @@
+{
+  "osssVersion": "0.1.0",
+  "instance": {
+    "metadata": {
+      "name": "Singles Racquetball Championship",
+      "track": "amateur",
+      "sport": "Singles Racquetball",
+      "sportType": "Racquetball",
+      "season": "Winter 2026",
+      "timezone": "America/Chicago",
+      "difficulty": "⭐⭐",
+      "estimatedComplexity": "low",
+      "competitionDataset": true
+    },
+    "teams": [
+      {"teamId": "rb-01", "name": "Player 1"},
+      {"teamId": "rb-02", "name": "Player 2"},
+      {"teamId": "rb-03", "name": "Player 3"},
+      {"teamId": "rb-04", "name": "Player 4"},
+      {"teamId": "rb-05", "name": "Player 5"},
+      {"teamId": "rb-06", "name": "Player 6"}
+    ],
+    "venues": [
+      {
+        "venueId": "club-01",
+        "name": "Racquetball Club",
+        "resources": [
+          {"resourceId": "court-1", "resourceType": "racquetball_court"},
+          {"resourceId": "court-2", "resourceType": "racquetball_court"}
+        ],
+        "availability": [{
+          "recurringPattern": {
+            "daysOfWeek": ["tuesday", "thursday", "saturday"],
+            "timeWindows": [{"start": "17:00", "end": "22:00"}]
+          }
+        }]
+      }
+    ],
+    "fixtures": [
+      {"fixtureId": "rb1", "homeTeamId": "rb-01", "awayTeamId": "rb-02", "estimatedDuration": 45},
+      {"fixtureId": "rb2", "homeTeamId": "rb-03", "awayTeamId": "rb-04", "estimatedDuration": 45},
+      {"fixtureId": "rb3", "homeTeamId": "rb-05", "awayTeamId": "rb-06", "estimatedDuration": 45}
+    ],
+    "constraints": [
+      {"constraintId": "no_overlap_team", "type": "hard"},
+      {"constraintId": "no_overlap_venue_resource", "type": "hard"},
+      {"constraintId": "min_rest_time", "type": "hard", "params": {"min_hours": 4}}
+    ]
+  }
+}

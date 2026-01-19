@@ -1,0 +1,57 @@
+{
+  "instanceId": "wimbledon-2026",
+  "scheduledFixtures": [
+    {
+      "fixtureId": "qf-1",
+      "venue": "centre-court",
+      "startTime": "2026-07-07T13:00:00+01:00",
+      "endTime": "2026-07-07T16:00:00+01:00"
+    },
+    {
+      "fixtureId": "qf-2",
+      "venue": "court-1",
+      "startTime": "2026-07-07T13:00:00+01:00",
+      "endTime": "2026-07-07T16:00:00+01:00"
+    },
+    {
+      "fixtureId": "qf-3",
+      "venue": "centre-court",
+      "startTime": "2026-07-08T13:00:00+01:00",
+      "endTime": "2026-07-08T16:00:00+01:00"
+    },
+    {
+      "fixtureId": "qf-4",
+      "venue": "court-1",
+      "startTime": "2026-07-08T13:00:00+01:00",
+      "endTime": "2026-07-08T16:00:00+01:00"
+    },
+    {
+      "fixtureId": "sf-1",
+      "venue": "centre-court",
+      "startTime": "2026-07-10T14:00:00+01:00",
+      "endTime": "2026-07-10T17:30:00+01:00"
+    },
+    {
+      "fixtureId": "sf-2",
+      "venue": "centre-court",
+      "startTime": "2026-07-11T14:00:00+01:00",
+      "endTime": "2026-07-11T17:30:00+01:00"
+    },
+    {
+      "fixtureId": "final",
+      "venue": "centre-court",
+      "startTime": "2026-07-12T14:00:00+01:00",
+      "endTime": "2026-07-12T18:00:00+01:00",
+      "notes": "Gentlemen's Singles Final"
+    }
+  ],
+  "score": {
+    "objectives": {
+      "broadcast_quality": 950,
+      "player_rest_equity": 2.1,
+      "schedule_compactness": 6
+    },
+    "violations": [],
+    "totalPenalty": 0
+  }
+}

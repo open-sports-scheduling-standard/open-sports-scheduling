@@ -1,0 +1,189 @@
+{
+  "id": "six-nations-2026",
+  "name": "Six Nations Championship 2026",
+  "version": "1.0.0",
+  "sport": "Rugby Union 15s",
+  "timezone": "Europe/London",
+  "season": {
+    "start": "2026-02-01T00:00:00Z",
+    "end": "2026-03-21T23:59:59Z"
+  },
+  "competition": {
+    "name": "Six Nations Championship",
+    "format": "round_robin",
+    "organizer": "Six Nations Rugby"
+  },
+  "entities": {
+    "teams": [
+      {
+        "id": "eng",
+        "name": "England",
+        "homeVenue": "twickenham",
+        "location": {"lat": 51.4556, "lon": -0.3415}
+      },
+      {
+        "id": "fra",
+        "name": "France",
+        "homeVenue": "stade-de-france",
+        "location": {"lat": 48.9244, "lon": 2.3601}
+      },
+      {
+        "id": "ire",
+        "name": "Ireland",
+        "homeVenue": "aviva",
+        "location": {"lat": 53.3352, "lon": -6.2283}
+      },
+      {
+        "id": "ita",
+        "name": "Italy",
+        "homeVenue": "olimpico",
+        "location": {"lat": 41.9342, "lon": 12.4540}
+      },
+      {
+        "id": "sco",
+        "name": "Scotland",
+        "homeVenue": "murrayfield",
+        "location": {"lat": 55.9424, "lon": -3.2416}
+      },
+      {
+        "id": "wal",
+        "name": "Wales",
+        "homeVenue": "principality",
+        "location": {"lat": 51.4783, "lon": -3.1828}
+      }
+    ],
+    "venues": [
+      {
+        "id": "twickenham",
+        "name": "Twickenham Stadium",
+        "location": {"lat": 51.4556, "lon": -0.3415, "city": "London", "country": "England"},
+        "capacity": 82000,
+        "surfaceType": "grass"
+      },
+      {
+        "id": "stade-de-france",
+        "name": "Stade de France",
+        "location": {"lat": 48.9244, "lon": 2.3601, "city": "Paris", "country": "France"},
+        "capacity": 80698,
+        "surfaceType": "grass"
+      },
+      {
+        "id": "aviva",
+        "name": "Aviva Stadium",
+        "location": {"lat": 53.3352, "lon": -6.2283, "city": "Dublin", "country": "Ireland"},
+        "capacity": 51700,
+        "surfaceType": "grass"
+      },
+      {
+        "id": "olimpico",
+        "name": "Stadio Olimpico",
+        "location": {"lat": 41.9342, "lon": 12.4540, "city": "Rome", "country": "Italy"},
+        "capacity": 70634,
+        "surfaceType": "grass"
+      },
+      {
+        "id": "murrayfield",
+        "name": "Murrayfield Stadium",
+        "location": {"lat": 55.9424, "lon": -3.2416, "city": "Edinburgh", "country": "Scotland"},
+        "capacity": 67144,
+        "surfaceType": "grass"
+      },
+      {
+        "id": "principality",
+        "name": "Principality Stadium",
+        "location": {"lat": 51.4783, "lon": -3.1828, "city": "Cardiff", "country": "Wales"},
+        "capacity": 74500,
+        "surfaceType": "grass",
+        "roofed": true
+      }
+    ]
+  },
+  "fixtures": [
+    {"id": "match-1", "participants": ["eng", "sco"], "durationMinutes": 100},
+    {"id": "match-2", "participants": ["ire", "wal"], "durationMinutes": 100},
+    {"id": "match-3", "participants": ["fra", "ita"], "durationMinutes": 100},
+    {"id": "match-4", "participants": ["sco", "wal"], "durationMinutes": 100},
+    {"id": "match-5", "participants": ["eng", "ita"], "durationMinutes": 100},
+    {"id": "match-6", "participants": ["ire", "fra"], "durationMinutes": 100},
+    {"id": "match-7", "participants": ["wal", "eng"], "durationMinutes": 100},
+    {"id": "match-8", "participants": ["ita", "sco"], "durationMinutes": 100},
+    {"id": "match-9", "participants": ["fra", "eng"], "durationMinutes": 100},
+    {"id": "match-10", "participants": ["wal", "ita"], "durationMinutes": 100},
+    {"id": "match-11", "participants": ["sco", "ire"], "durationMinutes": 100},
+    {"id": "match-12", "participants": ["eng", "ire"], "durationMinutes": 100},
+    {"id": "match-13", "participants": ["wal", "fra"], "durationMinutes": 100},
+    {"id": "match-14", "participants": ["sco", "fra"], "durationMinutes": 100},
+    {"id": "match-15", "participants": ["ita", "ire"], "durationMinutes": 100}
+  ],
+  "constraints": [
+    {
+      "id": "no_overlap_team",
+      "type": "hard",
+      "rule": "no_overlap_team",
+      "selector": {"entityType": "team"}
+    },
+    {
+      "id": "no_overlap_venue",
+      "type": "hard",
+      "rule": "no_overlap_venue_resource",
+      "selector": {"entityType": "venue"}
+    },
+    {
+      "id": "min_rest_14days",
+      "type": "hard",
+      "rule": "min_rest_time",
+      "selector": {"entityType": "team"},
+      "params": {"min_hours": 168},
+      "comment": "Minimum 7 days rest between matches for player welfare"
+    },
+    {
+      "id": "home_venue",
+      "type": "hard",
+      "rule": "preferred_venue",
+      "selector": {"entityType": "fixture"},
+      "comment": "Each team plays home games at their home venue"
+    },
+    {
+      "id": "weekend_slots",
+      "type": "soft",
+      "rule": "time_window",
+      "selector": {"entityType": "fixture"},
+      "params": {
+        "preferred_days": ["Saturday", "Sunday"],
+        "time_slots": ["14:15", "16:45"]
+      },
+      "penalty": {"model": "linear", "weight": 50}
+    },
+    {
+      "id": "travel_optimization",
+      "type": "soft",
+      "rule": "minimize_travel",
+      "selector": {"entityType": "team"},
+      "penalty": {"model": "linear", "perKm": 0.1}
+    }
+  ],
+  "objectives": [
+    {
+      "metric": "total_travel_distance",
+      "aggregation": "sum",
+      "weight": 0.3
+    },
+    {
+      "metric": "weekend_fixture_count",
+      "aggregation": "count",
+      "weight": 0.5,
+      "direction": "maximize"
+    },
+    {
+      "metric": "rest_time_fairness",
+      "aggregation": "variance",
+      "weight": 0.2,
+      "direction": "minimize"
+    }
+  ],
+  "metadata": {
+    "description": "Six Nations Rugby Championship - premier European rugby union tournament",
+    "tags": ["rugby", "union", "15s", "international", "europe"],
+    "difficulty": "moderate"
+  }
+}

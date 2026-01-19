@@ -1,0 +1,39 @@
+{
+  "instanceId": "fivb-world-championship-2026",
+  "scheduledFixtures": [
+    {
+      "fixtureId": "pool-a-1",
+      "venue": "tauron-arena",
+      "startTime": "2026-08-27T17:00:00+02:00",
+      "endTime": "2026-08-27T19:00:00+02:00"
+    },
+    {
+      "fixtureId": "pool-b-1",
+      "venue": "ergo-arena",
+      "startTime": "2026-08-27T20:30:00+02:00",
+      "endTime": "2026-08-27T22:30:00+02:00"
+    },
+    {
+      "fixtureId": "pool-a-2",
+      "venue": "tauron-arena",
+      "startTime": "2026-08-29T20:30:00+02:00",
+      "endTime": "2026-08-29T22:30:00+02:00"
+    },
+    {
+      "fixtureId": "final",
+      "venue": "tauron-arena",
+      "startTime": "2026-09-11T20:30:00+02:00",
+      "endTime": "2026-09-11T23:00:00+02:00",
+      "notes": "Championship Final"
+    }
+  ],
+  "score": {
+    "objectives": {
+      "attendance": 51500,
+      "rest_equity": 0.8,
+      "venue_utilization": 0.85
+    },
+    "violations": [],
+    "totalPenalty": 0
+  }
+}

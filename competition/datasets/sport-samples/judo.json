@@ -1,0 +1,50 @@
+{
+  "osssVersion": "0.1.0",
+  "instance": {
+    "metadata": {
+      "name": "Judo Tournament",
+      "track": "professional",
+      "sport": "Judo",
+      "sportType": "Judo",
+      "season": "2026",
+      "timezone": "Asia/Tokyo",
+      "difficulty": "⭐⭐⭐",
+      "estimatedComplexity": "moderate",
+      "competitionDataset": true
+    },
+    "teams": [
+      {"teamId": "judo-01", "name": "Athlete 1 - 66kg"},
+      {"teamId": "judo-02", "name": "Athlete 2 - 66kg"},
+      {"teamId": "judo-03", "name": "Athlete 3 - 73kg"},
+      {"teamId": "judo-04", "name": "Athlete 4 - 73kg"},
+      {"teamId": "judo-05", "name": "Athlete 5 - 81kg"},
+      {"teamId": "judo-06", "name": "Athlete 6 - 81kg"}
+    ],
+    "venues": [
+      {
+        "venueId": "dojo-01",
+        "name": "International Judo Hall",
+        "resources": [
+          {"resourceId": "mat-1", "resourceType": "judo_mat"},
+          {"resourceId": "mat-2", "resourceType": "judo_mat"}
+        ],
+        "availability": [{
+          "recurringPattern": {
+            "daysOfWeek": ["saturday", "sunday"],
+            "timeWindows": [{"start": "09:00", "end": "18:00"}]
+          }
+        }]
+      }
+    ],
+    "fixtures": [
+      {"fixtureId": "j1", "homeTeamId": "judo-01", "awayTeamId": "judo-02", "estimatedDuration": 15},
+      {"fixtureId": "j2", "homeTeamId": "judo-03", "awayTeamId": "judo-04", "estimatedDuration": 15},
+      {"fixtureId": "j3", "homeTeamId": "judo-05", "awayTeamId": "judo-06", "estimatedDuration": 15}
+    ],
+    "constraints": [
+      {"constraintId": "no_overlap_team", "type": "hard"},
+      {"constraintId": "no_overlap_venue_resource", "type": "hard"},
+      {"constraintId": "min_rest_time", "type": "hard", "params": {"min_hours": 4}}
+    ]
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "osssVersion": "0.1.0",
+  "instance": {
+    "metadata": {
+      "name": "3x3 Basketball Tournament",
+      "track": "amateur",
+      "sport": "3x3 Basketball",
+      "sportType": "Basketball",
+      "season": "Summer 2026",
+      "timezone": "America/Los_Angeles",
+      "difficulty": "⭐⭐⭐",
+      "estimatedComplexity": "moderate",
+      "competitionDataset": true
+    },
+    "teams": [
+      {"teamId": "3x3-01", "name": "LA Street Kings"},
+      {"teamId": "3x3-02", "name": "Venice Beach Ballers"},
+      {"teamId": "3x3-03", "name": "Downtown Dunkers"},
+      {"teamId": "3x3-04", "name": "Coast City Crew"},
+      {"teamId": "3x3-05", "name": "Bay Area Shooters"},
+      {"teamId": "3x3-06", "name": "Hollywood Hoopers"}
+    ],
+    "venues": [
+      {
+        "venueId": "court-01",
+        "name": "Outdoor 3x3 Court",
+        "resources": [{"resourceId": "halfcourt-1", "resourceType": "3x3_court"}],
+        "availability": [{
+          "recurringPattern": {
+            "daysOfWeek": ["saturday", "sunday"],
+            "timeWindows": [{"start": "09:00", "end": "18:00"}]
+          }
+        }]
+      }
+    ],
+    "fixtures": [
+      {"fixtureId": "g1", "homeTeamId": "3x3-01", "awayTeamId": "3x3-02", "estimatedDuration": 30},
+      {"fixtureId": "g2", "homeTeamId": "3x3-03", "awayTeamId": "3x3-04", "estimatedDuration": 30},
+      {"fixtureId": "g3", "homeTeamId": "3x3-05", "awayTeamId": "3x3-06", "estimatedDuration": 30},
+      {"fixtureId": "g4", "homeTeamId": "3x3-01", "awayTeamId": "3x3-03", "estimatedDuration": 30},
+      {"fixtureId": "g5", "homeTeamId": "3x3-02", "awayTeamId": "3x3-04", "estimatedDuration": 30}
+    ],
+    "constraints": [
+      {"constraintId": "no_overlap_team", "type": "hard"},
+      {"constraintId": "no_overlap_venue_resource", "type": "hard"},
+      {"constraintId": "min_rest_time", "type": "hard", "params": {"min_hours": 2}}
+    ]
+  }
+}

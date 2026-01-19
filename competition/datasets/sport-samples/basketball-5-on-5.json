@@ -1,0 +1,47 @@
+{
+  "osssVersion": "0.1.0",
+  "instance": {
+    "metadata": {
+      "name": "Basketball 5-on-5 League",
+      "track": "professional",
+      "sport": "Basketball 5-on-5",
+      "sportType": "Basketball",
+      "season": "2025-2026",
+      "timezone": "America/New_York",
+      "difficulty": "⭐⭐⭐⭐",
+      "estimatedComplexity": "high",
+      "competitionDataset": true
+    },
+    "teams": [
+      {"teamId": "bb-01", "name": "Boston Celtics"},
+      {"teamId": "bb-02", "name": "Los Angeles Lakers"},
+      {"teamId": "bb-03", "name": "Chicago Bulls"},
+      {"teamId": "bb-04", "name": "Miami Heat"},
+      {"teamId": "bb-05", "name": "Golden State Warriors"},
+      {"teamId": "bb-06", "name": "Brooklyn Nets"}
+    ],
+    "venues": [
+      {
+        "venueId": "arena-01",
+        "name": "TD Garden",
+        "resources": [{"resourceId": "court-1", "resourceType": "basketball_court"}],
+        "availability": [{
+          "recurringPattern": {
+            "daysOfWeek": ["tuesday", "thursday", "saturday"],
+            "timeWindows": [{"start": "19:00", "end": "22:00"}]
+          }
+        }]
+      }
+    ],
+    "fixtures": [
+      {"fixtureId": "g1", "homeTeamId": "bb-01", "awayTeamId": "bb-02", "estimatedDuration": 150},
+      {"fixtureId": "g2", "homeTeamId": "bb-03", "awayTeamId": "bb-04", "estimatedDuration": 150},
+      {"fixtureId": "g3", "homeTeamId": "bb-05", "awayTeamId": "bb-06", "estimatedDuration": 150}
+    ],
+    "constraints": [
+      {"constraintId": "no_overlap_team", "type": "hard"},
+      {"constraintId": "no_overlap_venue_resource", "type": "hard"},
+      {"constraintId": "min_rest_time", "type": "hard", "params": {"min_hours": 48}}
+    ]
+  }
+}

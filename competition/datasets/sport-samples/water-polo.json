@@ -1,0 +1,47 @@
+{
+  "osssVersion": "0.1.0",
+  "instance": {
+    "metadata": {
+      "name": "Water Polo Championship",
+      "track": "professional",
+      "sport": "Water Polo",
+      "sportType": "Water Polo",
+      "season": "2026",
+      "timezone": "Europe/Budapest",
+      "difficulty": "⭐⭐⭐⭐",
+      "estimatedComplexity": "high",
+      "competitionDataset": true
+    },
+    "teams": [
+      {"teamId": "wp-01", "name": "Pro Recco"},
+      {"teamId": "wp-02", "name": "Ferencvaros"},
+      {"teamId": "wp-03", "name": "Olympiacos"},
+      {"teamId": "wp-04", "name": "Barceloneta"},
+      {"teamId": "wp-05", "name": "Jug Dubrovnik"},
+      {"teamId": "wp-06", "name": "Brescia"}
+    ],
+    "venues": [
+      {
+        "venueId": "pool-01",
+        "name": "Alfréd Hajós Swimming Complex",
+        "resources": [{"resourceId": "pool-1", "resourceType": "water_polo_pool"}],
+        "availability": [{
+          "recurringPattern": {
+            "daysOfWeek": ["wednesday", "saturday"],
+            "timeWindows": [{"start": "18:00", "end": "21:00"}]
+          }
+        }]
+      }
+    ],
+    "fixtures": [
+      {"fixtureId": "wp1", "homeTeamId": "wp-01", "awayTeamId": "wp-02", "estimatedDuration": 60},
+      {"fixtureId": "wp2", "homeTeamId": "wp-03", "awayTeamId": "wp-04", "estimatedDuration": 60},
+      {"fixtureId": "wp3", "homeTeamId": "wp-05", "awayTeamId": "wp-06", "estimatedDuration": 60}
+    ],
+    "constraints": [
+      {"constraintId": "no_overlap_team", "type": "hard"},
+      {"constraintId": "no_overlap_venue_resource", "type": "hard"},
+      {"constraintId": "min_rest_time", "type": "hard", "params": {"min_hours": 72}}
+    ]
+  }
+}

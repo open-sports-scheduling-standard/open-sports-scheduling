@@ -1,0 +1,47 @@
+{
+  "osssVersion": "0.1.0",
+  "instance": {
+    "metadata": {
+      "name": "Field Hockey Premier League",
+      "track": "professional",
+      "sport": "Field Hockey",
+      "sportType": "Hockey",
+      "season": "2026",
+      "timezone": "Asia/Kolkata",
+      "difficulty": "⭐⭐⭐⭐",
+      "estimatedComplexity": "high",
+      "competitionDataset": true
+    },
+    "teams": [
+      {"teamId": "fhp-01", "name": "Punjab Warriors"},
+      {"teamId": "fhp-02", "name": "Mumbai Magicians"},
+      {"teamId": "fhp-03", "name": "Delhi Waveriders"},
+      {"teamId": "fhp-04", "name": "Ranchi Rays"},
+      {"teamId": "fhp-05", "name": "Kalinga Lancers"},
+      {"teamId": "fhp-06", "name": "Dabang Mumbai"}
+    ],
+    "venues": [
+      {
+        "venueId": "stadium-01",
+        "name": "International Hockey Stadium",
+        "resources": [{"resourceId": "turf-1", "resourceType": "astroturf"}],
+        "availability": [{
+          "recurringPattern": {
+            "daysOfWeek": ["friday", "saturday", "sunday"],
+            "timeWindows": [{"start": "17:00", "end": "21:00"}]
+          }
+        }]
+      }
+    ],
+    "fixtures": [
+      {"fixtureId": "m1", "homeTeamId": "fhp-01", "awayTeamId": "fhp-02", "estimatedDuration": 75},
+      {"fixtureId": "m2", "homeTeamId": "fhp-03", "awayTeamId": "fhp-04", "estimatedDuration": 75},
+      {"fixtureId": "m3", "homeTeamId": "fhp-05", "awayTeamId": "fhp-06", "estimatedDuration": 75}
+    ],
+    "constraints": [
+      {"constraintId": "no_overlap_team", "type": "hard"},
+      {"constraintId": "no_overlap_venue_resource", "type": "hard"},
+      {"constraintId": "min_rest_time", "type": "hard", "params": {"min_hours": 72}}
+    ]
+  }
+}

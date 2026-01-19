@@ -1,0 +1,47 @@
+{
+  "osssVersion": "0.1.0",
+  "instance": {
+    "metadata": {
+      "name": "Mixed Martial Arts Championship",
+      "track": "professional",
+      "sport": "Mixed Martial Arts",
+      "sportType": "Mixed Martial Arts",
+      "season": "2026",
+      "timezone": "America/Las_Vegas",
+      "difficulty": "⭐⭐⭐⭐",
+      "estimatedComplexity": "high",
+      "competitionDataset": true
+    },
+    "teams": [
+      {"teamId": "mma-01", "name": "Fighter 1 - Lightweight"},
+      {"teamId": "mma-02", "name": "Fighter 2 - Lightweight"},
+      {"teamId": "mma-03", "name": "Fighter 3 - Welterweight"},
+      {"teamId": "mma-04", "name": "Fighter 4 - Welterweight"},
+      {"teamId": "mma-05", "name": "Fighter 5 - Middleweight"},
+      {"teamId": "mma-06", "name": "Fighter 6 - Middleweight"}
+    ],
+    "venues": [
+      {
+        "venueId": "octagon-01",
+        "name": "UFC Apex",
+        "resources": [{"resourceId": "cage-1", "resourceType": "mma_octagon"}],
+        "availability": [{
+          "recurringPattern": {
+            "daysOfWeek": ["saturday"],
+            "timeWindows": [{"start": "20:00", "end": "23:30"}]
+          }
+        }]
+      }
+    ],
+    "fixtures": [
+      {"fixtureId": "bout1", "homeTeamId": "mma-01", "awayTeamId": "mma-02", "estimatedDuration": 45},
+      {"fixtureId": "bout2", "homeTeamId": "mma-03", "awayTeamId": "mma-04", "estimatedDuration": 45},
+      {"fixtureId": "bout3", "homeTeamId": "mma-05", "awayTeamId": "mma-06", "estimatedDuration": 45}
+    ],
+    "constraints": [
+      {"constraintId": "no_overlap_team", "type": "hard"},
+      {"constraintId": "no_overlap_venue_resource", "type": "hard"},
+      {"constraintId": "min_rest_time", "type": "hard", "params": {"min_hours": 1440}}
+    ]
+  }
+}

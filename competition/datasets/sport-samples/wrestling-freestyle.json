@@ -1,0 +1,53 @@
+{
+  "osssVersion": "0.1.0",
+  "instance": {
+    "metadata": {
+      "name": "Freestyle Wrestling Championship",
+      "track": "professional",
+      "sport": "Freestyle Wrestling",
+      "sportType": "Wrestling",
+      "season": "2026",
+      "timezone": "America/New_York",
+      "difficulty": "⭐⭐⭐",
+      "estimatedComplexity": "moderate",
+      "competitionDataset": true
+    },
+    "teams": [
+      {"teamId": "wr-01", "name": "Wrestler 1 - 57kg"},
+      {"teamId": "wr-02", "name": "Wrestler 2 - 57kg"},
+      {"teamId": "wr-03", "name": "Wrestler 3 - 65kg"},
+      {"teamId": "wr-04", "name": "Wrestler 4 - 65kg"},
+      {"teamId": "wr-05", "name": "Wrestler 5 - 74kg"},
+      {"teamId": "wr-06", "name": "Wrestler 6 - 74kg"},
+      {"teamId": "wr-07", "name": "Wrestler 7 - 86kg"},
+      {"teamId": "wr-08", "name": "Wrestler 8 - 86kg"}
+    ],
+    "venues": [
+      {
+        "venueId": "hall-01",
+        "name": "Wrestling Arena",
+        "resources": [
+          {"resourceId": "mat-1", "resourceType": "wrestling_mat"},
+          {"resourceId": "mat-2", "resourceType": "wrestling_mat"}
+        ],
+        "availability": [{
+          "recurringPattern": {
+            "daysOfWeek": ["saturday", "sunday"],
+            "timeWindows": [{"start": "09:00", "end": "18:00"}]
+          }
+        }]
+      }
+    ],
+    "fixtures": [
+      {"fixtureId": "wr1", "homeTeamId": "wr-01", "awayTeamId": "wr-02", "estimatedDuration": 15},
+      {"fixtureId": "wr2", "homeTeamId": "wr-03", "awayTeamId": "wr-04", "estimatedDuration": 15},
+      {"fixtureId": "wr3", "homeTeamId": "wr-05", "awayTeamId": "wr-06", "estimatedDuration": 15},
+      {"fixtureId": "wr4", "homeTeamId": "wr-07", "awayTeamId": "wr-08", "estimatedDuration": 15}
+    ],
+    "constraints": [
+      {"constraintId": "no_overlap_team", "type": "hard"},
+      {"constraintId": "no_overlap_venue_resource", "type": "hard"},
+      {"constraintId": "min_rest_time", "type": "hard", "params": {"min_hours": 4}}
+    ]
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "osssVersion": "0.1.0",
+  "instance": {
+    "metadata": {
+      "name": "Regional Cricket League (Legacy)",
+      "track": "amateur",
+      "sport": "Cricket (Legacy)",
+      "sportType": "Cricket",
+      "season": "Summer 2026",
+      "timezone": "Asia/Kolkata",
+      "difficulty": "⭐⭐⭐",
+      "estimatedComplexity": "moderate",
+      "competitionDataset": true
+    },
+    "teams": [
+      {"teamId": "cri-01", "name": "Mumbai Indians"},
+      {"teamId": "cri-02", "name": "Chennai Super Kings"},
+      {"teamId": "cri-03", "name": "Kolkata Knight Riders"},
+      {"teamId": "cri-04", "name": "Delhi Capitals"},
+      {"teamId": "cri-05", "name": "Rajasthan Royals"},
+      {"teamId": "cri-06", "name": "Punjab Kings"}
+    ],
+    "venues": [
+      {
+        "venueId": "ground-01",
+        "name": "Central Cricket Ground",
+        "resources": [{"resourceId": "pitch-a", "resourceType": "cricket_pitch"}],
+        "availability": [{
+          "recurringPattern": {
+            "daysOfWeek": ["saturday", "sunday"],
+            "timeWindows": [{"start": "10:00", "end": "19:00"}]
+          }
+        }]
+      }
+    ],
+    "fixtures": [
+      {"fixtureId": "c1", "homeTeamId": "cri-01", "awayTeamId": "cri-02", "estimatedDuration": 480},
+      {"fixtureId": "c2", "homeTeamId": "cri-01", "awayTeamId": "cri-03", "estimatedDuration": 480},
+      {"fixtureId": "c3", "homeTeamId": "cri-01", "awayTeamId": "cri-04", "estimatedDuration": 480},
+      {"fixtureId": "c4", "homeTeamId": "cri-02", "awayTeamId": "cri-03", "estimatedDuration": 480},
+      {"fixtureId": "c5", "homeTeamId": "cri-02", "awayTeamId": "cri-04", "estimatedDuration": 480},
+      {"fixtureId": "c6", "homeTeamId": "cri-03", "awayTeamId": "cri-04", "estimatedDuration": 480}
+    ],
+    "constraints": [
+      {"constraintId": "no_overlap_team", "type": "hard"},
+      {"constraintId": "no_overlap_venue_resource", "type": "hard"},
+      {"constraintId": "min_rest_time", "type": "hard", "params": {"min_hours": 96}}
+    ]
+  }
+}

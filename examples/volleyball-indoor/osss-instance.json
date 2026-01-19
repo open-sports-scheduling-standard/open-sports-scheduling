@@ -1,0 +1,109 @@
+{
+  "id": "fivb-world-championship-2026",
+  "name": "FIVB Volleyball World Championship 2026",
+  "version": "1.0.0",
+  "sport": "Indoor Volleyball",
+  "timezone": "Europe/Warsaw",
+  "season": {
+    "start": "2026-08-25T00:00:00+02:00",
+    "end": "2026-09-11T23:59:59+02:00"
+  },
+  "competition": {
+    "name": "FIVB World Championship",
+    "format": "pool_play_knockout",
+    "organizer": "FIVB"
+  },
+  "entities": {
+    "teams": [
+      {"id": "pol", "name": "Poland", "homeVenue": "tauron-arena"},
+      {"id": "bra", "name": "Brazil", "homeVenue": "tauron-arena"},
+      {"id": "usa", "name": "United States", "homeVenue": "ergo-arena"},
+      {"id": "ita", "name": "Italy", "homeVenue": "ergo-arena"}
+    ],
+    "venues": [
+      {
+        "id": "tauron-arena",
+        "name": "Tauron Arena Kraków",
+        "location": {"lat": 50.0682, "lon": 19.9882, "city": "Kraków", "country": "Poland"},
+        "capacity": 15000,
+        "courts": 1
+      },
+      {
+        "id": "ergo-arena",
+        "name": "Ergo Arena",
+        "location": {"lat": 54.3900, "lon": 18.6016, "city": "Gdańsk", "country": "Poland"},
+        "capacity": 11409,
+        "courts": 1
+      }
+    ]
+  },
+  "fixtures": [
+    {"id": "pool-a-1", "participants": ["pol", "bra"], "durationMinutes": 120, "pool": "A"},
+    {"id": "pool-b-1", "participants": ["usa", "ita"], "durationMinutes": 120, "pool": "B"},
+    {"id": "pool-a-2", "participants": ["pol", "usa"], "durationMinutes": 120, "pool": "crossover"},
+    {"id": "final", "participants": ["TBD-1", "TBD-2"], "durationMinutes": 150, "round": "final"}
+  ],
+  "constraints": [
+    {
+      "id": "no_overlap_team",
+      "type": "hard",
+      "rule": "no_overlap_team",
+      "selector": {"entityType": "team"}
+    },
+    {
+      "id": "no_overlap_court",
+      "type": "hard",
+      "rule": "no_overlap_venue_resource",
+      "selector": {"entityType": "venue"}
+    },
+    {
+      "id": "min_rest_24h",
+      "type": "hard",
+      "rule": "min_rest_time",
+      "selector": {"entityType": "team"},
+      "params": {"min_hours": 24}
+    },
+    {
+      "id": "evening_matches",
+      "type": "soft",
+      "rule": "time_window",
+      "selector": {"entityType": "fixture"},
+      "params": {
+        "preferred_start_times": ["17:00", "20:30"]
+      },
+      "penalty": {"model": "linear", "weight": 75}
+    },
+    {
+      "id": "final_venue",
+      "type": "hard",
+      "rule": "venue_assignment",
+      "selector": {"round": "final"},
+      "params": {"required_venue": "tauron-arena"}
+    }
+  ],
+  "objectives": [
+    {
+      "metric": "attendance",
+      "aggregation": "sum",
+      "weight": 0.4,
+      "direction": "maximize"
+    },
+    {
+      "metric": "rest_equity",
+      "aggregation": "variance",
+      "weight": 0.35,
+      "direction": "minimize"
+    },
+    {
+      "metric": "venue_utilization",
+      "aggregation": "rate",
+      "weight": 0.25,
+      "direction": "maximize"
+    }
+  ],
+  "metadata": {
+    "description": "FIVB World Championship - volleyball's premier international tournament",
+    "tags": ["volleyball", "indoor", "world_championship", "international"],
+    "difficulty": "moderate"
+  }
+}

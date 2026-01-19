@@ -1,0 +1,51 @@
+{
+  "osssVersion": "0.1.0",
+  "instance": {
+    "metadata": {
+      "name": "Singles Pickleball Tournament",
+      "track": "amateur",
+      "sport": "Singles Pickleball",
+      "sportType": "Pickleball",
+      "season": "Summer 2026",
+      "timezone": "America/Phoenix",
+      "difficulty": "⭐⭐",
+      "estimatedComplexity": "low",
+      "competitionDataset": true
+    },
+    "teams": [
+      {"teamId": "pb-01", "name": "Player A"},
+      {"teamId": "pb-02", "name": "Player B"},
+      {"teamId": "pb-03", "name": "Player C"},
+      {"teamId": "pb-04", "name": "Player D"},
+      {"teamId": "pb-05", "name": "Player E"},
+      {"teamId": "pb-06", "name": "Player F"}
+    ],
+    "venues": [
+      {
+        "venueId": "courts-01",
+        "name": "Pickleball Center",
+        "resources": [
+          {"resourceId": "court-1", "resourceType": "pickleball_court"},
+          {"resourceId": "court-2", "resourceType": "pickleball_court"},
+          {"resourceId": "court-3", "resourceType": "pickleball_court"}
+        ],
+        "availability": [{
+          "recurringPattern": {
+            "daysOfWeek": ["saturday", "sunday"],
+            "timeWindows": [{"start": "08:00", "end": "18:00"}]
+          }
+        }]
+      }
+    ],
+    "fixtures": [
+      {"fixtureId": "p1", "homeTeamId": "pb-01", "awayTeamId": "pb-02", "estimatedDuration": 45},
+      {"fixtureId": "p2", "homeTeamId": "pb-03", "awayTeamId": "pb-04", "estimatedDuration": 45},
+      {"fixtureId": "p3", "homeTeamId": "pb-05", "awayTeamId": "pb-06", "estimatedDuration": 45}
+    ],
+    "constraints": [
+      {"constraintId": "no_overlap_team", "type": "hard"},
+      {"constraintId": "no_overlap_venue_resource", "type": "hard"},
+      {"constraintId": "min_rest_time", "type": "hard", "params": {"min_hours": 3}}
+    ]
+  }
+}

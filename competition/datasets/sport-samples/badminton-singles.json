@@ -1,0 +1,53 @@
+{
+  "osssVersion": "0.1.0",
+  "instance": {
+    "metadata": {
+      "name": "Singles Badminton Championship",
+      "track": "professional",
+      "sport": "Singles Badminton",
+      "sportType": "Badminton",
+      "season": "2026",
+      "timezone": "Asia/Jakarta",
+      "difficulty": "⭐⭐⭐",
+      "estimatedComplexity": "moderate",
+      "competitionDataset": true
+    },
+    "teams": [
+      {"teamId": "bd-01", "name": "Player A"},
+      {"teamId": "bd-02", "name": "Player B"},
+      {"teamId": "bd-03", "name": "Player C"},
+      {"teamId": "bd-04", "name": "Player D"},
+      {"teamId": "bd-05", "name": "Player E"},
+      {"teamId": "bd-06", "name": "Player F"},
+      {"teamId": "bd-07", "name": "Player G"},
+      {"teamId": "bd-08", "name": "Player H"}
+    ],
+    "venues": [
+      {
+        "venueId": "hall-01",
+        "name": "Badminton Hall",
+        "resources": [
+          {"resourceId": "court-1", "resourceType": "badminton_court"},
+          {"resourceId": "court-2", "resourceType": "badminton_court"}
+        ],
+        "availability": [{
+          "recurringPattern": {
+            "daysOfWeek": ["friday", "saturday", "sunday"],
+            "timeWindows": [{"start": "09:00", "end": "20:00"}]
+          }
+        }]
+      }
+    ],
+    "fixtures": [
+      {"fixtureId": "m1", "homeTeamId": "bd-01", "awayTeamId": "bd-02", "estimatedDuration": 60},
+      {"fixtureId": "m2", "homeTeamId": "bd-03", "awayTeamId": "bd-04", "estimatedDuration": 60},
+      {"fixtureId": "m3", "homeTeamId": "bd-05", "awayTeamId": "bd-06", "estimatedDuration": 60},
+      {"fixtureId": "m4", "homeTeamId": "bd-07", "awayTeamId": "bd-08", "estimatedDuration": 60}
+    ],
+    "constraints": [
+      {"constraintId": "no_overlap_team", "type": "hard"},
+      {"constraintId": "no_overlap_venue_resource", "type": "hard"},
+      {"constraintId": "min_rest_time", "type": "hard", "params": {"min_hours": 4}}
+    ]
+  }
+}

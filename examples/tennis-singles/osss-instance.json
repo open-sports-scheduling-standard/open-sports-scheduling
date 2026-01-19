@@ -1,0 +1,138 @@
+{
+  "id": "wimbledon-2026",
+  "name": "The Championships, Wimbledon 2026",
+  "version": "1.0.0",
+  "sport": "Singles Tennis",
+  "timezone": "Europe/London",
+  "season": {
+    "start": "2026-06-29T00:00:00+01:00",
+    "end": "2026-07-12T23:59:59+01:00"
+  },
+  "competition": {
+    "name": "Wimbledon Championships",
+    "format": "single_elimination",
+    "organizer": "All England Lawn Tennis Club"
+  },
+  "entities": {
+    "teams": [
+      {"id": "player-1", "name": "Player 1 (Seed 1)"},
+      {"id": "player-2", "name": "Player 2 (Seed 2)"},
+      {"id": "player-3", "name": "Player 3 (Seed 3)"},
+      {"id": "player-4", "name": "Player 4 (Seed 4)"},
+      {"id": "player-5", "name": "Player 5"},
+      {"id": "player-6", "name": "Player 6"},
+      {"id": "player-7", "name": "Player 7"},
+      {"id": "player-8", "name": "Player 8"}
+    ],
+    "venues": [
+      {
+        "id": "centre-court",
+        "name": "Centre Court",
+        "location": {"lat": 51.4344, "lon": -0.2142, "city": "Wimbledon", "country": "UK"},
+        "capacity": 15000,
+        "surfaceType": "grass",
+        "roofed": true,
+        "priority": 1
+      },
+      {
+        "id": "court-1",
+        "name": "No. 1 Court",
+        "location": {"lat": 51.4346, "lon": -0.2140, "city": "Wimbledon", "country": "UK"},
+        "capacity": 12345,
+        "surfaceType": "grass",
+        "roofed": true,
+        "priority": 2
+      },
+      {
+        "id": "court-2",
+        "name": "No. 2 Court",
+        "location": {"lat": 51.4348, "lon": -0.2138, "city": "Wimbledon", "country": "UK"},
+        "capacity": 4000,
+        "surfaceType": "grass",
+        "priority": 3
+      }
+    ]
+  },
+  "fixtures": [
+    {"id": "qf-1", "participants": ["player-1", "player-5"], "durationMinutes": 180, "round": "quarterfinal"},
+    {"id": "qf-2", "participants": ["player-2", "player-6"], "durationMinutes": 180, "round": "quarterfinal"},
+    {"id": "qf-3", "participants": ["player-3", "player-7"], "durationMinutes": 180, "round": "quarterfinal"},
+    {"id": "qf-4", "participants": ["player-4", "player-8"], "durationMinutes": 180, "round": "quarterfinal"},
+    {"id": "sf-1", "participants": ["TBD-qf1", "TBD-qf2"], "durationMinutes": 210, "round": "semifinal"},
+    {"id": "sf-2", "participants": ["TBD-qf3", "TBD-qf4"], "durationMinutes": 210, "round": "semifinal"},
+    {"id": "final", "participants": ["TBD-sf1", "TBD-sf2"], "durationMinutes": 240, "round": "final"}
+  ],
+  "constraints": [
+    {
+      "id": "no_overlap_player",
+      "type": "hard",
+      "rule": "no_overlap_team",
+      "selector": {"entityType": "team"}
+    },
+    {
+      "id": "no_overlap_court",
+      "type": "hard",
+      "rule": "no_overlap_venue_resource",
+      "selector": {"entityType": "venue"}
+    },
+    {
+      "id": "min_rest_48h",
+      "type": "hard",
+      "rule": "min_rest_time",
+      "selector": {"entityType": "team"},
+      "params": {"min_hours": 48}
+    },
+    {
+      "id": "centre_court_finals",
+      "type": "hard",
+      "rule": "venue_assignment",
+      "selector": {"round": "final"},
+      "params": {"required_venue": "centre-court"}
+    },
+    {
+      "id": "afternoon_start",
+      "type": "soft",
+      "rule": "time_window",
+      "selector": {"entityType": "fixture"},
+      "params": {
+        "preferred_start_times": ["13:00", "14:00"]
+      },
+      "penalty": {"model": "linear", "weight": 50}
+    },
+    {
+      "id": "weather_contingency",
+      "type": "soft",
+      "rule": "roofed_venue_priority",
+      "selector": {"entityType": "fixture"},
+      "params": {"priority_venues": ["centre-court", "court-1"]},
+      "penalty": {"model": "linear", "weight": 30},
+      "comment": "Prefer roofed courts for important matches"
+    }
+  ],
+  "objectives": [
+    {
+      "metric": "broadcast_quality",
+      "aggregation": "weighted_sum",
+      "weight": 0.5,
+      "direction": "maximize",
+      "comment": "Maximize viewership by optimal court and time allocation"
+    },
+    {
+      "metric": "player_rest_equity",
+      "aggregation": "variance",
+      "weight": 0.3,
+      "direction": "minimize"
+    },
+    {
+      "metric": "schedule_compactness",
+      "aggregation": "span",
+      "weight": 0.2,
+      "direction": "minimize"
+    }
+  ],
+  "metadata": {
+    "description": "Wimbledon - The world's oldest and most prestigious tennis tournament",
+    "tags": ["tennis", "singles", "grand_slam", "grass_court", "professional"],
+    "difficulty": "moderate"
+  }
+}

@@ -15,6 +15,8 @@ Examples:
 - `training/youth-league-basic-01.json`
 - `training/amateur-league-standard-01.json`
 - `training/professional-league-example-01.json`
+- `training/esports-global-sample-01.json`
+- `training/master-championship-sample-01.json`
 
 ### 2. Competition Datasets
 **Purpose**: Official competition submissions
@@ -264,7 +266,9 @@ datasets/
 │   ├── track-1-youth/
 │   ├── track-2-amateur/
 │   ├── track-3-professional/
-│   └── track-4-multi-division/
+│   ├── track-4-multi-division/
+│   ├── track-5-esports/
+│   └── track-6-master/
 ├── competition/
 │   ├── 2025-q1/
 │   ├── 2025-q2/
@@ -321,7 +325,9 @@ Contributed datasets should use:
 | Amateur | 15 | 4 per quarter | 31 |
 | Professional | 12 | 4 per quarter | 28 |
 | Multi-Division | 8 | 2 per quarter | 16 |
-| **Total** | **45** | **56/year** | **101** |
+| Esports | 5 | 2 per quarter | 13 |
+| Master | 3 | 1 per quarter | 7 |
+| **Total** | **53** | **68/year** | **121** |
 
 ### Growth Target
 

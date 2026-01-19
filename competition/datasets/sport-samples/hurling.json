@@ -1,0 +1,47 @@
+{
+  "osssVersion": "0.1.0",
+  "instance": {
+    "metadata": {
+      "name": "Hurling Championship",
+      "track": "amateur",
+      "sport": "Hurling",
+      "sportType": "Hurling",
+      "season": "Summer 2026",
+      "timezone": "Europe/Dublin",
+      "difficulty": "⭐⭐⭐",
+      "estimatedComplexity": "moderate",
+      "competitionDataset": true
+    },
+    "teams": [
+      {"teamId": "hurl-01", "name": "Kilkenny GAA"},
+      {"teamId": "hurl-02", "name": "Tipperary GAA"},
+      {"teamId": "hurl-03", "name": "Cork GAA"},
+      {"teamId": "hurl-04", "name": "Limerick GAA"},
+      {"teamId": "hurl-05", "name": "Galway GAA"},
+      {"teamId": "hurl-06", "name": "Waterford GAA"}
+    ],
+    "venues": [
+      {
+        "venueId": "park-01",
+        "name": "Croke Park",
+        "resources": [{"resourceId": "pitch-1", "resourceType": "hurling_pitch"}],
+        "availability": [{
+          "recurringPattern": {
+            "daysOfWeek": ["sunday"],
+            "timeWindows": [{"start": "14:00", "end": "18:00"}]
+          }
+        }]
+      }
+    ],
+    "fixtures": [
+      {"fixtureId": "hu1", "homeTeamId": "hurl-01", "awayTeamId": "hurl-02", "estimatedDuration": 90},
+      {"fixtureId": "hu2", "homeTeamId": "hurl-03", "awayTeamId": "hurl-04", "estimatedDuration": 90},
+      {"fixtureId": "hu3", "homeTeamId": "hurl-05", "awayTeamId": "hurl-06", "estimatedDuration": 90}
+    ],
+    "constraints": [
+      {"constraintId": "no_overlap_team", "type": "hard"},
+      {"constraintId": "no_overlap_venue_resource", "type": "hard"},
+      {"constraintId": "min_rest_time", "type": "hard", "params": {"min_hours": 168}}
+    ]
+  }
+}

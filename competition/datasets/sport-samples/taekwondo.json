@@ -1,0 +1,50 @@
+{
+  "osssVersion": "0.1.0",
+  "instance": {
+    "metadata": {
+      "name": "Taekwondo Championship",
+      "track": "professional",
+      "sport": "Taekwondo",
+      "sportType": "Taekwondo",
+      "season": "2026",
+      "timezone": "Asia/Seoul",
+      "difficulty": "⭐⭐⭐",
+      "estimatedComplexity": "moderate",
+      "competitionDataset": true
+    },
+    "teams": [
+      {"teamId": "tkd-01", "name": "Athlete 1 - Flyweight"},
+      {"teamId": "tkd-02", "name": "Athlete 2 - Flyweight"},
+      {"teamId": "tkd-03", "name": "Athlete 3 - Featherweight"},
+      {"teamId": "tkd-04", "name": "Athlete 4 - Featherweight"},
+      {"teamId": "tkd-05", "name": "Athlete 5 - Welterweight"},
+      {"teamId": "tkd-06", "name": "Athlete 6 - Welterweight"}
+    ],
+    "venues": [
+      {
+        "venueId": "hall-01",
+        "name": "Taekwondo Competition Hall",
+        "resources": [
+          {"resourceId": "mat-1", "resourceType": "taekwondo_mat"},
+          {"resourceId": "mat-2", "resourceType": "taekwondo_mat"}
+        ],
+        "availability": [{
+          "recurringPattern": {
+            "daysOfWeek": ["saturday", "sunday"],
+            "timeWindows": [{"start": "09:00", "end": "18:00"}]
+          }
+        }]
+      }
+    ],
+    "fixtures": [
+      {"fixtureId": "tkd1", "homeTeamId": "tkd-01", "awayTeamId": "tkd-02", "estimatedDuration": 20},
+      {"fixtureId": "tkd2", "homeTeamId": "tkd-03", "awayTeamId": "tkd-04", "estimatedDuration": 20},
+      {"fixtureId": "tkd3", "homeTeamId": "tkd-05", "awayTeamId": "tkd-06", "estimatedDuration": 20}
+    ],
+    "constraints": [
+      {"constraintId": "no_overlap_team", "type": "hard"},
+      {"constraintId": "no_overlap_venue_resource", "type": "hard"},
+      {"constraintId": "min_rest_time", "type": "hard", "params": {"min_hours": 4}}
+    ]
+  }
+}

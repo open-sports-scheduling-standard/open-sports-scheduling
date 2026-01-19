@@ -1,0 +1,73 @@
+SPORT SAMPLE DATASETS - QUICK REFERENCE
+========================================
+
+Total Samples: 44 sport configurations
+
+TRADITIONAL SPORTS (26)
+-----------------------
+Rugby:
+  - rugby-union-legacy.json
+  - rugby-union-15s.json  
+  - rugby-union-7s.json
+
+Soccer:
+  - soccer-legacy.json
+  - soccer-11-a-side.json
+  - soccer-futsal.json
+
+Cricket:
+  - cricket-legacy.json
+  - cricket-test.json
+  - cricket-odi.json
+  - cricket-t20.json
+
+Hockey:
+  - field-hockey-legacy.json
+  - field-hockey.json
+  - ice-hockey.json
+
+Team Sports:
+  - american-football.json
+  - baseball.json
+  - basketball-3x3.json
+  - basketball-5-on-5.json
+  - gaelic-football.json
+  - handball-team.json
+  - hurling.json
+  - lacrosse-field.json
+  - netball.json
+  - ultimate-frisbee.json
+  - volleyball-beach.json
+  - volleyball-indoor.json
+  - water-polo.json
+
+RACQUET/COURT SPORTS (6)
+-------------------------
+  - badminton-singles.json
+  - pickleball-singles.json
+  - racquetball-singles.json
+  - squash-singles.json
+  - table-tennis-singles.json
+  - tennis-singles.json
+  - tennis-doubles.json
+
+COMBAT SPORTS (5)
+-----------------
+  - boxing.json
+  - judo.json
+  - mixed-martial-arts.json
+  - taekwondo.json
+  - wrestling-freestyle.json
+
+INDIVIDUAL SPORTS (7)
+---------------------
+  - bowling-ten-pin.json
+  - go-kart-racing.json
+  - skateboarding.json
+  - sport-climbing.json
+  - surfing-shortboard.json
+  - track-100m-sprint.json
+
+========================================
+All samples follow OSSS v0.1.0 standard
+See README.md for detailed documentation

@@ -1,0 +1,50 @@
+{
+  "osssVersion": "0.1.0",
+  "instance": {
+    "metadata": {
+      "name": "Field Hockey League (Legacy)",
+      "track": "amateur",
+      "sport": "Field Hockey (Legacy)",
+      "sportType": "Hockey",
+      "season": "Fall 2026",
+      "timezone": "Europe/Amsterdam",
+      "difficulty": "⭐⭐⭐",
+      "estimatedComplexity": "moderate",
+      "competitionDataset": true
+    },
+    "teams": [
+      {"teamId": "fh-01", "name": "Amsterdam HC"},
+      {"teamId": "fh-02", "name": "Rotterdam HC"},
+      {"teamId": "fh-03", "name": "Utrecht HC"},
+      {"teamId": "fh-04", "name": "Den Haag HC"},
+      {"teamId": "fh-05", "name": "Eindhoven HC"},
+      {"teamId": "fh-06", "name": "Groningen HC"}
+    ],
+    "venues": [
+      {
+        "venueId": "pitch-01",
+        "name": "National Hockey Centre",
+        "resources": [{"resourceId": "turf-a", "resourceType": "hockey_turf"}],
+        "availability": [{
+          "recurringPattern": {
+            "daysOfWeek": ["saturday", "sunday"],
+            "timeWindows": [{"start": "10:00", "end": "18:00"}]
+          }
+        }]
+      }
+    ],
+    "fixtures": [
+      {"fixtureId": "fh1", "homeTeamId": "fh-01", "awayTeamId": "fh-02", "estimatedDuration": 75},
+      {"fixtureId": "fh2", "homeTeamId": "fh-01", "awayTeamId": "fh-03", "estimatedDuration": 75},
+      {"fixtureId": "fh3", "homeTeamId": "fh-01", "awayTeamId": "fh-04", "estimatedDuration": 75},
+      {"fixtureId": "fh4", "homeTeamId": "fh-02", "awayTeamId": "fh-03", "estimatedDuration": 75},
+      {"fixtureId": "fh5", "homeTeamId": "fh-02", "awayTeamId": "fh-04", "estimatedDuration": 75},
+      {"fixtureId": "fh6", "homeTeamId": "fh-03", "awayTeamId": "fh-04", "estimatedDuration": 75}
+    ],
+    "constraints": [
+      {"constraintId": "no_overlap_team", "type": "hard"},
+      {"constraintId": "no_overlap_venue_resource", "type": "hard"},
+      {"constraintId": "min_rest_time", "type": "hard", "params": {"min_hours": 72}}
+    ]
+  }
+}

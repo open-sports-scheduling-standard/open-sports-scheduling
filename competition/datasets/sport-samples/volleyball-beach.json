@@ -1,0 +1,50 @@
+{
+  "osssVersion": "0.1.0",
+  "instance": {
+    "metadata": {
+      "name": "Beach Volleyball Tour",
+      "track": "professional",
+      "sport": "Beach Volleyball",
+      "sportType": "Volleyball",
+      "season": "Summer 2026",
+      "timezone": "America/Los_Angeles",
+      "difficulty": "⭐⭐⭐⭐",
+      "estimatedComplexity": "high",
+      "competitionDataset": true
+    },
+    "teams": [
+      {"teamId": "bv-01", "name": "Team 1 (Player A & B)"},
+      {"teamId": "bv-02", "name": "Team 2 (Player C & D)"},
+      {"teamId": "bv-03", "name": "Team 3 (Player E & F)"},
+      {"teamId": "bv-04", "name": "Team 4 (Player G & H)"},
+      {"teamId": "bv-05", "name": "Team 5 (Player I & J)"},
+      {"teamId": "bv-06", "name": "Team 6 (Player K & L)"}
+    ],
+    "venues": [
+      {
+        "venueId": "beach-01",
+        "name": "Manhattan Beach",
+        "resources": [
+          {"resourceId": "court-1", "resourceType": "beach_volleyball_court"},
+          {"resourceId": "court-2", "resourceType": "beach_volleyball_court"}
+        ],
+        "availability": [{
+          "recurringPattern": {
+            "daysOfWeek": ["friday", "saturday", "sunday"],
+            "timeWindows": [{"start": "09:00", "end": "19:00"}]
+          }
+        }]
+      }
+    ],
+    "fixtures": [
+      {"fixtureId": "bv1", "homeTeamId": "bv-01", "awayTeamId": "bv-02", "estimatedDuration": 60},
+      {"fixtureId": "bv2", "homeTeamId": "bv-03", "awayTeamId": "bv-04", "estimatedDuration": 60},
+      {"fixtureId": "bv3", "homeTeamId": "bv-05", "awayTeamId": "bv-06", "estimatedDuration": 60}
+    ],
+    "constraints": [
+      {"constraintId": "no_overlap_team", "type": "hard"},
+      {"constraintId": "no_overlap_venue_resource", "type": "hard"},
+      {"constraintId": "min_rest_time", "type": "hard", "params": {"min_hours": 6}}
+    ]
+  }
+}

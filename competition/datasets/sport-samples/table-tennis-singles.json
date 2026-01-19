@@ -1,0 +1,54 @@
+{
+  "osssVersion": "0.1.0",
+  "instance": {
+    "metadata": {
+      "name": "Singles Table Tennis Championship",
+      "track": "professional",
+      "sport": "Singles Table Tennis",
+      "sportType": "Table Tennis",
+      "season": "2026",
+      "timezone": "Asia/Shanghai",
+      "difficulty": "⭐⭐⭐",
+      "estimatedComplexity": "moderate",
+      "competitionDataset": true
+    },
+    "teams": [
+      {"teamId": "tt-01", "name": "Player 1"},
+      {"teamId": "tt-02", "name": "Player 2"},
+      {"teamId": "tt-03", "name": "Player 3"},
+      {"teamId": "tt-04", "name": "Player 4"},
+      {"teamId": "tt-05", "name": "Player 5"},
+      {"teamId": "tt-06", "name": "Player 6"},
+      {"teamId": "tt-07", "name": "Player 7"},
+      {"teamId": "tt-08", "name": "Player 8"}
+    ],
+    "venues": [
+      {
+        "venueId": "hall-01",
+        "name": "Table Tennis Hall",
+        "resources": [
+          {"resourceId": "table-1", "resourceType": "table_tennis_table"},
+          {"resourceId": "table-2", "resourceType": "table_tennis_table"},
+          {"resourceId": "table-3", "resourceType": "table_tennis_table"}
+        ],
+        "availability": [{
+          "recurringPattern": {
+            "daysOfWeek": ["friday", "saturday", "sunday"],
+            "timeWindows": [{"start": "09:00", "end": "20:00"}]
+          }
+        }]
+      }
+    ],
+    "fixtures": [
+      {"fixtureId": "tt1", "homeTeamId": "tt-01", "awayTeamId": "tt-02", "estimatedDuration": 45},
+      {"fixtureId": "tt2", "homeTeamId": "tt-03", "awayTeamId": "tt-04", "estimatedDuration": 45},
+      {"fixtureId": "tt3", "homeTeamId": "tt-05", "awayTeamId": "tt-06", "estimatedDuration": 45},
+      {"fixtureId": "tt4", "homeTeamId": "tt-07", "awayTeamId": "tt-08", "estimatedDuration": 45}
+    ],
+    "constraints": [
+      {"constraintId": "no_overlap_team", "type": "hard"},
+      {"constraintId": "no_overlap_venue_resource", "type": "hard"},
+      {"constraintId": "min_rest_time", "type": "hard", "params": {"min_hours": 4}}
+    ]
+  }
+}

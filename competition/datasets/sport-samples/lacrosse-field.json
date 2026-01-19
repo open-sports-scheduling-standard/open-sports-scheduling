@@ -1,0 +1,47 @@
+{
+  "osssVersion": "0.1.0",
+  "instance": {
+    "metadata": {
+      "name": "Field Lacrosse League",
+      "track": "amateur",
+      "sport": "Field Lacrosse",
+      "sportType": "Lacrosse",
+      "season": "Spring 2026",
+      "timezone": "America/New_York",
+      "difficulty": "⭐⭐⭐",
+      "estimatedComplexity": "moderate",
+      "competitionDataset": true
+    },
+    "teams": [
+      {"teamId": "lax-01", "name": "Boston Cannons"},
+      {"teamId": "lax-02", "name": "New York Lizards"},
+      {"teamId": "lax-03", "name": "Denver Outlaws"},
+      {"teamId": "lax-04", "name": "Atlanta Blaze"},
+      {"teamId": "lax-05", "name": "Philadelphia Barrage"},
+      {"teamId": "lax-06", "name": "Charlotte Hounds"}
+    ],
+    "venues": [
+      {
+        "venueId": "field-01",
+        "name": "Lacrosse Stadium",
+        "resources": [{"resourceId": "field-1", "resourceType": "lacrosse_field"}],
+        "availability": [{
+          "recurringPattern": {
+            "daysOfWeek": ["saturday", "sunday"],
+            "timeWindows": [{"start": "13:00", "end": "19:00"}]
+          }
+        }]
+      }
+    ],
+    "fixtures": [
+      {"fixtureId": "lax1", "homeTeamId": "lax-01", "awayTeamId": "lax-02", "estimatedDuration": 90},
+      {"fixtureId": "lax2", "homeTeamId": "lax-03", "awayTeamId": "lax-04", "estimatedDuration": 90},
+      {"fixtureId": "lax3", "homeTeamId": "lax-05", "awayTeamId": "lax-06", "estimatedDuration": 90}
+    ],
+    "constraints": [
+      {"constraintId": "no_overlap_team", "type": "hard"},
+      {"constraintId": "no_overlap_venue_resource", "type": "hard"},
+      {"constraintId": "min_rest_time", "type": "hard", "params": {"min_hours": 72}}
+    ]
+  }
+}

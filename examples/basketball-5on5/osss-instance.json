@@ -1,0 +1,123 @@
+{
+  "id": "euroleague-2026",
+  "name": "Turkish Airlines EuroLeague 2025-2026",
+  "version": "1.0.0",
+  "sport": "Basketball 5-on-5",
+  "timezone": "Europe/Madrid",
+  "season": {
+    "start": "2025-10-01T00:00:00+02:00",
+    "end": "2026-05-30T23:59:59+02:00"
+  },
+  "competition": {
+    "name": "EuroLeague Basketball",
+    "format": "double_round_robin",
+    "organizer": "Euroleague Basketball"
+  },
+  "entities": {
+    "teams": [
+      {"id": "real", "name": "Real Madrid", "homeVenue": "wizink", "location": {"lat": 40.4168, "lon": -3.7038}},
+      {"id": "barca", "name": "FC Barcelona", "homeVenue": "palau", "location": {"lat": 41.3851, "lon": 2.1734}},
+      {"id": "efes", "name": "Anadolu Efes", "homeVenue": "sinan-erdem", "location": {"lat": 41.0082, "lon": 28.9784}},
+      {"id": "olympiacos", "name": "Olympiacos Piraeus", "homeVenue": "peace-friendship", "location": {"lat": 37.9838, "lon": 23.7275}}
+    ],
+    "venues": [
+      {
+        "id": "wizink",
+        "name": "WiZink Center",
+        "location": {"lat": 40.4168, "lon": -3.7038, "city": "Madrid", "country": "Spain"},
+        "capacity": 15000
+      },
+      {
+        "id": "palau",
+        "name": "Palau Blaugrana",
+        "location": {"lat": 41.3851, "lon": 2.1734, "city": "Barcelona", "country": "Spain"},
+        "capacity": 7585
+      },
+      {
+        "id": "sinan-erdem",
+        "name": "Sinan Erdem Dome",
+        "location": {"lat": 41.0082, "lon": 28.9784, "city": "Istanbul", "country": "Turkey"},
+        "capacity": 16000
+      },
+      {
+        "id": "peace-friendship",
+        "name": "Peace and Friendship Stadium",
+        "location": {"lat": 37.9838, "lon": 23.7275, "city": "Piraeus", "country": "Greece"},
+        "capacity": 12171
+      }
+    ]
+  },
+  "fixtures": [
+    {"id": "round1-1", "participants": ["real", "barca"], "durationMinutes": 120},
+    {"id": "round1-2", "participants": ["efes", "olympiacos"], "durationMinutes": 120},
+    {"id": "round2-1", "participants": ["real", "efes"], "durationMinutes": 120},
+    {"id": "round2-2", "participants": ["barca", "olympiacos"], "durationMinutes": 120}
+  ],
+  "constraints": [
+    {
+      "id": "no_overlap_team",
+      "type": "hard",
+      "rule": "no_overlap_team",
+      "selector": {"entityType": "team"}
+    },
+    {
+      "id": "no_overlap_venue",
+      "type": "hard",
+      "rule": "no_overlap_venue_resource",
+      "selector": {"entityType": "venue"}
+    },
+    {
+      "id": "min_rest_72h",
+      "type": "hard",
+      "rule": "min_rest_time",
+      "selector": {"entityType": "team"},
+      "params": {"min_hours": 72}
+    },
+    {
+      "id": "euroleague_thursday",
+      "type": "soft",
+      "rule": "time_window",
+      "selector": {"entityType": "fixture"},
+      "params": {
+        "preferred_days": ["Thursday", "Friday"],
+        "time_slots": ["20:00", "20:45"]
+      },
+      "penalty": {"model": "linear", "weight": 100},
+      "comment": "EuroLeague traditional game days"
+    },
+    {
+      "id": "domestic_league_spacing",
+      "type": "soft",
+      "rule": "buffer_time",
+      "selector": {"entityType": "team"},
+      "params": {"buffer_hours": 96},
+      "penalty": {"model": "linear", "weight": 75},
+      "comment": "Allow time for domestic league games"
+    }
+  ],
+  "objectives": [
+    {
+      "metric": "broadcast_coverage",
+      "aggregation": "sum",
+      "weight": 0.4,
+      "direction": "maximize"
+    },
+    {
+      "metric": "travel_distance",
+      "aggregation": "sum",
+      "weight": 0.35,
+      "direction": "minimize"
+    },
+    {
+      "metric": "rest_fairness",
+      "aggregation": "variance",
+      "weight": 0.25,
+      "direction": "minimize"
+    }
+  ],
+  "metadata": {
+    "description": "EuroLeague - Europe's premier professional basketball competition",
+    "tags": ["basketball", "euroleague", "europe", "professional"],
+    "difficulty": "high"
+  }
+}

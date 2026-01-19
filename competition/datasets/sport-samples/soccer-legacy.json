@@ -1,0 +1,59 @@
+{
+  "osssVersion": "0.1.0",
+  "instance": {
+    "metadata": {
+      "name": "Community Soccer League (Legacy)",
+      "track": "youth",
+      "sport": "Soccer (Legacy)",
+      "sportType": "Soccer",
+      "season": "Fall 2026",
+      "timezone": "America/New_York",
+      "difficulty": "⭐⭐",
+      "estimatedComplexity": "low",
+      "competitionDataset": true
+    },
+    "teams": [
+      {"teamId": "soc-01", "name": "Red Devils FC"},
+      {"teamId": "soc-02", "name": "Blue Knights SC"},
+      {"teamId": "soc-03", "name": "Green Warriors"},
+      {"teamId": "soc-04", "name": "Yellow Strikers"},
+      {"teamId": "soc-05", "name": "Orange United"},
+      {"teamId": "soc-06", "name": "Purple Rangers"}
+    ],
+    "venues": [
+      {
+        "venueId": "field-01",
+        "name": "Community Soccer Field",
+        "resources": [{"resourceId": "field-a", "resourceType": "soccer_field"}],
+        "availability": [{
+          "recurringPattern": {
+            "daysOfWeek": ["saturday", "sunday"],
+            "timeWindows": [{"start": "09:00", "end": "17:00"}]
+          }
+        }]
+      }
+    ],
+    "fixtures": [
+      {"fixtureId": "s1", "homeTeamId": "soc-01", "awayTeamId": "soc-02", "estimatedDuration": 90},
+      {"fixtureId": "s2", "homeTeamId": "soc-01", "awayTeamId": "soc-03", "estimatedDuration": 90},
+      {"fixtureId": "s3", "homeTeamId": "soc-01", "awayTeamId": "soc-04", "estimatedDuration": 90},
+      {"fixtureId": "s4", "homeTeamId": "soc-01", "awayTeamId": "soc-05", "estimatedDuration": 90},
+      {"fixtureId": "s5", "homeTeamId": "soc-01", "awayTeamId": "soc-06", "estimatedDuration": 90},
+      {"fixtureId": "s6", "homeTeamId": "soc-02", "awayTeamId": "soc-03", "estimatedDuration": 90},
+      {"fixtureId": "s7", "homeTeamId": "soc-02", "awayTeamId": "soc-04", "estimatedDuration": 90},
+      {"fixtureId": "s8", "homeTeamId": "soc-02", "awayTeamId": "soc-05", "estimatedDuration": 90},
+      {"fixtureId": "s9", "homeTeamId": "soc-02", "awayTeamId": "soc-06", "estimatedDuration": 90},
+      {"fixtureId": "s10", "homeTeamId": "soc-03", "awayTeamId": "soc-04", "estimatedDuration": 90},
+      {"fixtureId": "s11", "homeTeamId": "soc-03", "awayTeamId": "soc-05", "estimatedDuration": 90},
+      {"fixtureId": "s12", "homeTeamId": "soc-03", "awayTeamId": "soc-06", "estimatedDuration": 90},
+      {"fixtureId": "s13", "homeTeamId": "soc-04", "awayTeamId": "soc-05", "estimatedDuration": 90},
+      {"fixtureId": "s14", "homeTeamId": "soc-04", "awayTeamId": "soc-06", "estimatedDuration": 90},
+      {"fixtureId": "s15", "homeTeamId": "soc-05", "awayTeamId": "soc-06", "estimatedDuration": 90}
+    ],
+    "constraints": [
+      {"constraintId": "no_overlap_team", "type": "hard"},
+      {"constraintId": "no_overlap_venue_resource", "type": "hard"},
+      {"constraintId": "min_rest_time", "type": "hard", "params": {"min_hours": 96}}
+    ]
+  }
+}

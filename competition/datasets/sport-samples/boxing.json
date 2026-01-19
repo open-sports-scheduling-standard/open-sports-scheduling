@@ -1,0 +1,47 @@
+{
+  "osssVersion": "0.1.0",
+  "instance": {
+    "metadata": {
+      "name": "Boxing Tournament",
+      "track": "professional",
+      "sport": "Boxing",
+      "sportType": "Boxing",
+      "season": "2026",
+      "timezone": "America/Las_Vegas",
+      "difficulty": "⭐⭐⭐⭐",
+      "estimatedComplexity": "high",
+      "competitionDataset": true
+    },
+    "teams": [
+      {"teamId": "box-01", "name": "Fighter 1 - Heavyweight"},
+      {"teamId": "box-02", "name": "Fighter 2 - Heavyweight"},
+      {"teamId": "box-03", "name": "Fighter 3 - Middleweight"},
+      {"teamId": "box-04", "name": "Fighter 4 - Middleweight"},
+      {"teamId": "box-05", "name": "Fighter 5 - Welterweight"},
+      {"teamId": "box-06", "name": "Fighter 6 - Welterweight"}
+    ],
+    "venues": [
+      {
+        "venueId": "arena-01",
+        "name": "MGM Grand Garden Arena",
+        "resources": [{"resourceId": "ring-1", "resourceType": "boxing_ring"}],
+        "availability": [{
+          "recurringPattern": {
+            "daysOfWeek": ["saturday"],
+            "timeWindows": [{"start": "20:00", "end": "23:30"}]
+          }
+        }]
+      }
+    ],
+    "fixtures": [
+      {"fixtureId": "bout1", "homeTeamId": "box-01", "awayTeamId": "box-02", "estimatedDuration": 60},
+      {"fixtureId": "bout2", "homeTeamId": "box-03", "awayTeamId": "box-04", "estimatedDuration": 45},
+      {"fixtureId": "bout3", "homeTeamId": "box-05", "awayTeamId": "box-06", "estimatedDuration": 45}
+    ],
+    "constraints": [
+      {"constraintId": "no_overlap_team", "type": "hard"},
+      {"constraintId": "no_overlap_venue_resource", "type": "hard"},
+      {"constraintId": "min_rest_time", "type": "hard", "params": {"min_hours": 720}}
+    ]
+  }
+}

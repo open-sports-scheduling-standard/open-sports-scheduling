@@ -1,0 +1,47 @@
+{
+  "osssVersion": "0.1.0",
+  "instance": {
+    "metadata": {
+      "name": "Team Handball League",
+      "track": "professional",
+      "sport": "Team Handball",
+      "sportType": "Handball",
+      "season": "2025-2026",
+      "timezone": "Europe/Copenhagen",
+      "difficulty": "⭐⭐⭐⭐",
+      "estimatedComplexity": "high",
+      "competitionDataset": true
+    },
+    "teams": [
+      {"teamId": "hb-01", "name": "THW Kiel"},
+      {"teamId": "hb-02", "name": "FC Barcelona"},
+      {"teamId": "hb-03", "name": "Paris Saint-Germain"},
+      {"teamId": "hb-04", "name": "Aalborg Handbold"},
+      {"teamId": "hb-05", "name": "Vardar Skopje"},
+      {"teamId": "hb-06", "name": "Telekom Veszprem"}
+    ],
+    "venues": [
+      {
+        "venueId": "hall-01",
+        "name": "Handball Arena",
+        "resources": [{"resourceId": "court-1", "resourceType": "handball_court"}],
+        "availability": [{
+          "recurringPattern": {
+            "daysOfWeek": ["wednesday", "saturday"],
+            "timeWindows": [{"start": "18:00", "end": "21:00"}]
+          }
+        }]
+      }
+    ],
+    "fixtures": [
+      {"fixtureId": "h1", "homeTeamId": "hb-01", "awayTeamId": "hb-02", "estimatedDuration": 75},
+      {"fixtureId": "h2", "homeTeamId": "hb-03", "awayTeamId": "hb-04", "estimatedDuration": 75},
+      {"fixtureId": "h3", "homeTeamId": "hb-05", "awayTeamId": "hb-06", "estimatedDuration": 75}
+    ],
+    "constraints": [
+      {"constraintId": "no_overlap_team", "type": "hard"},
+      {"constraintId": "no_overlap_venue_resource", "type": "hard"},
+      {"constraintId": "min_rest_time", "type": "hard", "params": {"min_hours": 72}}
+    ]
+  }
+}

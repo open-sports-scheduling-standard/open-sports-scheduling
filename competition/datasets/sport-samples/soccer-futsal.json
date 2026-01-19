@@ -1,0 +1,59 @@
+{
+  "osssVersion": "0.1.0",
+  "instance": {
+    "metadata": {
+      "name": "Futsal Championship League",
+      "track": "amateur",
+      "sport": "Futsal",
+      "sportType": "Soccer",
+      "season": "Winter 2026",
+      "timezone": "America/Sao_Paulo",
+      "difficulty": "⭐⭐⭐",
+      "estimatedComplexity": "moderate",
+      "competitionDataset": true
+    },
+    "teams": [
+      {"teamId": "fut-01", "name": "Corinthians Futsal"},
+      {"teamId": "fut-02", "name": "Palmeiras Indoor"},
+      {"teamId": "fut-03", "name": "Santos Futsal"},
+      {"teamId": "fut-04", "name": "Sao Paulo FC Futsal"},
+      {"teamId": "fut-05", "name": "Flamengo Futsal"},
+      {"teamId": "fut-06", "name": "Vasco Futsal"}
+    ],
+    "venues": [
+      {
+        "venueId": "gym-01",
+        "name": "Indoor Sports Arena",
+        "resources": [{"resourceId": "court-a", "resourceType": "futsal_court"}],
+        "availability": [{
+          "recurringPattern": {
+            "daysOfWeek": ["tuesday", "thursday", "saturday"],
+            "timeWindows": [{"start": "18:00", "end": "22:00"}]
+          }
+        }]
+      }
+    ],
+    "fixtures": [
+      {"fixtureId": "f1", "homeTeamId": "fut-01", "awayTeamId": "fut-02", "estimatedDuration": 50},
+      {"fixtureId": "f2", "homeTeamId": "fut-01", "awayTeamId": "fut-03", "estimatedDuration": 50},
+      {"fixtureId": "f3", "homeTeamId": "fut-01", "awayTeamId": "fut-04", "estimatedDuration": 50},
+      {"fixtureId": "f4", "homeTeamId": "fut-01", "awayTeamId": "fut-05", "estimatedDuration": 50},
+      {"fixtureId": "f5", "homeTeamId": "fut-01", "awayTeamId": "fut-06", "estimatedDuration": 50},
+      {"fixtureId": "f6", "homeTeamId": "fut-02", "awayTeamId": "fut-03", "estimatedDuration": 50},
+      {"fixtureId": "f7", "homeTeamId": "fut-02", "awayTeamId": "fut-04", "estimatedDuration": 50},
+      {"fixtureId": "f8", "homeTeamId": "fut-02", "awayTeamId": "fut-05", "estimatedDuration": 50},
+      {"fixtureId": "f9", "homeTeamId": "fut-02", "awayTeamId": "fut-06", "estimatedDuration": 50},
+      {"fixtureId": "f10", "homeTeamId": "fut-03", "awayTeamId": "fut-04", "estimatedDuration": 50},
+      {"fixtureId": "f11", "homeTeamId": "fut-03", "awayTeamId": "fut-05", "estimatedDuration": 50},
+      {"fixtureId": "f12", "homeTeamId": "fut-03", "awayTeamId": "fut-06", "estimatedDuration": 50},
+      {"fixtureId": "f13", "homeTeamId": "fut-04", "awayTeamId": "fut-05", "estimatedDuration": 50},
+      {"fixtureId": "f14", "homeTeamId": "fut-04", "awayTeamId": "fut-06", "estimatedDuration": 50},
+      {"fixtureId": "f15", "homeTeamId": "fut-05", "awayTeamId": "fut-06", "estimatedDuration": 50}
+    ],
+    "constraints": [
+      {"constraintId": "no_overlap_team", "type": "hard"},
+      {"constraintId": "no_overlap_venue_resource", "type": "hard"},
+      {"constraintId": "min_rest_time", "type": "hard", "params": {"min_hours": 48}}
+    ]
+  }
+}

@@ -1,0 +1,159 @@
+{
+  "id": "nfl-2026-nfc-east",
+  "name": "NFL 2026 Season - NFC East Division",
+  "version": "1.0.0",
+  "sport": "American Football",
+  "timezone": "America/New_York",
+  "season": {
+    "start": "2026-09-10T00:00:00-04:00",
+    "end": "2027-01-03T23:59:59-05:00"
+  },
+  "competition": {
+    "name": "National Football League - NFC East",
+    "format": "division_schedule",
+    "organizer": "NFL"
+  },
+  "entities": {
+    "teams": [
+      {
+        "id": "dal",
+        "name": "Dallas Cowboys",
+        "homeVenue": "att-stadium",
+        "location": {"lat": 32.7473, "lon": -97.0945}
+      },
+      {
+        "id": "nyg",
+        "name": "New York Giants",
+        "homeVenue": "metlife",
+        "location": {"lat": 40.8128, "lon": -74.0742}
+      },
+      {
+        "id": "phi",
+        "name": "Philadelphia Eagles",
+        "homeVenue": "lincoln-financial",
+        "location": {"lat": 39.9008, "lon": -75.1675}
+      },
+      {
+        "id": "was",
+        "name": "Washington Commanders",
+        "homeVenue": "fedex-field",
+        "location": {"lat": 38.9076, "lon": -76.8645}
+      }
+    ],
+    "venues": [
+      {
+        "id": "att-stadium",
+        "name": "AT&T Stadium",
+        "location": {"lat": 32.7473, "lon": -97.0945, "city": "Arlington", "state": "TX"},
+        "capacity": 80000,
+        "surfaceType": "artificial_turf",
+        "roofed": true
+      },
+      {
+        "id": "metlife",
+        "name": "MetLife Stadium",
+        "location": {"lat": 40.8128, "lon": -74.0742, "city": "East Rutherford", "state": "NJ"},
+        "capacity": 82500,
+        "surfaceType": "artificial_turf"
+      },
+      {
+        "id": "lincoln-financial",
+        "name": "Lincoln Financial Field",
+        "location": {"lat": 39.9008, "lon": -75.1675, "city": "Philadelphia", "state": "PA"},
+        "capacity": 69796,
+        "surfaceType": "grass"
+      },
+      {
+        "id": "fedex-field",
+        "name": "FedExField",
+        "location": {"lat": 38.9076, "lon": -76.8645, "city": "Landover", "state": "MD"},
+        "capacity": 67617,
+        "surfaceType": "grass"
+      }
+    ]
+  },
+  "fixtures": [
+    {"id": "game-1", "participants": ["dal", "nyg"], "durationMinutes": 210},
+    {"id": "game-2", "participants": ["phi", "was"], "durationMinutes": 210},
+    {"id": "game-3", "participants": ["dal", "phi"], "durationMinutes": 210},
+    {"id": "game-4", "participants": ["nyg", "was"], "durationMinutes": 210},
+    {"id": "game-5", "participants": ["dal", "was"], "durationMinutes": 210},
+    {"id": "game-6", "participants": ["nyg", "phi"], "durationMinutes": 210}
+  ],
+  "constraints": [
+    {
+      "id": "no_overlap_team",
+      "type": "hard",
+      "rule": "no_overlap_team",
+      "selector": {"entityType": "team"}
+    },
+    {
+      "id": "no_overlap_venue",
+      "type": "hard",
+      "rule": "no_overlap_venue_resource",
+      "selector": {"entityType": "venue"}
+    },
+    {
+      "id": "min_rest_7days",
+      "type": "hard",
+      "rule": "min_rest_time",
+      "selector": {"entityType": "team"},
+      "params": {"min_hours": 168},
+      "comment": "Minimum 7 days between games for player recovery"
+    },
+    {
+      "id": "sunday_primetime",
+      "type": "soft",
+      "rule": "time_window",
+      "selector": {"entityType": "fixture"},
+      "params": {
+        "preferred_days": ["Sunday"],
+        "time_slots": ["13:00", "16:25", "20:20"]
+      },
+      "penalty": {"model": "linear", "weight": 150},
+      "comment": "NFL Sunday broadcast windows"
+    },
+    {
+      "id": "no_three_consecutive_road",
+      "type": "hard",
+      "rule": "max_consecutive_away",
+      "selector": {"entityType": "team"},
+      "params": {"max_consecutive": 2}
+    },
+    {
+      "id": "thanksgiving_tradition",
+      "type": "soft",
+      "rule": "specific_date_fixture",
+      "selector": {"fixtureId": "game-1"},
+      "params": {"preferred_date": "2026-11-26"},
+      "penalty": {"model": "linear", "weight": 500},
+      "comment": "Cowboys traditional Thanksgiving game"
+    }
+  ],
+  "objectives": [
+    {
+      "metric": "broadcast_revenue",
+      "aggregation": "sum",
+      "weight": 0.5,
+      "direction": "maximize"
+    },
+    {
+      "metric": "competitive_balance",
+      "aggregation": "variance",
+      "weight": 0.3,
+      "direction": "minimize",
+      "comment": "Balance strength of schedule across teams"
+    },
+    {
+      "metric": "travel_burden",
+      "aggregation": "sum",
+      "weight": 0.2,
+      "direction": "minimize"
+    }
+  ],
+  "metadata": {
+    "description": "NFL NFC East Division Schedule - America's most watched sports league",
+    "tags": ["american_football", "nfl", "broadcast", "professional"],
+    "difficulty": "very_high"
+  }
+}

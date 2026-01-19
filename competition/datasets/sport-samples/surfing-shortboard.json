@@ -1,0 +1,48 @@
+{
+  "osssVersion": "0.1.0",
+  "instance": {
+    "metadata": {
+      "name": "Shortboard Surfing Championship",
+      "track": "professional",
+      "sport": "Shortboard Surfing",
+      "sportType": "Surfing",
+      "season": "Summer 2026",
+      "timezone": "Pacific/Honolulu",
+      "difficulty": "⭐⭐⭐⭐",
+      "estimatedComplexity": "high",
+      "competitionDataset": true
+    },
+    "teams": [
+      {"teamId": "surf-01", "name": "Surfer 1"},
+      {"teamId": "surf-02", "name": "Surfer 2"},
+      {"teamId": "surf-03", "name": "Surfer 3"},
+      {"teamId": "surf-04", "name": "Surfer 4"},
+      {"teamId": "surf-05", "name": "Surfer 5"},
+      {"teamId": "surf-06", "name": "Surfer 6"}
+    ],
+    "venues": [
+      {
+        "venueId": "beach-01",
+        "name": "Pipeline",
+        "resources": [{"resourceId": "surf-zone", "resourceType": "surf_break"}],
+        "availability": [{
+          "recurringPattern": {
+            "daysOfWeek": ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"],
+            "timeWindows": [{"start": "06:00", "end": "18:00"}]
+          }
+        }],
+        "weatherDependent": true
+      }
+    ],
+    "fixtures": [
+      {"fixtureId": "heat1", "homeTeamId": "surf-01", "awayTeamId": "surf-02", "estimatedDuration": 40},
+      {"fixtureId": "heat2", "homeTeamId": "surf-03", "awayTeamId": "surf-04", "estimatedDuration": 40},
+      {"fixtureId": "heat3", "homeTeamId": "surf-05", "awayTeamId": "surf-06", "estimatedDuration": 40}
+    ],
+    "constraints": [
+      {"constraintId": "no_overlap_team", "type": "hard"},
+      {"constraintId": "no_overlap_venue_resource", "type": "hard"},
+      {"constraintId": "min_rest_time", "type": "hard", "params": {"min_hours": 3}}
+    ]
+  }
+}

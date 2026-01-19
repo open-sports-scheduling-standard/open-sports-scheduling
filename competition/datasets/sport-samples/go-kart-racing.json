@@ -1,0 +1,48 @@
+{
+  "osssVersion": "0.1.0",
+  "instance": {
+    "metadata": {
+      "name": "Go-Kart Racing Series",
+      "track": "amateur",
+      "sport": "Go-Kart Racing",
+      "sportType": "Go-Kart Racing",
+      "season": "Summer 2026",
+      "timezone": "America/New_York",
+      "difficulty": "⭐⭐⭐",
+      "estimatedComplexity": "moderate",
+      "competitionDataset": true
+    },
+    "teams": [
+      {"teamId": "kart-01", "name": "Racer 1"},
+      {"teamId": "kart-02", "name": "Racer 2"},
+      {"teamId": "kart-03", "name": "Racer 3"},
+      {"teamId": "kart-04", "name": "Racer 4"},
+      {"teamId": "kart-05", "name": "Racer 5"},
+      {"teamId": "kart-06", "name": "Racer 6"},
+      {"teamId": "kart-07", "name": "Racer 7"},
+      {"teamId": "kart-08", "name": "Racer 8"}
+    ],
+    "venues": [
+      {
+        "venueId": "track-01",
+        "name": "Championship Karting Track",
+        "resources": [{"resourceId": "circuit-1", "resourceType": "kart_track"}],
+        "availability": [{
+          "recurringPattern": {
+            "daysOfWeek": ["saturday", "sunday"],
+            "timeWindows": [{"start": "09:00", "end": "17:00"}]
+          }
+        }]
+      }
+    ],
+    "fixtures": [
+      {"fixtureId": "race1", "participants": ["kart-01", "kart-02", "kart-03", "kart-04"], "estimatedDuration": 45},
+      {"fixtureId": "race2", "participants": ["kart-05", "kart-06", "kart-07", "kart-08"], "estimatedDuration": 45}
+    ],
+    "constraints": [
+      {"constraintId": "no_overlap_team", "type": "hard"},
+      {"constraintId": "no_overlap_venue_resource", "type": "hard"},
+      {"constraintId": "min_rest_time", "type": "hard", "params": {"min_hours": 3}}
+    ]
+  }
+}

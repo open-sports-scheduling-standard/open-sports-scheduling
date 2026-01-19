@@ -1,0 +1,131 @@
+{
+  "id": "wsl-pipeline-2026",
+  "name": "WSL Championship Tour - Pipeline Pro 2026",
+  "version": "1.0.0",
+  "sport": "Shortboard Surfing",
+  "timezone": "Pacific/Honolulu",
+  "season": {
+    "start": "2026-01-29T00:00:00-10:00",
+    "end": "2026-02-10T23:59:59-10:00",
+    "waitingPeriod": true
+  },
+  "competition": {
+    "name": "World Surf League Championship Tour",
+    "format": "heat_based",
+    "organizer": "WSL"
+  },
+  "entities": {
+    "teams": [
+      {"id": "surfer-1", "name": "John John Florence"},
+      {"id": "surfer-2", "name": "Kelly Slater"},
+      {"id": "surfer-3", "name": "Gabriel Medina"},
+      {"id": "surfer-4", "name": "Italo Ferreira"},
+      {"id": "surfer-5", "name": "Filipe Toledo"},
+      {"id": "surfer-6", "name": "Jordy Smith"}
+    ],
+    "venues": [
+      {
+        "id": "pipeline",
+        "name": "Banzai Pipeline",
+        "location": {"lat": 21.6644, "lon": -158.0541, "city": "Oahu", "country": "USA"},
+        "waveType": "reef_break",
+        "difficulty": "expert",
+        "weatherDependent": true,
+        "tideDependendent": true
+      }
+    ]
+  },
+  "fixtures": [
+    {"id": "heat-1", "participants": ["surfer-1", "surfer-2"], "durationMinutes": 35, "round": "round_1"},
+    {"id": "heat-2", "participants": ["surfer-3", "surfer-4"], "durationMinutes": 35, "round": "round_1"},
+    {"id": "heat-3", "participants": ["surfer-5", "surfer-6"], "durationMinutes": 35, "round": "round_1"},
+    {"id": "final", "participants": ["TBD-1", "TBD-2"], "durationMinutes": 35, "round": "final"}
+  ],
+  "constraints": [
+    {
+      "id": "no_overlap_surfer",
+      "type": "hard",
+      "rule": "no_overlap_team",
+      "selector": {"entityType": "team"}
+    },
+    {
+      "id": "wave_conditions",
+      "type": "hard",
+      "rule": "weather_conditions",
+      "selector": {"entityType": "fixture"},
+      "params": {
+        "min_wave_height_ft": 6,
+        "max_wave_height_ft": 20,
+        "preferred_swell_direction": "NW"
+      },
+      "comment": "Pipeline requires specific wave conditions"
+    },
+    {
+      "id": "tide_window",
+      "type": "hard",
+      "rule": "tide_conditions",
+      "selector": {"entityType": "fixture"},
+      "params": {
+        "preferred_tide": ["mid", "high"],
+        "avoid_tide": ["low"]
+      }
+    },
+    {
+      "id": "daylight_hours",
+      "type": "hard",
+      "rule": "time_window",
+      "selector": {"entityType": "fixture"},
+      "params": {
+        "earliest_start": "07:00",
+        "latest_end": "18:00"
+      }
+    },
+    {
+      "id": "surfer_rest",
+      "type": "soft",
+      "rule": "min_rest_time",
+      "selector": {"entityType": "team"},
+      "params": {"min_hours": 3},
+      "penalty": {"model": "linear", "weight": 100}
+    },
+    {
+      "id": "optimal_conditions",
+      "type": "soft",
+      "rule": "wave_quality",
+      "selector": {"round": "final"},
+      "params": {
+        "optimal_wave_height_ft": 10,
+        "optimal_wind": "offshore"
+      },
+      "penalty": {"model": "exponential", "weight": 200}
+    }
+  ],
+  "objectives": [
+    {
+      "metric": "wave_quality_score",
+      "aggregation": "average",
+      "weight": 0.5,
+      "direction": "maximize",
+      "comment": "Schedule heats during best conditions"
+    },
+    {
+      "metric": "broadcast_window_alignment",
+      "aggregation": "sum",
+      "weight": 0.3,
+      "direction": "maximize"
+    },
+    {
+      "metric": "waiting_period_efficiency",
+      "aggregation": "span",
+      "weight": 0.2,
+      "direction": "minimize",
+      "comment": "Complete event in fewest days possible"
+    }
+  ],
+  "metadata": {
+    "description": "WSL Pipeline Pro - surfing's most prestigious and dangerous event",
+    "tags": ["surfing", "shortboard", "pipeline", "weather_dependent", "professional"],
+    "difficulty": "very_high",
+    "special_notes": "Event runs on waiting period - requires daily wave forecasting and flexible scheduling"
+  }
+}

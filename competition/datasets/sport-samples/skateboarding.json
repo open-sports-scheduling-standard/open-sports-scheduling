@@ -1,0 +1,47 @@
+{
+  "osssVersion": "0.1.0",
+  "instance": {
+    "metadata": {
+      "name": "Skateboarding Street Competition",
+      "track": "professional",
+      "sport": "Skateboarding",
+      "sportType": "Skateboarding",
+      "season": "Summer 2026",
+      "timezone": "America/Los_Angeles",
+      "difficulty": "⭐⭐⭐",
+      "estimatedComplexity": "moderate",
+      "competitionDataset": true
+    },
+    "teams": [
+      {"teamId": "sk-01", "name": "Skater 1"},
+      {"teamId": "sk-02", "name": "Skater 2"},
+      {"teamId": "sk-03", "name": "Skater 3"},
+      {"teamId": "sk-04", "name": "Skater 4"},
+      {"teamId": "sk-05", "name": "Skater 5"},
+      {"teamId": "sk-06", "name": "Skater 6"},
+      {"teamId": "sk-07", "name": "Skater 7"},
+      {"teamId": "sk-08", "name": "Skater 8"}
+    ],
+    "venues": [
+      {
+        "venueId": "park-01",
+        "name": "Skate Park",
+        "resources": [{"resourceId": "street-course", "resourceType": "street_course"}],
+        "availability": [{
+          "recurringPattern": {
+            "daysOfWeek": ["saturday", "sunday"],
+            "timeWindows": [{"start": "09:00", "end": "18:00"}]
+          }
+        }]
+      }
+    ],
+    "fixtures": [
+      {"fixtureId": "sk1", "participants": ["sk-01", "sk-02", "sk-03", "sk-04", "sk-05", "sk-06", "sk-07", "sk-08"], "estimatedDuration": 180, "type": "heat"}
+    ],
+    "constraints": [
+      {"constraintId": "no_overlap_team", "type": "hard"},
+      {"constraintId": "no_overlap_venue_resource", "type": "hard"},
+      {"constraintId": "min_rest_time", "type": "hard", "params": {"min_hours": 4}}
+    ]
+  }
+}

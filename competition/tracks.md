@@ -447,16 +447,281 @@ Unlike traditional sports:
 
 ---
 
+## Track 6: Master Championship (Hybrid Multi-Sport Global) ⭐⭐⭐⭐⭐⭐
+
+**Target Audience**: Expert practitioners, research institutions, algorithm developers pushing boundaries
+**Real-World Application**: Global multi-sport championships, international federations, mega-events (Olympics-style), hybrid sports/esports tournaments
+
+### Problem Characteristics
+
+- **Teams**: 64+ teams across multiple divisions and sports/esports
+- **Tournament Duration**: 12-16 weeks (regional qualifiers + global finals)
+- **Matches per Team**: 15-30 matches
+- **Venues**: 40+ venues (20+ physical, 20+ virtual/servers)
+- **Sports Types**: Mixed (traditional sports + esports)
+- **Regions**: 6+ global regions (NA, EU, APAC, LATAM, MENA, OCE)
+- **Complexity**: Extreme (global coordination, multi-sport, hybrid online/LAN, playoff structures)
+
+### Problem Structure
+
+This track simulates organizing a global championship combining:
+- **Regional Qualifiers**: Teams compete in their region (online for esports, physical for sports)
+- **Cross-Regional Group Stage**: Best teams from each region compete
+- **LAN Finals**: Top teams meet at physical venue for championship
+- **Parallel Competitions**: Multiple sports/games running simultaneously
+- **Shared Resources**: Venues used across different competitions
+
+### Required Constraints
+
+```json
+{
+  "required": [
+    {
+      "ruleId": "no_overlap_team",
+      "type": "hard",
+      "comment": "Across ALL sports and divisions"
+    },
+    {
+      "ruleId": "no_overlap_venue_resource",
+      "type": "hard",
+      "comment": "Physical and virtual venues"
+    },
+    {
+      "ruleId": "min_rest_time",
+      "type": "hard",
+      "params": { "min_hours": 48 },
+      "selector": { "division": "professional_sports" }
+    },
+    {
+      "ruleId": "min_rest_time",
+      "type": "hard",
+      "params": { "min_hours": 24 },
+      "selector": { "division": "esports" }
+    },
+    {
+      "ruleId": "server_latency_fairness",
+      "type": "hard",
+      "params": { "max_ping_ms": 40, "max_delta_ms": 12 },
+      "selector": { "competitionType": "esports", "phase": "online" }
+    },
+    {
+      "ruleId": "regional_time_balance",
+      "type": "hard",
+      "params": {
+        "regions": ["NA", "EU", "APAC", "LATAM", "MENA", "OCE"],
+        "primetime_windows": {
+          "NA": ["18:00-23:00 EST"],
+          "EU": ["18:00-23:00 CET"],
+          "APAC": ["18:00-23:00 JST"],
+          "LATAM": ["18:00-23:00 BRT"],
+          "MENA": ["18:00-23:00 GST"],
+          "OCE": ["18:00-23:00 AEDT"]
+        },
+        "min_primetime_matches_per_team": 3
+      }
+    },
+    {
+      "ruleId": "cross_division_spacing",
+      "type": "hard",
+      "params": { "min_hours": 6 },
+      "comment": "Same venue across different sports"
+    },
+    {
+      "ruleId": "playoff_progression",
+      "type": "hard",
+      "params": {
+        "regional_phase_deadline": "2025-08-15",
+        "global_phase_start": "2025-08-20",
+        "finals_date": "2025-09-15"
+      }
+    },
+    {
+      "ruleId": "broadcast_window",
+      "type": "hard",
+      "params": {
+        "allowed_windows": [
+          {
+            "dayOfWeek": "saturday",
+            "startTime": "12:00",
+            "endTime": "22:00",
+            "regions": ["global"]
+          },
+          {
+            "dayOfWeek": "sunday",
+            "startTime": "12:00",
+            "endTime": "22:00",
+            "regions": ["global"]
+          }
+        ],
+        "max_concurrent_broadcasts": 4
+      }
+    },
+    {
+      "ruleId": "venue_capacity_limits",
+      "type": "hard",
+      "params": {
+        "playoff_min_capacity": 5000,
+        "finals_min_capacity": 15000
+      }
+    }
+  ],
+  "recommended": [
+    {
+      "ruleId": "travel_time_realistic",
+      "type": "soft",
+      "params": {
+        "max_daily_travel_hours": 8,
+        "min_arrival_before_match": 12
+      },
+      "penalty": { "perViolation": 200 }
+    },
+    {
+      "ruleId": "concurrent_match_viewership",
+      "type": "soft",
+      "params": { "max_concurrent_high_profile": 2 },
+      "penalty": { "perViolation": 150 }
+    },
+    {
+      "ruleId": "regional_representation_balance",
+      "type": "soft",
+      "params": {
+        "min_teams_per_region_in_finals": 2,
+        "max_teams_per_region_in_finals": 8
+      },
+      "penalty": { "perViolation": 100 }
+    }
+  ]
+}
+```
+
+### Optimization Objectives
+
+| Objective | Weight | Target |
+|-----------|--------|--------|
+| global_fairness | 25% | balanced regional representation, time zones, venues |
+| operational_efficiency | 20% | venue utilization, travel minimization, broadcast windows |
+| competitive_integrity | 25% | playoff seeding fairness, rest time balance, no conflicts of interest |
+| viewership_maximization | 20% | primetime coverage, concurrent match optimization, regional accessibility |
+| sustainability | 10% | carbon footprint, travel reduction, venue reuse |
+
+### Scoring Formula
+
+```
+score = 0.25 × fairness_penalty
+      + 0.20 × efficiency_penalty
+      + 0.25 × integrity_penalty
+      + 0.20 × viewership_penalty
+      + 0.10 × sustainability_penalty
+```
+
+Lower score is better.
+
+### Sample Instance
+
+Available at: `competition/tracks/track-6-master/master-championship-2025-01.json`
+
+### Unique Challenges
+
+**1. Multi-Sport Coordination**
+- Schedule basketball, soccer, AND esports (LoL, CS:GO, Valorant)
+- Shared venue pools in some cities
+- Different rest requirements per sport
+- Different match durations
+
+**2. Hybrid Online/LAN**
+- Regional qualifiers online (server latency matters)
+- Cross-regional matches online
+- Semifinals and finals at physical LAN venues
+- Transition logistics between phases
+
+**3. Global Time Zone Optimization**
+- 6 major regions spanning 24 time zones
+- Must ensure each region gets reasonable match times
+- Primetime viewership across regions
+- Avoid 3am matches for any region
+
+**4. Playoff Structure Constraints**
+- Regional winners must qualify
+- Seeding based on regional performance
+- Bracket constraints (no same-region matchups early)
+- Finals at designated host city
+
+**5. Broadcast Complexity**
+- Multiple language streams
+- Concurrent match limits (4 max)
+- Prime broadcast slots (Saturday/Sunday 12:00-22:00 UTC)
+- High-profile matchups (marquee teams) separated temporally
+
+**6. Venue Sharing**
+- Same physical venue used for basketball (morning), esports LAN (afternoon), soccer (evening)
+- Setup/teardown time requirements
+- Capacity requirements for different phases
+- Equipment availability (esports requires specific setups)
+
+**7. Travel Logistics**
+- Physical sports teams traveling between cities
+- Esports teams traveling to LAN finals
+- Realistic travel time constraints
+- Jet lag considerations (min 48h arrival before important matches)
+
+**8. Sustainability Goals**
+- Minimize total carbon footprint
+- Prefer local venues when possible
+- Batch matches by location
+- Reduce redundant travel
+
+### Difficulty Notes
+
+- **Massive Search Space**: 64 teams × 200+ matches × 40+ venues × 16 weeks
+- **Constraint Density**: 15+ hard constraints, many interacting
+- **Global Coordination**: Impossible to satisfy all regional primetime preferences perfectly
+- **Multi-Objective Trade-offs**: Fairness vs. efficiency vs. viewership
+- **Feasibility Risk**: May be infeasible with tight constraints
+- **Computational Complexity**: Expected solve time: hours to days
+- **Real-World Realism**: Mirrors actual global championship logistics
+
+### Track Requirements
+
+To compete on Master Track, your solver must:
+
+1. ✅ Handle multi-sport/multi-format scheduling
+2. ✅ Support both physical and virtual venues
+3. ✅ Optimize across 6+ global regions
+4. ✅ Implement playoff bracket constraints
+5. ✅ Balance 5 competing objectives simultaneously
+6. ✅ Scale to 60+ teams and 200+ fixtures
+7. ✅ Complete within reasonable time (< 24 hours)
+
+### Expected Performance
+
+**Baseline (Greedy):** ~50,000 penalty (likely infeasible)
+**Good (CP-SAT):** ~8,000-12,000 penalty (feasible, some soft violations)
+**Excellent (Advanced):** ~4,000-6,000 penalty (near-optimal)
+**State-of-the-Art:** ~2,000-3,500 penalty (highly optimized)
+
+### Recognition
+
+Master Track winners receive:
+- 🏆 **OSSS Master Champion Badge**
+- 🌟 **Featured on Hall of Fame**
+- 📜 **Certificate of Excellence**
+- 🎤 **Invited to present at OSSS Summit**
+- 📊 **Published case study of approach**
+
+---
+
 ## Track Selection Guide
 
-| If you are... | Start with... | Then try... |
-|---------------|---------------|-------------|
-| **New to sports scheduling** | Track 1 (Youth) | Track 2 (Amateur) |
-| **Commercial vendor** | Track 2 (Amateur) | Track 3 (Professional) |
-| **Academic researcher** | Track 3 (Professional) | Track 4 (Multi-Division) |
-| **Expert optimizer** | Track 3 (Professional) | Track 4 (Multi-Division) |
-| **Esports tournament organizer** | Track 5 (Esports) | Track 4 (Multi-Division) |
-| **Learning OSSS** | Track 1 (Youth) | All tracks |
+| If you are... | Start with... | Then try... | Ultimate Challenge... |
+|---------------|---------------|-------------|----------------------|
+| **New to sports scheduling** | Track 1 (Youth) | Track 2 (Amateur) | Work up gradually |
+| **Commercial vendor** | Track 2 (Amateur) | Track 3 (Professional) | Track 6 (Master) |
+| **Academic researcher** | Track 3 (Professional) | Track 4 (Multi-Division) | Track 6 (Master) |
+| **Expert optimizer** | Track 3 (Professional) | Track 4 (Multi-Division) | Track 6 (Master) |
+| **Esports tournament organizer** | Track 5 (Esports) | Track 4 (Multi-Division) | Track 6 (Master) |
+| **Algorithm developer** | Track 3 (Professional) | Track 5 (Esports) | Track 6 (Master) |
+| **Ready for ultimate challenge** | Track 4 or 5 | Track 6 (Master) | - |
+| **Learning OSSS** | Track 1 (Youth) | All tracks | Track 6 (Master) |
 
 ---
 

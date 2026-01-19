@@ -1,0 +1,51 @@
+{
+  "osssVersion": "0.1.0",
+  "instance": {
+    "metadata": {
+      "name": "Sport Climbing Championship",
+      "track": "professional",
+      "sport": "Sport Climbing",
+      "sportType": "Sport Climbing",
+      "season": "2026",
+      "timezone": "Europe/Paris",
+      "difficulty": "⭐⭐⭐",
+      "estimatedComplexity": "moderate",
+      "competitionDataset": true
+    },
+    "teams": [
+      {"teamId": "climb-01", "name": "Athlete A"},
+      {"teamId": "climb-02", "name": "Athlete B"},
+      {"teamId": "climb-03", "name": "Athlete C"},
+      {"teamId": "climb-04", "name": "Athlete D"},
+      {"teamId": "climb-05", "name": "Athlete E"},
+      {"teamId": "climb-06", "name": "Athlete F"}
+    ],
+    "venues": [
+      {
+        "venueId": "wall-01",
+        "name": "Olympic Climbing Wall",
+        "resources": [
+          {"resourceId": "lead-wall", "resourceType": "lead_climbing_wall"},
+          {"resourceId": "speed-wall", "resourceType": "speed_climbing_wall"},
+          {"resourceId": "boulder-wall", "resourceType": "bouldering_wall"}
+        ],
+        "availability": [{
+          "recurringPattern": {
+            "daysOfWeek": ["friday", "saturday", "sunday"],
+            "timeWindows": [{"start": "09:00", "end": "18:00"}]
+          }
+        }]
+      }
+    ],
+    "fixtures": [
+      {"fixtureId": "c1", "homeTeamId": "climb-01", "awayTeamId": "climb-02", "estimatedDuration": 30, "discipline": "lead"},
+      {"fixtureId": "c2", "homeTeamId": "climb-03", "awayTeamId": "climb-04", "estimatedDuration": 15, "discipline": "speed"},
+      {"fixtureId": "c3", "homeTeamId": "climb-05", "awayTeamId": "climb-06", "estimatedDuration": 20, "discipline": "boulder"}
+    ],
+    "constraints": [
+      {"constraintId": "no_overlap_team", "type": "hard"},
+      {"constraintId": "no_overlap_venue_resource", "type": "hard"},
+      {"constraintId": "min_rest_time", "type": "hard", "params": {"min_hours": 6}}
+    ]
+  }
+}

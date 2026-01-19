@@ -1,0 +1,65 @@
+{
+  "osssVersion": "0.1.0",
+  "instance": {
+    "metadata": {
+      "name": "Rugby Union 7s Tournament Series",
+      "track": "professional",
+      "sport": "Rugby Union 7s",
+      "sportType": "Rugby",
+      "season": "Summer 2026",
+      "timezone": "Pacific/Auckland",
+      "difficulty": "⭐⭐⭐",
+      "estimatedComplexity": "moderate",
+      "competitionDataset": true
+    },
+    "teams": [
+      {"teamId": "r7-01", "name": "All Blacks 7s"},
+      {"teamId": "r7-02", "name": "Springboks 7s"},
+      {"teamId": "r7-03", "name": "Fiji 7s"},
+      {"teamId": "r7-04", "name": "Australia 7s"},
+      {"teamId": "r7-05", "name": "England 7s"},
+      {"teamId": "r7-06", "name": "France 7s"},
+      {"teamId": "r7-07", "name": "Argentina 7s"},
+      {"teamId": "r7-08", "name": "USA 7s"}
+    ],
+    "venues": [
+      {
+        "venueId": "pitch-01",
+        "name": "Tournament Pitch 1",
+        "resources": [{"resourceId": "p1", "resourceType": "rugby_7s_pitch"}],
+        "availability": [{
+          "recurringPattern": {
+            "daysOfWeek": ["saturday", "sunday"],
+            "timeWindows": [{"start": "09:00", "end": "19:00"}]
+          }
+        }]
+      },
+      {
+        "venueId": "pitch-02",
+        "name": "Tournament Pitch 2",
+        "resources": [{"resourceId": "p2", "resourceType": "rugby_7s_pitch"}],
+        "availability": [{
+          "recurringPattern": {
+            "daysOfWeek": ["saturday", "sunday"],
+            "timeWindows": [{"start": "09:00", "end": "19:00"}]
+          }
+        }]
+      }
+    ],
+    "fixtures": [
+      {"fixtureId": "g1", "homeTeamId": "r7-01", "awayTeamId": "r7-02", "estimatedDuration": 30},
+      {"fixtureId": "g2", "homeTeamId": "r7-03", "awayTeamId": "r7-04", "estimatedDuration": 30},
+      {"fixtureId": "g3", "homeTeamId": "r7-05", "awayTeamId": "r7-06", "estimatedDuration": 30},
+      {"fixtureId": "g4", "homeTeamId": "r7-07", "awayTeamId": "r7-08", "estimatedDuration": 30},
+      {"fixtureId": "g5", "homeTeamId": "r7-01", "awayTeamId": "r7-03", "estimatedDuration": 30},
+      {"fixtureId": "g6", "homeTeamId": "r7-02", "awayTeamId": "r7-04", "estimatedDuration": 30},
+      {"fixtureId": "g7", "homeTeamId": "r7-05", "awayTeamId": "r7-07", "estimatedDuration": 30},
+      {"fixtureId": "g8", "homeTeamId": "r7-06", "awayTeamId": "r7-08", "estimatedDuration": 30}
+    ],
+    "constraints": [
+      {"constraintId": "no_overlap_team", "type": "hard"},
+      {"constraintId": "no_overlap_venue_resource", "type": "hard"},
+      {"constraintId": "min_rest_time", "type": "hard", "params": {"min_hours": 3}}
+    ]
+  }
+}

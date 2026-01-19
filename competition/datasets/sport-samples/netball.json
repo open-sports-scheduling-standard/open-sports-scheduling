@@ -1,0 +1,47 @@
+{
+  "osssVersion": "0.1.0",
+  "instance": {
+    "metadata": {
+      "name": "Netball Super League",
+      "track": "professional",
+      "sport": "Netball",
+      "sportType": "Netball",
+      "season": "2026",
+      "timezone": "Australia/Sydney",
+      "difficulty": "⭐⭐⭐⭐",
+      "estimatedComplexity": "high",
+      "competitionDataset": true
+    },
+    "teams": [
+      {"teamId": "nb-01", "name": "Sydney Swifts"},
+      {"teamId": "nb-02", "name": "Melbourne Vixens"},
+      {"teamId": "nb-03", "name": "Queensland Firebirds"},
+      {"teamId": "nb-04", "name": "Adelaide Thunderbirds"},
+      {"teamId": "nb-05", "name": "West Coast Fever"},
+      {"teamId": "nb-06", "name": "Giants Netball"}
+    ],
+    "venues": [
+      {
+        "venueId": "court-01",
+        "name": "Netball Arena",
+        "resources": [{"resourceId": "court-1", "resourceType": "netball_court"}],
+        "availability": [{
+          "recurringPattern": {
+            "daysOfWeek": ["saturday", "sunday"],
+            "timeWindows": [{"start": "15:00", "end": "20:00"}]
+          }
+        }]
+      }
+    ],
+    "fixtures": [
+      {"fixtureId": "n1", "homeTeamId": "nb-01", "awayTeamId": "nb-02", "estimatedDuration": 75},
+      {"fixtureId": "n2", "homeTeamId": "nb-03", "awayTeamId": "nb-04", "estimatedDuration": 75},
+      {"fixtureId": "n3", "homeTeamId": "nb-05", "awayTeamId": "nb-06", "estimatedDuration": 75}
+    ],
+    "constraints": [
+      {"constraintId": "no_overlap_team", "type": "hard"},
+      {"constraintId": "no_overlap_venue_resource", "type": "hard"},
+      {"constraintId": "min_rest_time", "type": "hard", "params": {"min_hours": 72}}
+    ]
+  }
+}

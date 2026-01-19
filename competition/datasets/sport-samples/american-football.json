@@ -1,0 +1,47 @@
+{
+  "osssVersion": "0.1.0",
+  "instance": {
+    "metadata": {
+      "name": "American Football Conference",
+      "track": "professional",
+      "sport": "American Football",
+      "sportType": "American Football",
+      "season": "Fall 2026",
+      "timezone": "America/New_York",
+      "difficulty": "⭐⭐⭐⭐",
+      "estimatedComplexity": "high",
+      "competitionDataset": true
+    },
+    "teams": [
+      {"teamId": "af-01", "name": "New York Giants"},
+      {"teamId": "af-02", "name": "Dallas Cowboys"},
+      {"teamId": "af-03", "name": "Philadelphia Eagles"},
+      {"teamId": "af-04", "name": "Washington Commanders"},
+      {"teamId": "af-05", "name": "Green Bay Packers"},
+      {"teamId": "af-06", "name": "Chicago Bears"}
+    ],
+    "venues": [
+      {
+        "venueId": "stadium-01",
+        "name": "MetLife Stadium",
+        "resources": [{"resourceId": "field-1", "resourceType": "football_field"}],
+        "availability": [{
+          "recurringPattern": {
+            "daysOfWeek": ["sunday"],
+            "timeWindows": [{"start": "13:00", "end": "20:00"}]
+          }
+        }]
+      }
+    ],
+    "fixtures": [
+      {"fixtureId": "g1", "homeTeamId": "af-01", "awayTeamId": "af-02", "estimatedDuration": 210},
+      {"fixtureId": "g2", "homeTeamId": "af-03", "awayTeamId": "af-04", "estimatedDuration": 210},
+      {"fixtureId": "g3", "homeTeamId": "af-05", "awayTeamId": "af-06", "estimatedDuration": 210}
+    ],
+    "constraints": [
+      {"constraintId": "no_overlap_team", "type": "hard"},
+      {"constraintId": "no_overlap_venue_resource", "type": "hard"},
+      {"constraintId": "min_rest_time", "type": "hard", "params": {"min_hours": 168}}
+    ]
+  }
+}

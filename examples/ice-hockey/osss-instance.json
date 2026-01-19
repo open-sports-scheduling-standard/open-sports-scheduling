@@ -1,0 +1,130 @@
+{
+  "id": "nhl-2026-original-six",
+  "name": "NHL 2025-2026 Original Six Rivalry",
+  "version": "1.0.0",
+  "sport": "Ice Hockey",
+  "timezone": "America/Toronto",
+  "season": {
+    "start": "2025-10-08T00:00:00-04:00",
+    "end": "2026-04-15T23:59:59-04:00"
+  },
+  "competition": {
+    "name": "National Hockey League",
+    "format": "season_schedule",
+    "organizer": "NHL"
+  },
+  "entities": {
+    "teams": [
+      {"id": "tor", "name": "Toronto Maple Leafs", "homeVenue": "scotiabank"},
+      {"id": "mtl", "name": "Montreal Canadiens", "homeVenue": "bell-centre"},
+      {"id": "bos", "name": "Boston Bruins", "homeVenue": "td-garden"},
+      {"id": "det", "name": "Detroit Red Wings", "homeVenue": "little-caesars"}
+    ],
+    "venues": [
+      {
+        "id": "scotiabank",
+        "name": "Scotiabank Arena",
+        "location": {"lat": 43.6435, "lon": -79.3791, "city": "Toronto", "country": "Canada"},
+        "capacity": 18800
+      },
+      {
+        "id": "bell-centre",
+        "name": "Bell Centre",
+        "location": {"lat": 45.4960, "lon": -73.5693, "city": "Montreal", "country": "Canada"},
+        "capacity": 21302
+      },
+      {
+        "id": "td-garden",
+        "name": "TD Garden",
+        "location": {"lat": 42.3662, "lon": -71.0621, "city": "Boston", "country": "USA"},
+        "capacity": 17565
+      },
+      {
+        "id": "little-caesars",
+        "name": "Little Caesars Arena",
+        "location": {"lat": 42.3411, "lon": -83.0553, "city": "Detroit", "country": "USA"},
+        "capacity": 19515
+      }
+    ]
+  },
+  "fixtures": [
+    {"id": "game-1", "participants": ["tor", "mtl"], "durationMinutes": 150},
+    {"id": "game-2", "participants": ["bos", "det"], "durationMinutes": 150},
+    {"id": "game-3", "participants": ["tor", "bos"], "durationMinutes": 150},
+    {"id": "game-4", "participants": ["mtl", "det"], "durationMinutes": 150}
+  ],
+  "constraints": [
+    {
+      "id": "no_overlap_team",
+      "type": "hard",
+      "rule": "no_overlap_team",
+      "selector": {"entityType": "team"}
+    },
+    {
+      "id": "no_overlap_venue",
+      "type": "hard",
+      "rule": "no_overlap_venue_resource",
+      "selector": {"entityType": "venue"}
+    },
+    {
+      "id": "min_rest_48h",
+      "type": "hard",
+      "rule": "min_rest_time",
+      "selector": {"entityType": "team"},
+      "params": {"min_hours": 48},
+      "comment": "NHL minimum rest between games"
+    },
+    {
+      "id": "max_three_in_four",
+      "type": "hard",
+      "rule": "max_games_in_period",
+      "selector": {"entityType": "team"},
+      "params": {"max_games": 3, "period_days": 4}
+    },
+    {
+      "id": "saturday_night_hockey",
+      "type": "soft",
+      "rule": "time_window",
+      "selector": {"entityType": "fixture"},
+      "params": {
+        "preferred_days": ["Saturday"],
+        "time_slots": ["19:00"]
+      },
+      "penalty": {"model": "linear", "weight": 100},
+      "comment": "Hockey Night in Canada tradition"
+    },
+    {
+      "id": "rivalry_game_spacing",
+      "type": "soft",
+      "rule": "opponent_spacing",
+      "selector": {"rivalry": true},
+      "params": {"min_days_between_rematches": 21},
+      "penalty": {"model": "linear", "weight": 50}
+    }
+  ],
+  "objectives": [
+    {
+      "metric": "broadcast_ratings",
+      "aggregation": "sum",
+      "weight": 0.4,
+      "direction": "maximize"
+    },
+    {
+      "metric": "travel_distance",
+      "aggregation": "sum",
+      "weight": 0.3,
+      "direction": "minimize"
+    },
+    {
+      "metric": "back_to_back_games",
+      "aggregation": "count",
+      "weight": 0.3,
+      "direction": "minimize"
+    }
+  ],
+  "metadata": {
+    "description": "NHL Original Six rivalry games - hockey's most historic matchups",
+    "tags": ["ice_hockey", "nhl", "original_six", "professional"],
+    "difficulty": "high"
+  }
+}

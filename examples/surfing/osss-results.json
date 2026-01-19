@@ -1,0 +1,64 @@
+{
+  "instanceId": "wsl-pipeline-2026",
+  "scheduledFixtures": [
+    {
+      "fixtureId": "heat-1",
+      "venue": "pipeline",
+      "startTime": "2026-02-03T08:00:00-10:00",
+      "endTime": "2026-02-03T08:35:00-10:00",
+      "conditions": {
+        "wave_height_ft": 12,
+        "swell_direction": "NW",
+        "wind": "light_offshore",
+        "tide": "mid_incoming"
+      }
+    },
+    {
+      "fixtureId": "heat-2",
+      "venue": "pipeline",
+      "startTime": "2026-02-03T09:00:00-10:00",
+      "endTime": "2026-02-03T09:35:00-10:00",
+      "conditions": {
+        "wave_height_ft": 12,
+        "swell_direction": "NW",
+        "wind": "light_offshore",
+        "tide": "mid_incoming"
+      }
+    },
+    {
+      "fixtureId": "heat-3",
+      "venue": "pipeline",
+      "startTime": "2026-02-03T10:00:00-10:00",
+      "endTime": "2026-02-03T10:35:00-10:00",
+      "conditions": {
+        "wave_height_ft": 11,
+        "swell_direction": "NW",
+        "wind": "offshore",
+        "tide": "high"
+      }
+    },
+    {
+      "fixtureId": "final",
+      "venue": "pipeline",
+      "startTime": "2026-02-08T09:00:00-10:00",
+      "endTime": "2026-02-08T09:35:00-10:00",
+      "notes": "Championship Final - Epic conditions",
+      "conditions": {
+        "wave_height_ft": 15,
+        "swell_direction": "NNW",
+        "wind": "offshore",
+        "tide": "mid"
+      }
+    }
+  ],
+  "score": {
+    "objectives": {
+      "wave_quality_score": 9.2,
+      "broadcast_window_alignment": 95,
+      "waiting_period_efficiency": 6
+    },
+    "violations": [],
+    "totalPenalty": 0
+  },
+  "notes": "Event utilized 6 days of the 13-day waiting period. Optimal conditions on day 6 and day 10."
+}

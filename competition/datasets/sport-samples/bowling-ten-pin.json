@@ -1,0 +1,50 @@
+{
+  "osssVersion": "0.1.0",
+  "instance": {
+    "metadata": {
+      "name": "Ten Pin Bowling League",
+      "track": "amateur",
+      "sport": "Ten Pin Bowling",
+      "sportType": "Bowling",
+      "season": "Winter 2026",
+      "timezone": "America/Chicago",
+      "difficulty": "⭐⭐",
+      "estimatedComplexity": "low",
+      "competitionDataset": true
+    },
+    "teams": [
+      {"teamId": "bowl-01", "name": "Strike Force"},
+      {"teamId": "bowl-02", "name": "Pin Crushers"},
+      {"teamId": "bowl-03", "name": "Spare Me"},
+      {"teamId": "bowl-04", "name": "Gutter Gang"},
+      {"teamId": "bowl-05", "name": "Split Happens"},
+      {"teamId": "bowl-06", "name": "Alley Cats"}
+    ],
+    "venues": [
+      {
+        "venueId": "alley-01",
+        "name": "Championship Bowling Center",
+        "resources": [
+          {"resourceId": "lanes-1-8", "resourceType": "bowling_lanes"},
+          {"resourceId": "lanes-9-16", "resourceType": "bowling_lanes"}
+        ],
+        "availability": [{
+          "recurringPattern": {
+            "daysOfWeek": ["tuesday", "thursday", "saturday"],
+            "timeWindows": [{"start": "18:00", "end": "22:00"}]
+          }
+        }]
+      }
+    ],
+    "fixtures": [
+      {"fixtureId": "b1", "homeTeamId": "bowl-01", "awayTeamId": "bowl-02", "estimatedDuration": 120},
+      {"fixtureId": "b2", "homeTeamId": "bowl-03", "awayTeamId": "bowl-04", "estimatedDuration": 120},
+      {"fixtureId": "b3", "homeTeamId": "bowl-05", "awayTeamId": "bowl-06", "estimatedDuration": 120}
+    ],
+    "constraints": [
+      {"constraintId": "no_overlap_team", "type": "hard"},
+      {"constraintId": "no_overlap_venue_resource", "type": "hard"},
+      {"constraintId": "min_rest_time", "type": "hard", "params": {"min_hours": 48}}
+    ]
+  }
+}

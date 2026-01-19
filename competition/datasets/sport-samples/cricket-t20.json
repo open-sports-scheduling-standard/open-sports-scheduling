@@ -1,0 +1,50 @@
+{
+  "osssVersion": "0.1.0",
+  "instance": {
+    "metadata": {
+      "name": "Twenty20 Cricket League",
+      "track": "professional",
+      "sport": "Twenty20 (T20)",
+      "sportType": "Cricket",
+      "season": "Spring 2026",
+      "timezone": "Asia/Dubai",
+      "difficulty": "⭐⭐⭐",
+      "estimatedComplexity": "moderate",
+      "competitionDataset": true
+    },
+    "teams": [
+      {"teamId": "t20-01", "name": "Mumbai Indians"},
+      {"teamId": "t20-02", "name": "Chennai Super Kings"},
+      {"teamId": "t20-03", "name": "Kolkata Knight Riders"},
+      {"teamId": "t20-04", "name": "Delhi Capitals"},
+      {"teamId": "t20-05", "name": "Royal Challengers"},
+      {"teamId": "t20-06", "name": "Sunrisers Hyderabad"},
+      {"teamId": "t20-07", "name": "Rajasthan Royals"},
+      {"teamId": "t20-08", "name": "Punjab Kings"}
+    ],
+    "venues": [
+      {
+        "venueId": "stadium-01",
+        "name": "Dubai International Stadium",
+        "resources": [{"resourceId": "pitch-1", "resourceType": "t20_ground"}],
+        "availability": [{
+          "recurringPattern": {
+            "daysOfWeek": ["tuesday", "wednesday", "friday", "saturday", "sunday"],
+            "timeWindows": [{"start": "16:00", "end": "23:00"}]
+          }
+        }]
+      }
+    ],
+    "fixtures": [
+      {"fixtureId": "t1", "homeTeamId": "t20-01", "awayTeamId": "t20-02", "estimatedDuration": 210},
+      {"fixtureId": "t2", "homeTeamId": "t20-03", "awayTeamId": "t20-04", "estimatedDuration": 210},
+      {"fixtureId": "t3", "homeTeamId": "t20-05", "awayTeamId": "t20-06", "estimatedDuration": 210},
+      {"fixtureId": "t4", "homeTeamId": "t20-07", "awayTeamId": "t20-08", "estimatedDuration": 210}
+    ],
+    "constraints": [
+      {"constraintId": "no_overlap_team", "type": "hard"},
+      {"constraintId": "no_overlap_venue_resource", "type": "hard"},
+      {"constraintId": "min_rest_time", "type": "hard", "params": {"min_hours": 48}}
+    ]
+  }
+}

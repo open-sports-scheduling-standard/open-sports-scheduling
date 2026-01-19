@@ -1,0 +1,604 @@
+{
+  "id": "master-championship-2025-01",
+  "name": "Global Sports & Esports Championship 2025 - Master Track Sample",
+  "version": "0.1.0",
+  "track": "track-6-master",
+  "difficulty": "extreme",
+  "timezone": "UTC",
+  "season": {
+    "start": "2025-07-01T00:00:00Z",
+    "end": "2025-09-30T23:59:59Z",
+    "phases": [
+      {
+        "phaseId": "regional-qualifiers",
+        "name": "Regional Qualifiers",
+        "start": "2025-07-01T00:00:00Z",
+        "end": "2025-08-10T23:59:59Z",
+        "format": "regional_round_robin"
+      },
+      {
+        "phaseId": "global-groups",
+        "name": "Global Group Stage",
+        "start": "2025-08-15T00:00:00Z",
+        "end": "2025-09-05T23:59:59Z",
+        "format": "cross_regional_groups"
+      },
+      {
+        "phaseId": "playoffs",
+        "name": "Playoff Bracket",
+        "start": "2025-09-10T00:00:00Z",
+        "end": "2025-09-25T23:59:59Z",
+        "format": "single_elimination"
+      },
+      {
+        "phaseId": "finals",
+        "name": "Grand Finals",
+        "start": "2025-09-28T00:00:00Z",
+        "end": "2025-09-30T23:59:59Z",
+        "format": "best_of_series",
+        "venue": "grand-finals-stadium"
+      }
+    ]
+  },
+  "competition": {
+    "name": "Global Sports & Esports Championship",
+    "format": "multi_sport_multi_division",
+    "sports": ["basketball", "soccer", "esports_lol", "esports_valorant"],
+    "organizer": "International Sports & Esports Federation"
+  },
+  "entities": {
+    "teams": [
+      {
+        "id": "bball-na-1",
+        "name": "New York Thunder",
+        "sport": "basketball",
+        "region": "NA",
+        "division": "professional_sports",
+        "timezone": "America/New_York",
+        "homeVenue": "arena-new-york",
+        "capacity_needs": "medium",
+        "tags": ["basketball", "traditional_sport", "professional"]
+      },
+      {
+        "id": "bball-eu-1",
+        "name": "Berlin Eagles",
+        "sport": "basketball",
+        "region": "EU",
+        "division": "professional_sports",
+        "timezone": "Europe/Berlin",
+        "homeVenue": "arena-berlin",
+        "capacity_needs": "medium",
+        "tags": ["basketball", "traditional_sport", "professional"]
+      },
+      {
+        "id": "bball-apac-1",
+        "name": "Tokyo Dragons",
+        "sport": "basketball",
+        "region": "APAC",
+        "division": "professional_sports",
+        "timezone": "Asia/Tokyo",
+        "homeVenue": "arena-tokyo",
+        "capacity_needs": "medium",
+        "tags": ["basketball", "traditional_sport", "professional"]
+      },
+      {
+        "id": "bball-latam-1",
+        "name": "São Paulo Storm",
+        "sport": "basketball",
+        "region": "LATAM",
+        "division": "professional_sports",
+        "timezone": "America/Sao_Paulo",
+        "homeVenue": "arena-sao-paulo",
+        "capacity_needs": "medium",
+        "tags": ["basketball", "traditional_sport", "professional"]
+      },
+      {
+        "id": "soccer-na-1",
+        "name": "Los Angeles United",
+        "sport": "soccer",
+        "region": "NA",
+        "division": "professional_sports",
+        "timezone": "America/Los_Angeles",
+        "homeVenue": "stadium-los-angeles",
+        "capacity_needs": "large",
+        "tags": ["soccer", "traditional_sport", "professional"]
+      },
+      {
+        "id": "soccer-eu-1",
+        "name": "Madrid FC",
+        "sport": "soccer",
+        "region": "EU",
+        "division": "professional_sports",
+        "timezone": "Europe/Madrid",
+        "homeVenue": "stadium-madrid",
+        "capacity_needs": "large",
+        "tags": ["soccer", "traditional_sport", "professional"]
+      },
+      {
+        "id": "soccer-apac-1",
+        "name": "Seoul City",
+        "sport": "soccer",
+        "region": "APAC",
+        "division": "professional_sports",
+        "timezone": "Asia/Seoul",
+        "homeVenue": "stadium-seoul",
+        "capacity_needs": "large",
+        "tags": ["soccer", "traditional_sport", "professional"]
+      },
+      {
+        "id": "soccer-mena-1",
+        "name": "Dubai Warriors",
+        "sport": "soccer",
+        "region": "MENA",
+        "division": "professional_sports",
+        "timezone": "Asia/Dubai",
+        "homeVenue": "stadium-dubai",
+        "capacity_needs": "large",
+        "tags": ["soccer", "traditional_sport", "professional"]
+      },
+      {
+        "id": "lol-na-1",
+        "name": "Cloud9",
+        "sport": "esports_lol",
+        "region": "NA",
+        "division": "esports",
+        "timezone": "America/Los_Angeles",
+        "homeServer": "server-na-west",
+        "tags": ["esports", "lol", "professional"]
+      },
+      {
+        "id": "lol-eu-1",
+        "name": "G2 Esports",
+        "sport": "esports_lol",
+        "region": "EU",
+        "division": "esports",
+        "timezone": "Europe/Berlin",
+        "homeServer": "server-eu-west",
+        "tags": ["esports", "lol", "professional"]
+      },
+      {
+        "id": "lol-apac-1",
+        "name": "T1",
+        "sport": "esports_lol",
+        "region": "APAC",
+        "division": "esports",
+        "timezone": "Asia/Seoul",
+        "homeServer": "server-apac-kr",
+        "tags": ["esports", "lol", "professional"]
+      },
+      {
+        "id": "lol-cn-1",
+        "name": "EDward Gaming",
+        "sport": "esports_lol",
+        "region": "APAC",
+        "sub_region": "CN",
+        "division": "esports",
+        "timezone": "Asia/Shanghai",
+        "homeServer": "server-apac-cn",
+        "tags": ["esports", "lol", "professional"]
+      },
+      {
+        "id": "val-na-1",
+        "name": "Sentinels",
+        "sport": "esports_valorant",
+        "region": "NA",
+        "division": "esports",
+        "timezone": "America/Los_Angeles",
+        "homeServer": "server-na-west",
+        "tags": ["esports", "valorant", "professional"]
+      },
+      {
+        "id": "val-eu-1",
+        "name": "Fnatic",
+        "sport": "esports_valorant",
+        "region": "EU",
+        "division": "esports",
+        "timezone": "Europe/London",
+        "homeServer": "server-eu-west",
+        "tags": ["esports", "valorant", "professional"]
+      },
+      {
+        "id": "val-latam-1",
+        "name": "LOUD",
+        "sport": "esports_valorant",
+        "region": "LATAM",
+        "division": "esports",
+        "timezone": "America/Sao_Paulo",
+        "homeServer": "server-latam-br",
+        "tags": ["esports", "valorant", "professional"]
+      },
+      {
+        "id": "val-apac-1",
+        "name": "Paper Rex",
+        "sport": "esports_valorant",
+        "region": "APAC",
+        "division": "esports",
+        "timezone": "Asia/Singapore",
+        "homeServer": "server-apac-sea",
+        "tags": ["esports", "valorant", "professional"]
+      }
+    ],
+    "venues": [
+      {
+        "id": "arena-new-york",
+        "name": "Madison Square Garden",
+        "type": "physical",
+        "sport_types": ["basketball", "esports_lan"],
+        "region": "NA",
+        "location": { "lat": 40.7505, "lon": -73.9934, "city": "New York", "country": "USA" },
+        "capacity": 20000,
+        "availability": "weekends",
+        "setup_time_minutes": 180,
+        "tags": ["arena", "multi_purpose"]
+      },
+      {
+        "id": "arena-berlin",
+        "name": "Mercedes-Benz Arena",
+        "type": "physical",
+        "sport_types": ["basketball", "esports_lan"],
+        "region": "EU",
+        "location": { "lat": 52.5067, "lon": 13.4437, "city": "Berlin", "country": "Germany" },
+        "capacity": 17000,
+        "availability": "weekends",
+        "setup_time_minutes": 180,
+        "tags": ["arena", "multi_purpose"]
+      },
+      {
+        "id": "arena-tokyo",
+        "name": "Saitama Super Arena",
+        "type": "physical",
+        "sport_types": ["basketball", "esports_lan"],
+        "region": "APAC",
+        "location": { "lat": 35.8944, "lon": 139.6311, "city": "Tokyo", "country": "Japan" },
+        "capacity": 22000,
+        "availability": "weekends",
+        "setup_time_minutes": 180,
+        "tags": ["arena", "multi_purpose"]
+      },
+      {
+        "id": "stadium-los-angeles",
+        "name": "SoFi Stadium",
+        "type": "physical",
+        "sport_types": ["soccer"],
+        "region": "NA",
+        "location": { "lat": 33.9535, "lon": -118.3389, "city": "Los Angeles", "country": "USA" },
+        "capacity": 70000,
+        "availability": "weekends",
+        "setup_time_minutes": 240,
+        "tags": ["stadium", "soccer_only"]
+      },
+      {
+        "id": "stadium-madrid",
+        "name": "Santiago Bernabéu",
+        "type": "physical",
+        "sport_types": ["soccer"],
+        "region": "EU",
+        "location": { "lat": 40.4531, "lon": -3.6883, "city": "Madrid", "country": "Spain" },
+        "capacity": 81000,
+        "availability": "weekends",
+        "setup_time_minutes": 240,
+        "tags": ["stadium", "soccer_only"]
+      },
+      {
+        "id": "stadium-seoul",
+        "name": "Seoul World Cup Stadium",
+        "type": "physical",
+        "sport_types": ["soccer"],
+        "region": "APAC",
+        "location": { "lat": 37.5681, "lon": 126.8975, "city": "Seoul", "country": "South Korea" },
+        "capacity": 66000,
+        "availability": "weekends",
+        "setup_time_minutes": 240,
+        "tags": ["stadium", "soccer_only"]
+      },
+      {
+        "id": "server-na-west",
+        "name": "NA West Server (Oregon)",
+        "type": "virtual",
+        "sport_types": ["esports_lol", "esports_valorant"],
+        "region": "NA",
+        "location": { "lat": 45.5152, "lon": -122.6784 },
+        "capacity": 50,
+        "latency_profiles": {
+          "lol-na-1": 10,
+          "val-na-1": 10,
+          "lol-eu-1": 140,
+          "val-eu-1": 140,
+          "lol-apac-1": 180,
+          "val-apac-1": 180
+        }
+      },
+      {
+        "id": "server-eu-west",
+        "name": "EU West Server (Amsterdam)",
+        "type": "virtual",
+        "sport_types": ["esports_lol", "esports_valorant"],
+        "region": "EU",
+        "location": { "lat": 52.3676, "lon": 4.9041 },
+        "capacity": 50,
+        "latency_profiles": {
+          "lol-eu-1": 8,
+          "val-eu-1": 8,
+          "lol-na-1": 120,
+          "val-na-1": 120,
+          "lol-apac-1": 220,
+          "val-apac-1": 220
+        }
+      },
+      {
+        "id": "server-apac-kr",
+        "name": "APAC Korea Server (Seoul)",
+        "type": "virtual",
+        "sport_types": ["esports_lol", "esports_valorant"],
+        "region": "APAC",
+        "location": { "lat": 37.5665, "lon": 126.9780 },
+        "capacity": 50,
+        "latency_profiles": {
+          "lol-apac-1": 5,
+          "val-apac-1": 5,
+          "lol-cn-1": 35,
+          "lol-na-1": 180,
+          "lol-eu-1": 240
+        }
+      },
+      {
+        "id": "lan-venue-iceland",
+        "name": "Iceland LAN Finals Venue",
+        "type": "physical_esports",
+        "sport_types": ["esports_lol", "esports_valorant"],
+        "region": "NEUTRAL",
+        "location": { "lat": 64.1466, "lon": -21.9426, "city": "Reykjavik", "country": "Iceland" },
+        "capacity": 5000,
+        "setup_time_minutes": 120,
+        "server_connection": "server-neutral-iceland",
+        "tags": ["lan", "finals_venue", "neutral"]
+      },
+      {
+        "id": "grand-finals-stadium",
+        "name": "Olympic Stadium - Grand Finals",
+        "type": "physical",
+        "sport_types": ["basketball", "soccer", "esports_lan"],
+        "region": "EU",
+        "location": { "lat": 48.8566, "lon": 2.3522, "city": "Paris", "country": "France" },
+        "capacity": 80000,
+        "availability": "finals_only",
+        "setup_time_minutes": 360,
+        "tags": ["grand_finals", "multi_sport", "premier_venue"]
+      }
+    ]
+  },
+  "fixtures": [
+    {
+      "id": "bball-regional-na-1",
+      "sport": "basketball",
+      "phase": "regional-qualifiers",
+      "participants": ["bball-na-1", "bball-na-2"],
+      "durationMinutes": 120,
+      "priority": 0.6,
+      "constraints": {
+        "preferredVenue": "arena-new-york",
+        "phase_constraint": "must_complete_by_2025-08-10"
+      }
+    },
+    {
+      "id": "soccer-regional-eu-1",
+      "sport": "soccer",
+      "phase": "regional-qualifiers",
+      "participants": ["soccer-eu-1", "soccer-eu-2"],
+      "durationMinutes": 120,
+      "priority": 0.65,
+      "constraints": {
+        "preferredVenue": "stadium-madrid",
+        "phase_constraint": "must_complete_by_2025-08-10"
+      }
+    },
+    {
+      "id": "lol-regional-na-1",
+      "sport": "esports_lol",
+      "phase": "regional-qualifiers",
+      "participants": ["lol-na-1", "lol-na-2"],
+      "durationMinutes": 180,
+      "priority": 0.75,
+      "venue_type": "online",
+      "server": "server-na-west",
+      "constraints": {
+        "max_latency_ms": 35,
+        "phase_constraint": "must_complete_by_2025-08-10"
+      }
+    },
+    {
+      "id": "val-cross-regional-1",
+      "sport": "esports_valorant",
+      "phase": "global-groups",
+      "participants": ["val-na-1", "val-eu-1"],
+      "durationMinutes": 150,
+      "priority": 0.9,
+      "venue_type": "online",
+      "server": "server-neutral-iceland",
+      "constraints": {
+        "min_start_date": "2025-08-15",
+        "max_latency_delta_ms": 15
+      }
+    },
+    {
+      "id": "finals-basketball",
+      "sport": "basketball",
+      "phase": "finals",
+      "participants": ["TBD-bball-1", "TBD-bball-2"],
+      "durationMinutes": 150,
+      "priority": 1.0,
+      "venue": "grand-finals-stadium",
+      "constraints": {
+        "exact_date": "2025-09-28",
+        "broadcast_primetime": true,
+        "min_capacity": 50000
+      }
+    },
+    {
+      "id": "finals-esports-lol",
+      "sport": "esports_lol",
+      "phase": "finals",
+      "participants": ["TBD-lol-1", "TBD-lol-2"],
+      "durationMinutes": 240,
+      "priority": 1.0,
+      "venue": "lan-venue-iceland",
+      "constraints": {
+        "date_range": "2025-09-28_to_2025-09-29",
+        "broadcast_primetime": true
+      }
+    }
+  ],
+  "constraints": [
+    {
+      "id": "no_team_overlap_global",
+      "type": "hard",
+      "rule": "no_overlap_team",
+      "selector": { "entityType": "team" },
+      "comment": "No team can play in two fixtures simultaneously across all sports"
+    },
+    {
+      "id": "no_venue_overlap",
+      "type": "hard",
+      "rule": "no_overlap_venue_resource",
+      "selector": { "entityType": "venue" }
+    },
+    {
+      "id": "rest_traditional_sports",
+      "type": "hard",
+      "rule": "min_rest_time",
+      "selector": { "division": "professional_sports" },
+      "params": { "min_hours": 48 }
+    },
+    {
+      "id": "rest_esports",
+      "type": "hard",
+      "rule": "min_rest_time",
+      "selector": { "division": "esports" },
+      "params": { "min_hours": 24 }
+    },
+    {
+      "id": "server_latency_online",
+      "type": "hard",
+      "rule": "server_latency_fairness",
+      "selector": { "competitionType": "esports", "venueType": "online" },
+      "params": { "max_ping_ms": 40, "max_delta_ms": 12 }
+    },
+    {
+      "id": "global_time_balance",
+      "type": "hard",
+      "rule": "regional_time_balance",
+      "selector": { "phase": "global-groups" },
+      "params": {
+        "regions": ["NA", "EU", "APAC", "LATAM", "MENA", "OCE"],
+        "primetime_windows": {
+          "NA": ["18:00-23:00 EST"],
+          "EU": ["18:00-23:00 CET"],
+          "APAC": ["18:00-23:00 JST"],
+          "LATAM": ["18:00-23:00 BRT"],
+          "MENA": ["18:00-23:00 GST"],
+          "OCE": ["18:00-23:00 AEDT"]
+        },
+        "min_primetime_matches_per_team": 3
+      }
+    },
+    {
+      "id": "venue_setup_time",
+      "type": "hard",
+      "rule": "venue_setup_time",
+      "selector": { "venueType": "physical" },
+      "params": { "min_setup_hours": 3 },
+      "comment": "Time between events for changeover"
+    },
+    {
+      "id": "finals_venue_constraint",
+      "type": "hard",
+      "rule": "phase_venue_lock",
+      "selector": { "phase": "finals" },
+      "params": {
+        "locked_venue": "grand-finals-stadium",
+        "dates": ["2025-09-28", "2025-09-29", "2025-09-30"]
+      }
+    },
+    {
+      "id": "broadcast_windows",
+      "type": "hard",
+      "rule": "broadcast_window",
+      "selector": { "phase": ["global-groups", "playoffs", "finals"] },
+      "params": {
+        "allowed_windows": [
+          { "dayOfWeek": "saturday", "startTime": "12:00", "endTime": "22:00" },
+          { "dayOfWeek": "sunday", "startTime": "12:00", "endTime": "22:00" }
+        ],
+        "max_concurrent_broadcasts": 4
+      }
+    },
+    {
+      "id": "viewership_optimization",
+      "type": "soft",
+      "rule": "concurrent_match_viewership",
+      "selector": { "priority": { "gte": 0.8 } },
+      "params": { "max_concurrent_high_profile": 2 },
+      "penalty": { "model": "linear", "weight": 150 }
+    },
+    {
+      "id": "travel_realism",
+      "type": "soft",
+      "rule": "travel_time_realistic",
+      "selector": { "division": "professional_sports" },
+      "params": {
+        "max_daily_travel_hours": 8,
+        "min_arrival_hours_before_match": 12
+      },
+      "penalty": { "model": "exponential", "weight": 200 }
+    },
+    {
+      "id": "sustainability_carbon",
+      "type": "soft",
+      "rule": "minimize_carbon_footprint",
+      "selector": { "entityType": "team" },
+      "params": { "target_kg_co2": 50000 },
+      "penalty": { "model": "linear", "perKg": 0.1 }
+    }
+  ],
+  "objectives": [
+    {
+      "metric": "global_fairness",
+      "aggregation": "composite",
+      "weight": 0.25,
+      "components": ["regional_balance", "venue_distribution", "rest_time_equity"]
+    },
+    {
+      "metric": "operational_efficiency",
+      "aggregation": "composite",
+      "weight": 0.20,
+      "components": ["venue_utilization", "travel_cost", "broadcast_fill_rate"]
+    },
+    {
+      "metric": "competitive_integrity",
+      "aggregation": "composite",
+      "weight": 0.25,
+      "components": ["rest_fairness", "home_away_balance", "playoff_seeding_fairness"]
+    },
+    {
+      "metric": "viewership_maximization",
+      "aggregation": "composite",
+      "weight": 0.20,
+      "components": ["primetime_coverage", "concurrent_match_minimization", "marquee_spacing"]
+    },
+    {
+      "metric": "sustainability",
+      "aggregation": "sum",
+      "weight": 0.10,
+      "components": ["total_carbon_emissions", "venue_reuse_rate"]
+    }
+  ],
+  "metadata": {
+    "description": "Master Track Sample: Global multi-sport championship combining traditional sports and esports with regional qualifiers and global finals",
+    "complexity": "extreme",
+    "expected_runtime": "hours_to_days",
+    "note": "This is a reduced sample (16 teams). Full competition instance has 64 teams.",
+    "tags": ["master", "multi-sport", "global", "hybrid", "esports", "traditional", "championship"],
+    "baseline_penalty": null,
+    "feasibility_note": "May require relaxing some soft constraints to find feasible solution"
+  }
+}

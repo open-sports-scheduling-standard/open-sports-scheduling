@@ -1,0 +1,50 @@
+{
+  "osssVersion": "0.1.0",
+  "instance": {
+    "metadata": {
+      "name": "Soccer 11-a-side League",
+      "track": "amateur",
+      "sport": "Soccer 11-a-side",
+      "sportType": "Soccer",
+      "season": "Spring 2026",
+      "timezone": "Europe/Madrid",
+      "difficulty": "⭐⭐⭐",
+      "estimatedComplexity": "moderate",
+      "competitionDataset": true
+    },
+    "teams": [
+      {"teamId": "s11-01", "name": "Barcelona FC"},
+      {"teamId": "s11-02", "name": "Madrid United"},
+      {"teamId": "s11-03", "name": "Valencia CF"},
+      {"teamId": "s11-04", "name": "Sevilla SC"},
+      {"teamId": "s11-05", "name": "Athletic Bilbao"},
+      {"teamId": "s11-06", "name": "Atletico"},
+      {"teamId": "s11-07", "name": "Real Sociedad"},
+      {"teamId": "s11-08", "name": "Villarreal CF"}
+    ],
+    "venues": [
+      {
+        "venueId": "stadium-01",
+        "name": "Central Stadium",
+        "resources": [{"resourceId": "pitch-1", "resourceType": "soccer_pitch"}],
+        "availability": [{
+          "recurringPattern": {
+            "daysOfWeek": ["saturday", "sunday"],
+            "timeWindows": [{"start": "16:00", "end": "21:00"}]
+          }
+        }]
+      }
+    ],
+    "fixtures": [
+      {"fixtureId": "m1", "homeTeamId": "s11-01", "awayTeamId": "s11-02", "estimatedDuration": 105},
+      {"fixtureId": "m2", "homeTeamId": "s11-03", "awayTeamId": "s11-04", "estimatedDuration": 105},
+      {"fixtureId": "m3", "homeTeamId": "s11-05", "awayTeamId": "s11-06", "estimatedDuration": 105},
+      {"fixtureId": "m4", "homeTeamId": "s11-07", "awayTeamId": "s11-08", "estimatedDuration": 105}
+    ],
+    "constraints": [
+      {"constraintId": "no_overlap_team", "type": "hard"},
+      {"constraintId": "no_overlap_venue_resource", "type": "hard"},
+      {"constraintId": "min_rest_time", "type": "hard", "params": {"min_hours": 72}}
+    ]
+  }
+}

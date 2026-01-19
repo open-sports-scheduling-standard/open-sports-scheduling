@@ -1,0 +1,47 @@
+{
+  "osssVersion": "0.1.0",
+  "instance": {
+    "metadata": {
+      "name": "Baseball League",
+      "track": "professional",
+      "sport": "Baseball",
+      "sportType": "Baseball",
+      "season": "Summer 2026",
+      "timezone": "America/New_York",
+      "difficulty": "⭐⭐⭐⭐",
+      "estimatedComplexity": "high",
+      "competitionDataset": true
+    },
+    "teams": [
+      {"teamId": "mlb-01", "name": "New York Yankees"},
+      {"teamId": "mlb-02", "name": "Boston Red Sox"},
+      {"teamId": "mlb-03", "name": "Los Angeles Dodgers"},
+      {"teamId": "mlb-04", "name": "Chicago Cubs"},
+      {"teamId": "mlb-05", "name": "Atlanta Braves"},
+      {"teamId": "mlb-06", "name": "Houston Astros"}
+    ],
+    "venues": [
+      {
+        "venueId": "stadium-01",
+        "name": "Yankee Stadium",
+        "resources": [{"resourceId": "field-1", "resourceType": "baseball_diamond"}],
+        "availability": [{
+          "recurringPattern": {
+            "daysOfWeek": ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"],
+            "timeWindows": [{"start": "13:00", "end": "22:00"}]
+          }
+        }]
+      }
+    ],
+    "fixtures": [
+      {"fixtureId": "g1", "homeTeamId": "mlb-01", "awayTeamId": "mlb-02", "estimatedDuration": 180},
+      {"fixtureId": "g2", "homeTeamId": "mlb-03", "awayTeamId": "mlb-04", "estimatedDuration": 180},
+      {"fixtureId": "g3", "homeTeamId": "mlb-05", "awayTeamId": "mlb-06", "estimatedDuration": 180}
+    ],
+    "constraints": [
+      {"constraintId": "no_overlap_team", "type": "hard"},
+      {"constraintId": "no_overlap_venue_resource", "type": "hard"},
+      {"constraintId": "min_rest_time", "type": "hard", "params": {"min_hours": 24}}
+    ]
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "osssVersion": "0.1.0",
+  "instance": {
+    "metadata": {
+      "name": "Test Cricket Championship Series",
+      "track": "professional",
+      "sport": "Test Cricket",
+      "sportType": "Cricket",
+      "season": "2026",
+      "timezone": "Australia/Sydney",
+      "difficulty": "⭐⭐⭐⭐⭐",
+      "estimatedComplexity": "very_high",
+      "competitionDataset": true
+    },
+    "teams": [
+      {"teamId": "test-01", "name": "Australia"},
+      {"teamId": "test-02", "name": "England"},
+      {"teamId": "test-03", "name": "India"},
+      {"teamId": "test-04", "name": "South Africa"}
+    ],
+    "venues": [
+      {
+        "venueId": "ground-01",
+        "name": "Sydney Cricket Ground",
+        "resources": [{"resourceId": "scg-pitch", "resourceType": "test_cricket_ground"}],
+        "availability": [{
+          "recurringPattern": {
+            "daysOfWeek": ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"],
+            "timeWindows": [{"start": "10:30", "end": "18:00"}]
+          }
+        }]
+      }
+    ],
+    "fixtures": [
+      {"fixtureId": "test1", "homeTeamId": "test-01", "awayTeamId": "test-02", "estimatedDuration": 2400, "durationDays": 5},
+      {"fixtureId": "test2", "homeTeamId": "test-03", "awayTeamId": "test-04", "estimatedDuration": 2400, "durationDays": 5}
+    ],
+    "constraints": [
+      {"constraintId": "no_overlap_team", "type": "hard"},
+      {"constraintId": "no_overlap_venue_resource", "type": "hard"},
+      {"constraintId": "min_rest_time", "type": "hard", "params": {"min_hours": 240}}
+    ]
+  }
+}

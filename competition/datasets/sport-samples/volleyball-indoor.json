@@ -1,0 +1,47 @@
+{
+  "osssVersion": "0.1.0",
+  "instance": {
+    "metadata": {
+      "name": "Indoor Volleyball League",
+      "track": "professional",
+      "sport": "Indoor Volleyball",
+      "sportType": "Volleyball",
+      "season": "2025-2026",
+      "timezone": "Europe/Rome",
+      "difficulty": "⭐⭐⭐⭐",
+      "estimatedComplexity": "high",
+      "competitionDataset": true
+    },
+    "teams": [
+      {"teamId": "iv-01", "name": "Cucine Lube Civitanova"},
+      {"teamId": "iv-02", "name": "Itas Trentino"},
+      {"teamId": "iv-03", "name": "Sir Safety Perugia"},
+      {"teamId": "iv-04", "name": "Modena Volley"},
+      {"teamId": "iv-05", "name": "Vero Volley Monza"},
+      {"teamId": "iv-06", "name": "Allianz Milano"}
+    ],
+    "venues": [
+      {
+        "venueId": "arena-01",
+        "name": "PalaTrento",
+        "resources": [{"resourceId": "court-1", "resourceType": "volleyball_court"}],
+        "availability": [{
+          "recurringPattern": {
+            "daysOfWeek": ["wednesday", "saturday", "sunday"],
+            "timeWindows": [{"start": "18:00", "end": "22:00"}]
+          }
+        }]
+      }
+    ],
+    "fixtures": [
+      {"fixtureId": "iv1", "homeTeamId": "iv-01", "awayTeamId": "iv-02", "estimatedDuration": 120},
+      {"fixtureId": "iv2", "homeTeamId": "iv-03", "awayTeamId": "iv-04", "estimatedDuration": 120},
+      {"fixtureId": "iv3", "homeTeamId": "iv-05", "awayTeamId": "iv-06", "estimatedDuration": 120}
+    ],
+    "constraints": [
+      {"constraintId": "no_overlap_team", "type": "hard"},
+      {"constraintId": "no_overlap_venue_resource", "type": "hard"},
+      {"constraintId": "min_rest_time", "type": "hard", "params": {"min_hours": 72}}
+    ]
+  }
+}

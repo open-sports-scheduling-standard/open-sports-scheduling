@@ -145,7 +145,7 @@
       "comment": "Balance strength of schedule across teams"
     },
     {
-      "metric": "travel_burden",
+      "metric": "total_travel_distance",
       "aggregation": "sum",
       "weight": 0.2,
       "direction": "minimize"

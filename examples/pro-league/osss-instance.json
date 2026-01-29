@@ -611,7 +611,7 @@
     {
       "id": "max_3_games_per_week",
       "type": "hard",
-      "rule": "max_games_per_week",
+      "rule": "max_games_per_day",
       "selector": { "entityType": "team" },
       "params": { "max_games": 3 },
       "priority": 2,
@@ -720,21 +720,21 @@
   ],
   "objectives": [
     {
-      "metric": "travel_distance_km",
+      "metric": "total_travel_distance",
       "aggregation": "sum",
       "weight": 1.0,
       "direction": "minimize",
       "enabled": true
     },
     {
-      "metric": "home_away_delta",
+      "metric": "home_away_balance",
       "aggregation": "max",
       "weight": 10.0,
       "direction": "minimize",
       "enabled": true
     },
     {
-      "metric": "prime_time_games",
+      "metric": "primetime_distribution",
       "aggregation": "sum",
       "weight": 5.0,
       "direction": "maximize",

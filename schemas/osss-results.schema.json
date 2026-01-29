@@ -14,7 +14,7 @@
     },
     "scores": {
       "type": "object",
-      "required": ["totalPenalty", "byConstraint"],
+      "required": ["totalPenalty"],
       "properties": {
         "totalPenalty": { "type": "number" },
         "byConstraint": {
@@ -28,7 +28,7 @@
   "$defs": {
     "assignment": {
       "type": "object",
-      "required": ["fixtureId", "startTime", "endTime", "venueId"],
+      "required": ["fixtureId", "startTime", "venueId"],
       "properties": {
         "fixtureId": { "type": "string" },
         "startTime": { "type": "string", "format": "date-time" },

@@ -1,0 +1,343 @@
+{
+  "$schema": "../../schemas/osss-core.schema.json",
+  "id": "carry-over-fairness-2026",
+  "name": "Carry-Over Effects Balanced League",
+  "description": "10-team double round-robin with strict carry-over effect balancing, break pattern minimization, and travel clustering. This combination creates an extremely constrained optimization problem that pure round-robin solvers cannot handle.",
+  "sport": "soccer",
+  "timezone": "Europe/London",
+  "defaultFixtureDuration": 105,
+  "season": {
+    "start": "2026-08-15",
+    "end": "2026-12-20"
+  },
+  "entities": {
+    "teams": [
+      {"id": "team-north-1", "name": "Northern United", "city": "Nordheim", "region": "north", "strength": 10},
+      {"id": "team-north-2", "name": "Northern City", "city": "Nordberg", "region": "north", "strength": 8},
+      {"id": "team-central-1", "name": "Central FC", "city": "Centrum", "region": "central", "strength": 9},
+      {"id": "team-central-2", "name": "Central United", "city": "Midtown", "region": "central", "strength": 7},
+      {"id": "team-south-1", "name": "Southern Athletic", "city": "Sudheim", "region": "south", "strength": 9},
+      {"id": "team-south-2", "name": "Southern Rangers", "city": "Sudberg", "region": "south", "strength": 6},
+      {"id": "team-east-1", "name": "Eastern Dynamo", "city": "Ostburg", "region": "east", "strength": 8},
+      {"id": "team-east-2", "name": "Eastern Wanderers", "city": "Ostheim", "region": "east", "strength": 5},
+      {"id": "team-west-1", "name": "Western Stars", "city": "Westburg", "region": "west", "strength": 7},
+      {"id": "team-west-2", "name": "Western Rovers", "city": "Westheim", "region": "west", "strength": 4}
+    ],
+    "venues": [
+      {"id": "venue-north-1", "name": "Nordheim Arena", "city": "Nordheim", "region": "north", "homeTeam": "team-north-1"},
+      {"id": "venue-north-2", "name": "Nordberg Stadium", "city": "Nordberg", "region": "north", "homeTeam": "team-north-2"},
+      {"id": "venue-central-1", "name": "Centrum Park", "city": "Centrum", "region": "central", "homeTeam": "team-central-1"},
+      {"id": "venue-central-2", "name": "Midtown Ground", "city": "Midtown", "region": "central", "homeTeam": "team-central-2"},
+      {"id": "venue-south-1", "name": "Sudheim Stadium", "city": "Sudheim", "region": "south", "homeTeam": "team-south-1"},
+      {"id": "venue-south-2", "name": "Sudberg Arena", "city": "Sudberg", "region": "south", "homeTeam": "team-south-2"},
+      {"id": "venue-east-1", "name": "Ostburg Complex", "city": "Ostburg", "region": "east", "homeTeam": "team-east-1"},
+      {"id": "venue-east-2", "name": "Ostheim Park", "city": "Ostheim", "region": "east", "homeTeam": "team-east-2"},
+      {"id": "venue-west-1", "name": "Westburg Arena", "city": "Westburg", "region": "west", "homeTeam": "team-west-1"},
+      {"id": "venue-west-2", "name": "Westheim Stadium", "city": "Westheim", "region": "west", "homeTeam": "team-west-2"}
+    ],
+    "distances": {
+      "north-north": 50, "north-central": 200, "north-south": 450, "north-east": 300, "north-west": 350,
+      "central-central": 40, "central-south": 250, "central-east": 150, "central-west": 180,
+      "south-south": 60, "south-east": 320, "south-west": 280,
+      "east-east": 45, "east-west": 400,
+      "west-west": 55
+    }
+  },
+  "fixtures": [
+    {"id": "r01-01", "round": 1, "participants": ["team-north-1", "team-north-2"]},
+    {"id": "r01-02", "round": 1, "participants": ["team-central-1", "team-central-2"]},
+    {"id": "r01-03", "round": 1, "participants": ["team-south-1", "team-south-2"]},
+    {"id": "r01-04", "round": 1, "participants": ["team-east-1", "team-east-2"]},
+    {"id": "r01-05", "round": 1, "participants": ["team-west-1", "team-west-2"]},
+
+    {"id": "r02-01", "round": 2, "participants": ["team-north-1", "team-central-1"]},
+    {"id": "r02-02", "round": 2, "participants": ["team-north-2", "team-south-1"]},
+    {"id": "r02-03", "round": 2, "participants": ["team-central-2", "team-east-1"]},
+    {"id": "r02-04", "round": 2, "participants": ["team-south-2", "team-west-1"]},
+    {"id": "r02-05", "round": 2, "participants": ["team-east-2", "team-west-2"]},
+
+    {"id": "r03-01", "round": 3, "participants": ["team-north-1", "team-south-1"]},
+    {"id": "r03-02", "round": 3, "participants": ["team-north-2", "team-east-1"]},
+    {"id": "r03-03", "round": 3, "participants": ["team-central-1", "team-west-1"]},
+    {"id": "r03-04", "round": 3, "participants": ["team-central-2", "team-west-2"]},
+    {"id": "r03-05", "round": 3, "participants": ["team-south-2", "team-east-2"]},
+
+    {"id": "r04-01", "round": 4, "participants": ["team-north-1", "team-east-1"]},
+    {"id": "r04-02", "round": 4, "participants": ["team-north-2", "team-west-1"]},
+    {"id": "r04-03", "round": 4, "participants": ["team-central-1", "team-south-2"]},
+    {"id": "r04-04", "round": 4, "participants": ["team-central-2", "team-south-1"]},
+    {"id": "r04-05", "round": 4, "participants": ["team-east-2", "team-west-1"]},
+
+    {"id": "r05-01", "round": 5, "participants": ["team-north-1", "team-west-1"]},
+    {"id": "r05-02", "round": 5, "participants": ["team-north-2", "team-central-2"]},
+    {"id": "r05-03", "round": 5, "participants": ["team-central-1", "team-east-2"]},
+    {"id": "r05-04", "round": 5, "participants": ["team-south-1", "team-west-2"]},
+    {"id": "r05-05", "round": 5, "participants": ["team-south-2", "team-east-1"]},
+
+    {"id": "r06-01", "round": 6, "participants": ["team-north-1", "team-central-2"]},
+    {"id": "r06-02", "round": 6, "participants": ["team-north-2", "team-south-2"]},
+    {"id": "r06-03", "round": 6, "participants": ["team-central-1", "team-east-1"]},
+    {"id": "r06-04", "round": 6, "participants": ["team-south-1", "team-east-2"]},
+    {"id": "r06-05", "round": 6, "participants": ["team-west-1", "team-west-2"]},
+
+    {"id": "r07-01", "round": 7, "participants": ["team-north-1", "team-south-2"]},
+    {"id": "r07-02", "round": 7, "participants": ["team-north-2", "team-west-2"]},
+    {"id": "r07-03", "round": 7, "participants": ["team-central-1", "team-south-1"]},
+    {"id": "r07-04", "round": 7, "participants": ["team-central-2", "team-east-2"]},
+    {"id": "r07-05", "round": 7, "participants": ["team-east-1", "team-west-1"]},
+
+    {"id": "r08-01", "round": 8, "participants": ["team-north-1", "team-east-2"]},
+    {"id": "r08-02", "round": 8, "participants": ["team-north-2", "team-central-1"]},
+    {"id": "r08-03", "round": 8, "participants": ["team-central-2", "team-west-1"]},
+    {"id": "r08-04", "round": 8, "participants": ["team-south-1", "team-east-1"]},
+    {"id": "r08-05", "round": 8, "participants": ["team-south-2", "team-west-2"]},
+
+    {"id": "r09-01", "round": 9, "participants": ["team-north-1", "team-west-2"]},
+    {"id": "r09-02", "round": 9, "participants": ["team-north-2", "team-east-2"]},
+    {"id": "r09-03", "round": 9, "participants": ["team-central-1", "team-west-2"]},
+    {"id": "r09-04", "round": 9, "participants": ["team-central-2", "team-south-2"]},
+    {"id": "r09-05", "round": 9, "participants": ["team-south-1", "team-west-1"]},
+
+    {"id": "r10-01", "round": 10, "participants": ["team-north-2", "team-north-1"]},
+    {"id": "r10-02", "round": 10, "participants": ["team-central-2", "team-central-1"]},
+    {"id": "r10-03", "round": 10, "participants": ["team-south-2", "team-south-1"]},
+    {"id": "r10-04", "round": 10, "participants": ["team-east-2", "team-east-1"]},
+    {"id": "r10-05", "round": 10, "participants": ["team-west-2", "team-west-1"]},
+
+    {"id": "r11-01", "round": 11, "participants": ["team-central-1", "team-north-1"]},
+    {"id": "r11-02", "round": 11, "participants": ["team-south-1", "team-north-2"]},
+    {"id": "r11-03", "round": 11, "participants": ["team-east-1", "team-central-2"]},
+    {"id": "r11-04", "round": 11, "participants": ["team-west-1", "team-south-2"]},
+    {"id": "r11-05", "round": 11, "participants": ["team-west-2", "team-east-2"]},
+
+    {"id": "r12-01", "round": 12, "participants": ["team-south-1", "team-north-1"]},
+    {"id": "r12-02", "round": 12, "participants": ["team-east-1", "team-north-2"]},
+    {"id": "r12-03", "round": 12, "participants": ["team-west-1", "team-central-1"]},
+    {"id": "r12-04", "round": 12, "participants": ["team-west-2", "team-central-2"]},
+    {"id": "r12-05", "round": 12, "participants": ["team-east-2", "team-south-2"]},
+
+    {"id": "r13-01", "round": 13, "participants": ["team-east-1", "team-north-1"]},
+    {"id": "r13-02", "round": 13, "participants": ["team-west-1", "team-north-2"]},
+    {"id": "r13-03", "round": 13, "participants": ["team-south-2", "team-central-1"]},
+    {"id": "r13-04", "round": 13, "participants": ["team-south-1", "team-central-2"]},
+    {"id": "r13-05", "round": 13, "participants": ["team-west-1", "team-east-2"]},
+
+    {"id": "r14-01", "round": 14, "participants": ["team-west-1", "team-north-1"]},
+    {"id": "r14-02", "round": 14, "participants": ["team-central-2", "team-north-2"]},
+    {"id": "r14-03", "round": 14, "participants": ["team-east-2", "team-central-1"]},
+    {"id": "r14-04", "round": 14, "participants": ["team-west-2", "team-south-1"]},
+    {"id": "r14-05", "round": 14, "participants": ["team-east-1", "team-south-2"]},
+
+    {"id": "r15-01", "round": 15, "participants": ["team-central-2", "team-north-1"]},
+    {"id": "r15-02", "round": 15, "participants": ["team-south-2", "team-north-2"]},
+    {"id": "r15-03", "round": 15, "participants": ["team-east-1", "team-central-1"]},
+    {"id": "r15-04", "round": 15, "participants": ["team-east-2", "team-south-1"]},
+    {"id": "r15-05", "round": 15, "participants": ["team-west-2", "team-west-1"]},
+
+    {"id": "r16-01", "round": 16, "participants": ["team-south-2", "team-north-1"]},
+    {"id": "r16-02", "round": 16, "participants": ["team-west-2", "team-north-2"]},
+    {"id": "r16-03", "round": 16, "participants": ["team-south-1", "team-central-1"]},
+    {"id": "r16-04", "round": 16, "participants": ["team-east-2", "team-central-2"]},
+    {"id": "r16-05", "round": 16, "participants": ["team-west-1", "team-east-1"]},
+
+    {"id": "r17-01", "round": 17, "participants": ["team-east-2", "team-north-1"]},
+    {"id": "r17-02", "round": 17, "participants": ["team-central-1", "team-north-2"]},
+    {"id": "r17-03", "round": 17, "participants": ["team-west-1", "team-central-2"]},
+    {"id": "r17-04", "round": 17, "participants": ["team-east-1", "team-south-1"]},
+    {"id": "r17-05", "round": 17, "participants": ["team-west-2", "team-south-2"]},
+
+    {"id": "r18-01", "round": 18, "participants": ["team-west-2", "team-north-1"]},
+    {"id": "r18-02", "round": 18, "participants": ["team-east-2", "team-north-2"]},
+    {"id": "r18-03", "round": 18, "participants": ["team-west-2", "team-central-1"]},
+    {"id": "r18-04", "round": 18, "participants": ["team-south-2", "team-central-2"]},
+    {"id": "r18-05", "round": 18, "participants": ["team-west-1", "team-south-1"]}
+  ],
+  "constraints": [
+    {
+      "id": "carry-over-balance",
+      "rule": "carry_over_effects",
+      "params": {
+        "maxCarryOverImbalance": 1,
+        "weightByStrength": true,
+        "strengthField": "strength"
+      },
+      "penalty": 5000,
+      "type": "hard",
+      "description": "Each team should face approximately equal carry-over effects from strong opponents"
+    },
+    {
+      "id": "break-minimization",
+      "rule": "break_pattern",
+      "params": {
+        "maxBreaks": 2,
+        "breakDefinition": "consecutive_home_or_away"
+      },
+      "penalty": 1000,
+      "type": "hard",
+      "description": "Maximum 2 breaks (consecutive home or consecutive away) per team"
+    },
+    {
+      "id": "no-triple-break",
+      "rule": "break_pattern",
+      "params": {
+        "maxConsecutiveSameVenueType": 2
+      },
+      "penalty": 10000,
+      "type": "hard",
+      "description": "Never 3 consecutive home or 3 consecutive away games"
+    },
+    {
+      "id": "travel-clustering",
+      "rule": "travel_pattern",
+      "params": {
+        "preferRegionalClusters": true,
+        "clusterSize": 2,
+        "regionField": "region"
+      },
+      "penalty": 300,
+      "type": "soft",
+      "description": "When away, prefer to play multiple games in same region"
+    },
+    {
+      "id": "min-rest-7-days",
+      "rule": "min_rest_time",
+      "params": {"minRestHours": 168},
+      "penalty": 2000,
+      "type": "hard"
+    },
+    {
+      "id": "round-weekly",
+      "rule": "round_distribution",
+      "params": {
+        "minDaysBetweenRounds": 6,
+        "maxDaysBetweenRounds": 8
+      },
+      "penalty": 500,
+      "type": "soft"
+    },
+    {
+      "id": "no-early-rematch",
+      "rule": "max_rematches_in_phase",
+      "params": {
+        "minRoundsBetweenRematches": 5
+      },
+      "penalty": 800,
+      "type": "soft",
+      "description": "Teams should not play each other in consecutive rounds"
+    },
+    {
+      "id": "derby-special",
+      "rule": "specific_date_fixture",
+      "params": {
+        "derbies": [
+          {"teams": ["team-north-1", "team-north-2"], "preferredRounds": [1, 10]},
+          {"teams": ["team-central-1", "team-central-2"], "preferredRounds": [1, 10]},
+          {"teams": ["team-south-1", "team-south-2"], "preferredRounds": [1, 10]},
+          {"teams": ["team-east-1", "team-east-2"], "preferredRounds": [1, 10]},
+          {"teams": ["team-west-1", "team-west-2"], "preferredRounds": [1, 10]}
+        ]
+      },
+      "penalty": 400,
+      "type": "soft",
+      "description": "Regional derbies at start and middle of season"
+    },
+    {
+      "id": "complementary-schedule",
+      "rule": "complementary_pattern",
+      "params": {
+        "pairs": [
+          ["team-north-1", "team-south-1"],
+          ["team-central-1", "team-east-1"],
+          ["team-west-1", "team-central-2"]
+        ],
+        "mustBeOpposite": true
+      },
+      "penalty": 600,
+      "type": "soft",
+      "description": "Certain team pairs should have complementary home/away patterns for TV"
+    },
+    {
+      "id": "strength-balanced-rest",
+      "rule": "rest_balance",
+      "params": {
+        "considerOpponentStrength": true,
+        "maxRestAdvantageVsStrongOpponent": 24
+      },
+      "penalty": 400,
+      "type": "soft",
+      "description": "No team should have significant rest advantage when playing top teams"
+    },
+    {
+      "id": "final-round-home",
+      "rule": "phase_constraint",
+      "params": {
+        "rounds": [18],
+        "homeAdvantage": "top_half",
+        "rankingBasis": "strength"
+      },
+      "penalty": 200,
+      "type": "soft",
+      "description": "Stronger teams should have home advantage in final round"
+    }
+  ],
+  "objectives": [
+    {
+      "id": "carry-over-fairness",
+      "metric": "carry_over_variance",
+      "direction": "minimize",
+      "weight": 150,
+      "description": "Primary: Minimize variance in carry-over effects weighted by opponent strength"
+    },
+    {
+      "id": "break-count",
+      "metric": "total_breaks",
+      "direction": "minimize",
+      "weight": 120,
+      "description": "Minimize total number of breaks across all teams"
+    },
+    {
+      "id": "travel-distance",
+      "metric": "total_travel_distance",
+      "direction": "minimize",
+      "weight": 80
+    },
+    {
+      "id": "travel-clustering-score",
+      "metric": "travel_clustering",
+      "direction": "maximize",
+      "weight": 60,
+      "description": "Maximize efficiency of away trip clustering"
+    },
+    {
+      "id": "rest-fairness",
+      "metric": "rest_fairness",
+      "direction": "maximize",
+      "weight": 70
+    },
+    {
+      "id": "competitive-balance",
+      "metric": "competitive_balance",
+      "direction": "maximize",
+      "weight": 100,
+      "description": "Ensure schedule doesn't favor any team"
+    }
+  ],
+  "metadata": {
+    "complexity": "expert",
+    "robinx_solvable": false,
+    "challenges": [
+      "Carry-over effects: Classic NP-hard constraint - balancing who plays after the strong teams",
+      "Break pattern constraints combined with carry-over creates tight coupling",
+      "Travel clustering conflicts with break minimization",
+      "Complementary schedules add cross-team dependencies",
+      "Strength-weighted objectives require solving scheduling + assignment together",
+      "10 teams = 90 fixtures, but constraint interactions make search space enormous"
+    ],
+    "academic_references": [
+      "de Werra, D. (1988) - Some models of graphs for scheduling sports competitions",
+      "Russell, R.A. & Urban, T.L. (2006) - A constraint programming approach to sports scheduling",
+      "Trick, M.A. (2001) - A Schedule-Then-Break Approach to Sports Timetabling"
+    ],
+    "expected_difficulty": "Extremely high - requires constraint propagation with intelligent backtracking"
+  }
+}

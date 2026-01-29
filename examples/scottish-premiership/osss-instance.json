@@ -1,0 +1,454 @@
+{
+  "id": "scottish-premiership-2025-26",
+  "name": "Scottish Premiership 2025-26 Season",
+  "version": "0.1.0",
+  "timezone": "Europe/London",
+  "description": "Split-season format with dynamic re-grouping after 33 rounds. 12 teams play triple round-robin, then split into Top 6 and Bottom 6 for final 5 rounds.",
+  "season": {
+    "start": "2025-08-02T12:30:00+01:00",
+    "end": "2026-05-24T15:00:00+01:00",
+    "phases": [
+      {
+        "id": "phase-1",
+        "name": "Triple Round-Robin",
+        "start": "2025-08-02T12:30:00+01:00",
+        "end": "2026-04-05T15:00:00+01:00",
+        "rounds": 33,
+        "description": "All 12 teams play each other 3 times"
+      },
+      {
+        "id": "phase-2-top",
+        "name": "Championship Split (Top 6)",
+        "start": "2026-04-11T12:30:00+01:00",
+        "end": "2026-05-24T15:00:00+01:00",
+        "rounds": 5,
+        "description": "Top 6 teams after split play each other once",
+        "dynamic": true,
+        "qualifying_positions": [1, 2, 3, 4, 5, 6]
+      },
+      {
+        "id": "phase-2-bottom",
+        "name": "Relegation Split (Bottom 6)",
+        "start": "2026-04-11T12:30:00+01:00",
+        "end": "2026-05-24T15:00:00+01:00",
+        "rounds": 5,
+        "description": "Bottom 6 teams after split play each other once",
+        "dynamic": true,
+        "qualifying_positions": [7, 8, 9, 10, 11, 12]
+      }
+    ],
+    "blackout_dates": [
+      {
+        "start": "2025-12-24T00:00:00Z",
+        "end": "2025-12-25T23:59:59Z",
+        "reason": "Christmas Eve/Day"
+      },
+      {
+        "start": "2026-01-01T00:00:00Z",
+        "end": "2026-01-02T23:59:59Z",
+        "reason": "New Year's Day recovery"
+      }
+    ]
+  },
+  "competition": {
+    "sport": "soccer",
+    "level": "professional",
+    "league": "Scottish Professional Football League",
+    "country": "Scotland",
+    "format": "split-season",
+    "promotion_relegation": {
+      "relegated": 1,
+      "playoff": 1,
+      "note": "12th place relegated, 11th place enters playoff with Championship teams"
+    }
+  },
+  "entities": {
+    "teams": [
+      {
+        "id": "celtic",
+        "name": "Celtic FC",
+        "home_venue": "celtic-park",
+        "tags": ["glasgow", "top-tier", "historic"],
+        "location": { "city": "Glasgow", "latitude": 55.8497, "longitude": -4.2057 }
+      },
+      {
+        "id": "rangers",
+        "name": "Rangers FC",
+        "home_venue": "ibrox",
+        "tags": ["glasgow", "top-tier", "historic"],
+        "location": { "city": "Glasgow", "latitude": 55.8531, "longitude": -4.3089 }
+      },
+      {
+        "id": "aberdeen",
+        "name": "Aberdeen FC",
+        "home_venue": "pittodrie",
+        "tags": ["north-east"],
+        "location": { "city": "Aberdeen", "latitude": 57.1592, "longitude": -2.0889 }
+      },
+      {
+        "id": "hearts",
+        "name": "Heart of Midlothian FC",
+        "home_venue": "tynecastle",
+        "tags": ["edinburgh"],
+        "location": { "city": "Edinburgh", "latitude": 55.9387, "longitude": -3.2324 }
+      },
+      {
+        "id": "hibernian",
+        "name": "Hibernian FC",
+        "home_venue": "easter-road",
+        "tags": ["edinburgh"],
+        "location": { "city": "Edinburgh", "latitude": 55.9617, "longitude": -3.1653 }
+      },
+      {
+        "id": "dundee-utd",
+        "name": "Dundee United FC",
+        "home_venue": "tannadice",
+        "tags": ["dundee"],
+        "location": { "city": "Dundee", "latitude": 56.4749, "longitude": -2.9686 }
+      },
+      {
+        "id": "st-mirren",
+        "name": "St Mirren FC",
+        "home_venue": "smisa-stadium",
+        "tags": ["paisley"],
+        "location": { "city": "Paisley", "latitude": 55.8497, "longitude": -4.4308 }
+      },
+      {
+        "id": "kilmarnock",
+        "name": "Kilmarnock FC",
+        "home_venue": "rugby-park",
+        "tags": ["ayrshire"],
+        "location": { "city": "Kilmarnock", "latitude": 55.6047, "longitude": -4.5086 }
+      },
+      {
+        "id": "ross-county",
+        "name": "Ross County FC",
+        "home_venue": "global-energy-stadium",
+        "tags": ["highlands", "north"],
+        "location": { "city": "Dingwall", "latitude": 57.5972, "longitude": -4.4269 }
+      },
+      {
+        "id": "motherwell",
+        "name": "Motherwell FC",
+        "home_venue": "fir-park",
+        "tags": ["lanarkshire"],
+        "location": { "city": "Motherwell", "latitude": 55.7800, "longitude": -3.9822 }
+      },
+      {
+        "id": "livingston",
+        "name": "Livingston FC",
+        "home_venue": "tony-macaroni-arena",
+        "tags": ["west-lothian"],
+        "location": { "city": "Livingston", "latitude": 55.8864, "longitude": -3.5231 }
+      },
+      {
+        "id": "st-johnstone",
+        "name": "St Johnstone FC",
+        "home_venue": "mcdiarmid-park",
+        "tags": ["perthshire"],
+        "location": { "city": "Perth", "latitude": 56.4100, "longitude": -3.4761 }
+      }
+    ],
+    "venues": [
+      {
+        "id": "celtic-park",
+        "name": "Celtic Park",
+        "capacity": 60411,
+        "location": { "city": "Glasgow", "latitude": 55.8497, "longitude": -4.2057 },
+        "surface": "grass"
+      },
+      {
+        "id": "ibrox",
+        "name": "Ibrox Stadium",
+        "capacity": 50817,
+        "location": { "city": "Glasgow", "latitude": 55.8531, "longitude": -4.3089 },
+        "surface": "grass"
+      },
+      {
+        "id": "pittodrie",
+        "name": "Pittodrie Stadium",
+        "capacity": 20866,
+        "location": { "city": "Aberdeen", "latitude": 57.1592, "longitude": -2.0889 },
+        "surface": "grass"
+      },
+      {
+        "id": "tynecastle",
+        "name": "Tynecastle Park",
+        "capacity": 20099,
+        "location": { "city": "Edinburgh", "latitude": 55.9387, "longitude": -3.2324 },
+        "surface": "grass"
+      },
+      {
+        "id": "easter-road",
+        "name": "Easter Road Stadium",
+        "capacity": 20421,
+        "location": { "city": "Edinburgh", "latitude": 55.9617, "longitude": -3.1653 },
+        "surface": "grass"
+      },
+      {
+        "id": "tannadice",
+        "name": "Tannadice Park",
+        "capacity": 14223,
+        "location": { "city": "Dundee", "latitude": 56.4749, "longitude": -2.9686 },
+        "surface": "grass"
+      },
+      {
+        "id": "smisa-stadium",
+        "name": "SMiSA Stadium",
+        "capacity": 8023,
+        "location": { "city": "Paisley", "latitude": 55.8497, "longitude": -4.4308 },
+        "surface": "artificial"
+      },
+      {
+        "id": "rugby-park",
+        "name": "Rugby Park",
+        "capacity": 18128,
+        "location": { "city": "Kilmarnock", "latitude": 55.6047, "longitude": -4.5086 },
+        "surface": "artificial"
+      },
+      {
+        "id": "global-energy-stadium",
+        "name": "Global Energy Stadium",
+        "capacity": 6541,
+        "location": { "city": "Dingwall", "latitude": 57.5972, "longitude": -4.4269 },
+        "surface": "grass"
+      },
+      {
+        "id": "fir-park",
+        "name": "Fir Park",
+        "capacity": 13742,
+        "location": { "city": "Motherwell", "latitude": 55.7800, "longitude": -3.9822 },
+        "surface": "grass"
+      },
+      {
+        "id": "tony-macaroni-arena",
+        "name": "Tony Macaroni Arena",
+        "capacity": 10016,
+        "location": { "city": "Livingston", "latitude": 55.8864, "longitude": -3.5231 },
+        "surface": "artificial"
+      },
+      {
+        "id": "mcdiarmid-park",
+        "name": "McDiarmid Park",
+        "capacity": 10673,
+        "location": { "city": "Perth", "latitude": 56.4100, "longitude": -3.4761 },
+        "surface": "grass"
+      }
+    ]
+  },
+  "fixtures": [
+    { "id": "r01-celtic-aberdeen", "participants": ["celtic", "aberdeen"], "durationMinutes": 105, "round": 1, "phase": "phase-1" },
+    { "id": "r01-rangers-hearts", "participants": ["rangers", "hearts"], "durationMinutes": 105, "round": 1, "phase": "phase-1" },
+    { "id": "r01-hibernian-dundee-utd", "participants": ["hibernian", "dundee-utd"], "durationMinutes": 105, "round": 1, "phase": "phase-1" },
+    { "id": "r01-st-mirren-kilmarnock", "participants": ["st-mirren", "kilmarnock"], "durationMinutes": 105, "round": 1, "phase": "phase-1" },
+    { "id": "r01-ross-county-motherwell", "participants": ["ross-county", "motherwell"], "durationMinutes": 105, "round": 1, "phase": "phase-1" },
+    { "id": "r01-livingston-st-johnstone", "participants": ["livingston", "st-johnstone"], "durationMinutes": 105, "round": 1, "phase": "phase-1" },
+
+    { "id": "r02-aberdeen-rangers", "participants": ["aberdeen", "rangers"], "durationMinutes": 105, "round": 2, "phase": "phase-1" },
+    { "id": "r02-hearts-celtic", "participants": ["hearts", "celtic"], "durationMinutes": 105, "round": 2, "phase": "phase-1" },
+    { "id": "r02-dundee-utd-st-mirren", "participants": ["dundee-utd", "st-mirren"], "durationMinutes": 105, "round": 2, "phase": "phase-1" },
+    { "id": "r02-kilmarnock-hibernian", "participants": ["kilmarnock", "hibernian"], "durationMinutes": 105, "round": 2, "phase": "phase-1" },
+    { "id": "r02-motherwell-livingston", "participants": ["motherwell", "livingston"], "durationMinutes": 105, "round": 2, "phase": "phase-1" },
+    { "id": "r02-st-johnstone-ross-county", "participants": ["st-johnstone", "ross-county"], "durationMinutes": 105, "round": 2, "phase": "phase-1" },
+
+    { "id": "r03-celtic-rangers", "participants": ["celtic", "rangers"], "durationMinutes": 105, "round": 3, "phase": "phase-1", "tags": ["old-firm-derby", "rivalry", "high-profile"] },
+    { "id": "r03-aberdeen-hearts", "participants": ["aberdeen", "hearts"], "durationMinutes": 105, "round": 3, "phase": "phase-1" },
+    { "id": "r03-hibernian-st-mirren", "participants": ["hibernian", "st-mirren"], "durationMinutes": 105, "round": 3, "phase": "phase-1" },
+    { "id": "r03-dundee-utd-kilmarnock", "participants": ["dundee-utd", "kilmarnock"], "durationMinutes": 105, "round": 3, "phase": "phase-1" },
+    { "id": "r03-ross-county-livingston", "participants": ["ross-county", "livingston"], "durationMinutes": 105, "round": 3, "phase": "phase-1" },
+    { "id": "r03-motherwell-st-johnstone", "participants": ["motherwell", "st-johnstone"], "durationMinutes": 105, "round": 3, "phase": "phase-1" },
+
+    { "id": "r04-rangers-celtic", "participants": ["rangers", "celtic"], "durationMinutes": 105, "round": 4, "phase": "phase-1", "tags": ["old-firm-derby", "rivalry", "high-profile"] },
+    { "id": "r04-hearts-hibernian", "participants": ["hearts", "hibernian"], "durationMinutes": 105, "round": 4, "phase": "phase-1", "tags": ["edinburgh-derby", "rivalry"] },
+    { "id": "r04-st-mirren-aberdeen", "participants": ["st-mirren", "aberdeen"], "durationMinutes": 105, "round": 4, "phase": "phase-1" },
+    { "id": "r04-kilmarnock-ross-county", "participants": ["kilmarnock", "ross-county"], "durationMinutes": 105, "round": 4, "phase": "phase-1" },
+    { "id": "r04-livingston-dundee-utd", "participants": ["livingston", "dundee-utd"], "durationMinutes": 105, "round": 4, "phase": "phase-1" },
+    { "id": "r04-st-johnstone-motherwell", "participants": ["st-johnstone", "motherwell"], "durationMinutes": 105, "round": 4, "phase": "phase-1" },
+
+    { "id": "r05-celtic-hibernian", "participants": ["celtic", "hibernian"], "durationMinutes": 105, "round": 5, "phase": "phase-1" },
+    { "id": "r05-rangers-dundee-utd", "participants": ["rangers", "dundee-utd"], "durationMinutes": 105, "round": 5, "phase": "phase-1" },
+    { "id": "r05-aberdeen-kilmarnock", "participants": ["aberdeen", "kilmarnock"], "durationMinutes": 105, "round": 5, "phase": "phase-1" },
+    { "id": "r05-hearts-st-mirren", "participants": ["hearts", "st-mirren"], "durationMinutes": 105, "round": 5, "phase": "phase-1" },
+    { "id": "r05-ross-county-st-johnstone", "participants": ["ross-county", "st-johnstone"], "durationMinutes": 105, "round": 5, "phase": "phase-1" },
+    { "id": "r05-motherwell-livingston", "participants": ["motherwell", "livingston"], "durationMinutes": 105, "round": 5, "phase": "phase-1" },
+
+    { "id": "r06-hibernian-hearts", "participants": ["hibernian", "hearts"], "durationMinutes": 105, "round": 6, "phase": "phase-1", "tags": ["edinburgh-derby", "rivalry"] },
+    { "id": "r06-dundee-utd-celtic", "participants": ["dundee-utd", "celtic"], "durationMinutes": 105, "round": 6, "phase": "phase-1" },
+    { "id": "r06-st-mirren-rangers", "participants": ["st-mirren", "rangers"], "durationMinutes": 105, "round": 6, "phase": "phase-1" },
+    { "id": "r06-kilmarnock-motherwell", "participants": ["kilmarnock", "motherwell"], "durationMinutes": 105, "round": 6, "phase": "phase-1" },
+    { "id": "r06-livingston-aberdeen", "participants": ["livingston", "aberdeen"], "durationMinutes": 105, "round": 6, "phase": "phase-1" },
+    { "id": "r06-st-johnstone-dundee-utd", "participants": ["st-johnstone", "dundee-utd"], "durationMinutes": 105, "round": 6, "phase": "phase-1" },
+
+    { "id": "split-top-a", "participants": ["celtic", "rangers"], "durationMinutes": 105, "round": 34, "phase": "phase-2-top", "tags": ["old-firm-derby", "split-fixture", "conditional"], "conditional": { "type": "same_group", "group": "top-6" } },
+    { "id": "split-top-b", "participants": ["celtic", "aberdeen"], "durationMinutes": 105, "round": 35, "phase": "phase-2-top", "tags": ["split-fixture", "conditional"], "conditional": { "type": "same_group", "group": "top-6" } },
+    { "id": "split-top-c", "participants": ["celtic", "hearts"], "durationMinutes": 105, "round": 36, "phase": "phase-2-top", "tags": ["split-fixture", "conditional"], "conditional": { "type": "same_group", "group": "top-6" } },
+    { "id": "split-top-d", "participants": ["rangers", "aberdeen"], "durationMinutes": 105, "round": 34, "phase": "phase-2-top", "tags": ["split-fixture", "conditional"], "conditional": { "type": "same_group", "group": "top-6" } },
+    { "id": "split-top-e", "participants": ["rangers", "hearts"], "durationMinutes": 105, "round": 35, "phase": "phase-2-top", "tags": ["split-fixture", "conditional"], "conditional": { "type": "same_group", "group": "top-6" } },
+    { "id": "split-top-f", "participants": ["aberdeen", "hearts"], "durationMinutes": 105, "round": 36, "phase": "phase-2-top", "tags": ["split-fixture", "conditional"], "conditional": { "type": "same_group", "group": "top-6" } },
+
+    { "id": "split-bottom-a", "participants": ["ross-county", "livingston"], "durationMinutes": 105, "round": 34, "phase": "phase-2-bottom", "tags": ["split-fixture", "conditional", "relegation-battle"], "conditional": { "type": "same_group", "group": "bottom-6" } },
+    { "id": "split-bottom-b", "participants": ["ross-county", "st-johnstone"], "durationMinutes": 105, "round": 35, "phase": "phase-2-bottom", "tags": ["split-fixture", "conditional", "relegation-battle"], "conditional": { "type": "same_group", "group": "bottom-6" } },
+    { "id": "split-bottom-c", "participants": ["livingston", "st-johnstone"], "durationMinutes": 105, "round": 36, "phase": "phase-2-bottom", "tags": ["split-fixture", "conditional", "relegation-battle"], "conditional": { "type": "same_group", "group": "bottom-6" } }
+  ],
+  "constraints": [
+    {
+      "id": "no-team-overlap",
+      "type": "hard",
+      "rule": "no_overlap_team",
+      "selector": { "entityType": "team" },
+      "description": "A team cannot play two matches at the same time"
+    },
+    {
+      "id": "no-venue-overlap",
+      "type": "hard",
+      "rule": "no_overlap_venue_resource",
+      "selector": { "entityType": "venue" },
+      "description": "A venue cannot host two matches at the same time"
+    },
+    {
+      "id": "min-rest-4-days",
+      "type": "hard",
+      "rule": "min_rest_time",
+      "selector": { "entityType": "team" },
+      "params": { "min_hours": 96 },
+      "description": "Minimum 4 days rest between matches (SPFL rule)"
+    },
+    {
+      "id": "phase-1-split",
+      "type": "hard",
+      "rule": "phase_split",
+      "selector": { "phase": "phase-1" },
+      "params": {
+        "split_after_round": 33,
+        "groups": [
+          { "name": "top-6", "size": 6, "standing_range": { "from": 1, "to": 6 } },
+          { "name": "bottom-6", "size": 6, "standing_range": { "from": 7, "to": 12 } }
+        ],
+        "carry_over_points": true
+      },
+      "description": "League splits into Top 6 and Bottom 6 after round 33"
+    },
+    {
+      "id": "max-meetings-phase-1",
+      "type": "hard",
+      "rule": "max_rematches_in_phase",
+      "selector": { "phase": "phase-1" },
+      "params": { "max_meetings": 3, "scope": "phase", "phase_id": "phase-1" },
+      "description": "Each pair of teams meets exactly 3 times in Phase 1"
+    },
+    {
+      "id": "max-meetings-season",
+      "type": "hard",
+      "rule": "max_rematches_in_phase",
+      "selector": { "entityType": "team" },
+      "params": { "max_meetings": 4, "scope": "season" },
+      "description": "Each pair of teams meets at most 4 times in the full season"
+    },
+    {
+      "id": "home-away-asymmetry",
+      "type": "soft",
+      "rule": "home_away_asymmetry_tolerance",
+      "selector": { "entityType": "team" },
+      "params": { "max_imbalance": 5 },
+      "penalty": { "model": "linear", "weight": 5 },
+      "description": "Allow up to 5 game imbalance (e.g., 19 home / 14 away is acceptable)"
+    },
+    {
+      "id": "max-consecutive-away",
+      "type": "soft",
+      "rule": "max_consecutive_away",
+      "selector": { "entityType": "team" },
+      "params": { "max_away": 3 },
+      "penalty": { "model": "exponential", "weight": 20, "multiplier": 2 },
+      "description": "Avoid more than 3 consecutive away games"
+    },
+    {
+      "id": "max-consecutive-home",
+      "type": "soft",
+      "rule": "max_consecutive_home",
+      "selector": { "entityType": "team" },
+      "params": { "max_home": 3 },
+      "penalty": { "model": "linear", "weight": 10 },
+      "description": "Avoid more than 3 consecutive home games"
+    },
+    {
+      "id": "derby-spacing",
+      "type": "soft",
+      "rule": "opponent_spacing",
+      "selector": { "tags": ["rivalry"] },
+      "params": { "min_days_between_meetings": 42 },
+      "penalty": { "model": "linear", "weight": 15 },
+      "description": "At least 6 weeks between derby rematches (Old Firm, Edinburgh Derby)"
+    },
+    {
+      "id": "broadcast-window-saturday",
+      "type": "soft",
+      "rule": "time_window",
+      "selector": { "tags": ["high-profile"] },
+      "params": {
+        "allowed_days": ["Saturday"],
+        "allowed_hours": { "start": "12:00", "end": "17:30" }
+      },
+      "penalty": { "model": "linear", "weight": 25 },
+      "description": "High-profile matches (Old Firm) should be Saturday lunchtime or 3pm for TV"
+    },
+    {
+      "id": "highlands-travel",
+      "type": "soft",
+      "rule": "min_rest_time",
+      "selector": { "teams": ["ross-county", "aberdeen"] },
+      "params": { "min_hours": 120 },
+      "penalty": { "model": "linear", "weight": 10 },
+      "description": "Extra rest for Highland teams due to travel distances"
+    }
+  ],
+  "objectives": [
+    {
+      "metric": "home_away_balance",
+      "aggregation": "max",
+      "weight": 0.3,
+      "description": "Minimize the worst home/away imbalance across all teams"
+    },
+    {
+      "metric": "total_travel_distance",
+      "aggregation": "sum",
+      "weight": 0.25,
+      "description": "Minimize total travel for all teams (especially Ross County)"
+    },
+    {
+      "metric": "rest_fairness",
+      "aggregation": "stddev",
+      "weight": 0.2,
+      "description": "Ensure rest time is fairly distributed across teams"
+    },
+    {
+      "metric": "broadcast_coverage",
+      "aggregation": "count",
+      "weight": 0.15,
+      "description": "Maximize matches in broadcast windows"
+    },
+    {
+      "metric": "competitive_balance",
+      "aggregation": "composite",
+      "weight": 0.1,
+      "description": "Overall schedule fairness score"
+    }
+  ],
+  "metadata": {
+    "format_notes": [
+      "Triple round-robin Phase 1 creates 33 rounds (each team plays 33 matches)",
+      "Phase 2 split creates 5 additional rounds (38 total matches per team)",
+      "Home/away assignment for third meeting of each pair depends on prior assignments",
+      "Split groups determined by standings after round 33 - fixtures are conditional",
+      "Teams may end up with 19 home/14 away or 14 home/19 away - asymmetry accepted"
+    ],
+    "broadcast_partners": ["Sky Sports", "BBC Scotland"],
+    "typical_kickoff_times": [
+      "Saturday 12:30 (early TV)",
+      "Saturday 15:00 (traditional)",
+      "Saturday 17:30 (late TV)",
+      "Sunday 12:00 (TV)",
+      "Midweek 19:45"
+    ]
+  }
+}

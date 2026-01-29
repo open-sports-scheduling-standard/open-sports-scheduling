@@ -1,0 +1,323 @@
+{
+  "$schema": "../../schemas/osss-core.schema.json",
+  "id": "venue-sharing-conflict-2026",
+  "name": "Multi-Team Venue Sharing with Complex Availability",
+  "description": "8 teams sharing 3 venues with overlapping blackout periods, priority hierarchies, and strict no-overlap constraints. Creates a tightly constrained feasibility problem.",
+  "sport": "basketball",
+  "timezone": "America/New_York",
+  "defaultFixtureDuration": 150,
+  "season": {
+    "start": "2026-01-10",
+    "end": "2026-03-28"
+  },
+  "entities": {
+    "teams": [
+      {"id": "team-1", "name": "Metro Lions", "homeVenues": ["arena-central"], "priority": 1},
+      {"id": "team-2", "name": "Metro Tigers", "homeVenues": ["arena-central"], "priority": 2},
+      {"id": "team-3", "name": "North Stars", "homeVenues": ["arena-north"], "priority": 1},
+      {"id": "team-4", "name": "North Comets", "homeVenues": ["arena-north"], "priority": 2},
+      {"id": "team-5", "name": "South Hawks", "homeVenues": ["arena-south", "arena-central"], "priority": 1},
+      {"id": "team-6", "name": "South Eagles", "homeVenues": ["arena-south"], "priority": 2},
+      {"id": "team-7", "name": "East Warriors", "homeVenues": ["arena-north", "arena-south"], "priority": 3},
+      {"id": "team-8", "name": "West Knights", "homeVenues": ["arena-central", "arena-south"], "priority": 3}
+    ],
+    "venues": [
+      {
+        "id": "arena-central",
+        "name": "Central Arena",
+        "capacity": 18000,
+        "availability": {
+          "default": ["19:00", "21:30"],
+          "saturday": ["14:00", "17:00", "20:00"],
+          "sunday": ["15:00", "18:00"],
+          "blackouts": [
+            {"start": "2026-01-15", "end": "2026-01-18", "reason": "Concert"},
+            {"start": "2026-02-01", "end": "2026-02-03", "reason": "Trade Show"},
+            {"start": "2026-02-14", "end": "2026-02-15", "reason": "Valentine's Event"},
+            {"start": "2026-03-01", "end": "2026-03-05", "reason": "Convention"}
+          ]
+        },
+        "gameMinutes": 150,
+        "turnaroundMinutes": 90
+      },
+      {
+        "id": "arena-north",
+        "name": "North Sports Complex",
+        "capacity": 12000,
+        "availability": {
+          "default": ["19:30"],
+          "friday": ["19:00", "21:30"],
+          "saturday": ["15:00", "19:00"],
+          "sunday": ["14:00"],
+          "blackouts": [
+            {"start": "2026-01-24", "end": "2026-01-26", "reason": "Hockey Tournament"},
+            {"start": "2026-02-07", "end": "2026-02-10", "reason": "Maintenance"},
+            {"start": "2026-02-28", "end": "2026-03-02", "reason": "Concert Series"},
+            {"start": "2026-03-14", "end": "2026-03-16", "reason": "Graduation Ceremonies"}
+          ]
+        },
+        "gameMinutes": 150,
+        "turnaroundMinutes": 60
+      },
+      {
+        "id": "arena-south",
+        "name": "South Stadium",
+        "capacity": 15000,
+        "availability": {
+          "default": ["19:00"],
+          "wednesday": [],
+          "thursday": ["20:00"],
+          "friday": ["19:30", "22:00"],
+          "saturday": ["14:00", "17:00", "20:00"],
+          "sunday": ["13:00", "16:00"],
+          "blackouts": [
+            {"start": "2026-01-17", "end": "2026-01-20", "reason": "Religious Holiday"},
+            {"start": "2026-02-12", "end": "2026-02-16", "reason": "Festival"},
+            {"start": "2026-03-07", "end": "2026-03-09", "reason": "Political Rally"},
+            {"start": "2026-03-21", "end": "2026-03-23", "reason": "Repair Work"}
+          ]
+        },
+        "gameMinutes": 150,
+        "turnaroundMinutes": 75
+      }
+    ]
+  },
+  "fixtures": [
+    {"id": "g-001", "round": 1, "participants": ["team-1", "team-2"]},
+    {"id": "g-002", "round": 1, "participants": ["team-3", "team-4"]},
+    {"id": "g-003", "round": 1, "participants": ["team-5", "team-6"]},
+    {"id": "g-004", "round": 1, "participants": ["team-7", "team-8"]},
+
+    {"id": "g-005", "round": 2, "participants": ["team-1", "team-3"]},
+    {"id": "g-006", "round": 2, "participants": ["team-2", "team-4"]},
+    {"id": "g-007", "round": 2, "participants": ["team-5", "team-7"]},
+    {"id": "g-008", "round": 2, "participants": ["team-6", "team-8"]},
+
+    {"id": "g-009", "round": 3, "participants": ["team-1", "team-4"]},
+    {"id": "g-010", "round": 3, "participants": ["team-2", "team-3"]},
+    {"id": "g-011", "round": 3, "participants": ["team-5", "team-8"]},
+    {"id": "g-012", "round": 3, "participants": ["team-6", "team-7"]},
+
+    {"id": "g-013", "round": 4, "participants": ["team-1", "team-5"]},
+    {"id": "g-014", "round": 4, "participants": ["team-2", "team-6"]},
+    {"id": "g-015", "round": 4, "participants": ["team-3", "team-7"]},
+    {"id": "g-016", "round": 4, "participants": ["team-4", "team-8"]},
+
+    {"id": "g-017", "round": 5, "participants": ["team-1", "team-6"]},
+    {"id": "g-018", "round": 5, "participants": ["team-2", "team-5"]},
+    {"id": "g-019", "round": 5, "participants": ["team-3", "team-8"]},
+    {"id": "g-020", "round": 5, "participants": ["team-4", "team-7"]},
+
+    {"id": "g-021", "round": 6, "participants": ["team-1", "team-7"]},
+    {"id": "g-022", "round": 6, "participants": ["team-2", "team-8"]},
+    {"id": "g-023", "round": 6, "participants": ["team-3", "team-5"]},
+    {"id": "g-024", "round": 6, "participants": ["team-4", "team-6"]},
+
+    {"id": "g-025", "round": 7, "participants": ["team-1", "team-8"]},
+    {"id": "g-026", "round": 7, "participants": ["team-2", "team-7"]},
+    {"id": "g-027", "round": 7, "participants": ["team-3", "team-6"]},
+    {"id": "g-028", "round": 7, "participants": ["team-4", "team-5"]},
+
+    {"id": "g-029", "round": 8, "participants": ["team-2", "team-1"]},
+    {"id": "g-030", "round": 8, "participants": ["team-4", "team-3"]},
+    {"id": "g-031", "round": 8, "participants": ["team-6", "team-5"]},
+    {"id": "g-032", "round": 8, "participants": ["team-8", "team-7"]},
+
+    {"id": "g-033", "round": 9, "participants": ["team-3", "team-1"]},
+    {"id": "g-034", "round": 9, "participants": ["team-4", "team-2"]},
+    {"id": "g-035", "round": 9, "participants": ["team-7", "team-5"]},
+    {"id": "g-036", "round": 9, "participants": ["team-8", "team-6"]},
+
+    {"id": "g-037", "round": 10, "participants": ["team-4", "team-1"]},
+    {"id": "g-038", "round": 10, "participants": ["team-3", "team-2"]},
+    {"id": "g-039", "round": 10, "participants": ["team-8", "team-5"]},
+    {"id": "g-040", "round": 10, "participants": ["team-7", "team-6"]},
+
+    {"id": "g-041", "round": 11, "participants": ["team-5", "team-1"]},
+    {"id": "g-042", "round": 11, "participants": ["team-6", "team-2"]},
+    {"id": "g-043", "round": 11, "participants": ["team-7", "team-3"]},
+    {"id": "g-044", "round": 11, "participants": ["team-8", "team-4"]},
+
+    {"id": "g-045", "round": 12, "participants": ["team-6", "team-1"]},
+    {"id": "g-046", "round": 12, "participants": ["team-5", "team-2"]},
+    {"id": "g-047", "round": 12, "participants": ["team-8", "team-3"]},
+    {"id": "g-048", "round": 12, "participants": ["team-7", "team-4"]},
+
+    {"id": "g-049", "round": 13, "participants": ["team-7", "team-1"]},
+    {"id": "g-050", "round": 13, "participants": ["team-8", "team-2"]},
+    {"id": "g-051", "round": 13, "participants": ["team-5", "team-3"]},
+    {"id": "g-052", "round": 13, "participants": ["team-6", "team-4"]},
+
+    {"id": "g-053", "round": 14, "participants": ["team-8", "team-1"]},
+    {"id": "g-054", "round": 14, "participants": ["team-7", "team-2"]},
+    {"id": "g-055", "round": 14, "participants": ["team-6", "team-3"]},
+    {"id": "g-056", "round": 14, "participants": ["team-5", "team-4"]}
+  ],
+  "constraints": [
+    {
+      "id": "no-venue-overlap",
+      "rule": "no_venue_overlap",
+      "params": {"includeSetupTime": true},
+      "penalty": 10000,
+      "type": "hard"
+    },
+    {
+      "id": "venue-availability",
+      "rule": "venue_availability",
+      "params": {"strictBlackouts": true},
+      "penalty": 10000,
+      "type": "hard"
+    },
+    {
+      "id": "home-venue-priority",
+      "rule": "venue_assignment",
+      "params": {
+        "respectPriority": true,
+        "priorityConflictResolution": "higher_wins"
+      },
+      "penalty": 500,
+      "type": "soft"
+    },
+    {
+      "id": "min-rest-48h",
+      "rule": "min_rest_time",
+      "params": {"minRestHours": 48},
+      "penalty": 2000,
+      "type": "hard"
+    },
+    {
+      "id": "max-consecutive-away-3",
+      "rule": "max_consecutive_away",
+      "params": {"maxConsecutive": 3},
+      "penalty": 1500,
+      "type": "hard"
+    },
+    {
+      "id": "max-consecutive-home-3",
+      "rule": "max_consecutive_home",
+      "params": {"maxConsecutive": 3},
+      "penalty": 1000,
+      "type": "soft"
+    },
+    {
+      "id": "home-away-balance",
+      "rule": "home_away_asymmetry_tolerance",
+      "params": {"maxImbalance": 1},
+      "penalty": 800,
+      "type": "soft"
+    },
+    {
+      "id": "weekend-games-preferred",
+      "rule": "time_window",
+      "params": {
+        "preferredDays": ["friday", "saturday", "sunday"],
+        "percentageRequired": 60
+      },
+      "penalty": 100,
+      "type": "soft"
+    },
+    {
+      "id": "no-monday-games",
+      "rule": "time_window",
+      "params": {"excludedDays": ["monday"]},
+      "penalty": 300,
+      "type": "soft"
+    },
+    {
+      "id": "derby-separate",
+      "rule": "buffer_time",
+      "params": {
+        "teams": [["team-1", "team-2"], ["team-3", "team-4"], ["team-5", "team-6"]],
+        "minDaysBetween": 14
+      },
+      "penalty": 400,
+      "type": "soft",
+      "description": "Teams sharing venues should not play home games within 2 weeks of each other when possible"
+    },
+    {
+      "id": "round-spread",
+      "rule": "round_distribution",
+      "params": {
+        "minDaysBetweenRounds": 4,
+        "maxDaysBetweenRounds": 8
+      },
+      "penalty": 200,
+      "type": "soft"
+    },
+    {
+      "id": "primetime-conflict-avoidance",
+      "rule": "no_simultaneous_group_games",
+      "params": {
+        "sameSlotLimit": 1,
+        "slots": ["19:00", "19:30", "20:00"]
+      },
+      "penalty": 250,
+      "type": "soft",
+      "description": "Avoid multiple games at same primetime to reduce broadcast conflicts"
+    },
+    {
+      "id": "turnaround-enforcement",
+      "rule": "buffer_time",
+      "params": {
+        "scope": "venue",
+        "useVenueTurnaround": true
+      },
+      "penalty": 5000,
+      "type": "hard"
+    }
+  ],
+  "objectives": [
+    {
+      "id": "minimize-venue-conflicts",
+      "metric": "venue_utilization",
+      "direction": "maximize",
+      "weight": 100,
+      "description": "Maximize efficient use of limited venues"
+    },
+    {
+      "id": "respect-team-priority",
+      "metric": "priority_satisfaction",
+      "direction": "maximize",
+      "weight": 80,
+      "params": {
+        "higherPriorityWeight": 2.0
+      }
+    },
+    {
+      "id": "weekend-distribution",
+      "metric": "weekend_fixture_count",
+      "direction": "maximize",
+      "weight": 60
+    },
+    {
+      "id": "home-away-fairness",
+      "metric": "home_away_balance",
+      "direction": "maximize",
+      "weight": 70
+    },
+    {
+      "id": "minimize-travel",
+      "metric": "total_travel_distance",
+      "direction": "minimize",
+      "weight": 40
+    }
+  ],
+  "metadata": {
+    "complexity": "expert",
+    "robinx_solvable": false,
+    "challenges": [
+      "3 venues shared by 8 teams with overlapping blackouts",
+      "Priority hierarchies create asymmetric constraints",
+      "Blackout periods overlap across venues - creating bottleneck weeks",
+      "Turnaround times vary by venue",
+      "Limited slots force tight packing",
+      "Some weeks may be infeasible without constraint relaxation"
+    ],
+    "bottleneck_periods": [
+      "2026-01-15 to 2026-01-20: Only arena-north available",
+      "2026-02-12 to 2026-02-16: Only arena-central available (and limited)",
+      "2026-03-01 to 2026-03-05: Severe constraint - all venues limited"
+    ],
+    "expected_difficulty": "Very high - requires backtracking or constraint propagation"
+  }
+}

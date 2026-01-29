@@ -1,0 +1,362 @@
+{
+  "$schema": "../../schemas/osss-core.schema.json",
+  "id": "complex-multi-phase-2026",
+  "name": "Complex Multi-Phase Tournament with Dynamic Seeding",
+  "description": "16-team tournament with group stage, crossover playoffs, and knockout - featuring dynamic seeding, venue neutrality requirements, and complex rest constraints. Designed to challenge traditional round-robin solvers.",
+  "sport": "soccer",
+  "timezone": "UTC",
+  "defaultFixtureDuration": 120,
+  "season": {
+    "start": "2026-06-01",
+    "end": "2026-07-15",
+    "phases": [
+      {
+        "id": "group-stage",
+        "name": "Group Stage",
+        "startDate": "2026-06-01",
+        "endDate": "2026-06-21",
+        "description": "4 groups of 4 teams, double round-robin within groups"
+      },
+      {
+        "id": "crossover-round",
+        "name": "Crossover Playoffs",
+        "startDate": "2026-06-25",
+        "endDate": "2026-06-28",
+        "description": "3rd place teams play for last 2 knockout spots - complex seeding"
+      },
+      {
+        "id": "round-of-16",
+        "name": "Round of 16",
+        "startDate": "2026-07-01",
+        "endDate": "2026-07-03",
+        "description": "Single elimination, seeded bracket"
+      },
+      {
+        "id": "quarter-finals",
+        "name": "Quarter Finals",
+        "startDate": "2026-07-06",
+        "endDate": "2026-07-07",
+        "description": "Single elimination"
+      },
+      {
+        "id": "semi-finals",
+        "name": "Semi Finals",
+        "startDate": "2026-07-10",
+        "endDate": "2026-07-11",
+        "description": "Single elimination"
+      },
+      {
+        "id": "finals",
+        "name": "Finals",
+        "startDate": "2026-07-15",
+        "endDate": "2026-07-15",
+        "description": "Third place match and Final"
+      }
+    ]
+  },
+  "entities": {
+    "teams": [
+      {"id": "team-a1", "name": "Alpha Prime", "group": "A", "tier": 1},
+      {"id": "team-a2", "name": "Alpha Beta", "group": "A", "tier": 2},
+      {"id": "team-a3", "name": "Alpha Gamma", "group": "A", "tier": 3},
+      {"id": "team-a4", "name": "Alpha Delta", "group": "A", "tier": 4},
+      {"id": "team-b1", "name": "Bravo Prime", "group": "B", "tier": 1},
+      {"id": "team-b2", "name": "Bravo Beta", "group": "B", "tier": 2},
+      {"id": "team-b3", "name": "Bravo Gamma", "group": "B", "tier": 3},
+      {"id": "team-b4", "name": "Bravo Delta", "group": "B", "tier": 4},
+      {"id": "team-c1", "name": "Charlie Prime", "group": "C", "tier": 1},
+      {"id": "team-c2", "name": "Charlie Beta", "group": "C", "tier": 2},
+      {"id": "team-c3", "name": "Charlie Gamma", "group": "C", "tier": 3},
+      {"id": "team-c4", "name": "Charlie Delta", "group": "C", "tier": 4},
+      {"id": "team-d1", "name": "Delta Prime", "group": "D", "tier": 1},
+      {"id": "team-d2", "name": "Delta Beta", "group": "D", "tier": 2},
+      {"id": "team-d3", "name": "Delta Gamma", "group": "D", "tier": 3},
+      {"id": "team-d4", "name": "Delta Delta", "group": "D", "tier": 4}
+    ],
+    "venues": [
+      {"id": "venue-north", "name": "Northern Stadium", "city": "Northville", "capacity": 60000, "region": "north"},
+      {"id": "venue-south", "name": "Southern Arena", "city": "Southport", "capacity": 55000, "region": "south"},
+      {"id": "venue-east", "name": "Eastern Complex", "city": "Eastham", "capacity": 45000, "region": "east"},
+      {"id": "venue-west", "name": "Western Ground", "city": "Westfield", "capacity": 50000, "region": "west"},
+      {"id": "venue-central", "name": "Central Stadium", "city": "Centrum", "capacity": 80000, "region": "central", "neutralVenue": true},
+      {"id": "venue-national", "name": "National Arena", "city": "Capital", "capacity": 90000, "region": "central", "neutralVenue": true, "finalVenue": true}
+    ]
+  },
+  "fixtures": [
+    {"id": "gs-a-1", "phase": "group-stage", "round": 1, "participants": ["team-a1", "team-a2"], "group": "A"},
+    {"id": "gs-a-2", "phase": "group-stage", "round": 1, "participants": ["team-a3", "team-a4"], "group": "A"},
+    {"id": "gs-a-3", "phase": "group-stage", "round": 2, "participants": ["team-a1", "team-a3"], "group": "A"},
+    {"id": "gs-a-4", "phase": "group-stage", "round": 2, "participants": ["team-a2", "team-a4"], "group": "A"},
+    {"id": "gs-a-5", "phase": "group-stage", "round": 3, "participants": ["team-a1", "team-a4"], "group": "A"},
+    {"id": "gs-a-6", "phase": "group-stage", "round": 3, "participants": ["team-a2", "team-a3"], "group": "A"},
+    {"id": "gs-a-7", "phase": "group-stage", "round": 4, "participants": ["team-a2", "team-a1"], "group": "A"},
+    {"id": "gs-a-8", "phase": "group-stage", "round": 4, "participants": ["team-a4", "team-a3"], "group": "A"},
+    {"id": "gs-a-9", "phase": "group-stage", "round": 5, "participants": ["team-a3", "team-a1"], "group": "A"},
+    {"id": "gs-a-10", "phase": "group-stage", "round": 5, "participants": ["team-a4", "team-a2"], "group": "A"},
+    {"id": "gs-a-11", "phase": "group-stage", "round": 6, "participants": ["team-a4", "team-a1"], "group": "A"},
+    {"id": "gs-a-12", "phase": "group-stage", "round": 6, "participants": ["team-a3", "team-a2"], "group": "A"},
+
+    {"id": "gs-b-1", "phase": "group-stage", "round": 1, "participants": ["team-b1", "team-b2"], "group": "B"},
+    {"id": "gs-b-2", "phase": "group-stage", "round": 1, "participants": ["team-b3", "team-b4"], "group": "B"},
+    {"id": "gs-b-3", "phase": "group-stage", "round": 2, "participants": ["team-b1", "team-b3"], "group": "B"},
+    {"id": "gs-b-4", "phase": "group-stage", "round": 2, "participants": ["team-b2", "team-b4"], "group": "B"},
+    {"id": "gs-b-5", "phase": "group-stage", "round": 3, "participants": ["team-b1", "team-b4"], "group": "B"},
+    {"id": "gs-b-6", "phase": "group-stage", "round": 3, "participants": ["team-b2", "team-b3"], "group": "B"},
+    {"id": "gs-b-7", "phase": "group-stage", "round": 4, "participants": ["team-b2", "team-b1"], "group": "B"},
+    {"id": "gs-b-8", "phase": "group-stage", "round": 4, "participants": ["team-b4", "team-b3"], "group": "B"},
+    {"id": "gs-b-9", "phase": "group-stage", "round": 5, "participants": ["team-b3", "team-b1"], "group": "B"},
+    {"id": "gs-b-10", "phase": "group-stage", "round": 5, "participants": ["team-b4", "team-b2"], "group": "B"},
+    {"id": "gs-b-11", "phase": "group-stage", "round": 6, "participants": ["team-b4", "team-b1"], "group": "B"},
+    {"id": "gs-b-12", "phase": "group-stage", "round": 6, "participants": ["team-b3", "team-b2"], "group": "B"},
+
+    {"id": "gs-c-1", "phase": "group-stage", "round": 1, "participants": ["team-c1", "team-c2"], "group": "C"},
+    {"id": "gs-c-2", "phase": "group-stage", "round": 1, "participants": ["team-c3", "team-c4"], "group": "C"},
+    {"id": "gs-c-3", "phase": "group-stage", "round": 2, "participants": ["team-c1", "team-c3"], "group": "C"},
+    {"id": "gs-c-4", "phase": "group-stage", "round": 2, "participants": ["team-c2", "team-c4"], "group": "C"},
+    {"id": "gs-c-5", "phase": "group-stage", "round": 3, "participants": ["team-c1", "team-c4"], "group": "C"},
+    {"id": "gs-c-6", "phase": "group-stage", "round": 3, "participants": ["team-c2", "team-c3"], "group": "C"},
+    {"id": "gs-c-7", "phase": "group-stage", "round": 4, "participants": ["team-c2", "team-c1"], "group": "C"},
+    {"id": "gs-c-8", "phase": "group-stage", "round": 4, "participants": ["team-c4", "team-c3"], "group": "C"},
+    {"id": "gs-c-9", "phase": "group-stage", "round": 5, "participants": ["team-c3", "team-c1"], "group": "C"},
+    {"id": "gs-c-10", "phase": "group-stage", "round": 5, "participants": ["team-c4", "team-c2"], "group": "C"},
+    {"id": "gs-c-11", "phase": "group-stage", "round": 6, "participants": ["team-c4", "team-c1"], "group": "C"},
+    {"id": "gs-c-12", "phase": "group-stage", "round": 6, "participants": ["team-c3", "team-c2"], "group": "C"},
+
+    {"id": "gs-d-1", "phase": "group-stage", "round": 1, "participants": ["team-d1", "team-d2"], "group": "D"},
+    {"id": "gs-d-2", "phase": "group-stage", "round": 1, "participants": ["team-d3", "team-d4"], "group": "D"},
+    {"id": "gs-d-3", "phase": "group-stage", "round": 2, "participants": ["team-d1", "team-d3"], "group": "D"},
+    {"id": "gs-d-4", "phase": "group-stage", "round": 2, "participants": ["team-d2", "team-d4"], "group": "D"},
+    {"id": "gs-d-5", "phase": "group-stage", "round": 3, "participants": ["team-d1", "team-d4"], "group": "D"},
+    {"id": "gs-d-6", "phase": "group-stage", "round": 3, "participants": ["team-d2", "team-d3"], "group": "D"},
+    {"id": "gs-d-7", "phase": "group-stage", "round": 4, "participants": ["team-d2", "team-d1"], "group": "D"},
+    {"id": "gs-d-8", "phase": "group-stage", "round": 4, "participants": ["team-d4", "team-d3"], "group": "D"},
+    {"id": "gs-d-9", "phase": "group-stage", "round": 5, "participants": ["team-d3", "team-d1"], "group": "D"},
+    {"id": "gs-d-10", "phase": "group-stage", "round": 5, "participants": ["team-d4", "team-d2"], "group": "D"},
+    {"id": "gs-d-11", "phase": "group-stage", "round": 6, "participants": ["team-d4", "team-d1"], "group": "D"},
+    {"id": "gs-d-12", "phase": "group-stage", "round": 6, "participants": ["team-d3", "team-d2"], "group": "D"},
+
+    {"id": "cross-1", "phase": "crossover-round", "description": "3rd Group A vs 3rd Group B", "conditional": true, "conditionType": "standings", "participants": ["3rd-A", "3rd-B"]},
+    {"id": "cross-2", "phase": "crossover-round", "description": "3rd Group C vs 3rd Group D", "conditional": true, "conditionType": "standings", "participants": ["3rd-C", "3rd-D"]},
+
+    {"id": "r16-1", "phase": "round-of-16", "description": "1st A vs 2nd B", "conditional": true, "participants": ["1st-A", "2nd-B"]},
+    {"id": "r16-2", "phase": "round-of-16", "description": "1st B vs 2nd A", "conditional": true, "participants": ["1st-B", "2nd-A"]},
+    {"id": "r16-3", "phase": "round-of-16", "description": "1st C vs 2nd D", "conditional": true, "participants": ["1st-C", "2nd-D"]},
+    {"id": "r16-4", "phase": "round-of-16", "description": "1st D vs 2nd C", "conditional": true, "participants": ["1st-D", "2nd-C"]},
+    {"id": "r16-5", "phase": "round-of-16", "description": "Winner Cross-1 vs Best 3rd", "conditional": true, "participants": ["W-cross-1", "best-3rd"]},
+    {"id": "r16-6", "phase": "round-of-16", "description": "Winner Cross-2 vs 2nd Best 3rd", "conditional": true, "participants": ["W-cross-2", "2nd-best-3rd"]},
+    {"id": "r16-7", "phase": "round-of-16", "description": "Bracket match 7", "conditional": true, "participants": ["TBD", "TBD"]},
+    {"id": "r16-8", "phase": "round-of-16", "description": "Bracket match 8", "conditional": true, "participants": ["TBD", "TBD"]},
+
+    {"id": "qf-1", "phase": "quarter-finals", "conditional": true, "participants": ["W-r16-1", "W-r16-2"]},
+    {"id": "qf-2", "phase": "quarter-finals", "conditional": true, "participants": ["W-r16-3", "W-r16-4"]},
+    {"id": "qf-3", "phase": "quarter-finals", "conditional": true, "participants": ["W-r16-5", "W-r16-6"]},
+    {"id": "qf-4", "phase": "quarter-finals", "conditional": true, "participants": ["W-r16-7", "W-r16-8"]},
+
+    {"id": "sf-1", "phase": "semi-finals", "conditional": true, "participants": ["W-qf-1", "W-qf-2"]},
+    {"id": "sf-2", "phase": "semi-finals", "conditional": true, "participants": ["W-qf-3", "W-qf-4"]},
+
+    {"id": "third-place", "phase": "finals", "conditional": true, "participants": ["L-sf-1", "L-sf-2"], "venueRequirement": "neutral"},
+    {"id": "final", "phase": "finals", "conditional": true, "participants": ["W-sf-1", "W-sf-2"], "venueRequirement": "finalVenue"}
+  ],
+  "constraints": [
+    {
+      "id": "min-rest-72h",
+      "rule": "min_rest_time",
+      "params": {"minRestHours": 72},
+      "scope": {"phases": ["group-stage", "crossover-round"]},
+      "penalty": 1000,
+      "type": "hard"
+    },
+    {
+      "id": "min-rest-96h-knockout",
+      "rule": "min_rest_time",
+      "params": {"minRestHours": 96},
+      "scope": {"phases": ["round-of-16", "quarter-finals", "semi-finals", "finals"]},
+      "penalty": 2000,
+      "type": "hard"
+    },
+    {
+      "id": "no-venue-overlap",
+      "rule": "no_venue_overlap",
+      "params": {"bufferMinutes": 180},
+      "penalty": 5000,
+      "type": "hard"
+    },
+    {
+      "id": "group-stage-venues",
+      "rule": "venue_assignment",
+      "params": {
+        "allowedVenues": ["venue-north", "venue-south", "venue-east", "venue-west"],
+        "strategy": "balanced"
+      },
+      "scope": {"phases": ["group-stage"]},
+      "penalty": 100,
+      "type": "soft"
+    },
+    {
+      "id": "knockout-neutral-venues",
+      "rule": "venue_assignment",
+      "params": {
+        "requiredVenues": ["venue-central", "venue-national"],
+        "neutralOnly": true
+      },
+      "scope": {"phases": ["quarter-finals", "semi-finals", "finals"]},
+      "penalty": 3000,
+      "type": "hard"
+    },
+    {
+      "id": "final-venue",
+      "rule": "specific_venue_fixture",
+      "params": {
+        "fixtureId": "final",
+        "venueId": "venue-national"
+      },
+      "penalty": 10000,
+      "type": "hard"
+    },
+    {
+      "id": "broadcast-slots-group",
+      "rule": "time_window",
+      "params": {
+        "allowedSlots": ["14:00", "17:00", "20:00"],
+        "timezone": "UTC"
+      },
+      "scope": {"phases": ["group-stage"]},
+      "penalty": 50,
+      "type": "soft"
+    },
+    {
+      "id": "max-2-games-per-venue-per-day",
+      "rule": "max_games_in_period",
+      "params": {
+        "maxGames": 2,
+        "periodHours": 24,
+        "scope": "venue"
+      },
+      "penalty": 500,
+      "type": "soft"
+    },
+    {
+      "id": "no-same-group-simultaneous",
+      "rule": "no_simultaneous_group_games",
+      "params": {
+        "exceptFinalRound": true
+      },
+      "scope": {"phases": ["group-stage"]},
+      "penalty": 800,
+      "type": "soft"
+    },
+    {
+      "id": "final-round-simultaneous",
+      "rule": "simultaneous_games",
+      "params": {
+        "rounds": [6],
+        "tolerance_minutes": 0
+      },
+      "scope": {"phases": ["group-stage"]},
+      "penalty": 2000,
+      "type": "hard",
+      "description": "All final group stage games in same group must kick off simultaneously"
+    },
+    {
+      "id": "no-back-to-back-days",
+      "rule": "back_to_back_games",
+      "params": {"minDaysBetween": 2},
+      "penalty": 1500,
+      "type": "hard"
+    },
+    {
+      "id": "rest-fairness-group",
+      "rule": "rest_balance",
+      "params": {
+        "maxRestDifferenceHours": 48,
+        "scope": "within_group"
+      },
+      "scope": {"phases": ["group-stage"]},
+      "penalty": 200,
+      "type": "soft"
+    },
+    {
+      "id": "tier1-evening-priority",
+      "rule": "time_window",
+      "params": {
+        "preferredSlots": ["20:00"],
+        "teamFilter": {"tier": 1}
+      },
+      "penalty": 30,
+      "type": "soft",
+      "description": "Top tier teams should play in prime evening slot"
+    },
+    {
+      "id": "avoid-region-travel",
+      "rule": "travel_pattern",
+      "params": {
+        "maxConsecutiveRegionChanges": 2
+      },
+      "penalty": 75,
+      "type": "soft"
+    },
+    {
+      "id": "crossover-before-r16",
+      "rule": "phase_ordering",
+      "params": {
+        "before": "crossover-round",
+        "after": "round-of-16",
+        "minGapDays": 2
+      },
+      "penalty": 5000,
+      "type": "hard"
+    }
+  ],
+  "objectives": [
+    {
+      "id": "minimize-rest-variance",
+      "metric": "rest_fairness",
+      "direction": "minimize",
+      "weight": 100,
+      "description": "Minimize variance in rest time between teams"
+    },
+    {
+      "id": "maximize-broadcast-value",
+      "metric": "broadcast_revenue",
+      "direction": "maximize",
+      "weight": 80,
+      "params": {
+        "primeTimeSlots": ["20:00"],
+        "tier1Multiplier": 2.0
+      }
+    },
+    {
+      "id": "minimize-travel",
+      "metric": "total_travel_distance",
+      "direction": "minimize",
+      "weight": 40
+    },
+    {
+      "id": "venue-utilization",
+      "metric": "venue_utilization",
+      "direction": "maximize",
+      "weight": 30
+    },
+    {
+      "id": "competitive-balance",
+      "metric": "competitive_balance",
+      "direction": "maximize",
+      "weight": 60,
+      "description": "Ensure fair seeding and bracket positioning"
+    }
+  ],
+  "metadata": {
+    "complexity": "expert",
+    "robinx_solvable": false,
+    "challenges": [
+      "Multi-phase with dynamic participant resolution",
+      "Conditional fixtures based on standings",
+      "Mixed venue assignment strategies per phase",
+      "Simultaneous kick-off requirements",
+      "Complex rest fairness within groups",
+      "Bracket seeding dependencies"
+    ],
+    "expected_difficulty": "Very high - requires constraint programming or hybrid solver"
+  }
+}

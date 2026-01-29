@@ -111,14 +111,14 @@
   ],
   "objectives": [
     {
-      "metric": "broadcast_quality",
+      "metric": "broadcast_coverage",
       "aggregation": "weighted_sum",
       "weight": 0.5,
       "direction": "maximize",
       "comment": "Maximize viewership by optimal court and time allocation"
     },
     {
-      "metric": "player_rest_equity",
+      "metric": "rest_fairness",
       "aggregation": "variance",
       "weight": 0.3,
       "direction": "minimize"

@@ -12,6 +12,19 @@ Each sport example includes:
 
 ### Traditional Team Sports
 
+#### Scottish Premiership (Split-Season)
+**Directory:** `scottish-premiership/`
+**Example:** Scottish Premiership 2025-26
+- 12 teams
+- **Split-season format with dynamic re-grouping**
+- Phase 1: Triple round-robin (33 rounds, each pair meets 3 times)
+- Phase 2: League splits into Top 6 and Bottom 6 based on standings
+- Top/Bottom groups play 5 more rounds within their group
+- Conditional fixtures based on standings at split point
+- Accepted home/away asymmetry (19H/14A or 14H/19A)
+- Derby constraints: Old Firm (Celtic vs Rangers), Edinburgh Derby (Hearts vs Hibernian)
+- **Most complex structural format example**
+
 #### Rugby Union 15s
 **Directory:** `rugby-union-15s/`
 **Example:** Six Nations Championship 2026
@@ -173,18 +186,29 @@ Each sport example includes:
 
 ## Using These Examples
 
-### 1. Validation
+### 1. Validate an instance
 ```bash
-osss-validate instance examples/rugby-union-15s/osss-instance.json \
+osss-validate instance \
+  --instance ./examples/rugby-union-15s/osss-instance.json \
   --schemas ./schemas \
   --registry ./registry
 ```
 
-### 2. Result Verification
+### 2. Validate a solver result
 ```bash
-osss-validate result examples/rugby-union-15s/osss-results.json \
-  --instance examples/rugby-union-15s/osss-instance.json \
-  --schemas ./schemas
+osss-validate result \
+  --instance ./examples/rugby-union-15s/osss-instance.json \
+  --result ./examples/rugby-union-15s/osss-results.json \
+  --schemas ./schemas \
+  --registry ./registry
+```
+
+### 3. Validate all examples at once
+```bash
+osss-validate bundle \
+  --examples ./examples \
+  --schemas ./schemas \
+  --registry ./registry
 ```
 
 ### 3. As Templates
@@ -222,9 +246,42 @@ Each example demonstrates different aspects of the standard:
 - American Football NFL
 
 ### Expert (⭐⭐⭐⭐⭐)
+- **Scottish Premiership (split-season with dynamic re-grouping)**
 - Surfing (weather-dependent)
 - Professional League (multi-objective)
 - Esports Tournament (global coordination)
+
+### RobinX-Hard (⭐⭐⭐⭐⭐⭐)
+These instances are specifically designed to challenge traditional round-robin solvers like RobinX:
+
+#### Complex Multi-Phase Tournament
+**Directory:** `complex-multi-phase/`
+- 16 teams, 6 venues
+- Group stage → crossover playoffs → knockout bracket
+- Conditional fixtures based on standings
+- Dynamic seeding dependencies
+- Venue neutrality requirements for knockout
+- Simultaneous kick-off in final group round
+- **Why hard:** Multi-phase with dynamic participant resolution, bracket seeding dependencies
+
+#### Venue Sharing Conflict
+**Directory:** `venue-sharing-conflict/`
+- 8 teams sharing 3 venues
+- Overlapping blackout periods across venues
+- Team priority hierarchies for venue access
+- Complex turnaround time requirements
+- **Bottleneck weeks:** Some periods have severe venue constraints
+- **Why hard:** Tightly constrained feasibility - requires backtracking or constraint propagation
+
+#### Carry-Over Fairness League
+**Directory:** `carry-over-fairness/`
+- 10-team double round-robin (90 fixtures)
+- **Carry-over effects balancing** (classic NP-hard constraint)
+- Break pattern minimization (max 2 breaks per team)
+- Travel clustering by region
+- Complementary home/away patterns for TV
+- **Why hard:** Carry-over combined with break patterns creates tight coupling
+- **Academic references:** de Werra (1988), Russell & Urban (2006), Trick (2001)
 
 ## Sport Categories Represented
 

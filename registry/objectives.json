@@ -445,6 +445,379 @@
         "rationale": "Competitive variety and global fan engagement in international esports",
         "relatedObjectives": ["opponent_variety", "regional_fairness"]
       }
+    },
+    {
+      "objectiveId": "broadcast_revenue",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "commercial",
+      "unit": "currency",
+      "optimizationGoal": "maximize",
+      "description": "Total estimated broadcast revenue based on fixture timing and visibility",
+      "calculation": "sum",
+      "appliesTo": "fixture",
+      "paramsSchema": {
+        "revenueModel": {
+          "type": "object",
+          "description": "Model mapping time slots to revenue values"
+        }
+      },
+      "targetRanges": null,
+      "references": {
+        "rationale": "Professional leagues are heavily revenue-driven by broadcast contracts",
+        "relatedObjectives": ["primetime_distribution", "viewership_maximization"]
+      }
+    },
+    {
+      "objectiveId": "competitive_balance",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "fairness",
+      "unit": "score",
+      "optimizationGoal": "maximize",
+      "description": "Measure of schedule fairness across all teams (rest time, travel, opponent strength distribution)",
+      "calculation": "composite",
+      "appliesTo": "team",
+      "paramsSchema": {
+        "weights": {
+          "type": "object",
+          "description": "Weights for rest_fairness, travel_fairness, opponent_fairness components"
+        }
+      },
+      "targetRanges": {
+        "ideal": 0.9,
+        "min": 0.7
+      },
+      "references": {
+        "rationale": "Ensuring no team has a systematically harder schedule than others",
+        "relatedObjectives": ["travel_balance", "rest_time_average", "home_away_balance"]
+      }
+    },
+    {
+      "objectiveId": "broadcast_coverage",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "commercial",
+      "unit": "count",
+      "optimizationGoal": "maximize",
+      "description": "Number of fixtures in broadcast windows",
+      "calculation": "count",
+      "appliesTo": "fixture",
+      "paramsSchema": {
+        "broadcast_windows": {
+          "type": "array",
+          "description": "Definition of broadcast-eligible time windows"
+        }
+      },
+      "targetRanges": null,
+      "references": {
+        "rationale": "Maximize number of games with broadcast visibility",
+        "relatedObjectives": ["broadcast_revenue", "primetime_distribution"]
+      }
+    },
+    {
+      "objectiveId": "back_to_back_games",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "player_welfare",
+      "unit": "count",
+      "optimizationGoal": "minimize",
+      "description": "Number of back-to-back game pairs (consecutive day games) across all teams",
+      "calculation": "count",
+      "appliesTo": "team",
+      "paramsSchema": {},
+      "targetRanges": {
+        "youth": { "ideal": 0, "max": 0 },
+        "amateur": { "ideal": 0, "max": 5 },
+        "pro": { "ideal": 5, "max": 20 }
+      },
+      "references": {
+        "rationale": "Player fatigue and injury risk from consecutive-day games",
+        "relatedObjectives": ["min_rest_time", "rest_time_average"]
+      }
+    },
+    {
+      "objectiveId": "weekend_game_distribution",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "commercial",
+      "unit": "percentage",
+      "optimizationGoal": "maximize",
+      "description": "Percentage of games scheduled on weekends (Saturday/Sunday)",
+      "calculation": "ratio",
+      "appliesTo": "fixture",
+      "paramsSchema": {
+        "weekend_days": {
+          "type": "array",
+          "description": "Days considered weekend (default: Saturday, Sunday)"
+        }
+      },
+      "targetRanges": {
+        "youth": { "ideal": 0.9, "max": 1.0 },
+        "amateur": { "ideal": 0.6, "max": 0.8 },
+        "pro": { "ideal": 0.5, "max": 0.7 }
+      },
+      "references": {
+        "rationale": "Fan attendance and viewership are typically higher on weekends",
+        "relatedObjectives": ["primetime_distribution", "broadcast_revenue"]
+      }
+    },
+    {
+      "objectiveId": "weekend_fixture_count",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "commercial",
+      "unit": "count",
+      "optimizationGoal": "maximize",
+      "description": "Total number of fixtures scheduled on weekends",
+      "calculation": "count",
+      "appliesTo": "fixture",
+      "paramsSchema": {},
+      "targetRanges": null,
+      "references": {
+        "rationale": "More weekend fixtures increase attendance and commercial value",
+        "relatedObjectives": ["weekend_game_distribution", "primetime_distribution"]
+      }
+    },
+    {
+      "objectiveId": "attendance",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "commercial",
+      "unit": "count",
+      "optimizationGoal": "maximize",
+      "description": "Total expected or actual attendance across all fixtures",
+      "calculation": "sum",
+      "appliesTo": "fixture",
+      "paramsSchema": {
+        "attendance_model": {
+          "type": "object",
+          "description": "Model mapping time slots and matchups to expected attendance"
+        }
+      },
+      "targetRanges": null,
+      "references": {
+        "rationale": "Ticket revenue and fan engagement are core commercial objectives",
+        "relatedObjectives": ["primetime_distribution", "weekend_game_distribution"]
+      }
+    },
+    {
+      "objectiveId": "wave_quality_score",
+      "version": "1.0.0",
+      "status": "experimental",
+      "deprecated": false,
+      "category": "environmental",
+      "unit": "score",
+      "optimizationGoal": "maximize",
+      "description": "Average wave quality score across competition days (surfing)",
+      "calculation": "average",
+      "appliesTo": "fixture",
+      "paramsSchema": {
+        "forecast_source": {
+          "type": "string",
+          "description": "Wave forecast data source"
+        }
+      },
+      "targetRanges": {
+        "ideal": 8,
+        "min": 5
+      },
+      "references": {
+        "rationale": "Competition quality depends on wave conditions in surfing",
+        "relatedObjectives": []
+      }
+    },
+    {
+      "objectiveId": "broadcast_window_alignment",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "commercial",
+      "unit": "percentage",
+      "optimizationGoal": "maximize",
+      "description": "Percentage of fixtures that fall within broadcast windows",
+      "calculation": "ratio",
+      "appliesTo": "fixture",
+      "paramsSchema": {
+        "broadcast_windows": {
+          "type": "array",
+          "description": "Broadcast window definitions"
+        }
+      },
+      "targetRanges": {
+        "ideal": 0.8,
+        "min": 0.5
+      },
+      "references": {
+        "rationale": "Aligning fixtures with broadcast windows maximizes viewership",
+        "relatedObjectives": ["broadcast_revenue", "broadcast_coverage"]
+      }
+    },
+    {
+      "objectiveId": "waiting_period_efficiency",
+      "version": "1.0.0",
+      "status": "experimental",
+      "deprecated": false,
+      "category": "efficiency",
+      "unit": "percentage",
+      "optimizationGoal": "maximize",
+      "description": "Ratio of competition days to total waiting period (weather-dependent sports)",
+      "calculation": "ratio",
+      "appliesTo": "season",
+      "paramsSchema": {},
+      "targetRanges": {
+        "ideal": 0.6,
+        "min": 0.3
+      },
+      "references": {
+        "rationale": "Minimize idle days in weather-dependent waiting period formats (surfing, cricket)",
+        "relatedObjectives": ["schedule_compactness"]
+      }
+    },
+    {
+      "objectiveId": "rest_fairness",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "fairness",
+      "unit": "hours",
+      "optimizationGoal": "minimize",
+      "description": "Standard deviation of average rest time across teams",
+      "calculation": "stddev",
+      "appliesTo": "team",
+      "paramsSchema": {},
+      "targetRanges": {
+        "ideal": 4,
+        "max": 12
+      },
+      "references": {
+        "rationale": "Ensure no team is disadvantaged by systematically shorter rest periods",
+        "relatedObjectives": ["rest_time_average", "min_rest_time", "competitive_balance"]
+      }
+    },
+    {
+      "objectiveId": "carry_over_variance",
+      "version": "1.0.0",
+      "status": "experimental",
+      "deprecated": false,
+      "category": "fairness",
+      "unit": "score",
+      "optimizationGoal": "minimize",
+      "description": "Variance in carry-over effects across teams. Measures how evenly the 'playing after strong opponent' burden is distributed.",
+      "calculation": "variance",
+      "appliesTo": "team",
+      "paramsSchema": {
+        "strengthField": {
+          "type": "string",
+          "description": "Field in team object containing strength rating for weighting"
+        },
+        "weightByStrength": {
+          "type": "boolean",
+          "description": "Whether to weight carry-over by opponent strength"
+        }
+      },
+      "targetRanges": {
+        "ideal": 0,
+        "max": 5
+      },
+      "references": {
+        "rationale": "Classic NP-hard scheduling fairness metric - measures systematic advantage/disadvantage from schedule structure",
+        "academicReferences": ["de Werra (1988)", "Russell & Urban (2006)"],
+        "relatedObjectives": ["competitive_balance", "rest_fairness"]
+      }
+    },
+    {
+      "objectiveId": "total_breaks",
+      "version": "1.0.0",
+      "status": "experimental",
+      "deprecated": false,
+      "category": "fairness",
+      "unit": "count",
+      "optimizationGoal": "minimize",
+      "description": "Total number of breaks (consecutive home or consecutive away games) across all teams",
+      "calculation": "sum",
+      "appliesTo": "team",
+      "paramsSchema": {
+        "breakDefinition": {
+          "type": "string",
+          "enum": ["consecutive_home_or_away", "any_repeat"],
+          "description": "Definition of what constitutes a break"
+        }
+      },
+      "targetRanges": {
+        "optimal": 0,
+        "typical": { "10_teams": 18, "12_teams": 22 },
+        "max": 30
+      },
+      "references": {
+        "rationale": "Breaks disrupt home/away rhythm and can create unfair advantage patterns",
+        "academicReferences": ["Trick (2001) - Schedule-Then-Break approach"],
+        "relatedObjectives": ["home_away_balance", "home_streak_length"]
+      }
+    },
+    {
+      "objectiveId": "travel_clustering",
+      "version": "1.0.0",
+      "status": "experimental",
+      "deprecated": false,
+      "category": "travel",
+      "unit": "score",
+      "optimizationGoal": "maximize",
+      "description": "Efficiency score measuring how well away games are clustered by region to reduce travel",
+      "calculation": "ratio",
+      "appliesTo": "team",
+      "paramsSchema": {
+        "regionField": {
+          "type": "string",
+          "description": "Field in team/venue object containing region identifier"
+        },
+        "optimalClusterSize": {
+          "type": "integer",
+          "description": "Target number of games per regional away trip"
+        }
+      },
+      "targetRanges": {
+        "ideal": 0.8,
+        "min": 0.5
+      },
+      "references": {
+        "rationale": "Grouped away trips reduce total travel distance and cost",
+        "useCases": ["NHL road trips", "NBA West Coast swings"],
+        "relatedObjectives": ["total_travel_distance", "max_team_travel"]
+      }
+    },
+    {
+      "objectiveId": "priority_satisfaction",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "efficiency",
+      "unit": "score",
+      "optimizationGoal": "maximize",
+      "description": "Score measuring how well team priority preferences were satisfied for venue assignments",
+      "calculation": "weighted_sum",
+      "appliesTo": "team",
+      "paramsSchema": {
+        "higherPriorityWeight": {
+          "type": "number",
+          "description": "Multiplier for higher priority team satisfaction"
+        }
+      },
+      "targetRanges": {
+        "ideal": 1.0,
+        "min": 0.7
+      },
+      "references": {
+        "rationale": "Multi-tenant venues require balancing priority claims",
+        "relatedObjectives": ["venue_utilization", "venue_balance"]
+      }
     }
   ],
   "metadata": {

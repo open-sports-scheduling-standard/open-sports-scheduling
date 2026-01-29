@@ -89,7 +89,7 @@
       "direction": "maximize"
     },
     {
-      "metric": "rest_equity",
+      "metric": "rest_fairness",
       "aggregation": "variance",
       "weight": 0.35,
       "direction": "minimize"

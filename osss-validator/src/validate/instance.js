@@ -1,5 +1,20 @@
 import { buildAjv, formatAjvErrors } from "./schema.js";
-import { loadRegistry } from "./registry.js";
+import { loadRegistry, findClosestMatches } from "./registry.js";
+
+/**
+ * Format a suggestion message for unknown identifiers
+ */
+function formatSuggestion(type, unknown, availableIds) {
+  const matches = findClosestMatches(unknown, availableIds, 3, 5);
+
+  if (matches.length === 1) {
+    return `${type} '${unknown}' not found in registry. Did you mean '${matches[0]}'?`;
+  } else if (matches.length > 1) {
+    return `${type} '${unknown}' not found in registry. Closest matches: ${matches.map(m => `'${m}'`).join(", ")}`;
+  } else {
+    return `${type} '${unknown}' not found in registry. No close matches found.`;
+  }
+}
 
 export async function validateInstance({ instance, schemasDir, registryDir }) {
   const warnings = [];
@@ -27,22 +42,34 @@ export async function validateInstance({ instance, schemasDir, registryDir }) {
 
   // Registry references for objectives + constraints if present
   if (Array.isArray(instance.objectives)) {
+    const unknownMetrics = [];
     for (const obj of instance.objectives) {
       if (!registry.objectiveIds.has(obj.metric)) {
-        warnings.push(`Objective metric not found in registry: ${obj.metric}`);
+        unknownMetrics.push(obj.metric);
+        warnings.push(formatSuggestion("Objective metric", obj.metric, registry.objectiveList));
       }
+    }
+    // List all available objectives if any were unknown
+    if (unknownMetrics.length > 0) {
+      warnings.push(`Available objective metrics: ${registry.objectiveList.join(", ")}`);
     }
   }
 
   if (Array.isArray(instance.constraints)) {
+    const unknownRules = [];
     for (const c of instance.constraints) {
       // Use rule name as registry key (your instances currently put rule == constraint id)
       if (!registry.constraintIds.has(c.rule)) {
-        warnings.push(`Constraint rule not found in registry: ${c.rule}`);
+        unknownRules.push(c.rule);
+        warnings.push(formatSuggestion("Constraint rule", c.rule, registry.constraintList));
       }
       if (c.type === "soft" && !c.penalty) {
         errors.push(`Soft constraint '${c.id}' missing penalty model`);
       }
+    }
+    // List all available constraints if any were unknown
+    if (unknownRules.length > 0) {
+      warnings.push(`Available constraint rules: ${registry.constraintList.join(", ")}`);
     }
   } else {
     warnings.push("No constraints[] found on instance (allowed, but unusual).");

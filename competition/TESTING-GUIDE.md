@@ -114,14 +114,14 @@ jq '{
 git clone https://github.com/osss/open-sports-scheduling.git
 cd open-sports-scheduling
 
-# Install dependencies
+# Install and link the validator
+cd osss-validator
 npm install
-
-# Build validator
-npm run build
+npm link
+cd ..
 
 # Test installation
-npx osss-validate --version
+osss-validate --help
 ```
 
 ### Step 2: Download Competition Instance
@@ -141,20 +141,25 @@ cp "competition/instances/${TRACK}/${INSTANCE_ID}.json" instance.json
 ./my-solver --input instance.json --output result.json
 ```
 
-### Step 4: Validate Schema
+### Step 4: Validate Instance
 
 ```bash
-# Validate result against OSSS schema
-osss-validate schema \
-  --type result \
-  --file result.json \
-  --schemas ./schemas
+# Validate instance against OSSS schema and registry
+osss-validate instance \
+  --instance instance.json \
+  --schemas ./schemas \
+  --registry ./registry
 
 # Expected output:
-# ✅ Schema validation passed
+# ✔ Instance is valid
+#
+# If a constraint or objective is misspelled, you'll see:
+# Warnings:
+# - Constraint rule 'min_rest_tim' not found in registry. Did you mean 'min_rest_time'?
+# - Available constraint rules: no_overlap_team, min_rest_time, ...
 ```
 
-### Step 5: Validate Constraints
+### Step 5: Validate Result
 
 ```bash
 # Full validation with constraint checking
@@ -162,15 +167,14 @@ osss-validate result \
   --instance instance.json \
   --result result.json \
   --schemas ./schemas \
-  --registry ./registry \
-  --verbose
+  --registry ./registry
 
 # Expected output:
-# ✅ Instance valid
-# ✅ Result valid
-# ✅ Hard constraints: 0 violations
-# ⚠️  Soft constraints: 12 violations (penalty: 245)
-# ✅ Feasible schedule
+# ✔ Result JSON is schema-valid
+# Total penalty: 245
+#
+# The validator accepts alternative result formats (schedule.fixtures,
+# scheduledFixtures) and normalizes them automatically with warnings.
 ```
 
 ### Step 6: Verify Scores (CRITICAL)
@@ -257,11 +261,11 @@ echo "📄 Instance: $INSTANCE_ID"
 
 # Test 1: Schema validation
 echo "1️⃣ Schema validation..."
-npx osss-validate schema --type result --file "$SUBMISSION" --schemas ./schemas
+osss-validate schema --type result --file "$SUBMISSION" --schemas ./schemas
 
 # Test 2: Constraint validation
 echo "2️⃣ Constraint validation..."
-npx osss-validate result \
+osss-validate result \
   --instance "$INSTANCE" \
   --result "$SUBMISSION" \
   --schemas ./schemas \
@@ -269,7 +273,7 @@ npx osss-validate result \
 
 # Test 3: Score verification
 echo "3️⃣ Score verification..."
-npx osss-validate result \
+osss-validate result \
   --instance "$INSTANCE" \
   --result "$SUBMISSION" \
   --schemas ./schemas \
@@ -651,7 +655,7 @@ echo "Improvement: ${IMPROVEMENT}%"
 - [GitHub Setup Guide](./GITHUB-SETUP.md)
 
 ### Testing Tools
-- **OSSS Validator**: `npx osss-validate --help`
+- **OSSS Validator**: `osss-validate --help`
 - **Conformance Tests**: See `conformance/README.md`
 - **Example Submissions**: See `examples/submissions/`
 

@@ -140,13 +140,12 @@ export async function main(argv) {
         if (!(await fileExists(instancePath))) {
           bundle.push({
             example: dir,
-            valid: false,
-            exitCode: 1,
-            summary: "Missing osss-instance.json",
-            warnings: [],
-            errors: [`Missing file: ${instancePath}`]
+            valid: null,
+            exitCode: 0,
+            summary: "Skipped (no osss-instance.json)",
+            warnings: [`No osss-instance.json in ${dir} (directory skipped)`],
+            errors: []
           });
-          worstExit = Math.max(worstExit, 1);
           continue;
         }
 

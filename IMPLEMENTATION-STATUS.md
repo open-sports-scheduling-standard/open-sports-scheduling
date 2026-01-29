@@ -2,7 +2,7 @@
 
 This document tracks the implementation progress of the OSSS roadmap for maximum extensibility and adoption.
 
-**Last Updated**: 2025-01-01
+**Last Updated**: 2026-01-27
 **Status**: Phases 1-5 Complete (Universal Adoption Ready)
 
 ---
@@ -47,12 +47,14 @@ Added CLI commands:
 **Location**: `registry/constraints.json` (v2.0.0)
 
 Enhanced constraint registry with:
+- 27 constraint rules across 9 categories (feasibility, time, venue, travel, fairness, broadcast, environmental, special, esports)
 - Parameter schemas (JSON Schema validation)
 - Selector support definitions (teams, venues, fixtures, phases)
 - Units and recommended ranges by league type
 - Default penalty models (linear, quadratic, exponential, flat)
 - References, rationale, and use cases
 - Related rules cross-references
+- Sport-specific constraints: weather_conditions, tide_conditions, wave_quality, roofed_venue_priority
 
 **Impact**: Vendors and researchers can implement constraints consistently with clear contracts.
 
@@ -129,13 +131,16 @@ Implemented comprehensive venue system:
 **Location**: `schemas/osss-objectives.schema.json` (v2), `registry/objectives.json` (v2.0.0), `specs/objectives-framework.md`
 
 Enhanced objectives system with:
-- **13 standard objectives** across categories:
+- **30 standard objectives** across categories:
   - Travel: total_travel_distance, max_team_travel, travel_balance
-  - Fairness: home_away_balance, home_streak_length, primetime_distribution
-  - Player welfare: rest_time_average, min_rest_time
-  - Efficiency: venue_utilization, venue_balance, schedule_compactness
+  - Fairness: home_away_balance, home_streak_length, competitive_balance, rest_fairness
+  - Player welfare: rest_time_average, min_rest_time, back_to_back_games
+  - Commercial: primetime_distribution, broadcast_revenue, broadcast_coverage, broadcast_window_alignment, weekend_game_distribution, weekend_fixture_count, attendance
+  - Efficiency: venue_utilization, venue_balance, schedule_compactness, waiting_period_efficiency
   - Quality: opponent_variety
   - Operational: schedule_stability
+  - Environmental: wave_quality_score
+  - Esports: regional_fairness, server_latency_balance, viewership_maximization, regional_primetime_coverage, mental_fatigue_index, cross_region_balance
 
 - **Aggregation modes**:
   - weighted_sum (default)
@@ -650,14 +655,16 @@ Future enhancements (optional, based on community needs):
 - **Profiles Created**: 4 (baseline, youth, amateur, pro)
 - **CLI Commands**: 6 (init, add, doctor, explain, fix-scores, conformance)
 - **Conformance Tests**: 8 (4 must-pass, 4 must-fail)
-- **Constraints Enhanced**: 10 (with semantic contracts)
-- **Objectives Defined**: 13 (with target ranges)
+- **Constraints Defined**: 27 (with semantic contracts, across 9 categories)
+- **Objectives Defined**: 30 (with target ranges, across 9 categories)
 - **SDK Functions**: 20+ (helpers for rule authoring)
+- **Smart Suggestions**: Fuzzy matching for constraint/objective typos ("Did you mean X?")
+- **Result Normalization**: Accepts `schedule.fixtures`, `scheduledFixtures`, `score` alternative formats
 
 ### Phase 2 (Real-World Modeling)
 - **Selector DSL v2**: Boolean logic + temporal scoping
 - **Venue Resources**: Multi-resource support with availability
-- **Objectives Framework**: 13 standard objectives, 5 aggregation modes
+- **Objectives Framework**: 30 standard objectives, 5 aggregation modes
 - **Attestation System**: 4 hash types, cryptographic verification
 
 ### Phase 3 (Competition & Ecosystem)

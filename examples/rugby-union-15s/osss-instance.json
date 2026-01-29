@@ -175,7 +175,7 @@
       "direction": "maximize"
     },
     {
-      "metric": "rest_time_fairness",
+      "metric": "rest_fairness",
       "aggregation": "variance",
       "weight": 0.2,
       "direction": "minimize"

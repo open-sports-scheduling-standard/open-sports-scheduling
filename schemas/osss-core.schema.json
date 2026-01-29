@@ -20,8 +20,24 @@
       "type": "object",
       "required": ["start", "end"],
       "properties": {
-        "start": { "type": "string", "format": "date-time" },
-        "end": { "type": "string", "format": "date-time" }
+        "start": { "type": "string", "description": "Season start date (YYYY-MM-DD or ISO 8601)" },
+        "end": { "type": "string", "description": "Season end date (YYYY-MM-DD or ISO 8601)" },
+        "phases": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "name"],
+            "properties": {
+              "id": { "type": "string" },
+              "name": { "type": "string" },
+              "startDate": { "type": "string" },
+              "endDate": { "type": "string" },
+              "description": { "type": "string" },
+              "rounds": { "type": "integer" },
+              "dynamic": { "type": "boolean" }
+            }
+          }
+        }
       }
     },
     "entities": {
@@ -45,6 +61,11 @@
     "fixtures": {
       "type": "array",
       "items": { "$ref": "#/$defs/fixture" }
+    },
+    "defaultFixtureDuration": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Default duration in minutes for fixtures that don't specify durationMinutes"
     }
   },
 
@@ -108,19 +129,49 @@
 
     "fixture": {
       "type": "object",
-      "required": ["id", "participants", "durationMinutes"],
+      "required": ["id", "participants"],
       "properties": {
         "id": { "type": "string" },
         "participants": {
           "type": "array",
           "minItems": 2,
-          "items": { "type": "string" }
+          "items": {
+            "oneOf": [
+              { "type": "string" },
+              {
+                "type": "object",
+                "required": ["id"],
+                "properties": {
+                  "id": { "type": "string" },
+                  "role": { "type": "string", "enum": ["home", "away", "neutral", "participant"] }
+                }
+              }
+            ]
+          }
         },
         "durationMinutes": {
           "type": "integer",
-          "minimum": 1
+          "minimum": 1,
+          "description": "Duration in minutes. Optional if defaultFixtureDuration is set at root level."
         },
         "competitionPhase": { "type": "string" },
+        "round": { "oneOf": [{ "type": "integer", "minimum": 1 }, { "type": "string" }] },
+        "phase": { "type": "string" },
+        "group": { "type": "string" },
+        "conditional": {
+          "oneOf": [
+            { "type": "boolean" },
+            {
+              "type": "object",
+              "properties": {
+                "type": { "type": "string" },
+                "group": { "type": "string" },
+                "condition": { "type": "string" }
+              }
+            }
+          ],
+          "description": "Whether fixture is conditional (boolean) or condition details (object)"
+        },
         "locked": { "type": "boolean", "default": false }
       }
     }

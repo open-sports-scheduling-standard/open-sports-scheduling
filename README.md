@@ -96,14 +96,60 @@ See: [`ODDD-CHARTER.md`](./OSSS-CHARTER.md)
 
 ## Repository structure
 
-This repository contains the OSSS specifications, schemas, and registries.
+```
+open-sports-scheduling/
+  schemas/                    JSON schemas (osss-core, results, constraints, objectives, etc.)
+  registry/
+    constraints.json          Canonical constraint rules (27 rules, v2.1.0)
+    objectives.json           Canonical objective metrics (30 metrics, v2.1.0)
+  examples/
+    youth-league/             Minimal 2-team example
+    amateur-league/           3-team regional league
+    pro-league/               Full-featured professional league
+    esports-tournament/       Esports with latency/server constraints
+    american-football/        NFL-style scheduling
+    basketball-5on5/          EuroLeague-style
+    cricket-t20/              IPL-style T20 league
+    ice-hockey/               NHL-style dense schedule
+    rugby-union-15s/          Six Nations-style
+    surfing/                  Weather-dependent waiting period format
+    tennis-singles/           Multi-court tournament
+    volleyball-indoor/        Indoor league
+  osss-validator/             Reference validator CLI (see osss-validator/README.md)
+  profiles/                   Constraint profiles (baseline, youth, amateur, pro)
+  conformance/                Must-pass / must-fail conformance tests
+  competition/                OSSS Scheduling Challenge framework
+  specs/                      Technical specifications
+  procurement/                Enterprise procurement resources
+```
 
+## Quick start
+
+```bash
+cd osss-validator && npm install && npm link
+cd ..
+
+# Validate an instance
+osss-validate instance \
+  --instance ./examples/youth-league/osss-instance.json \
+  --schemas ./schemas \
+  --registry ./registry
+
+# Validate all examples
+osss-validate bundle \
+  --examples ./examples \
+  --schemas ./schemas \
+  --registry ./registry
+```
+
+See [`osss-validator/README.md`](./osss-validator/README.md) for full CLI documentation.
 
 ---
 
 ## Status
 
-- Version: **v0.1 (Draft)**
+- Version: **v0.2**
+- Phases 1-5 complete (see [IMPLEMENTATION-STATUS.md](./IMPLEMENTATION-STATUS.md))
 - Public review phase
 - Founding Stewards being appointed
 

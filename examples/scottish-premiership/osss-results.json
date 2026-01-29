@@ -1,0 +1,406 @@
+{
+  "feasible": true,
+  "instanceId": "scottish-premiership-2025-26",
+  "solverMetadata": {
+    "name": "OSSS-SplitSeasonSolver",
+    "version": "1.0.0",
+    "algorithmClass": "CP-SAT",
+    "runtime": 45.2,
+    "timestamp": "2025-07-01T10:00:00Z"
+  },
+  "assignments": [
+    {
+      "fixtureId": "r01-celtic-aberdeen",
+      "startTime": "2025-08-02T15:00:00+01:00",
+      "endTime": "2025-08-02T16:45:00+01:00",
+      "venueId": "celtic-park"
+    },
+    {
+      "fixtureId": "r01-rangers-hearts",
+      "startTime": "2025-08-02T15:00:00+01:00",
+      "endTime": "2025-08-02T16:45:00+01:00",
+      "venueId": "ibrox"
+    },
+    {
+      "fixtureId": "r01-hibernian-dundee-utd",
+      "startTime": "2025-08-02T15:00:00+01:00",
+      "endTime": "2025-08-02T16:45:00+01:00",
+      "venueId": "easter-road"
+    },
+    {
+      "fixtureId": "r01-st-mirren-kilmarnock",
+      "startTime": "2025-08-02T15:00:00+01:00",
+      "endTime": "2025-08-02T16:45:00+01:00",
+      "venueId": "smisa-stadium"
+    },
+    {
+      "fixtureId": "r01-ross-county-motherwell",
+      "startTime": "2025-08-02T15:00:00+01:00",
+      "endTime": "2025-08-02T16:45:00+01:00",
+      "venueId": "global-energy-stadium"
+    },
+    {
+      "fixtureId": "r01-livingston-st-johnstone",
+      "startTime": "2025-08-02T15:00:00+01:00",
+      "endTime": "2025-08-02T16:45:00+01:00",
+      "venueId": "tony-macaroni-arena"
+    },
+    {
+      "fixtureId": "r02-aberdeen-rangers",
+      "startTime": "2025-08-09T15:00:00+01:00",
+      "endTime": "2025-08-09T16:45:00+01:00",
+      "venueId": "pittodrie"
+    },
+    {
+      "fixtureId": "r02-hearts-celtic",
+      "startTime": "2025-08-09T12:30:00+01:00",
+      "endTime": "2025-08-09T14:15:00+01:00",
+      "venueId": "tynecastle"
+    },
+    {
+      "fixtureId": "r02-dundee-utd-st-mirren",
+      "startTime": "2025-08-09T15:00:00+01:00",
+      "endTime": "2025-08-09T16:45:00+01:00",
+      "venueId": "tannadice"
+    },
+    {
+      "fixtureId": "r02-kilmarnock-hibernian",
+      "startTime": "2025-08-09T15:00:00+01:00",
+      "endTime": "2025-08-09T16:45:00+01:00",
+      "venueId": "rugby-park"
+    },
+    {
+      "fixtureId": "r02-motherwell-livingston",
+      "startTime": "2025-08-09T15:00:00+01:00",
+      "endTime": "2025-08-09T16:45:00+01:00",
+      "venueId": "fir-park"
+    },
+    {
+      "fixtureId": "r02-st-johnstone-ross-county",
+      "startTime": "2025-08-09T15:00:00+01:00",
+      "endTime": "2025-08-09T16:45:00+01:00",
+      "venueId": "mcdiarmid-park"
+    },
+    {
+      "fixtureId": "r03-celtic-rangers",
+      "startTime": "2025-08-16T12:30:00+01:00",
+      "endTime": "2025-08-16T14:15:00+01:00",
+      "venueId": "celtic-park",
+      "notes": "First Old Firm derby of the season - early TV kickoff"
+    },
+    {
+      "fixtureId": "r03-aberdeen-hearts",
+      "startTime": "2025-08-16T15:00:00+01:00",
+      "endTime": "2025-08-16T16:45:00+01:00",
+      "venueId": "pittodrie"
+    },
+    {
+      "fixtureId": "r03-hibernian-st-mirren",
+      "startTime": "2025-08-16T15:00:00+01:00",
+      "endTime": "2025-08-16T16:45:00+01:00",
+      "venueId": "easter-road"
+    },
+    {
+      "fixtureId": "r03-dundee-utd-kilmarnock",
+      "startTime": "2025-08-16T15:00:00+01:00",
+      "endTime": "2025-08-16T16:45:00+01:00",
+      "venueId": "tannadice"
+    },
+    {
+      "fixtureId": "r03-ross-county-livingston",
+      "startTime": "2025-08-16T15:00:00+01:00",
+      "endTime": "2025-08-16T16:45:00+01:00",
+      "venueId": "global-energy-stadium"
+    },
+    {
+      "fixtureId": "r03-motherwell-st-johnstone",
+      "startTime": "2025-08-16T15:00:00+01:00",
+      "endTime": "2025-08-16T16:45:00+01:00",
+      "venueId": "fir-park"
+    },
+    {
+      "fixtureId": "r04-rangers-celtic",
+      "startTime": "2025-08-23T12:30:00+01:00",
+      "endTime": "2025-08-23T14:15:00+01:00",
+      "venueId": "ibrox",
+      "notes": "Second Old Firm derby - at Ibrox"
+    },
+    {
+      "fixtureId": "r04-hearts-hibernian",
+      "startTime": "2025-08-23T17:30:00+01:00",
+      "endTime": "2025-08-23T19:15:00+01:00",
+      "venueId": "tynecastle",
+      "notes": "Edinburgh Derby - evening TV"
+    },
+    {
+      "fixtureId": "r04-st-mirren-aberdeen",
+      "startTime": "2025-08-23T15:00:00+01:00",
+      "endTime": "2025-08-23T16:45:00+01:00",
+      "venueId": "smisa-stadium"
+    },
+    {
+      "fixtureId": "r04-kilmarnock-ross-county",
+      "startTime": "2025-08-23T15:00:00+01:00",
+      "endTime": "2025-08-23T16:45:00+01:00",
+      "venueId": "rugby-park"
+    },
+    {
+      "fixtureId": "r04-livingston-dundee-utd",
+      "startTime": "2025-08-23T15:00:00+01:00",
+      "endTime": "2025-08-23T16:45:00+01:00",
+      "venueId": "tony-macaroni-arena"
+    },
+    {
+      "fixtureId": "r04-st-johnstone-motherwell",
+      "startTime": "2025-08-23T15:00:00+01:00",
+      "endTime": "2025-08-23T16:45:00+01:00",
+      "venueId": "mcdiarmid-park"
+    },
+    {
+      "fixtureId": "r05-celtic-hibernian",
+      "startTime": "2025-08-30T15:00:00+01:00",
+      "endTime": "2025-08-30T16:45:00+01:00",
+      "venueId": "celtic-park"
+    },
+    {
+      "fixtureId": "r05-rangers-dundee-utd",
+      "startTime": "2025-08-30T15:00:00+01:00",
+      "endTime": "2025-08-30T16:45:00+01:00",
+      "venueId": "ibrox"
+    },
+    {
+      "fixtureId": "r05-aberdeen-kilmarnock",
+      "startTime": "2025-08-30T15:00:00+01:00",
+      "endTime": "2025-08-30T16:45:00+01:00",
+      "venueId": "pittodrie"
+    },
+    {
+      "fixtureId": "r05-hearts-st-mirren",
+      "startTime": "2025-08-30T15:00:00+01:00",
+      "endTime": "2025-08-30T16:45:00+01:00",
+      "venueId": "tynecastle"
+    },
+    {
+      "fixtureId": "r05-ross-county-st-johnstone",
+      "startTime": "2025-08-30T15:00:00+01:00",
+      "endTime": "2025-08-30T16:45:00+01:00",
+      "venueId": "global-energy-stadium"
+    },
+    {
+      "fixtureId": "r05-motherwell-livingston",
+      "startTime": "2025-08-30T15:00:00+01:00",
+      "endTime": "2025-08-30T16:45:00+01:00",
+      "venueId": "fir-park"
+    },
+    {
+      "fixtureId": "r06-hibernian-hearts",
+      "startTime": "2025-09-13T12:30:00+01:00",
+      "endTime": "2025-09-13T14:15:00+01:00",
+      "venueId": "easter-road",
+      "notes": "Edinburgh Derby - at Easter Road"
+    },
+    {
+      "fixtureId": "r06-dundee-utd-celtic",
+      "startTime": "2025-09-13T15:00:00+01:00",
+      "endTime": "2025-09-13T16:45:00+01:00",
+      "venueId": "tannadice"
+    },
+    {
+      "fixtureId": "r06-st-mirren-rangers",
+      "startTime": "2025-09-13T15:00:00+01:00",
+      "endTime": "2025-09-13T16:45:00+01:00",
+      "venueId": "smisa-stadium"
+    },
+    {
+      "fixtureId": "r06-kilmarnock-motherwell",
+      "startTime": "2025-09-13T15:00:00+01:00",
+      "endTime": "2025-09-13T16:45:00+01:00",
+      "venueId": "rugby-park"
+    },
+    {
+      "fixtureId": "r06-livingston-aberdeen",
+      "startTime": "2025-09-13T15:00:00+01:00",
+      "endTime": "2025-09-13T16:45:00+01:00",
+      "venueId": "tony-macaroni-arena"
+    },
+    {
+      "fixtureId": "r06-st-johnstone-dundee-utd",
+      "startTime": "2025-09-13T15:00:00+01:00",
+      "endTime": "2025-09-13T16:45:00+01:00",
+      "venueId": "mcdiarmid-park"
+    },
+    {
+      "fixtureId": "split-top-a",
+      "startTime": "2026-04-11T12:30:00+01:00",
+      "endTime": "2026-04-11T14:15:00+01:00",
+      "venueId": "celtic-park",
+      "notes": "Split fixture - Old Firm (4th meeting of season, conditional on both teams in top 6)"
+    },
+    {
+      "fixtureId": "split-top-b",
+      "startTime": "2026-04-18T15:00:00+01:00",
+      "endTime": "2026-04-18T16:45:00+01:00",
+      "venueId": "pittodrie",
+      "notes": "Split fixture - conditional on both teams in top 6"
+    },
+    {
+      "fixtureId": "split-top-c",
+      "startTime": "2026-04-25T15:00:00+01:00",
+      "endTime": "2026-04-25T16:45:00+01:00",
+      "venueId": "tynecastle",
+      "notes": "Split fixture - conditional on both teams in top 6"
+    },
+    {
+      "fixtureId": "split-top-d",
+      "startTime": "2026-04-11T15:00:00+01:00",
+      "endTime": "2026-04-11T16:45:00+01:00",
+      "venueId": "pittodrie",
+      "notes": "Split fixture - conditional on both teams in top 6"
+    },
+    {
+      "fixtureId": "split-top-e",
+      "startTime": "2026-04-18T15:00:00+01:00",
+      "endTime": "2026-04-18T16:45:00+01:00",
+      "venueId": "ibrox",
+      "notes": "Split fixture - conditional on both teams in top 6"
+    },
+    {
+      "fixtureId": "split-top-f",
+      "startTime": "2026-04-25T15:00:00+01:00",
+      "endTime": "2026-04-25T16:45:00+01:00",
+      "venueId": "pittodrie",
+      "notes": "Split fixture - conditional on both teams in top 6"
+    },
+    {
+      "fixtureId": "split-bottom-a",
+      "startTime": "2026-04-11T15:00:00+01:00",
+      "endTime": "2026-04-11T16:45:00+01:00",
+      "venueId": "global-energy-stadium",
+      "notes": "Split fixture - relegation battle"
+    },
+    {
+      "fixtureId": "split-bottom-b",
+      "startTime": "2026-04-18T15:00:00+01:00",
+      "endTime": "2026-04-18T16:45:00+01:00",
+      "venueId": "global-energy-stadium",
+      "notes": "Split fixture - relegation battle"
+    },
+    {
+      "fixtureId": "split-bottom-c",
+      "startTime": "2026-04-25T15:00:00+01:00",
+      "endTime": "2026-04-25T16:45:00+01:00",
+      "venueId": "tony-macaroni-arena",
+      "notes": "Split fixture - relegation battle"
+    }
+  ],
+  "scores": {
+    "totalPenalty": 85,
+    "byConstraint": [
+      {
+        "constraintId": "no-team-overlap",
+        "violations": 0,
+        "penalty": 0,
+        "explanation": "No team has overlapping fixtures"
+      },
+      {
+        "constraintId": "no-venue-overlap",
+        "violations": 0,
+        "penalty": 0,
+        "explanation": "No venue has overlapping fixtures"
+      },
+      {
+        "constraintId": "min-rest-4-days",
+        "violations": 0,
+        "penalty": 0,
+        "explanation": "All teams have minimum 96 hours rest between matches"
+      },
+      {
+        "constraintId": "home-away-asymmetry",
+        "violations": 2,
+        "penalty": 10,
+        "explanation": "Ross County and Livingston each have 5-game imbalance (within tolerance)"
+      },
+      {
+        "constraintId": "max-consecutive-away",
+        "violations": 1,
+        "penalty": 40,
+        "explanation": "Ross County has 4 consecutive away games in October (1 over limit, doubled penalty)"
+      },
+      {
+        "constraintId": "max-consecutive-home",
+        "violations": 0,
+        "penalty": 0,
+        "explanation": "No team exceeds 3 consecutive home games"
+      },
+      {
+        "constraintId": "derby-spacing",
+        "violations": 1,
+        "penalty": 15,
+        "explanation": "Edinburgh Derby rematches 5 weeks apart (1 week short of ideal)"
+      },
+      {
+        "constraintId": "broadcast-window-saturday",
+        "violations": 0,
+        "penalty": 0,
+        "explanation": "All Old Firm matches scheduled Saturday 12:30"
+      },
+      {
+        "constraintId": "highlands-travel",
+        "violations": 2,
+        "penalty": 20,
+        "explanation": "Ross County has two matches with only 5-day rest after long away trips"
+      }
+    ],
+    "byObjective": [
+      {
+        "objectiveId": "home_away_balance",
+        "value": 5,
+        "unit": "games",
+        "explanation": "Worst home/away imbalance is 5 games (Ross County: 14H/19A)"
+      },
+      {
+        "objectiveId": "total_travel_distance",
+        "value": 45280,
+        "unit": "km",
+        "explanation": "Total travel distance for all teams"
+      },
+      {
+        "objectiveId": "rest_fairness",
+        "value": 8.2,
+        "unit": "hours",
+        "explanation": "Standard deviation of average rest time across teams"
+      },
+      {
+        "objectiveId": "broadcast_coverage",
+        "value": 24,
+        "unit": "matches",
+        "explanation": "24 matches scheduled in premium broadcast windows"
+      },
+      {
+        "objectiveId": "competitive_balance",
+        "value": 0.82,
+        "unit": "score",
+        "explanation": "Overall schedule fairness score"
+      }
+    ]
+  },
+  "splitOutcome": {
+    "note": "Split group assignments shown below are hypothetical based on projected standings",
+    "splitRound": 33,
+    "groups": {
+      "top-6": ["celtic", "rangers", "aberdeen", "hearts", "hibernian", "dundee-utd"],
+      "bottom-6": ["st-mirren", "kilmarnock", "ross-county", "motherwell", "livingston", "st-johnstone"]
+    },
+    "conditionalFixturesActivated": {
+      "split-top-a": true,
+      "split-top-b": true,
+      "split-top-c": true,
+      "split-top-d": true,
+      "split-top-e": true,
+      "split-top-f": true,
+      "split-bottom-a": true,
+      "split-bottom-b": true,
+      "split-bottom-c": true
+    }
+  }
+}

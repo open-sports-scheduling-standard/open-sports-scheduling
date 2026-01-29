@@ -651,6 +651,1360 @@
         "useCases": ["International esports competitions", "Cross-region leagues"],
         "note": "Experimental: server location assignment may be handled at different layer than scheduling"
       }
+    },
+    {
+      "ruleId": "time_window",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "time",
+      "appliesTo": "fixture",
+      "type": "hard_or_soft",
+      "description": "Fixtures must occur within specified time windows (days of week, times of day)",
+      "paramsSchema": {
+        "type": "object",
+        "properties": {
+          "allowed_days": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "List of allowed days (e.g., Saturday, Sunday)"
+          },
+          "allowed_hours": {
+            "type": "object",
+            "properties": {
+              "start": { "type": "string", "pattern": "^([0-1][0-9]|2[0-3]):[0-5][0-9]$" },
+              "end": { "type": "string", "pattern": "^([0-1][0-9]|2[0-3]):[0-5][0-9]$" }
+            },
+            "description": "Allowed time range (e.g., {start: '09:00', end: '21:00'})"
+          }
+        }
+      },
+      "selectorSupport": {
+        "teams": true,
+        "venues": true,
+        "fixtures": true,
+        "phases": true
+      },
+      "units": null,
+      "recommendedRanges": {
+        "examples": {
+          "weekends_only": { "allowed_days": ["Saturday", "Sunday"] },
+          "school_hours": { "allowed_hours": { "start": "15:00", "end": "20:00" } }
+        }
+      },
+      "defaultPenaltyModel": {
+        "type": "flat",
+        "perViolation": 100,
+        "description": "Flat penalty for each fixture outside allowed windows"
+      },
+      "references": {
+        "rationale": "Youth leagues often restricted to weekends, broadcast schedules require specific times",
+        "standardCompliance": ["OSSS-TIME-003"],
+        "useCases": ["Youth leagues (weekend only)", "Broadcast requirements", "Venue operational hours"]
+      }
+    },
+    {
+      "ruleId": "max_consecutive_away",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "fairness",
+      "appliesTo": "team",
+      "type": "hard_or_soft",
+      "description": "Limit the maximum number of consecutive away games for a team",
+      "paramsSchema": {
+        "type": "object",
+        "required": ["max_away"],
+        "properties": {
+          "max_away": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Maximum consecutive away games allowed"
+          }
+        }
+      },
+      "selectorSupport": {
+        "teams": true,
+        "venues": false,
+        "fixtures": false,
+        "phases": true
+      },
+      "units": {
+        "max_away": "games"
+      },
+      "recommendedRanges": {
+        "max_away": {
+          "youth": [2, 3],
+          "amateur": [3, 4],
+          "pro": [4, 6]
+        }
+      },
+      "defaultPenaltyModel": {
+        "type": "exponential",
+        "perViolation": 25,
+        "multiplier": 2,
+        "description": "Penalty doubles for each game beyond maximum"
+      },
+      "references": {
+        "rationale": "Player fatigue, fan engagement (want home games), travel costs",
+        "standardCompliance": ["OSSS-FAIRNESS-003"],
+        "useCases": ["All leagues - fan engagement and travel cost management"],
+        "relatedRules": ["home_away_balance"]
+      }
+    },
+    {
+      "ruleId": "max_consecutive_home",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "fairness",
+      "appliesTo": "team",
+      "type": "soft",
+      "description": "Limit the maximum number of consecutive home games for a team",
+      "paramsSchema": {
+        "type": "object",
+        "required": ["max_home"],
+        "properties": {
+          "max_home": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Maximum consecutive home games allowed"
+          }
+        }
+      },
+      "selectorSupport": {
+        "teams": true,
+        "venues": false,
+        "fixtures": false,
+        "phases": true
+      },
+      "units": {
+        "max_home": "games"
+      },
+      "recommendedRanges": {
+        "max_home": {
+          "youth": [3, 4],
+          "amateur": [4, 5],
+          "pro": [4, 6]
+        }
+      },
+      "defaultPenaltyModel": {
+        "type": "linear",
+        "perViolation": 15,
+        "description": "Linear penalty for each game beyond maximum"
+      },
+      "references": {
+        "rationale": "Competitive fairness - too many home games in a row can be unfair advantage",
+        "standardCompliance": ["OSSS-FAIRNESS-004"],
+        "useCases": ["Leagues requiring balanced schedules"],
+        "relatedRules": ["home_away_balance", "max_consecutive_away"]
+      }
+    },
+    {
+      "ruleId": "buffer_time",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "venue",
+      "appliesTo": "venue",
+      "type": "hard",
+      "description": "Minimum buffer time between fixtures at the same venue for setup/cleanup",
+      "paramsSchema": {
+        "type": "object",
+        "required": ["min_minutes"],
+        "properties": {
+          "min_minutes": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Minimum buffer time in minutes between fixtures"
+          }
+        }
+      },
+      "selectorSupport": {
+        "teams": false,
+        "venues": true,
+        "fixtures": false,
+        "phases": false
+      },
+      "units": {
+        "min_minutes": "minutes"
+      },
+      "recommendedRanges": {
+        "min_minutes": {
+          "indoor": [30, 60],
+          "outdoor": [15, 30],
+          "stadium": [60, 120]
+        }
+      },
+      "defaultPenaltyModel": null,
+      "references": {
+        "rationale": "Operational necessity - venues need time for cleanup, setup, fan exit/entry",
+        "standardCompliance": ["OSSS-VENUE-002"],
+        "useCases": ["Multi-game venue days", "Tournament venues", "Shared facilities"],
+        "relatedRules": ["no_overlap_venue_resource"]
+      }
+    },
+    {
+      "ruleId": "specific_date_fixture",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "special",
+      "appliesTo": "fixture",
+      "type": "hard",
+      "description": "Specific fixtures must occur on designated dates (e.g., rivalry games, holidays)",
+      "paramsSchema": {
+        "type": "object",
+        "required": ["fixture_id", "date"],
+        "properties": {
+          "fixture_id": {
+            "type": "string",
+            "description": "ID of the fixture that must be on specific date"
+          },
+          "date": {
+            "type": "string",
+            "format": "date",
+            "description": "Required date for the fixture (YYYY-MM-DD)"
+          },
+          "time_window": {
+            "type": "object",
+            "properties": {
+              "start": { "type": "string" },
+              "end": { "type": "string" }
+            },
+            "description": "Optional time window within the date"
+          }
+        }
+      },
+      "selectorSupport": {
+        "teams": false,
+        "venues": false,
+        "fixtures": true,
+        "phases": false
+      },
+      "units": null,
+      "recommendedRanges": null,
+      "defaultPenaltyModel": null,
+      "references": {
+        "rationale": "Broadcast contracts, traditions, holidays often require specific dates",
+        "standardCompliance": ["OSSS-SPECIAL-001"],
+        "useCases": ["Thanksgiving games (NFL)", "Boxing Day (EPL)", "Rivalry weekends", "Season openers/closers"],
+        "note": "Often contractually mandated - typically hard constraint"
+      }
+    },
+    {
+      "ruleId": "back_to_back_games",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "time",
+      "appliesTo": "team",
+      "type": "hard_or_soft",
+      "description": "Limit or prevent teams from playing on consecutive days",
+      "paramsSchema": {
+        "type": "object",
+        "properties": {
+          "max_consecutive_days": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Maximum number of consecutive days a team can play"
+          },
+          "allow_back_to_back": {
+            "type": "boolean",
+            "description": "Whether back-to-back games are allowed at all"
+          }
+        }
+      },
+      "selectorSupport": {
+        "teams": true,
+        "venues": false,
+        "fixtures": false,
+        "phases": true
+      },
+      "units": {
+        "max_consecutive_days": "days"
+      },
+      "recommendedRanges": {
+        "max_consecutive_days": {
+          "youth": [1, 1],
+          "amateur": [1, 2],
+          "pro": [2, 4]
+        }
+      },
+      "defaultPenaltyModel": {
+        "type": "exponential",
+        "perViolation": 30,
+        "multiplier": 2,
+        "description": "Penalty doubles for each additional back-to-back day"
+      },
+      "references": {
+        "rationale": "Player fatigue and injury risk, especially in physical sports",
+        "standardCompliance": ["OSSS-TIME-004"],
+        "useCases": ["Ice hockey", "Basketball", "Any league with frequent games"],
+        "relatedRules": ["min_rest_time", "max_games_per_day"]
+      }
+    },
+    {
+      "ruleId": "max_games_in_period",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "time",
+      "appliesTo": "team",
+      "type": "hard_or_soft",
+      "description": "Maximum games a team can play within a given time period (e.g., per week)",
+      "paramsSchema": {
+        "type": "object",
+        "required": ["max_games", "period_days"],
+        "properties": {
+          "max_games": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Maximum games allowed in the period"
+          },
+          "period_days": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Length of the period in days (e.g., 7 for weekly)"
+          }
+        }
+      },
+      "selectorSupport": {
+        "teams": true,
+        "venues": false,
+        "fixtures": false,
+        "phases": true
+      },
+      "units": {
+        "max_games": "games",
+        "period_days": "days"
+      },
+      "recommendedRanges": {
+        "max_games_per_week": {
+          "youth": [1, 2],
+          "amateur": [2, 3],
+          "pro": [3, 5]
+        }
+      },
+      "defaultPenaltyModel": {
+        "type": "exponential",
+        "perViolation": 40,
+        "multiplier": 2,
+        "description": "Penalty doubles for each game over the limit"
+      },
+      "references": {
+        "rationale": "Player welfare and competitive integrity over longer periods",
+        "standardCompliance": ["OSSS-TIME-005"],
+        "useCases": ["Dense schedules like ice hockey or basketball", "Tournament group stages"],
+        "relatedRules": ["max_games_per_day", "min_rest_time"]
+      }
+    },
+    {
+      "ruleId": "venue_assignment",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "venue",
+      "appliesTo": "fixture",
+      "type": "hard_or_soft",
+      "description": "Assign fixtures to specific venues based on capacity, surface, or other requirements",
+      "paramsSchema": {
+        "type": "object",
+        "properties": {
+          "preferred_venues": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Ordered list of preferred venue IDs"
+          },
+          "required_features": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Required venue features (e.g., 'indoor', 'clay', 'capacity>5000')"
+          }
+        }
+      },
+      "selectorSupport": {
+        "teams": true,
+        "venues": true,
+        "fixtures": true,
+        "phases": true
+      },
+      "units": null,
+      "recommendedRanges": null,
+      "defaultPenaltyModel": {
+        "type": "linear",
+        "perViolation": 20,
+        "description": "Penalty for assignment to non-preferred venue"
+      },
+      "references": {
+        "rationale": "Tournament scheduling often requires specific venue assignments",
+        "standardCompliance": ["OSSS-VENUE-003"],
+        "useCases": ["Tennis (court assignment)", "Multi-venue tournaments", "Volleyball (court type)"],
+        "relatedRules": ["venue_availability"]
+      }
+    },
+    {
+      "ruleId": "preferred_venue",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "venue",
+      "appliesTo": "fixture",
+      "type": "soft",
+      "description": "Preference for scheduling fixtures at specific venues",
+      "paramsSchema": {
+        "type": "object",
+        "properties": {
+          "venue_id": {
+            "type": "string",
+            "description": "Preferred venue ID"
+          },
+          "preference_weight": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Strength of preference (0-1)"
+          }
+        }
+      },
+      "selectorSupport": {
+        "teams": true,
+        "venues": true,
+        "fixtures": true,
+        "phases": true
+      },
+      "units": null,
+      "recommendedRanges": null,
+      "defaultPenaltyModel": {
+        "type": "linear",
+        "perViolation": 15,
+        "description": "Penalty for not using preferred venue"
+      },
+      "references": {
+        "rationale": "Home ground advantage, fan accessibility, operational efficiency",
+        "standardCompliance": ["OSSS-VENUE-004"],
+        "useCases": ["Teams with preferred home venues", "Shared venue scheduling"],
+        "relatedRules": ["venue_assignment", "venue_availability"]
+      }
+    },
+    {
+      "ruleId": "weather_conditions",
+      "version": "1.0.0",
+      "status": "experimental",
+      "deprecated": false,
+      "category": "environmental",
+      "appliesTo": "fixture",
+      "type": "hard",
+      "description": "Fixtures require specific weather conditions (e.g., outdoor/water sports)",
+      "paramsSchema": {
+        "type": "object",
+        "properties": {
+          "max_wind_speed_kph": { "type": "number", "description": "Maximum wind speed in kph" },
+          "min_temperature_c": { "type": "number", "description": "Minimum temperature in Celsius" },
+          "max_temperature_c": { "type": "number", "description": "Maximum temperature in Celsius" },
+          "no_precipitation": { "type": "boolean", "description": "Whether precipitation prevents play" }
+        }
+      },
+      "selectorSupport": {
+        "teams": false,
+        "venues": true,
+        "fixtures": true,
+        "phases": true
+      },
+      "units": null,
+      "recommendedRanges": null,
+      "defaultPenaltyModel": null,
+      "references": {
+        "rationale": "Player safety and competitive integrity in outdoor sports",
+        "standardCompliance": ["OSSS-ENV-001"],
+        "useCases": ["Surfing", "Sailing", "Outdoor tennis", "Cricket"],
+        "note": "Requires weather forecast integration"
+      }
+    },
+    {
+      "ruleId": "roofed_venue_priority",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "venue",
+      "appliesTo": "fixture",
+      "type": "soft",
+      "description": "Prefer scheduling at venues with roof/cover when weather risk is high",
+      "paramsSchema": {
+        "type": "object",
+        "properties": {
+          "rain_months": {
+            "type": "array",
+            "items": { "type": "integer", "minimum": 1, "maximum": 12 },
+            "description": "Months with high rain risk (1-12)"
+          }
+        }
+      },
+      "selectorSupport": {
+        "teams": false,
+        "venues": true,
+        "fixtures": true,
+        "phases": true
+      },
+      "units": null,
+      "recommendedRanges": null,
+      "defaultPenaltyModel": {
+        "type": "linear",
+        "perViolation": 10,
+        "description": "Penalty for outdoor scheduling during high-risk weather periods"
+      },
+      "references": {
+        "rationale": "Reduce weather-related disruptions and cancellations",
+        "standardCompliance": ["OSSS-VENUE-005"],
+        "useCases": ["Tennis (Grand Slams)", "Cricket", "Outdoor sports in rainy seasons"],
+        "relatedRules": ["weather_conditions", "venue_assignment"]
+      }
+    },
+    {
+      "ruleId": "tide_conditions",
+      "version": "1.0.0",
+      "status": "experimental",
+      "deprecated": false,
+      "category": "environmental",
+      "appliesTo": "fixture",
+      "type": "hard",
+      "description": "Fixtures require specific tide conditions (water sports)",
+      "paramsSchema": {
+        "type": "object",
+        "properties": {
+          "allowed_tides": {
+            "type": "array",
+            "items": { "type": "string", "enum": ["low", "mid", "high"] },
+            "description": "Allowed tide conditions"
+          }
+        }
+      },
+      "selectorSupport": {
+        "teams": false,
+        "venues": true,
+        "fixtures": true,
+        "phases": false
+      },
+      "units": null,
+      "recommendedRanges": null,
+      "defaultPenaltyModel": null,
+      "references": {
+        "rationale": "Safety and competitive fairness in water sports",
+        "standardCompliance": ["OSSS-ENV-002"],
+        "useCases": ["Surfing", "Sailing", "Open water swimming"],
+        "relatedRules": ["weather_conditions"]
+      }
+    },
+    {
+      "ruleId": "wave_quality",
+      "version": "1.0.0",
+      "status": "experimental",
+      "deprecated": false,
+      "category": "environmental",
+      "appliesTo": "fixture",
+      "type": "hard",
+      "description": "Minimum wave quality threshold for competition (surfing)",
+      "paramsSchema": {
+        "type": "object",
+        "required": ["min_score"],
+        "properties": {
+          "min_score": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 10,
+            "description": "Minimum wave quality score (0-10 scale)"
+          }
+        }
+      },
+      "selectorSupport": {
+        "teams": false,
+        "venues": true,
+        "fixtures": true,
+        "phases": false
+      },
+      "units": {
+        "min_score": "score"
+      },
+      "recommendedRanges": {
+        "min_score": {
+          "championship": [6, 8],
+          "qualifying": [4, 6]
+        }
+      },
+      "defaultPenaltyModel": null,
+      "references": {
+        "rationale": "Competition integrity requires adequate wave conditions",
+        "standardCompliance": ["OSSS-ENV-003"],
+        "useCases": ["Professional surfing (WSL)", "Surfing competitions"],
+        "relatedRules": ["weather_conditions", "tide_conditions"]
+      }
+    },
+    {
+      "ruleId": "phase_split",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "structure",
+      "appliesTo": "fixture",
+      "type": "hard",
+      "description": "Dynamic league split based on standings at a specific round. Teams are re-grouped into pools (e.g., Top 6 / Bottom 6) and only play within their new group for subsequent phases.",
+      "paramsSchema": {
+        "type": "object",
+        "required": ["split_after_round", "groups"],
+        "properties": {
+          "split_after_round": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Round number after which the split occurs"
+          },
+          "groups": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": { "type": "string" },
+                "size": { "type": "integer" },
+                "standing_range": {
+                  "type": "object",
+                  "properties": {
+                    "from": { "type": "integer" },
+                    "to": { "type": "integer" }
+                  }
+                }
+              }
+            },
+            "description": "Definition of split groups by standing position"
+          },
+          "carry_over_points": {
+            "type": "boolean",
+            "description": "Whether points from Phase 1 carry over to Phase 2"
+          }
+        }
+      },
+      "selectorSupport": {
+        "teams": false,
+        "venues": false,
+        "fixtures": true,
+        "phases": true
+      },
+      "units": null,
+      "recommendedRanges": null,
+      "defaultPenaltyModel": null,
+      "references": {
+        "rationale": "Split-season formats create competitive balance by grouping teams of similar ability in later phases",
+        "standardCompliance": ["OSSS-STRUCTURE-001"],
+        "useCases": ["Scottish Premiership", "Belgian Pro League", "Austrian Bundesliga", "Danish Superliga"],
+        "note": "Requires dynamic fixture generation based on standings at split point"
+      }
+    },
+    {
+      "ruleId": "max_rematches_in_phase",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "structure",
+      "appliesTo": "fixture",
+      "type": "hard_or_soft",
+      "description": "Limit the number of times two teams can play each other within a phase or the entire season",
+      "paramsSchema": {
+        "type": "object",
+        "required": ["max_meetings"],
+        "properties": {
+          "max_meetings": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Maximum times two teams can meet in the specified scope"
+          },
+          "scope": {
+            "type": "string",
+            "enum": ["phase", "season"],
+            "description": "Whether limit applies per phase or entire season"
+          },
+          "phase_id": {
+            "type": "string",
+            "description": "Specific phase to apply limit (if scope is 'phase')"
+          }
+        }
+      },
+      "selectorSupport": {
+        "teams": true,
+        "venues": false,
+        "fixtures": true,
+        "phases": true
+      },
+      "units": {
+        "max_meetings": "games"
+      },
+      "recommendedRanges": {
+        "max_meetings": {
+          "standard_league": [2, 2],
+          "triple_round_robin": [3, 3],
+          "split_season": [4, 5]
+        }
+      },
+      "defaultPenaltyModel": {
+        "type": "flat",
+        "perViolation": 1000,
+        "description": "High penalty for exceeding maximum meetings"
+      },
+      "references": {
+        "rationale": "Prevents fixture fatigue and maintains competitive variety",
+        "standardCompliance": ["OSSS-STRUCTURE-002"],
+        "useCases": ["Split-season leagues", "Playoff formats"],
+        "relatedRules": ["phase_split", "opponent_spacing"]
+      }
+    },
+    {
+      "ruleId": "home_away_asymmetry_tolerance",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "fairness",
+      "appliesTo": "team",
+      "type": "soft",
+      "description": "Allow controlled asymmetry in home/away game counts, common in odd-fixture formats like triple round-robin",
+      "paramsSchema": {
+        "type": "object",
+        "required": ["max_imbalance"],
+        "properties": {
+          "max_imbalance": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Maximum allowed difference between home and away games"
+          }
+        }
+      },
+      "selectorSupport": {
+        "teams": true,
+        "venues": false,
+        "fixtures": false,
+        "phases": true
+      },
+      "units": {
+        "max_imbalance": "games"
+      },
+      "recommendedRanges": {
+        "max_imbalance": {
+          "even_fixtures": [0, 1],
+          "triple_round_robin": [3, 5],
+          "split_season": [4, 6]
+        }
+      },
+      "defaultPenaltyModel": {
+        "type": "linear",
+        "perViolation": 10,
+        "description": "Penalty per game beyond allowed imbalance"
+      },
+      "references": {
+        "rationale": "Some formats mathematically cannot have equal home/away - this constraint allows controlled asymmetry",
+        "standardCompliance": ["OSSS-FAIRNESS-005"],
+        "useCases": ["Scottish Premiership (19H/14A or 14H/19A)", "Triple round-robin leagues"],
+        "relatedRules": ["home_away_balance", "max_consecutive_home", "max_consecutive_away"]
+      }
+    },
+    {
+      "ruleId": "conditional_fixture",
+      "version": "1.0.0",
+      "status": "experimental",
+      "deprecated": false,
+      "category": "structure",
+      "appliesTo": "fixture",
+      "type": "hard",
+      "description": "Fixture is only scheduled if a condition is met (e.g., both teams in same split group)",
+      "paramsSchema": {
+        "type": "object",
+        "required": ["condition_type"],
+        "properties": {
+          "condition_type": {
+            "type": "string",
+            "enum": ["same_group", "different_group", "standing_range", "custom"],
+            "description": "Type of condition that must be met"
+          },
+          "group_id": {
+            "type": "string",
+            "description": "Group identifier for same_group/different_group conditions"
+          },
+          "standing_range": {
+            "type": "object",
+            "properties": {
+              "from": { "type": "integer" },
+              "to": { "type": "integer" }
+            },
+            "description": "Standing range for standing_range condition"
+          }
+        }
+      },
+      "selectorSupport": {
+        "teams": true,
+        "venues": false,
+        "fixtures": true,
+        "phases": true
+      },
+      "units": null,
+      "recommendedRanges": null,
+      "defaultPenaltyModel": null,
+      "references": {
+        "rationale": "Enables dynamic fixture generation based on standings or group membership",
+        "standardCompliance": ["OSSS-STRUCTURE-003"],
+        "useCases": ["Split-season Phase 2 fixtures", "Playoff qualification", "Relegation playoffs"],
+        "relatedRules": ["phase_split"]
+      }
+    },
+    {
+      "ruleId": "no_venue_overlap",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "venue",
+      "appliesTo": "venue",
+      "type": "hard",
+      "description": "Prevent overlapping fixtures at the same venue, with optional buffer time for turnaround",
+      "paramsSchema": {
+        "type": "object",
+        "properties": {
+          "bufferMinutes": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Minimum minutes between fixtures at same venue"
+          },
+          "includeSetupTime": {
+            "type": "boolean",
+            "description": "Whether to include venue-specific turnaround time"
+          }
+        }
+      },
+      "selectorSupport": {
+        "teams": false,
+        "venues": true,
+        "fixtures": false,
+        "phases": true
+      },
+      "units": { "bufferMinutes": "minutes" },
+      "recommendedRanges": { "bufferMinutes": { "stadium": [60, 180], "arena": [30, 90] } },
+      "defaultPenaltyModel": null,
+      "references": {
+        "rationale": "Physical impossibility - venue can only host one event at a time",
+        "standardCompliance": ["OSSS-VENUE-006"],
+        "useCases": ["Multi-game tournament days", "Shared facilities"],
+        "relatedRules": ["no_overlap_venue_resource", "buffer_time"]
+      }
+    },
+    {
+      "ruleId": "carry_over_effects",
+      "version": "1.0.0",
+      "status": "experimental",
+      "deprecated": false,
+      "category": "fairness",
+      "appliesTo": "team",
+      "type": "hard_or_soft",
+      "description": "Balance carry-over effects - the teams that play immediately after facing strong opponents. Prevents systematic disadvantage where some teams always play fatigued opponents while others face rested ones.",
+      "paramsSchema": {
+        "type": "object",
+        "properties": {
+          "maxCarryOverImbalance": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Maximum allowed difference in carry-over effect count between any two teams"
+          },
+          "weightByStrength": {
+            "type": "boolean",
+            "description": "Weight carry-over by opponent strength (stronger = more impactful)"
+          },
+          "strengthField": {
+            "type": "string",
+            "description": "Field in team object containing strength rating"
+          }
+        }
+      },
+      "selectorSupport": {
+        "teams": true,
+        "venues": false,
+        "fixtures": false,
+        "phases": true
+      },
+      "units": null,
+      "recommendedRanges": { "maxCarryOverImbalance": { "strict": [0, 1], "relaxed": [2, 3] } },
+      "defaultPenaltyModel": {
+        "type": "quadratic",
+        "perImbalance": 100,
+        "description": "Penalty increases quadratically with imbalance"
+      },
+      "references": {
+        "rationale": "Classic NP-hard constraint in sports scheduling - teams playing after strong opponents may face fatigued teams",
+        "standardCompliance": ["OSSS-FAIRNESS-006"],
+        "useCases": ["Professional leagues seeking competitive fairness", "Academic scheduling research"],
+        "academicReferences": ["de Werra (1988)", "Russell & Urban (2006)"]
+      }
+    },
+    {
+      "ruleId": "break_pattern",
+      "version": "1.0.0",
+      "status": "experimental",
+      "deprecated": false,
+      "category": "fairness",
+      "appliesTo": "team",
+      "type": "hard_or_soft",
+      "description": "Limit breaks (consecutive home or consecutive away games) in the schedule. A break occurs when a team plays two consecutive home or two consecutive away games.",
+      "paramsSchema": {
+        "type": "object",
+        "properties": {
+          "maxBreaks": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Maximum number of breaks allowed per team"
+          },
+          "maxConsecutiveSameVenueType": {
+            "type": "integer",
+            "minimum": 2,
+            "description": "Maximum consecutive games at home or away (e.g., 2 = no triple home/away)"
+          },
+          "breakDefinition": {
+            "type": "string",
+            "enum": ["consecutive_home_or_away", "any_repeat"],
+            "description": "Definition of what constitutes a break"
+          }
+        }
+      },
+      "selectorSupport": {
+        "teams": true,
+        "venues": false,
+        "fixtures": false,
+        "phases": true
+      },
+      "units": { "maxBreaks": "breaks", "maxConsecutiveSameVenueType": "games" },
+      "recommendedRanges": { "maxBreaks": { "optimal": [0, 2], "relaxed": [3, 5] } },
+      "defaultPenaltyModel": {
+        "type": "exponential",
+        "perBreak": 50,
+        "multiplier": 2,
+        "description": "Penalty doubles for each break beyond limit"
+      },
+      "references": {
+        "rationale": "Breaks create competitive imbalance - home advantage disruption affects fairness",
+        "standardCompliance": ["OSSS-FAIRNESS-007"],
+        "useCases": ["Round-robin tournaments", "Professional leagues"],
+        "academicReferences": ["Trick (2001) - Schedule-Then-Break approach"]
+      }
+    },
+    {
+      "ruleId": "travel_pattern",
+      "version": "1.0.0",
+      "status": "experimental",
+      "deprecated": false,
+      "category": "travel",
+      "appliesTo": "team",
+      "type": "soft",
+      "description": "Optimize travel patterns by clustering away games in the same region",
+      "paramsSchema": {
+        "type": "object",
+        "properties": {
+          "preferRegionalClusters": {
+            "type": "boolean",
+            "description": "Prefer scheduling consecutive away games in same region"
+          },
+          "clusterSize": {
+            "type": "integer",
+            "minimum": 2,
+            "description": "Target number of games per regional cluster"
+          },
+          "regionField": {
+            "type": "string",
+            "description": "Field in team/venue object containing region identifier"
+          }
+        }
+      },
+      "selectorSupport": {
+        "teams": true,
+        "venues": false,
+        "fixtures": false,
+        "phases": true
+      },
+      "units": null,
+      "recommendedRanges": { "clusterSize": { "typical": [2, 3] } },
+      "defaultPenaltyModel": {
+        "type": "linear",
+        "perMissedCluster": 30,
+        "description": "Penalty for each missed clustering opportunity"
+      },
+      "references": {
+        "rationale": "Reduces total travel distance and cost by grouping geographically proximate away games",
+        "standardCompliance": ["OSSS-TRAVEL-003"],
+        "useCases": ["NHL road trips", "NBA West Coast swings", "International tours"],
+        "relatedRules": ["minimize_travel", "max_travel_distance"]
+      }
+    },
+    {
+      "ruleId": "complementary_pattern",
+      "version": "1.0.0",
+      "status": "experimental",
+      "deprecated": false,
+      "category": "broadcast",
+      "appliesTo": "team",
+      "type": "soft",
+      "description": "Certain team pairs should have complementary home/away patterns (when one is home, other is away) to avoid broadcast conflicts",
+      "paramsSchema": {
+        "type": "object",
+        "required": ["pairs"],
+        "properties": {
+          "pairs": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": { "type": "string" },
+              "minItems": 2,
+              "maxItems": 2
+            },
+            "description": "Pairs of team IDs that should have complementary patterns"
+          },
+          "mustBeOpposite": {
+            "type": "boolean",
+            "description": "Whether patterns must be exactly opposite (strict) or just different (relaxed)"
+          }
+        }
+      },
+      "selectorSupport": {
+        "teams": true,
+        "venues": false,
+        "fixtures": false,
+        "phases": true
+      },
+      "units": null,
+      "recommendedRanges": null,
+      "defaultPenaltyModel": {
+        "type": "linear",
+        "perViolation": 40,
+        "description": "Penalty per round where complementary pattern is violated"
+      },
+      "references": {
+        "rationale": "Broadcast scheduling - avoid two popular teams both at home/away on same day",
+        "standardCompliance": ["OSSS-BROADCAST-002"],
+        "useCases": ["TV scheduling optimization", "Regional broadcast rights management"],
+        "relatedRules": ["broadcast_window"]
+      }
+    },
+    {
+      "ruleId": "rest_balance",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "fairness",
+      "appliesTo": "team",
+      "type": "soft",
+      "description": "Ensure fair distribution of rest time between fixtures across teams",
+      "paramsSchema": {
+        "type": "object",
+        "properties": {
+          "maxRestDifferenceHours": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Maximum allowed rest time difference between teams in same fixture"
+          },
+          "scope": {
+            "type": "string",
+            "enum": ["fixture", "within_group", "season"],
+            "description": "Scope for rest balance calculation"
+          },
+          "considerOpponentStrength": {
+            "type": "boolean",
+            "description": "Weight rest advantage more heavily when facing strong opponents"
+          },
+          "maxRestAdvantageVsStrongOpponent": {
+            "type": "number",
+            "description": "Max rest advantage (hours) when playing top-tier teams"
+          }
+        }
+      },
+      "selectorSupport": {
+        "teams": true,
+        "venues": false,
+        "fixtures": true,
+        "phases": true
+      },
+      "units": { "maxRestDifferenceHours": "hours" },
+      "recommendedRanges": { "maxRestDifferenceHours": { "strict": [24, 48], "relaxed": [72, 96] } },
+      "defaultPenaltyModel": {
+        "type": "linear",
+        "perHour": 5,
+        "description": "Penalty per hour of rest imbalance"
+      },
+      "references": {
+        "rationale": "Rest advantage significantly impacts competitive performance",
+        "standardCompliance": ["OSSS-FAIRNESS-008"],
+        "useCases": ["Professional leagues", "Knockout tournaments"],
+        "relatedRules": ["min_rest_time"]
+      }
+    },
+    {
+      "ruleId": "phase_ordering",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "structure",
+      "appliesTo": "fixture",
+      "type": "hard",
+      "description": "Ensure phases occur in correct order with minimum gaps between them",
+      "paramsSchema": {
+        "type": "object",
+        "required": ["before", "after"],
+        "properties": {
+          "before": {
+            "type": "string",
+            "description": "Phase ID that must complete first"
+          },
+          "after": {
+            "type": "string",
+            "description": "Phase ID that must start after"
+          },
+          "minGapDays": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Minimum days between phases"
+          }
+        }
+      },
+      "selectorSupport": {
+        "teams": false,
+        "venues": false,
+        "fixtures": false,
+        "phases": true
+      },
+      "units": { "minGapDays": "days" },
+      "recommendedRanges": { "minGapDays": { "tournament": [1, 3], "league": [3, 7] } },
+      "defaultPenaltyModel": null,
+      "references": {
+        "rationale": "Tournament phases must occur in logical sequence",
+        "standardCompliance": ["OSSS-STRUCTURE-004"],
+        "useCases": ["Multi-phase tournaments", "Playoffs after regular season"],
+        "relatedRules": ["phase_split"]
+      }
+    },
+    {
+      "ruleId": "round_distribution",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "time",
+      "appliesTo": "fixture",
+      "type": "soft",
+      "description": "Ensure rounds are distributed evenly throughout the season with minimum/maximum gaps",
+      "paramsSchema": {
+        "type": "object",
+        "properties": {
+          "minDaysBetweenRounds": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Minimum days between consecutive rounds"
+          },
+          "maxDaysBetweenRounds": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Maximum days between consecutive rounds"
+          }
+        }
+      },
+      "selectorSupport": {
+        "teams": false,
+        "venues": false,
+        "fixtures": false,
+        "phases": true
+      },
+      "units": { "minDaysBetweenRounds": "days", "maxDaysBetweenRounds": "days" },
+      "recommendedRanges": {
+        "weekly_league": { "min": 6, "max": 8 },
+        "tournament": { "min": 1, "max": 3 }
+      },
+      "defaultPenaltyModel": {
+        "type": "linear",
+        "perDayViolation": 20,
+        "description": "Penalty per day outside allowed range"
+      },
+      "references": {
+        "rationale": "Even distribution ensures consistent schedule rhythm and rest",
+        "standardCompliance": ["OSSS-TIME-006"],
+        "useCases": ["League scheduling", "Tournament planning"],
+        "relatedRules": ["min_rest_time"]
+      }
+    },
+    {
+      "ruleId": "simultaneous_games",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "fairness",
+      "appliesTo": "fixture",
+      "type": "hard",
+      "description": "Require specific fixtures to kick off simultaneously (e.g., final round of group stage for fairness)",
+      "paramsSchema": {
+        "type": "object",
+        "properties": {
+          "rounds": {
+            "type": "array",
+            "items": { "type": "integer" },
+            "description": "Round numbers that require simultaneous kick-off"
+          },
+          "tolerance_minutes": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Allowed tolerance in minutes (0 = exact same time)"
+          },
+          "scope": {
+            "type": "string",
+            "enum": ["all", "within_group"],
+            "description": "Whether all games or only games within same group must be simultaneous"
+          }
+        }
+      },
+      "selectorSupport": {
+        "teams": false,
+        "venues": false,
+        "fixtures": true,
+        "phases": true
+      },
+      "units": { "tolerance_minutes": "minutes" },
+      "recommendedRanges": null,
+      "defaultPenaltyModel": null,
+      "references": {
+        "rationale": "Prevents collusion/result manipulation in final rounds where outcomes interdepend",
+        "standardCompliance": ["OSSS-FAIRNESS-009"],
+        "useCases": ["World Cup group stage final round", "League final matchday", "Champions League group stage"],
+        "note": "FIFA and UEFA mandate simultaneous kick-off for final group games"
+      }
+    },
+    {
+      "ruleId": "no_simultaneous_group_games",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "broadcast",
+      "appliesTo": "fixture",
+      "type": "soft",
+      "description": "Avoid scheduling games within the same group at the same time to maximize broadcast windows",
+      "paramsSchema": {
+        "type": "object",
+        "properties": {
+          "exceptFinalRound": {
+            "type": "boolean",
+            "description": "Allow simultaneous games in final round (fairness override)"
+          },
+          "sameSlotLimit": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Maximum games allowed in same time slot"
+          },
+          "slots": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Time slots to monitor for conflicts"
+          }
+        }
+      },
+      "selectorSupport": {
+        "teams": false,
+        "venues": false,
+        "fixtures": true,
+        "phases": true
+      },
+      "units": null,
+      "recommendedRanges": null,
+      "defaultPenaltyModel": {
+        "type": "linear",
+        "perConflict": 100,
+        "description": "Penalty per broadcast slot conflict"
+      },
+      "references": {
+        "rationale": "Spread games across time slots to maximize viewership and ad revenue",
+        "standardCompliance": ["OSSS-BROADCAST-003"],
+        "useCases": ["Group stage tournaments", "League matchdays"],
+        "relatedRules": ["simultaneous_games", "broadcast_window"]
+      }
+    },
+    {
+      "ruleId": "specific_venue_fixture",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "venue",
+      "appliesTo": "fixture",
+      "type": "hard",
+      "description": "Require specific fixture to be held at a specific venue",
+      "paramsSchema": {
+        "type": "object",
+        "required": ["fixtureId", "venueId"],
+        "properties": {
+          "fixtureId": {
+            "type": "string",
+            "description": "ID of the fixture"
+          },
+          "venueId": {
+            "type": "string",
+            "description": "Required venue ID"
+          }
+        }
+      },
+      "selectorSupport": {
+        "teams": false,
+        "venues": true,
+        "fixtures": true,
+        "phases": false
+      },
+      "units": null,
+      "recommendedRanges": null,
+      "defaultPenaltyModel": null,
+      "references": {
+        "rationale": "Finals and special matches often have designated venues",
+        "standardCompliance": ["OSSS-VENUE-007"],
+        "useCases": ["Cup finals", "All-Star games", "Designated showcase matches"],
+        "relatedRules": ["venue_assignment", "preferred_venue"]
+      }
+    },
+    {
+      "ruleId": "phase_constraint",
+      "version": "1.0.0",
+      "status": "experimental",
+      "deprecated": false,
+      "category": "structure",
+      "appliesTo": "fixture",
+      "type": "soft",
+      "description": "Apply special rules to specific phases (e.g., home advantage for top teams in final round)",
+      "paramsSchema": {
+        "type": "object",
+        "properties": {
+          "rounds": {
+            "type": "array",
+            "items": { "type": "integer" },
+            "description": "Rounds to apply constraint to"
+          },
+          "homeAdvantage": {
+            "type": "string",
+            "enum": ["top_half", "bottom_half", "by_standing", "none"],
+            "description": "Home advantage assignment strategy"
+          },
+          "rankingBasis": {
+            "type": "string",
+            "enum": ["standing", "strength", "random"],
+            "description": "Basis for ranking teams for home advantage"
+          }
+        }
+      },
+      "selectorSupport": {
+        "teams": true,
+        "venues": false,
+        "fixtures": true,
+        "phases": true
+      },
+      "units": null,
+      "recommendedRanges": null,
+      "defaultPenaltyModel": {
+        "type": "linear",
+        "perViolation": 25,
+        "description": "Penalty for violating phase-specific rules"
+      },
+      "references": {
+        "rationale": "Different phases may have different scheduling priorities",
+        "standardCompliance": ["OSSS-STRUCTURE-005"],
+        "useCases": ["Playoff seeding advantages", "Final round home field for top teams"],
+        "relatedRules": ["phase_split", "phase_ordering"]
+      }
     }
   ],
   "metadata": {

@@ -73,7 +73,8 @@ jobs:
       - name: 📦 Install OSSS Validator
         run: |
           echo "🔧 Installing OSSS validator dependencies..."
-          npm ci
+          cd osss-validator && npm ci && npm link
+          cd ..
 
       # ------------------------------------------------------------
       # 5️⃣ Locate submission file (STRICT)
@@ -151,7 +152,7 @@ jobs:
           INSTANCE="${{ steps.meta.outputs.instance }}"
 
           echo "🧠 Validating submission..."
-          npx osss-validate result \
+          osss-validate result \
             --instance "$INSTANCE" \
             --result "$FILE" \
             --schemas schemas \
@@ -167,7 +168,7 @@ jobs:
       - name: 📌 Capture validator version
         id: validator
         run: |
-          VERSION=$(npx osss-validate --version || echo "unknown")
+          VERSION=$(osss-validate --version || echo "unknown")
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "🧠 Validator version: $VERSION"
 

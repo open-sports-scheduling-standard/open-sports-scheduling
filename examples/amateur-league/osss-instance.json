@@ -69,12 +69,12 @@
   ],
   "objectives": [
     {
-      "metric": "travel_distance_km",
+      "metric": "total_travel_distance",
       "aggregation": "sum",
       "weight": 0.7
     },
     {
-      "metric": "home_away_delta",
+      "metric": "home_away_balance",
       "aggregation": "max",
       "weight": 0.3
     }

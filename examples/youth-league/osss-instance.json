@@ -48,7 +48,7 @@
   ],
   "objectives": [
     {
-      "metric": "travel_distance_km",
+      "metric": "total_travel_distance",
       "aggregation": "sum",
       "weight": 1.0
     }

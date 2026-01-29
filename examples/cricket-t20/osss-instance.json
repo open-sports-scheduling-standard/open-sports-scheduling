@@ -123,7 +123,7 @@
   ],
   "objectives": [
     {
-      "metric": "broadcast_viewership",
+      "metric": "viewership_maximization",
       "aggregation": "sum",
       "weight": 0.5,
       "direction": "maximize"

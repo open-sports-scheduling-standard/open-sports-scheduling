@@ -2,3 +2,4 @@ node_modules/*
 dist/*
 .claude/*
 IMPLEMENTATION-STATUS.md
+articles/*

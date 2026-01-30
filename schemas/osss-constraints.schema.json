@@ -2,9 +2,15 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://opensportsscheduling.org/schemas/osss-constraints.schema.json",
   "title": "OSSS Constraints Schema",
+  "description": "Open Sports Scheduling Standard v2.0 - Constraints schema",
   "type": "object",
   "required": ["constraints"],
   "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "default": "2.0.0"
+    },
     "constraints": {
       "type": "array",
       "items": { "$ref": "#/$defs/constraint" }
@@ -14,18 +20,52 @@
   "$defs": {
     "constraint": {
       "type": "object",
-      "required": ["id", "type", "rule", "selector"],
+      "required": ["id", "type", "ruleId"],
       "properties": {
-        "id": { "type": "string" },
-        "type": { "enum": ["hard", "soft"] },
-        "rule": { "type": "string" },
-        "selector": { "$ref": "#/$defs/selector" },
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for this constraint instance"
+        },
+        "ruleId": {
+          "type": "string",
+          "description": "Reference to constraint rule in registry (was 'rule' in v1)"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["hard", "soft"],
+          "description": "Hard constraints must be satisfied; soft constraints add penalty"
+        },
+        "selector": {
+          "$ref": "#/$defs/selector",
+          "description": "Which entities this constraint applies to"
+        },
         "params": {
           "type": "object",
-          "additionalProperties": true
+          "additionalProperties": true,
+          "description": "Rule-specific parameters"
         },
         "penalty": {
-          "$ref": "#/$defs/penalty"
+          "$ref": "#/$defs/penalty",
+          "description": "Required for soft constraints"
+        },
+        "description": {
+          "type": "string",
+          "description": "Human-readable description"
+        },
+        "enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether this constraint is active"
+        },
+        "priority": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Evaluation priority (1=highest)"
+        },
+        "phases": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Limit to specific season phases"
         }
       },
       "allOf": [
@@ -40,29 +80,118 @@
       "type": "object",
       "properties": {
         "entityType": {
-          "enum": ["team", "venue", "fixture", "official"]
+          "type": "string",
+          "enum": ["team", "venue", "fixture", "official", "resource", "phase", "all"],
+          "description": "Type of entity to select"
         },
         "ids": {
           "type": "array",
-          "items": { "type": "string" }
+          "items": { "type": "string" },
+          "description": "Specific entity IDs to include"
         },
         "tags": {
           "type": "array",
-          "items": { "type": "string" }
+          "items": { "type": "string" },
+          "description": "Include entities with ALL these tags"
+        },
+        "anyTags": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Include entities with ANY of these tags"
+        },
+        "excludeIds": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Specific entity IDs to exclude"
+        },
+        "excludeTags": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Exclude entities with ANY of these tags"
+        },
+        "phases": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Limit to specific phase IDs"
+        },
+        "rounds": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              { "type": "integer" },
+              { "type": "string" }
+            ]
+          },
+          "description": "Limit to specific rounds"
         }
       }
     },
 
     "penalty": {
       "type": "object",
-      "required": ["model", "weight"],
+      "required": ["weight"],
       "properties": {
         "model": {
-          "enum": ["linear", "quadratic", "piecewise", "lexicographic"]
+          "type": "string",
+          "enum": [
+            "linear",
+            "quadratic",
+            "exponential",
+            "logarithmic",
+            "step",
+            "flat",
+            "piecewise",
+            "lexicographic"
+          ],
+          "default": "linear",
+          "description": "Penalty calculation model"
         },
         "weight": {
           "type": "number",
-          "minimum": 0
+          "minimum": 0,
+          "description": "Base penalty weight"
+        },
+        "perViolation": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Additional penalty per violation unit"
+        },
+        "exponent": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Exponent for quadratic/exponential models"
+        },
+        "base": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Base for exponential model"
+        },
+        "tiers": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/piecewiseTier" },
+          "description": "Tiers for piecewise model"
+        },
+        "lexicographicRank": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Priority rank for lexicographic optimization"
+        }
+      }
+    },
+
+    "piecewiseTier": {
+      "type": "object",
+      "required": ["upTo", "weight"],
+      "properties": {
+        "upTo": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Upper bound for this tier"
+        },
+        "weight": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Penalty weight for violations in this tier"
         }
       }
     }

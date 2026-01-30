@@ -1,8 +1,8 @@
 {
-  "registryVersion": "2.1.0",
-  "osssVersion": "0.1.0",
+  "registryVersion": "3.0.0",
+  "osssVersion": "2.0.0",
   "description": "Canonical OSSS constraint registry with semantic definitions and lifecycle management",
-  "updated": "2025-01-01",
+  "updated": "2026-01-30",
   "constraints": [
     {
       "ruleId": "no_overlap_team",
@@ -2004,6 +2004,333 @@
         "standardCompliance": ["OSSS-STRUCTURE-005"],
         "useCases": ["Playoff seeding advantages", "Final round home field for top teams"],
         "relatedRules": ["phase_split", "phase_ordering"]
+      }
+    },
+    {
+      "ruleId": "official_availability",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "officials",
+      "appliesTo": "official",
+      "type": "hard",
+      "description": "Ensures assigned officials are available during fixture time slots",
+      "paramsSchema": {
+        "type": "object",
+        "properties": {
+          "checkBlackouts": {
+            "type": "boolean",
+            "default": true,
+            "description": "Whether to check official blackout dates"
+          },
+          "bufferMinutes": {
+            "type": "integer",
+            "minimum": 0,
+            "default": 30,
+            "description": "Buffer time before/after fixture for official availability"
+          }
+        }
+      },
+      "selectorSupport": {
+        "teams": false,
+        "venues": false,
+        "fixtures": true,
+        "phases": true,
+        "officials": true
+      },
+      "defaultPenaltyModel": null,
+      "references": {
+        "rationale": "Officials must be available to work assigned fixtures",
+        "standardCompliance": ["OSSS-OFFICIAL-001"],
+        "useCases": ["All leagues with official assignment"]
+      }
+    },
+    {
+      "ruleId": "official_qualification",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "officials",
+      "appliesTo": "official",
+      "type": "hard",
+      "description": "Ensures official qualification level meets fixture requirements",
+      "paramsSchema": {
+        "type": "object",
+        "properties": {
+          "qualificationField": {
+            "type": "string",
+            "default": "qualificationLevel",
+            "description": "Field name for official qualification"
+          },
+          "fixtureRequirementField": {
+            "type": "string",
+            "default": "requiredOfficialLevel",
+            "description": "Field name for fixture requirement"
+          },
+          "qualificationHierarchy": {
+            "type": "array",
+            "items": { "type": "string" },
+            "default": ["trainee", "local", "regional", "national", "international", "elite"],
+            "description": "Qualification levels in ascending order"
+          }
+        }
+      },
+      "selectorSupport": {
+        "teams": false,
+        "venues": false,
+        "fixtures": true,
+        "phases": true,
+        "officials": true
+      },
+      "defaultPenaltyModel": null,
+      "references": {
+        "rationale": "High-profile fixtures require appropriately qualified officials",
+        "standardCompliance": ["OSSS-OFFICIAL-002"],
+        "useCases": ["Professional leagues", "International tournaments"]
+      }
+    },
+    {
+      "ruleId": "official_conflict",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "officials",
+      "appliesTo": "official",
+      "type": "hard",
+      "description": "Prevents official assignment to fixtures involving teams with conflict of interest",
+      "paramsSchema": {
+        "type": "object",
+        "properties": {
+          "conflictField": {
+            "type": "string",
+            "default": "conflictTeamIds",
+            "description": "Field on official containing team IDs they cannot officiate"
+          }
+        }
+      },
+      "selectorSupport": {
+        "teams": true,
+        "venues": false,
+        "fixtures": true,
+        "phases": false,
+        "officials": true
+      },
+      "defaultPenaltyModel": null,
+      "references": {
+        "rationale": "Maintain integrity by preventing conflicts of interest",
+        "standardCompliance": ["OSSS-OFFICIAL-003"],
+        "useCases": ["All professional leagues"]
+      }
+    },
+    {
+      "ruleId": "official_rest_time",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "officials",
+      "appliesTo": "official",
+      "type": "hard_or_soft",
+      "description": "Minimum rest time required between official assignments",
+      "paramsSchema": {
+        "type": "object",
+        "required": ["min_hours"],
+        "properties": {
+          "min_hours": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Minimum hours between assignments"
+          }
+        }
+      },
+      "selectorSupport": {
+        "teams": false,
+        "venues": false,
+        "fixtures": false,
+        "phases": true,
+        "officials": true
+      },
+      "units": { "min_hours": "hours" },
+      "recommendedRanges": {
+        "min_hours": {
+          "local": [12, 24],
+          "professional": [24, 48]
+        }
+      },
+      "defaultPenaltyModel": {
+        "type": "linear",
+        "perHourViolation": 5
+      },
+      "references": {
+        "rationale": "Official fatigue affects match quality and safety",
+        "standardCompliance": ["OSSS-OFFICIAL-004"],
+        "useCases": ["Dense tournament schedules"]
+      }
+    },
+    {
+      "ruleId": "resource_capacity",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "venue",
+      "appliesTo": "resource",
+      "type": "hard",
+      "description": "Validates fixture assignment fits resource capacity requirements",
+      "paramsSchema": {
+        "type": "object",
+        "properties": {
+          "includeSpectators": {
+            "type": "boolean",
+            "default": false,
+            "description": "Whether to consider spectator capacity"
+          },
+          "capacityBuffer": {
+            "type": "number",
+            "default": 0,
+            "description": "Percentage buffer for capacity (0-1)"
+          },
+          "minCapacity": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Override minimum capacity requirement"
+          }
+        }
+      },
+      "selectorSupport": {
+        "teams": false,
+        "venues": true,
+        "fixtures": true,
+        "phases": false,
+        "resources": true
+      },
+      "defaultPenaltyModel": null,
+      "references": {
+        "rationale": "Venues/resources must accommodate fixture requirements",
+        "standardCompliance": ["OSSS-VENUE-006"],
+        "useCases": ["Multi-resource venues", "Capacity planning"]
+      }
+    },
+    {
+      "ruleId": "fixture_resource_compatibility",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "venue",
+      "appliesTo": "fixture",
+      "type": "hard",
+      "description": "Ensures fixture sport type matches resource suitableFor list",
+      "paramsSchema": {
+        "type": "object",
+        "properties": {
+          "sportField": {
+            "type": "string",
+            "default": "sport",
+            "description": "Instance field containing sport type"
+          },
+          "suitableForField": {
+            "type": "string",
+            "default": "suitableFor",
+            "description": "Resource field containing suitable sports"
+          }
+        }
+      },
+      "selectorSupport": {
+        "teams": false,
+        "venues": true,
+        "fixtures": true,
+        "phases": false,
+        "resources": true
+      },
+      "defaultPenaltyModel": null,
+      "references": {
+        "rationale": "Sports require appropriate playing surfaces and facilities",
+        "standardCompliance": ["OSSS-VENUE-007"],
+        "useCases": ["Multi-sport facilities", "Surface requirements"]
+      }
+    },
+    {
+      "ruleId": "complete_round_robin",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "structure",
+      "appliesTo": "fixture",
+      "type": "hard",
+      "description": "Validates that all team pairs meet the required number of times",
+      "paramsSchema": {
+        "type": "object",
+        "required": ["meetings"],
+        "properties": {
+          "meetings": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Required number of meetings per team pair (1=single, 2=double)"
+          },
+          "requireHomeAway": {
+            "type": "boolean",
+            "default": true,
+            "description": "Whether each team must host each opponent at least once"
+          }
+        }
+      },
+      "selectorSupport": {
+        "teams": true,
+        "venues": false,
+        "fixtures": true,
+        "phases": true
+      },
+      "defaultPenaltyModel": null,
+      "references": {
+        "rationale": "Round-robin formats require complete pairwise meetings",
+        "standardCompliance": ["OSSS-STRUCTURE-006"],
+        "useCases": ["League scheduling", "Group stages"],
+        "academicReferences": ["Knuth, The Art of Computer Programming, Vol. 4"]
+      }
+    },
+    {
+      "ruleId": "bracket_seeding",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "structure",
+      "appliesTo": "fixture",
+      "type": "hard",
+      "description": "Validates knockout bracket structure and seeding rules",
+      "paramsSchema": {
+        "type": "object",
+        "properties": {
+          "bracketSize": {
+            "type": "integer",
+            "enum": [2, 4, 8, 16, 32, 64, 128],
+            "description": "Number of participants in bracket"
+          },
+          "seedingMethod": {
+            "type": "string",
+            "enum": ["standard", "random", "serpentine"],
+            "default": "standard",
+            "description": "How seeds are matched (1v16, 2v15, etc.)"
+          },
+          "preventRematches": {
+            "type": "boolean",
+            "default": false,
+            "description": "Prevent rematches until specified round"
+          },
+          "rematchRound": {
+            "type": "string",
+            "description": "Earliest round for rematches (e.g., 'semifinal')"
+          }
+        }
+      },
+      "selectorSupport": {
+        "teams": true,
+        "venues": false,
+        "fixtures": true,
+        "phases": true
+      },
+      "defaultPenaltyModel": null,
+      "references": {
+        "rationale": "Knockout tournaments follow specific bracket structures",
+        "standardCompliance": ["OSSS-STRUCTURE-007"],
+        "useCases": ["Cup competitions", "Playoff brackets"]
       }
     }
   ],

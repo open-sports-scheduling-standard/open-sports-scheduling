@@ -2,26 +2,49 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://opensportsscheduling.org/schemas/osss-results.schema.json",
   "title": "OSSS Results Schema",
+  "description": "Open Sports Scheduling Standard v2.0 - Solver results schema",
   "type": "object",
   "required": ["feasible", "assignments", "scores"],
   "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "OSSS schema version used",
+      "default": "2.0.0"
+    },
+    "instanceId": {
+      "type": "string",
+      "description": "ID of the instance this result is for"
+    },
     "feasible": {
-      "type": "boolean"
+      "type": "boolean",
+      "description": "Whether all hard constraints are satisfied"
+    },
+    "optimal": {
+      "type": "boolean",
+      "description": "Whether this is proven optimal (for solvers that guarantee optimality)"
     },
     "assignments": {
       "type": "array",
-      "items": { "$ref": "#/$defs/assignment" }
+      "items": { "$ref": "#/$defs/assignment" },
+      "description": "Fixture time/venue assignments"
     },
-    "scores": {
+    "scores": { "$ref": "#/$defs/scores" },
+    "objectives": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/objectiveResult" },
+      "description": "Individual objective evaluations"
+    },
+    "solver": { "$ref": "#/$defs/solverInfo" },
+    "statistics": { "$ref": "#/$defs/solutionStatistics" },
+    "warnings": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Non-fatal warnings during solving"
+    },
+    "metadata": {
       "type": "object",
-      "required": ["totalPenalty"],
-      "properties": {
-        "totalPenalty": { "type": "number" },
-        "byConstraint": {
-          "type": "array",
-          "items": { "$ref": "#/$defs/constraintScore" }
-        }
-      }
+      "additionalProperties": true
     }
   },
 
@@ -31,12 +54,69 @@
       "required": ["fixtureId", "startTime", "venueId"],
       "properties": {
         "fixtureId": { "type": "string" },
-        "startTime": { "type": "string", "format": "date-time" },
-        "endTime": { "type": "string", "format": "date-time" },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 datetime with timezone"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Fixture end time (startTime + duration if not specified)"
+        },
         "venueId": { "type": "string" },
+        "resourceId": {
+          "type": "string",
+          "description": "Specific resource within venue (e.g., Court 1)"
+        },
         "officialIds": {
           "type": "array",
-          "items": { "type": "string" }
+          "items": { "type": "string" },
+          "description": "Assigned official IDs"
+        },
+        "broadcastSlot": {
+          "type": "string",
+          "description": "Broadcast window assignment if applicable"
+        },
+        "locked": {
+          "type": "boolean",
+          "description": "Whether this assignment was pre-locked in instance"
+        },
+        "notes": {
+          "type": "string",
+          "description": "Solver notes about this assignment"
+        }
+      }
+    },
+
+    "scores": {
+      "type": "object",
+      "required": ["totalPenalty"],
+      "properties": {
+        "totalPenalty": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Sum of all soft constraint penalties"
+        },
+        "hardViolations": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of hard constraint violations (should be 0 if feasible)"
+        },
+        "softViolations": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of soft constraint violations"
+        },
+        "byConstraint": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/constraintScore" },
+          "description": "Per-constraint violation breakdown"
+        },
+        "byCategory": {
+          "type": "object",
+          "additionalProperties": { "type": "number" },
+          "description": "Penalty totals by constraint category"
         }
       }
     },
@@ -46,9 +126,150 @@
       "required": ["constraintId", "violations", "penalty"],
       "properties": {
         "constraintId": { "type": "string" },
-        "violations": { "type": "integer" },
-        "penalty": { "type": "number" },
+        "ruleId": {
+          "type": "string",
+          "description": "Registry rule ID"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["hard", "soft"]
+        },
+        "violations": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of violations"
+        },
+        "penalty": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Total penalty for this constraint"
+        },
+        "violationDetails": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/violationDetail" },
+          "description": "Detailed breakdown of each violation"
+        },
         "explanation": { "type": "string" }
+      }
+    },
+
+    "violationDetail": {
+      "type": "object",
+      "properties": {
+        "fixtureIds": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "teamIds": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "venueId": { "type": "string" },
+        "officialId": { "type": "string" },
+        "severity": {
+          "type": "number",
+          "description": "Violation severity (used for penalty calculation)"
+        },
+        "message": { "type": "string" }
+      }
+    },
+
+    "objectiveResult": {
+      "type": "object",
+      "required": ["objectiveId"],
+      "properties": {
+        "objectiveId": { "type": "string" },
+        "metricId": {
+          "type": "string",
+          "description": "Registry metric ID"
+        },
+        "direction": {
+          "type": "string",
+          "enum": ["minimize", "maximize", "balance"]
+        },
+        "score": {
+          "type": "number",
+          "description": "Raw objective value"
+        },
+        "normalizedScore": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Score normalized to 0-1 range"
+        },
+        "weightedScore": {
+          "type": "number",
+          "description": "Score multiplied by weight"
+        },
+        "calculation": {
+          "type": "string",
+          "enum": ["sum", "max", "min", "average", "stddev", "variance", "count", "composite"],
+          "description": "Calculation method used"
+        },
+        "breakdown": {
+          "type": "object",
+          "additionalProperties": { "type": "number" },
+          "description": "Per-entity breakdown (e.g., per-team travel)"
+        },
+        "explanation": { "type": "string" }
+      }
+    },
+
+    "solverInfo": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "version": { "type": "string" },
+        "commit": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{7,40}$",
+          "description": "Git commit SHA"
+        },
+        "method": {
+          "type": "string",
+          "description": "Algorithm used (e.g., 'constraint_programming', 'local_search', 'milp')"
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "Solver parameters used"
+        }
+      }
+    },
+
+    "solutionStatistics": {
+      "type": "object",
+      "properties": {
+        "solveTimeMs": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total solve time in milliseconds"
+        },
+        "iterations": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "nodesExplored": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "solutionsFound": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "memoryUsedMb": {
+          "type": "number",
+          "minimum": 0
+        },
+        "gapToOptimal": {
+          "type": "number",
+          "minimum": 0,
+          "description": "MIP gap if applicable"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        }
       }
     }
   }

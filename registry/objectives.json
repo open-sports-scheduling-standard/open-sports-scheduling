@@ -1,8 +1,8 @@
 {
-  "registryVersion": "2.1.0",
-  "osssVersion": "0.1.0",
+  "registryVersion": "3.0.0",
+  "osssVersion": "2.0.0",
   "description": "Canonical OSSS objective metrics registry with lifecycle management",
-  "updated": "2025-01-01",
+  "updated": "2026-01-30",
   "objectives": [
     {
       "objectiveId": "total_travel_distance",
@@ -816,6 +816,148 @@
       },
       "references": {
         "rationale": "Multi-tenant venues require balancing priority claims",
+        "relatedObjectives": ["venue_utilization", "venue_balance"]
+      }
+    },
+    {
+      "objectiveId": "constraint_satisfaction",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "meta",
+      "unit": "ratio",
+      "optimizationGoal": "maximize",
+      "description": "Ratio of satisfied constraints to total constraints",
+      "calculation": "ratio",
+      "appliesTo": "schedule",
+      "paramsSchema": {
+        "type": "object",
+        "properties": {
+          "includeHard": {
+            "type": "boolean",
+            "default": true
+          },
+          "includeSoft": {
+            "type": "boolean",
+            "default": true
+          }
+        }
+      },
+      "targetRanges": {
+        "ideal": 1.0,
+        "min": 0.9
+      },
+      "references": {
+        "rationale": "Track overall schedule quality across all constraints",
+        "relatedObjectives": ["hard_violation_count", "soft_penalty_total"]
+      }
+    },
+    {
+      "objectiveId": "hard_violation_count",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "meta",
+      "unit": "count",
+      "optimizationGoal": "minimize",
+      "description": "Number of hard constraint violations (should be 0 for feasible)",
+      "calculation": "count",
+      "appliesTo": "schedule",
+      "paramsSchema": {},
+      "targetRanges": {
+        "ideal": 0,
+        "max": 0
+      },
+      "references": {
+        "rationale": "Hard constraints must be satisfied for schedule validity",
+        "relatedObjectives": ["constraint_satisfaction", "soft_penalty_total"]
+      }
+    },
+    {
+      "objectiveId": "soft_penalty_total",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "meta",
+      "unit": "penalty_units",
+      "optimizationGoal": "minimize",
+      "description": "Sum of all soft constraint penalty values",
+      "calculation": "sum",
+      "appliesTo": "schedule",
+      "paramsSchema": {
+        "type": "object",
+        "properties": {
+          "normalize": {
+            "type": "boolean",
+            "default": false,
+            "description": "Whether to normalize by number of constraints"
+          }
+        }
+      },
+      "targetRanges": null,
+      "references": {
+        "rationale": "Primary optimization target for soft constraint satisfaction",
+        "relatedObjectives": ["constraint_satisfaction", "hard_violation_count"]
+      }
+    },
+    {
+      "objectiveId": "official_utilization",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "efficiency",
+      "unit": "ratio",
+      "optimizationGoal": "balance",
+      "description": "Balance of fixture assignments across officials",
+      "calculation": "stddev",
+      "appliesTo": "official",
+      "paramsSchema": {
+        "type": "object",
+        "properties": {
+          "weightByQualification": {
+            "type": "boolean",
+            "default": false,
+            "description": "Weight by official qualification level"
+          }
+        }
+      },
+      "targetRanges": {
+        "ideal": 0,
+        "max": 0.2
+      },
+      "references": {
+        "rationale": "Fair distribution of workload among officials",
+        "relatedObjectives": ["venue_utilization"]
+      }
+    },
+    {
+      "objectiveId": "resource_utilization",
+      "version": "1.0.0",
+      "status": "stable",
+      "deprecated": false,
+      "category": "efficiency",
+      "unit": "ratio",
+      "optimizationGoal": "maximize",
+      "description": "Percentage of available resource time slots that are used",
+      "calculation": "ratio",
+      "appliesTo": "resource",
+      "paramsSchema": {
+        "type": "object",
+        "properties": {
+          "minUtilization": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "default": 0.5
+          }
+        }
+      },
+      "targetRanges": {
+        "ideal": 0.8,
+        "min": 0.5
+      },
+      "references": {
+        "rationale": "Maximize return on venue/resource investment",
         "relatedObjectives": ["venue_utilization", "venue_balance"]
       }
     }

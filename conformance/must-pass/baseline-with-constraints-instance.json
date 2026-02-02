@@ -1,54 +1,46 @@
 {
-  "osssVersion": "1.0.0",
-  "metadata": {
-    "leagueId": "test-league",
-    "seasonId": "2025",
-    "timezone": "UTC",
-    "description": "Baseline conformance test with core constraints"
+  "id": "baseline-with-constraints",
+  "name": "Baseline With Constraints",
+  "timezone": "UTC",
+  "season": {
+    "start": "2025-01-01",
+    "end": "2025-12-31"
   },
-  "teams": [
+  "entities": {
+    "teams": [
+      { "id": "team-1", "name": "Test Team A" },
+      { "id": "team-2", "name": "Test Team B" }
+    ],
+    "venues": [
+      { "id": "venue-1", "name": "Test Stadium" }
+    ]
+  },
+  "fixtures": [
     {
-      "id": "team-1",
-      "name": "Test Team A"
+      "id": "match-1",
+      "participants": ["team-1", "team-2"],
+      "durationMinutes": 90
+    }
+  ],
+  "constraints": [
+    {
+      "id": "no-overlap-team",
+      "ruleId": "no_overlap_team",
+      "type": "hard",
+      "selector": { "entityType": "team" }
     },
     {
-      "id": "team-2",
-      "name": "Test Team B"
-    }
-  ],
-  "venues": [
+      "id": "no-overlap-venue",
+      "ruleId": "no_overlap_venue_resource",
+      "type": "hard",
+      "selector": { "entityType": "venue" }
+    },
     {
-      "id": "venue-1",
-      "name": "Test Stadium"
+      "id": "min-rest",
+      "ruleId": "min_rest_time",
+      "type": "hard",
+      "params": { "min_hours": 24 },
+      "selector": { "entityType": "team" }
     }
-  ],
-  "fixtures": [],
-  "constraints": {
-    "required": [
-      {
-        "ruleId": "no_overlap_team",
-        "type": "hard",
-        "selector": {
-          "teams": "*"
-        }
-      },
-      {
-        "ruleId": "no_overlap_venue_resource",
-        "type": "hard",
-        "selector": {
-          "venues": "*"
-        }
-      },
-      {
-        "ruleId": "min_rest_time",
-        "type": "hard",
-        "params": {
-          "min_hours": 24
-        },
-        "selector": {
-          "teams": "*"
-        }
-      }
-    ]
-  }
+  ]
 }

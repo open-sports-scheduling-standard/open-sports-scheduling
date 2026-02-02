@@ -1,25 +1,25 @@
 {
-  "osssVersion": "1.0.0",
-  "metadata": {
-    "leagueId": "test-league",
-    "seasonId": "2025",
-    "timezone": "UTC"
+  "id": "invalid-params-test",
+  "name": "Invalid Params Test",
+  "timezone": "UTC",
+  "season": {
+    "start": "2025-01-01",
+    "end": "2025-12-31"
   },
-  "teams": [],
-  "venues": [],
+  "entities": {
+    "teams": [],
+    "venues": []
+  },
   "fixtures": [],
-  "constraints": {
-    "required": [
-      {
-        "ruleId": "min_rest_time",
-        "type": "hard",
-        "params": {
-          "min_hours": "not-a-number"
-        },
-        "selector": {
-          "teams": "*"
-        }
-      }
-    ]
-  }
+  "constraints": [
+    {
+      "id": "bad-params",
+      "ruleId": "min_rest_time",
+      "type": "hard",
+      "params": {
+        "min_hours": "not-a-number"
+      },
+      "selector": { "entityType": "team" }
+    }
+  ]
 }

@@ -1,0 +1,248 @@
+# ============================================================
+# 🔬 OSSS Continuous Integration
+# ------------------------------------------------------------
+# Validates the OSSS standard on every push and pull request.
+#
+# Checks:
+#  - Unit tests pass
+#  - All example instances validate
+#  - All example results validate
+#  - Conformance tests pass (must-pass/must-fail)
+#  - Schemas are valid JSON Schema
+#  - Registry files are valid
+# ============================================================
+
+name: 🔬 CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: 🧪 Tests & Validation
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18, 20, 22]
+
+    steps:
+      # ------------------------------------------------------------
+      # 1️⃣ Checkout repository
+      # ------------------------------------------------------------
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      # ------------------------------------------------------------
+      # 2️⃣ Setup Node.js
+      # ------------------------------------------------------------
+      - name: 🟢 Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+          cache-dependency-path: osss-validator/package-lock.json
+
+      # ------------------------------------------------------------
+      # 3️⃣ Install dependencies
+      # ------------------------------------------------------------
+      - name: 📦 Install dependencies
+        run: |
+          cd osss-validator
+          npm ci
+
+      # ------------------------------------------------------------
+      # 4️⃣ Run unit tests
+      # ------------------------------------------------------------
+      - name: 🧪 Run unit tests
+        run: |
+          cd osss-validator
+          npm test
+
+      # ------------------------------------------------------------
+      # 5️⃣ Link CLI for integration tests
+      # ------------------------------------------------------------
+      - name: 🔗 Link CLI
+        run: |
+          cd osss-validator
+          npm link
+
+      # ------------------------------------------------------------
+      # 6️⃣ Validate all examples (instances)
+      # ------------------------------------------------------------
+      - name: 📋 Validate all example instances
+        run: |
+          echo "🔍 Validating all example instances..."
+          osss-validate bundle \
+            --examples ./examples \
+            --schemas ./schemas \
+            --registry ./registry
+
+      # ------------------------------------------------------------
+      # 7️⃣ Run conformance tests
+      # ------------------------------------------------------------
+      - name: ✅ Run conformance tests
+        run: |
+          echo "🔍 Running conformance tests..."
+          osss-validate conformance \
+            --conformance ./conformance \
+            --schemas ./schemas \
+            --registry ./registry
+
+      # ------------------------------------------------------------
+      # 8️⃣ Validate schemas are valid JSON Schema
+      # ------------------------------------------------------------
+      - name: 📐 Validate JSON Schemas
+        run: |
+          echo "🔍 Validating JSON Schema files..."
+          npm install -g ajv-cli ajv-formats
+
+          for schema in schemas/*.schema.json; do
+            echo "  Checking: $schema"
+            ajv compile -s "$schema" --strict=false 2>/dev/null || {
+              echo "❌ Invalid schema: $schema"
+              exit 1
+            }
+          done
+          echo "✅ All schemas are valid"
+
+      # ------------------------------------------------------------
+      # 9️⃣ Validate registry files
+      # ------------------------------------------------------------
+      - name: 📚 Validate registry files
+        run: |
+          echo "🔍 Validating registry files..."
+
+          # Check constraints.json is valid JSON
+          if ! jq empty registry/constraints.json 2>/dev/null; then
+            echo "❌ registry/constraints.json is not valid JSON"
+            exit 1
+          fi
+
+          # Check objectives.json is valid JSON
+          if ! jq empty registry/objectives.json 2>/dev/null; then
+            echo "❌ registry/objectives.json is not valid JSON"
+            exit 1
+          fi
+
+          # Count constraints and objectives
+          CONSTRAINT_COUNT=$(jq '.constraints | length' registry/constraints.json)
+          OBJECTIVE_COUNT=$(jq '.objectives | length' registry/objectives.json)
+
+          echo "✅ Registry valid: $CONSTRAINT_COUNT constraints, $OBJECTIVE_COUNT objectives"
+
+      # ------------------------------------------------------------
+      # 🔟 Summary
+      # ------------------------------------------------------------
+      - name: 📊 Summary
+        run: |
+          echo "============================================"
+          echo "🎉 All checks passed!"
+          echo "============================================"
+          echo ""
+          echo "Node.js version: ${{ matrix.node-version }}"
+          echo ""
+
+          # Count examples
+          EXAMPLE_COUNT=$(find examples -name "osss-instance.json" | wc -l | tr -d ' ')
+          echo "Examples validated: $EXAMPLE_COUNT"
+
+          # Count conformance tests
+          MUST_PASS=$(find conformance/must-pass -name "*.json" 2>/dev/null | wc -l | tr -d ' ')
+          MUST_FAIL=$(find conformance/must-fail -name "*.json" 2>/dev/null | wc -l | tr -d ' ')
+          echo "Conformance tests: $MUST_PASS must-pass, $MUST_FAIL must-fail"
+
+  # ============================================================
+  # Lint job (optional - runs in parallel)
+  # ============================================================
+  lint:
+    name: 🔍 Lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+          cache-dependency-path: osss-validator/package-lock.json
+
+      - name: 📦 Install dependencies
+        run: |
+          cd osss-validator
+          npm ci
+
+      - name: 🔍 Check JSON formatting
+        run: |
+          echo "🔍 Checking JSON file formatting..."
+
+          # Check all JSON files are valid
+          find . -name "*.json" -not -path "*/node_modules/*" -not -path "*/.git/*" | while read file; do
+            if ! jq empty "$file" 2>/dev/null; then
+              echo "❌ Invalid JSON: $file"
+              exit 1
+            fi
+          done
+
+          echo "✅ All JSON files are valid"
+
+  # ============================================================
+  # Schema compatibility check
+  # ============================================================
+  compatibility:
+    name: 🔄 Backwards Compatibility
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+          cache-dependency-path: osss-validator/package-lock.json
+
+      - name: 📦 Install dependencies
+        run: |
+          cd osss-validator
+          npm ci
+          npm link
+
+      - name: 🔄 Test v1 compatibility
+        run: |
+          echo "🔍 Testing backwards compatibility with v1 instances..."
+
+          # All existing examples should still validate
+          # This ensures v2 schemas remain backwards compatible
+          osss-validate bundle \
+            --examples ./examples \
+            --schemas ./schemas \
+            --registry ./registry
+
+          echo "✅ All v1 instances validate with v2 schemas"
+
+      - name: 📊 Check constraint coverage
+        run: |
+          echo "🔍 Checking constraint coverage in examples..."
+
+          # Extract all ruleIds used in examples
+          USED_RULES=$(find examples -name "osss-instance.json" -exec jq -r '.constraints[]?.ruleId // .constraints[]?.rule // empty' {} \; 2>/dev/null | sort -u)
+
+          # Extract all ruleIds in registry
+          REGISTRY_RULES=$(jq -r '.constraints[].ruleId' registry/constraints.json | sort -u)
+
+          USED_COUNT=$(echo "$USED_RULES" | grep -c . || echo 0)
+          TOTAL_COUNT=$(echo "$REGISTRY_RULES" | grep -c . || echo 0)
+
+          echo "Constraints used in examples: $USED_COUNT / $TOTAL_COUNT"
+          echo ""
+          echo "Used constraints:"
+          echo "$USED_RULES" | sed 's/^/  - /'

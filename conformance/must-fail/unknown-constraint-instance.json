@@ -1,22 +1,22 @@
 {
-  "osssVersion": "1.0.0",
-  "metadata": {
-    "leagueId": "test-league",
-    "seasonId": "2025",
-    "timezone": "UTC"
+  "id": "unknown-constraint-test",
+  "name": "Unknown Constraint Test",
+  "timezone": "UTC",
+  "season": {
+    "start": "2025-01-01",
+    "end": "2025-12-31"
   },
-  "teams": [],
-  "venues": [],
+  "entities": {
+    "teams": [],
+    "venues": []
+  },
   "fixtures": [],
-  "constraints": {
-    "required": [
-      {
-        "ruleId": "this_constraint_does_not_exist",
-        "type": "hard",
-        "selector": {
-          "teams": "*"
-        }
-      }
-    ]
-  }
+  "constraints": [
+    {
+      "id": "unknown",
+      "ruleId": "this_constraint_does_not_exist",
+      "type": "hard",
+      "selector": { "entityType": "team" }
+    }
+  ]
 }

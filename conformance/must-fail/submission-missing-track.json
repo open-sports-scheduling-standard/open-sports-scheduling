@@ -1,3 +1,9 @@
 {
-  "$ref": "../../examples/submissions/invalid-missing-track.json"
+  "solver": {
+    "name": "BrokenSolver"
+  },
+  "result": {
+    "feasible": true,
+    "assignments": []
+  }
 }

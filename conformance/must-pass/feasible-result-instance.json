@@ -1,36 +1,33 @@
 {
-  "osssVersion": "1.0.0",
-  "metadata": {
-    "leagueId": "test-league",
-    "seasonId": "2025",
-    "timezone": "UTC"
+  "id": "feasible-result-test",
+  "name": "Feasible Result Test",
+  "timezone": "UTC",
+  "season": {
+    "start": "2025-01-01",
+    "end": "2025-12-31"
   },
-  "teams": [
-    {
-      "id": "team-1",
-      "name": "Team A"
-    },
-    {
-      "id": "team-2",
-      "name": "Team B"
-    }
-  ],
-  "venues": [
-    {
-      "id": "venue-1",
-      "name": "Stadium A"
-    }
-  ],
-  "fixtures": [],
-  "constraints": {
-    "required": [
-      {
-        "ruleId": "no_overlap_team",
-        "type": "hard",
-        "selector": {
-          "teams": "*"
-        }
-      }
+  "entities": {
+    "teams": [
+      { "id": "team-1", "name": "Team A" },
+      { "id": "team-2", "name": "Team B" }
+    ],
+    "venues": [
+      { "id": "venue-1", "name": "Stadium A" }
     ]
-  }
+  },
+  "fixtures": [
+    {
+      "id": "match-1",
+      "participants": ["team-1", "team-2"],
+      "durationMinutes": 90
+    }
+  ],
+  "constraints": [
+    {
+      "id": "no-overlap-team",
+      "ruleId": "no_overlap_team",
+      "type": "hard",
+      "selector": { "entityType": "team" }
+    }
+  ]
 }

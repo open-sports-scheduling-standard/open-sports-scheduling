@@ -1,12 +1,26 @@
 {
-  "osssVersion": "1.0.0",
-  "metadata": {
-    "leagueId": "test-league",
-    "seasonId": "2025",
-    "timezone": "UTC"
+  "id": "baseline-minimal",
+  "name": "Baseline Minimal Instance",
+  "timezone": "UTC",
+  "season": {
+    "start": "2025-01-01",
+    "end": "2025-12-31"
   },
-  "teams": [],
-  "venues": [],
-  "fixtures": [],
-  "constraints": {}
+  "entities": {
+    "teams": [
+      { "id": "team-1", "name": "Team A" },
+      { "id": "team-2", "name": "Team B" }
+    ],
+    "venues": [
+      { "id": "venue-1", "name": "Stadium" }
+    ]
+  },
+  "fixtures": [
+    {
+      "id": "match-1",
+      "participants": ["team-1", "team-2"],
+      "durationMinutes": 90
+    }
+  ],
+  "constraints": []
 }

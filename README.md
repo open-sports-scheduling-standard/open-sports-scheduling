@@ -2,9 +2,11 @@
 
 **A neutral, open standard for expressing sports schedules, constraints, and optimization goals.**
 
-The **Open Sports Scheduling Standard (OSSS)** defines a shared, machine-readable language for describing sports scheduling problems and solutions — including teams, venues, fixtures, hard and soft constraints, optimization objectives, and explainable outcomes. OSSS applies to traditional sports, esports tournaments, and any competitive scheduling scenario.
+The **Open Sports Scheduling Standard (OSSS)** defines a shared, machine-readable language for describing sports scheduling problems and solutions — including teams, venues, fixtures, officials, resources, hard and soft constraints, optimization objectives, and explainable outcomes. OSSS applies to traditional sports, esports tournaments, knockout brackets, and any competitive scheduling scenario.
 
 OSSS is **vendor-neutral**, **solver-agnostic**, and **openly governed**.
+
+> **Version 2.0** — Now with official scheduling, resource-level venue management, knockout tournament support, and 50+ constraints.
 
 ---
 
@@ -29,8 +31,11 @@ Yet today:
 OSSS defines:
 
 - A common data model for teams, venues (physical and virtual), fixtures, officials, and resources
-- Explicit hard and soft constraints (including esports-specific: latency, regional balance)
-- Standardized objective and penalty models
+- **Official/referee scheduling** with availability, qualifications, and conflict-of-interest rules
+- **Resource-level venue management** for multi-court/multi-field facilities
+- **Knockout tournament support** with fixture dependencies and bracket seeding
+- Explicit hard and soft constraints (50+ in registry, including esports-specific: latency, regional balance)
+- Standardized objective and penalty models (linear, quadratic, exponential, logarithmic, step, piecewise)
 - Explainable scoring and violation reporting
 - Support for leagues, tournaments, playoffs, rescheduling, and global esports events
 - Versioning, locks, and real-world change management
@@ -100,8 +105,8 @@ See: [`ODDD-CHARTER.md`](./OSSS-CHARTER.md)
 open-sports-scheduling/
   schemas/                    JSON schemas (osss-core, results, constraints, objectives, etc.)
   registry/
-    constraints.json          Canonical constraint rules (27 rules, v2.1.0)
-    objectives.json           Canonical objective metrics (30 metrics, v2.1.0)
+    constraints.json          Canonical constraint rules (50+ rules, v3.0.0)
+    objectives.json           Canonical objective metrics (35 metrics, v3.0.0)
   examples/
     youth-league/             Minimal 2-team example
     amateur-league/           3-team regional league
@@ -112,9 +117,13 @@ open-sports-scheduling/
     cricket-t20/              IPL-style T20 league
     ice-hockey/               NHL-style dense schedule
     rugby-union-15s/          Six Nations-style
+    scottish-premiership/     Split-season format with complex phases
     surfing/                  Weather-dependent waiting period format
     tennis-singles/           Multi-court tournament
     volleyball-indoor/        Indoor league
+    carry-over-fairness/      NP-hard carry-over balancing benchmark
+    complex-multi-phase/      Group stage → knockout with dependencies
+    venue-sharing-conflict/   Tight venue constraints benchmark
   osss-validator/             Reference validator CLI (see osss-validator/README.md)
   profiles/                   Constraint profiles (baseline, youth, amateur, pro)
   conformance/                Must-pass / must-fail conformance tests
@@ -148,10 +157,21 @@ See [`osss-validator/README.md`](./osss-validator/README.md) for full CLI docume
 
 ## Status
 
-- Version: **v0.2**
-- Phases 1-5 complete (see [IMPLEMENTATION-STATUS.md](./IMPLEMENTATION-STATUS.md))
+- Version: **v2.0**
+- All 60 tests passing, 16 examples validating
+- Full backwards compatibility with v1 instances
 - Public review phase
-- Founding Stewards being appointed
+
+### What's New in v2.0
+
+| Feature | Description |
+|---------|-------------|
+| **Official Scheduling** | Availability, qualifications, conflicts, rest time for referees |
+| **Resource Management** | Multi-court/multi-field venue scheduling |
+| **Knockout Tournaments** | Fixture dependencies, bracket seeding, winner/loser propagation |
+| **Enhanced Penalties** | Exponential, logarithmic, step, piecewise, lexicographic models |
+| **9 New Constraints** | Officials, resources, tournament structure |
+| **5 New Objectives** | Utilization tracking, constraint satisfaction metrics |
 
 ---
 
